@@ -17,7 +17,7 @@
     <header>
         <h1>Tutor'in</h1>
     </header>
-    <h1>Liste des clients : </h1>
+    <h1>Liste des élèves : </h1>
     <table border="1">
 
         <tr>
@@ -25,6 +25,7 @@
             <th>Prénom</th>
             <th>Date de naissance</th>
             <th>Niveau</th>
+            <th>Actions</th>
         </tr>
 
         @foreach (Tutorin.Models.Eleve eleve in Model.ListeEleves)
@@ -34,9 +35,16 @@
                     <td>@eleve.Utilisateur.Prenom</td>
                     <td>@eleve.DateNaissance</td>
                     <td>@eleve.Niveau</td>
+                    <td>
+                        <a href="/Eleve/modifer">Modifier</a>
+                        <a href="/Eleve/supprimer">Supprimer</a>
+                    </td>
                 </tr>
         }
     </table>
+
+    <br />
+    <a href="/Eleve/ajout">Ajouter un élève</a>
 
 
 </body>

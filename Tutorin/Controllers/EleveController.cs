@@ -24,5 +24,10 @@ namespace Tutorin.Controllers
             
             return View("ListeEleves", evm);
         }
+
+        public IActionResult Ajout()
+        {
+            return View("Ajout");
+        }
     }
 }

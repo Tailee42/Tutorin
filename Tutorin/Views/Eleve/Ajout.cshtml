@@ -1,0 +1,69 @@
+﻿@model Tutorin.Models.Eleve
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="/css/Site.css" rel="stylesheet" />
+    <title>Ajout Eleve</title>
+</head>
+<body>
+
+    <h1>Ajouter un élève</h1>
+    <div>
+
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend>Ajouter un élève : </legend>
+
+                <div>
+                    @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
+                    @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
+                    @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
+                    @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
+                    @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
+                    @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
+                    @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
+                    @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
+                    @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => Model.DateNaissance)<br />
+                    @Html.TextBoxFor(m => Model.DateNaissance, new {@type = "date"} )<br />
+                    @Html.ValidationMessageFor(m => Model.DateNaissance)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => Model.Niveau)<br />
+                    @Html.TextBoxFor(m => Model.Niveau )<br />
+                    @Html.ValidationMessageFor(m => Model.Niveau)
+                </div>
+
+
+                <input class="bouttonStyle" type="submit" value="Ajouter" />
+            </fieldset>
+        }
+
+    </div>
+
+
+</body>
+</html>
