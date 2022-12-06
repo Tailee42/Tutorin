@@ -8,7 +8,7 @@ namespace Tutorin.Models
         public TypeAbonnement Type { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
-        public float prix { get; set; }
+        public float Prix { get; set; }
         public const float TVA = 0.2F; 
 
         public int ResponsableEleveId { get; set; }
