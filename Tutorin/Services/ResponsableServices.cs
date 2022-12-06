@@ -20,7 +20,7 @@ namespace Tutorin.Services
             return responsable.Id;
         }
 
-        public void ModifierResponsable(int id, int utilisateurId, Utilisateur utilisateur, List<Abonnement> abonnements)
+        public void ModifierResponsable(int id, int utilisateurId, List<Abonnement> abonnements)
         {
             ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
             Utilisateur user = _bddContext.Utilisateurs.Find(utilisateurId);
@@ -29,7 +29,7 @@ namespace Tutorin.Services
             {
                 using (UtilisateurServices us = new UtilisateurServices())
                 {
-                    us.ModifierUtilisateur(utilisateur.Id, utilisateur.Nom, utilisateur.Prenom, utilisateur.Identifiant, utilisateur.MotDePasse);
+                    us.ModifierUtilisateur(user.Id, user.Nom, user.Prenom, user.Identifiant, user.MotDePasse);
                 }
                 responsable.Abonnements = abonnements;
             }
