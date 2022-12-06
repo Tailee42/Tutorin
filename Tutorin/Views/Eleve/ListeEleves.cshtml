@@ -1,0 +1,43 @@
+﻿@model Tutorin.ViewModels.EleveViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Liste des élèves</title>
+    <link href="/css/Site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <h1>Tutor'in</h1>
+    </header>
+    <h1>Liste des clients : </h1>
+    <table border="1">
+
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Niveau</th>
+        </tr>
+
+        @foreach (Tutorin.Models.Eleve eleve in Model.ListeEleves)
+        {
+                <tr>
+                    <td>@eleve.Utilisateur.Nom</td>
+                    <td>@eleve.Utilisateur.Prenom</td>
+                    <td>@eleve.DateNaissance</td>
+                    <td>@eleve.Niveau</td>
+                </tr>
+        }
+    </table>
+
+
+</body>
+</html>

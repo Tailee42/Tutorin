@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="wwwroot\css\" />
+    <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
 
@@ -16,6 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.5" />
   </ItemGroup>
 
