@@ -23,18 +23,14 @@ namespace Tutorin.Services
             return eleve.Id;
         }
 
-        public void DeleteCreateDatabase()
-        {
-            _bddContext.Database.EnsureDeleted();
-            _bddContext.Database.EnsureCreated();
-        }
+
 
         public void Dispose()
         {
             _bddContext.Dispose();
         }
 
-        public void ModifierElve(int id, DateTime dateNaissance, TypeNiveau niveau)
+        public void ModifierEleve(int id, DateTime dateNaissance, TypeNiveau niveau)
         {
             Eleve eleve = _bddContext.Eleves.Find(id);
             if (eleve != null)

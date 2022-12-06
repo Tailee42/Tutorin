@@ -6,9 +6,8 @@ namespace Tutorin.Services
 {
     public interface IEleveServices : IDisposable
     {
-        void DeleteCreateDatabase();
         int CreerEleve(DateTime dateNaissance, TypeNiveau niveau, int utilisateurID);
-        void ModifierElve(int id, DateTime dateNaissance, TypeNiveau niveau);
+        void ModifierEleve(int id, DateTime dateNaissance, TypeNiveau niveau);
         void SupprimerEleve(int id);
         List<Eleve> ObtientTousLesEleves();
     }

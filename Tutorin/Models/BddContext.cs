@@ -11,5 +11,11 @@ namespace Tutorin.Models
         {
             optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=tutorin");
         }
+
+        public void DeleteCreateDatabase()
+        {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
     }
 }
