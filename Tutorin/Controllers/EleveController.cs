@@ -20,14 +20,32 @@ namespace Tutorin.Controllers
                     ListeEleves = es.ObtientTousLesEleves()
 
                 };
+
             };
+
+            
             
             return View("ListeEleves", evm);
         }
 
-        public IActionResult Ajout()
+        public IActionResult Ajouter()
         {
-            return View("Ajout");
+            return View("Ajouter");
+        }
+
+        [HttpPost]
+        public IActionResult Ajouter(Eleve eleve)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AjouterUtilisateur", eleve);
+            }
+
+            using (EleveServices el = new EleveServices())
+            {
+                el.CreerEleve(eleve);
+                return RedirectToAction("Index");
+            }
         }
     }
 }

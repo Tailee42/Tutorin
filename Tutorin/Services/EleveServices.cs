@@ -23,6 +23,14 @@ namespace Tutorin.Services
             return eleve.Id;
         }
 
+        public int CreerEleve(Eleve eleve)
+        {
+            _bddContext.Eleves.Add(eleve);
+            _bddContext.SaveChanges();
+
+            return eleve.Id;
+        }
+
 
 
         public void Dispose()
@@ -43,7 +51,13 @@ namespace Tutorin.Services
 
         public List<Eleve> ObtientTousLesEleves()
         {
-            return _bddContext.Eleves.ToList();
+            List <Eleve> listeEleves = _bddContext.Eleves.ToList();
+            foreach (Eleve eleve in listeEleves)
+            {
+                eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurID);
+            }
+
+            return listeEleves;
         }
 
         public void SupprimerEleve(int id)
