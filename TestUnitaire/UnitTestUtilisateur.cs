@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Tutorin.Models;
-using Tutorin.Services;
 using Xunit;
 
 namespace TestUnitaire
@@ -11,14 +9,14 @@ namespace TestUnitaire
         [Fact]
         public void Creation_Utilisateur_Verification()
         {
-            using (UtilisateurServices us = new UtilisateurServices())
+            using (UtilisateurServices dal = new Dal())
             {
-                us.DeleteCreateDatabase();
-                us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
+                dal.DeleteCreateDatabase();
+                dal.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
             }
-            using (UtilisateurServices us = new UtilisateurServices())
+            using (Dal dal = new Dal())
             {
-                List<Utilisateur> utilisateurs = us.ObtientTousLesUtilisateurs();
+                List<Utilisateur> utilisateurs = dal.ObtientTousLesUtilisateurs();
                 Assert.Single(utilisateurs);
                 Assert.Equal("Badaroux", utilisateurs[0].Nom);
                 Assert.Equal("Antoine", utilisateurs[0].Prenom);
@@ -30,16 +28,15 @@ namespace TestUnitaire
         [Fact]
         public void Modification_Utilisateur_Verification()
         {
-            using (UtilisateurServices us = new UtilisateurServices())
+            using (Dal dal = new Dal())
             {
-                us.DeleteCreateDatabase();
-                int id = us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
-                us.ModifierUtilisateur(id, "Pasquali", "Antoine", "pantoine", "123456");
+                dal.DeleteCreateDatabase();
+                int id = dal.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
+                dal.ModiferUtilisateur(id, "Pasquali", "Antoine", "pantoine", "123456");
             }
-
-            using (UtilisateurServices us = new UtilisateurServices())
+            using (Dal dal = new Dal())
             {
-                List<Utilisateur> utilisateurs = us.ObtientTousLesUtilisateurs();
+                List<Utilisateur> utilisateurs = dal.ObtientTousLesUtilisateurs();
                 Assert.Single(utilisateurs);
                 Assert.Equal("Pasquali", utilisateurs[0].Nom);
                 Assert.Equal("Antoine", utilisateurs[0].Prenom);
@@ -50,15 +47,15 @@ namespace TestUnitaire
         [Fact]
         public void Suppression_Utilisateur_Verification()
         {
-            using (UtilisateurServices us = new UtilisateurServices())
+            using (Dal dal = new Dal())
             {
-                us.DeleteCreateDatabase();
-                int id = us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
-                us.SupprimerUtilisateur(id);
+                dal.DeleteCreateDatabase();
+                int id = dal.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
+                dal.SupprimerUtilisateur(id);
             }
-            using (UtilisateurServices us = new UtilisateurServices())
+            using (Dal dal = new Dal())
             {
-                List<Utilisateur> utilisateurs = us.ObtientTousLesUtilisateurs();
+                List<Utilisateur> utilisateurs = dal.ObtientTousLesUtilisateurs();
                 Assert.Empty(utilisateurs);
             }
         }
