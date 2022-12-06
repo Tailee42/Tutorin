@@ -12,17 +12,19 @@ namespace Tutorin.Services
             _bddContext = new BddContext();
         }
 
-        public int CreerResponsable(Utilisateur utilisateur, List<Abonnement> abonnements)
+        public int CreerResponsable(int utilisateurId, List<Abonnement> abonnements)
         {
-            ResponsableEleve responsable = new ResponsableEleve() {UtilisateurId = utilisateur.Id, Abonnements = abonnements};
+            ResponsableEleve responsable = new ResponsableEleve() {UtilisateurId = utilisateurId, Abonnements = abonnements};
             _bddContext.ResponsablesEleves.Add(responsable);
             _bddContext.SaveChanges();
             return responsable.Id;
         }
 
+
+
         public void Dispose()
-            {
-                _bddContext.Dispose();
-            }
+        {
+            _bddContext.Dispose();
+        }
     }
 }
