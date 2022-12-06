@@ -20,11 +20,24 @@ namespace Tutorin.Services
             return responsable.Id;
         }
 
-
+        public void ModifierResponsable(int id, int utilisateurId, Utilisateur utilisateur, List<Abonnement> abonnements)
+        {
+            ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
+            Utilisateur user = _bddContext.Utilisateurs.Find(utilisateurId);
+            
+            if (responsable != null && user != null)
+            {
+                using (UtilisateurServices us = new UtilisateurServices())
+                {
+                    us.ModifierUtilisateur(utilisateur.Id, utilisateur.Nom, utilisateur.Prenom, utilisateur.Identifiant, utilisateur.MotDePasse);
+                }
+                responsable.Abonnements = abonnements;
+            }
+        }
 
         public void Dispose()
-        {
-            _bddContext.Dispose();
-        }
+            {
+                _bddContext.Dispose();
+            }
     }
 }
