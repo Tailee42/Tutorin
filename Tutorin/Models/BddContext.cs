@@ -32,7 +32,6 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 2, Nom = "Roux", Prenom = "Louis", Identifiant = "rlouis", MotDePasse = "Louis12" },
                 new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = "Antoine9" },
                 new Utilisateur { Id = 4, Nom = "Dupond", Prenom = "Anne", Identifiant = "danne", MotDePasse = "Anne456" },
-
                 new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = "Antoine10" },
                 new Utilisateur { Id = 6, Nom = "LOUISE", Prenom = "Anne", Identifiant = "lanne", MotDePasse = "Anne25" },
 
@@ -47,7 +46,7 @@ namespace Tutorin.Models
                 );
 
             this.ResponsablesEleves.AddRange(
-                new ResponsableEleve { Id = 1, Mail = "slegrand@gmail.com", UtilisateurId = 5 },
+                new ResponsableEleve { Id = 1, Mail = "slegrand@gmail.com", UtilisateurId = 7 },
                 new ResponsableEleve { Id = 2, Mail = "palbrand@gmail.com", UtilisateurId = 1 }
 
                 );
