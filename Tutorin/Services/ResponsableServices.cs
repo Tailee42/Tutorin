@@ -23,16 +23,19 @@ namespace Tutorin.Services
         public void ModifierResponsable(int id, int utilisateurId, List<Abonnement> abonnements)
         {
             ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
-            Utilisateur user = _bddContext.Utilisateurs.Find(utilisateurId);
             
-            if (responsable != null && user != null)
+            if (responsable != null)
             {
-                using (UtilisateurServices us = new UtilisateurServices())
-                {
-                    us.ModifierUtilisateur(user.Id, user.Nom, user.Prenom, user.Identifiant, user.MotDePasse);
-                }
                 responsable.Abonnements = abonnements;
             }
+        }
+
+        public void SupprimerResponsable(int id)
+        {
+            ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
+            _bddContext.ResponsablesEleves.Remove(responsable);
+            _bddContext.SaveChanges();
+
         }
 
         public void Dispose()

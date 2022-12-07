@@ -15,7 +15,7 @@ namespace Tutorin.Models
         public ResponsableEleve ResponsableEleve { get; set; }
 
         public int EleveId { get; set; }
-        //public Eleve Eleve { get; set; }
+        public Eleve Eleve { get; set; }
     }
 }
 

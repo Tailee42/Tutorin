@@ -8,5 +8,6 @@ namespace Tutorin.Services
     {
         int CreerResponsable(int utilisateurId, List<Abonnement> abonnements);
         void ModifierResponsable(int id, int utilisateurId, List<Abonnement> abonnements);
+        void SupprimerResponsable(int id);
     }
 }
