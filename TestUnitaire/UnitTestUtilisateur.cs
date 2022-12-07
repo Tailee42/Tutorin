@@ -17,7 +17,6 @@ namespace TestUnitaire
 
             using (UtilisateurServices us = new UtilisateurServices())
             {
-
                 us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
             }
             using (UtilisateurServices us = new UtilisateurServices())
@@ -39,7 +38,6 @@ namespace TestUnitaire
 
             using (UtilisateurServices us = new UtilisateurServices())
             {
-
                 int id = us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
                 us.ModifierUtilisateur(id, "Pasquali", "Antoine", "pantoine", "123456");
             }
@@ -64,7 +62,6 @@ namespace TestUnitaire
 
             using (UtilisateurServices us = new UtilisateurServices())
             {
-
                 int id = us.CreerUtilisateur("Badaroux", "Alfonse", "balfonse", "azerty");
                 us.SupprimerUtilisateur(id);
             }

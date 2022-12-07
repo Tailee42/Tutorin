@@ -13,12 +13,6 @@ namespace Tutorin.Services
             _bddContext = new BddContext();
         }
 
-        public void DeleteCreateDatabase()
-        {
-            _bddContext.Database.EnsureDeleted();
-            _bddContext.Database.EnsureCreated();
-        }
-
         public int CreerUtilisateur(string nom, string prenom, string identifiant, string motDePasse)
         {
             Utilisateur utilisateur = new Utilisateur() { Nom = nom, Prenom = prenom, Identifiant = identifiant, MotDePasse = motDePasse};
