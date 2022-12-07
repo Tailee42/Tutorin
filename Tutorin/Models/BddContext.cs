@@ -7,10 +7,9 @@ namespace Tutorin.Models
     {
         public DbSet<Utilisateur> Utilisateurs { get;set; }
         public DbSet<Enseignant> Enseignants { get; set; }
-
         public DbSet<ResponsableEleve> ResponsablesEleves { get;set; }
-
         public DbSet<Eleve> Eleves { get;set; }
+        public DbSet<Prestation> Prestations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

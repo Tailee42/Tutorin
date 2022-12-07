@@ -4,17 +4,7 @@ namespace Tutorin.Models
 {
     public enum TypeNiveau
     {
-        CP, 
-        CE1, 
-        CE2, 
-        CM1, 
-        CM2,
-        Sixieme, 
-        Cinquieme, 
-        Quatrieme, 
-        Troisieme, 
-        Seconde, 
-        Premiere, Terminale
+        CP, CE1, CE2, CM1, CM2, Sixieme, Cinquieme, Quatrieme, Troisieme, Seconde, Premiere, Terminale
     }
 
     public static class TypeNiveauExtensions
@@ -42,7 +32,7 @@ namespace Tutorin.Models
                 case 8:
                     return "Troisième";
                 case 9:
-                    return "Seconde;";
+                    return "Seconde";
                 case 10:
                     return "Première";
                 case 11:
@@ -50,5 +40,7 @@ namespace Tutorin.Models
             }
             return null;
         }
+
+        
     }
 }
