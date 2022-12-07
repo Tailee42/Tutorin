@@ -7,7 +7,7 @@ namespace Tutorin.Services
     public interface IEleveServices : IDisposable
     {
         int CreerEleve(DateTime dateNaissance, TypeNiveau niveau, int utilisateurID);
-        void ModifierEleve(int id, DateTime dateNaissance, TypeNiveau niveau);
+        void ModifierEleve(int id, string nom, string prenom, string identifiant, string motDePasse, DateTime dateNaissance, TypeNiveau niveau);
         void SupprimerEleve(int id);
         List<Eleve> ObtientTousLesEleves();
     }

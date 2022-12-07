@@ -20,7 +20,7 @@ namespace Tutorin.Models
 
         [MaxLength(30)]
         [Display(Name = "Mot de passe")]
-        [RegularExpression(@"^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$", ErrorMessage = "Le mot de passe doit contenir entre 6 caractères dont au moins une majuscule, une minuscule et un chiffre")]
+        [RegularExpression(@"^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$", ErrorMessage = "Le mot de passe doit contenir au moins 6 caractères dont au moins une majuscule, une minuscule et un chiffre")]
         public string MotDePasse { get; set; }
 
     }
