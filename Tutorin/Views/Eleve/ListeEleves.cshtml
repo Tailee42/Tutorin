@@ -23,6 +23,7 @@
         <tr>
             <th>Nom</th>
             <th>Prénom</th>
+            <th>Identifiant</th>
             <th>Date de naissance</th>
             <th>Niveau</th>
             <th>Actions</th>
@@ -33,11 +34,12 @@
                 <tr>
                     <td>@eleve.Utilisateur.Nom</td>
                     <td>@eleve.Utilisateur.Prenom</td>
+                    <td>@eleve.Utilisateur.Identifiant</td>
                     <td>@eleve.DateNaissance</td>
                     <td>@eleve.Niveau</td>
                     <td>
-                        <a href="/Eleve/modifer">Modifier</a>
-                        <a href="/Eleve/supprimer">Supprimer</a>
+                        <a href="/Eleve/modifier?eleveId=@eleve.Id">Modifier</a>
+                        <a href="/Eleve/supprimer/@eleve.Id">Supprimer</a>
                     </td>
                 </tr>
         }
