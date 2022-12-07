@@ -4,7 +4,6 @@
     ViewBag.Title = "Modifier responsable";
 }
 
-<
 
 <h1>Modifier un Responsable d'élève</h1>
 <div>
@@ -62,12 +61,6 @@
                 @Html.TextBoxFor(m => Model.Utilisateur.Id)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Id)
             </div>
-
-         @* <div>
-                @Html.LabelFor(m => Model.Abonnements)<br />
-                @Html.TextBoxFor(m => Model.Abonnements )<br />
-                @Html.ValidationMessageFor(m => Model.Abonnements)
-            </div>*@
 
             <input class="bouttonStyle" type="submit" value="Modifier" />
         </fieldset>
