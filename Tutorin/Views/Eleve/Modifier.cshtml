@@ -1,4 +1,5 @@
 ﻿@model Tutorin.Models.Eleve
+@using Tutorin.Models
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Modifier élève";
@@ -46,6 +47,12 @@
             </div>
 
             <div>
+                @Html.LabelFor(m => Model.Utilisateur.Id) <br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Id)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Id)
+            </div>
+
+            <div>
                 @Html.LabelFor(m => Model.UtilisateurID) <br />
                 @Html.TextBoxFor(m => Model.UtilisateurID)<br />
                 @Html.ValidationMessageFor(m => Model.UtilisateurID)
@@ -59,7 +66,7 @@
 
             <div>
                 @Html.LabelFor(m => Model.Niveau)<br />
-                @Html.TextBoxFor(m => Model.Niveau )<br />
+                @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau)))) <br />
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 

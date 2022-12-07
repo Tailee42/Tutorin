@@ -42,7 +42,7 @@ namespace Tutorin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("AjouterUtilisateur", eleve);
+                return View("Ajouter", eleve);
             }
 
             using (EleveServices el = new EleveServices())
