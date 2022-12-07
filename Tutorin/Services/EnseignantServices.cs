@@ -21,7 +21,15 @@ namespace Tutorin.Services
             return enseignant.Id;
         }
 
-        public void ModiferEnseignant(int id, string nom, string prenom, string identifiant, string motDePasse, TypeMatiere matiere, TypeNiveau niveau, int utilisateurID)
+        public int CreerEnseignant(Enseignant enseignant)
+        {
+            _bddContext.Enseignants.Add(enseignant);
+            _bddContext.SaveChanges();
+
+            return enseignant.Id;
+        }
+
+        public void ModifierEnseignant(int id, string nom, string prenom, string identifiant, string motDePasse, TypeMatiere matiere, TypeNiveau niveau, int utilisateurID)
         {
             Enseignant enseignant = _bddContext.Enseignants.Find(id);
             enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
@@ -37,6 +45,12 @@ namespace Tutorin.Services
                
                 _bddContext.SaveChanges();
             }
+        }
+
+        public void ModifierEnseignant(Enseignant enseignant)
+        {
+            _bddContext.Enseignants.Update(enseignant);
+            _bddContext.SaveChanges();
         }
 
         public void SupprimerEnseignant(int id)
