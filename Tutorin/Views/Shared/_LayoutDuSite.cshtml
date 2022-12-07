@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="/css/Site.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <header>
+        <div>
+            <img />
+            <h1>Tutor'in</h1>
+        </div>
+        <nav>
+            <ul>
+                <li>Accueil</li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        <p>Contact</p>
+    </footer>
+
+    @RenderSection("Script", required: false)
+</body>
+</html>
