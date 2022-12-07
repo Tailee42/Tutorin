@@ -34,7 +34,7 @@ namespace TestUnitaire
                     Assert.Single(eleves);
                     Assert.Equal(new DateTime(2010, 7, 14), eleves[0].DateNaissance);
                     Assert.Equal(TypeNiveau.Quatrieme, eleves[0].Niveau);
-                    Assert.Equal(1, eleves[0].UtilisateurID);
+                    Assert.Equal(1, eleves[0].UtilisateurId);
                 }
                
             }
@@ -65,7 +65,7 @@ namespace TestUnitaire
                 Assert.Single(eleves);
                 Assert.Equal(new DateTime(2012, 7, 14), eleves[0].DateNaissance);
                 Assert.Equal(TypeNiveau.Sixieme, eleves[0].Niveau);
-                Assert.Equal(1, eleves[0].UtilisateurID);
+                Assert.Equal(1, eleves[0].UtilisateurId);
             }
         }
         [Fact]
