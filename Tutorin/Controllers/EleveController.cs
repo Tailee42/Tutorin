@@ -84,5 +84,14 @@ namespace Tutorin.Controllers
                 }
             
         }
+
+        public IActionResult Supprimer(int eleveId)
+        {
+            using(EleveServices es = new EleveServices())
+            {
+                es.SupprimerEleve(eleveId);
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

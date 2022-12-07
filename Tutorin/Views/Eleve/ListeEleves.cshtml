@@ -1,4 +1,4 @@
-﻿@model Tutorin.ViewModels.EleveViewModel
+@model Tutorin.ViewModels.EleveViewModel
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Liste des élèves";
@@ -27,7 +27,7 @@
                 <td>@eleve.Niveau</td>
                 <td>
                     <a href="/Eleve/modifier?eleveId=@eleve.Id">Modifier</a>
-                    <a href="/Eleve/supprimer/@eleve.Id">Supprimer</a>
+                    <a href="/Eleve/supprimer?eleveId=@eleve.Id">Supprimer</a>
                 </td>
             </tr>
     }
