@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Tutorin.Models;
 using System.Security.Cryptography.X509Certificates;
 using System.Linq;
+using System;
 
 namespace Tutorin.Controllers
 {
@@ -63,6 +64,7 @@ namespace Tutorin.Controllers
                     {
                         return View("Error");
                     }
+                    Console.WriteLine(eleve.DateNaissance.ToString());
                     return View("Modifier", eleve);
                 }
             }

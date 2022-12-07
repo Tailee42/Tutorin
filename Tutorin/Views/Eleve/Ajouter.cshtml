@@ -38,13 +38,13 @@
 
             <div>
                 @Html.LabelFor(m => Model.DateNaissance)<br />
-                @Html.TextBoxFor(m => Model.DateNaissance, new {@type = "date"} )<br />
+                @Html.TextBoxFor(m => Model.DateNaissance,"{0:dd-MM-yyyy}", new {@type = "date"} )<br />
                 @Html.ValidationMessageFor(m => Model.DateNaissance)
             </div>
 
             <div>
-                @Html.LabelFor(m => Model.Niveau)<br />
-                @Html.TextBoxFor(m => Model.Niveau )<br />
+                @Html.LabelFor(m => Model.Niveau)
+                @Html.RadioButtonFor(m => Model.Niveau, "CP" )<br />
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
