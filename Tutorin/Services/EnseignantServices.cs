@@ -13,7 +13,7 @@ namespace Tutorin.Services
             _bddContext = new BddContext();
         }
 
-        public int CreerEnseignant ( string matiere, TypeNiveau niveau, int utilisateurID)
+        public int CreerEnseignant ( TypeMatiere matiere, TypeNiveau niveau, int utilisateurID)
         {
             Enseignant enseignant = new Enseignant() { Matiere = matiere, Niveaux = niveau, UtilisateurId = utilisateurID };
             _bddContext.Enseignants.Add(enseignant);
@@ -21,7 +21,7 @@ namespace Tutorin.Services
             return enseignant.Id;
         }
 
-        public void ModiferEnseignant(int id, string nom, string prenom, string identifiant, string motDePasse, string matiere, TypeNiveau niveau, int utilisateurID)
+        public void ModiferEnseignant(int id, string nom, string prenom, string identifiant, string motDePasse, TypeMatiere matiere, TypeNiveau niveau, int utilisateurID)
         {
             Enseignant enseignant = _bddContext.Enseignants.Find(id);
             enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
@@ -32,14 +32,30 @@ namespace Tutorin.Services
                 enseignant.Utilisateur.Prenom = prenom;
                 enseignant.Utilisateur.Identifiant = identifiant;
                 enseignant.Utilisateur.MotDePasse = motDePasse;
+                enseignant.Matiere = matiere;
+                enseignant.Niveaux= niveau;
+               
                 _bddContext.SaveChanges();
             }
         }
 
+        public void SupprimerEnseignant(int id)
+        {
+            Enseignant enseignant = _bddContext.Enseignants.Find(id);
+            _bddContext.Enseignants.Remove(enseignant);
+            _bddContext.SaveChanges();
+        }
+
         public List<Enseignant> ObtientTousLesEnseignants()
         {
-            return _bddContext.Enseignants.ToList();
+            List<Enseignant>listeEnseignants = _bddContext.Enseignants.ToList();
+            foreach(Enseignant enseignant in listeEnseignants) 
+            {
+                enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
+            }
+            return listeEnseignants;
         }
+
         public void Dispose()
         {
             _bddContext.Dispose();
