@@ -6,6 +6,7 @@ namespace Tutorin.Models
     public class BddContext : DbContext
     {
         public DbSet<Utilisateur> Utilisateurs { get;set; }
+        public DbSet<Enseignant> Enseignants { get; set; }
 
         public DbSet<ResponsableEleve> ResponsablesEleves { get;set; }
 

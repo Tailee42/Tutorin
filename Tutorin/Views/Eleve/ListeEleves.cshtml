@@ -1,53 +1,39 @@
-﻿@model Tutorin.ViewModels.EleveViewModel
+@model Tutorin.ViewModels.EleveViewModel
 @{
-    Layout = null;
+    Layout = "_LayoutDuSite";
+    ViewBag.Title = "Liste des élèves";
 }
 
-<!DOCTYPE html>
 
-<html>
+<h1>Liste des élèves : </h1>
+<table border="1">
 
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Liste des élèves</title>
-    <link href="/css/Site.css" rel="stylesheet" />
-</head>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Identifiant</th>
+        <th>Date de naissance</th>
+        <th>Niveau</th>
+        <th>Actions</th>
+    </tr>
 
-<body>
-    <header>
-        <h1>Tutor'in</h1>
-    </header>
-    <h1>Liste des élèves : </h1>
-    <table border="1">
+    @foreach (Tutorin.Models.Eleve eleve in Model.ListeEleves)
+    {
+            <tr>
+                <td>@eleve.Utilisateur.Nom</td>
+                <td>@eleve.Utilisateur.Prenom</td>
+                <td>@eleve.Utilisateur.Identifiant</td>
+                <td>@eleve.DateNaissance</td>
+                <td>@eleve.Niveau</td>
+                <td>
+                    <a href="/Eleve/modifier?eleveId=@eleve.Id">Modifier</a>
+                    <a href="/Eleve/supprimer?eleveId=@eleve.Id">Supprimer</a>
+                </td>
+            </tr>
+    }
+</table>
 
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Identifiant</th>
-            <th>Date de naissance</th>
-            <th>Niveau</th>
-            <th>Actions</th>
-        </tr>
-
-        @foreach (Tutorin.Models.Eleve eleve in Model.ListeEleves)
-        {
-                <tr>
-                    <td>@eleve.Utilisateur.Nom</td>
-                    <td>@eleve.Utilisateur.Prenom</td>
-                    <td>@eleve.Utilisateur.Identifiant</td>
-                    <td>@eleve.DateNaissance</td>
-                    <td>@eleve.Niveau</td>
-                    <td>
-                        <a href="/Eleve/modifier?eleveId=@eleve.Id">Modifier</a>
-                        <a href="/Eleve/supprimer?eleveId=@eleve.Id">Supprimer</a>
-                    </td>
-                </tr>
-        }
-    </table>
-
-    <br />
-    <a href="/Eleve/ajouter">Ajouter un élève</a>
+<br />
+<a href="/Eleve/ajouter">Ajouter un élève</a>
 
 
-</body>
-</html>
