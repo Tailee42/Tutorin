@@ -34,6 +34,7 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 4, Nom = "Dupond", Prenom = "Anne", Identifiant = "danne", MotDePasse = "Anne456" },
                 new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = "Antoine10" },
                 new Utilisateur { Id = 6, Nom = "LOUISE", Prenom = "Anne", Identifiant = "lanne", MotDePasse = "Anne25" },
+
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = "Susie33"}
 
                 );

@@ -81,6 +81,15 @@ namespace Tutorin.Controllers
             }
 
         }
+
+        public IActionResult Supprimer(int enseignantId)
+        {
+            using (EnseignantServices ens = new EnseignantServices())
+            {
+                ens.SupprimerEnseignant(enseignantId);
+                return RedirectToAction("Index");
+            }
+        }
     }
 
 
