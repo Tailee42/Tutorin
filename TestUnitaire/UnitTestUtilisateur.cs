@@ -11,9 +11,12 @@ namespace TestUnitaire
         [Fact]
         public void Creation_Utilisateur_Verification()
         {
+
+            BddContext bdd = new BddContext();
+            bdd.DeleteCreateDatabase();
+
             using (UtilisateurServices us = new UtilisateurServices())
             {
-                us.DeleteCreateDatabase();
                 us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
             }
             using (UtilisateurServices us = new UtilisateurServices())
@@ -30,9 +33,11 @@ namespace TestUnitaire
         [Fact]
         public void Modification_Utilisateur_Verification()
         {
+            BddContext bdd = new BddContext();
+            bdd.DeleteCreateDatabase();
+
             using (UtilisateurServices us = new UtilisateurServices())
             {
-                us.DeleteCreateDatabase();
                 int id = us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
                 us.ModifierUtilisateur(id, "Pasquali", "Antoine", "pantoine", "123456");
             }
@@ -50,10 +55,14 @@ namespace TestUnitaire
         [Fact]
         public void Suppression_Utilisateur_Verification()
         {
+
+            BddContext bdd = new BddContext();
+            bdd.DeleteCreateDatabase();
+
+
             using (UtilisateurServices us = new UtilisateurServices())
             {
-                us.DeleteCreateDatabase();
-                int id = us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
+                int id = us.CreerUtilisateur("Badaroux", "Alfonse", "balfonse", "azerty");
                 us.SupprimerUtilisateur(id);
             }
             using (UtilisateurServices us = new UtilisateurServices())

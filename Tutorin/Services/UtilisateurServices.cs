@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Tutorin.Models;
 
@@ -11,12 +11,6 @@ namespace Tutorin.Services
         public UtilisateurServices()
         {
             _bddContext = new BddContext();
-        }
-
-        public void DeleteCreateDatabase()
-        {
-            _bddContext.Database.EnsureDeleted();
-            _bddContext.Database.EnsureCreated();
         }
 
         public int CreerUtilisateur(string nom, string prenom, string identifiant, string motDePasse)
