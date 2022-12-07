@@ -13,7 +13,7 @@ namespace Tutorin.Models
         [Required]
         public TypeNiveau Niveau { get; set; }
 
-        public int UtilisateurID { get; set; }
+        public int UtilisateurId { get; set; }
         public Utilisateur Utilisateur { get; set; }
     }
 }

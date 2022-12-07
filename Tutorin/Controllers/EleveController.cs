@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Tutorin.Models;
 using System.Security.Cryptography.X509Certificates;
 using System.Linq;
+using System;
 
 namespace Tutorin.Controllers
 {
@@ -41,7 +42,7 @@ namespace Tutorin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("AjouterUtilisateur", eleve);
+                return View("Ajouter", eleve);
             }
 
             using (EleveServices el = new EleveServices())
@@ -63,6 +64,7 @@ namespace Tutorin.Controllers
                     {
                         return View("Error");
                     }
+                    Console.WriteLine(eleve.DateNaissance.ToString());
                     return View("Modifier", eleve);
                 }
             }
@@ -83,6 +85,15 @@ namespace Tutorin.Controllers
                     return RedirectToAction("Index");
                 }
             
+        }
+
+        public IActionResult Supprimer(int eleveId)
+        {
+            using(EleveServices es = new EleveServices())
+            {
+                es.SupprimerEleve(eleveId);
+                return RedirectToAction("Index");
+            }
         }
     }
 }
