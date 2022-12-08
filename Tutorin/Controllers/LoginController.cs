@@ -28,7 +28,7 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Index(UtilisateurViewModel viewModel, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (viewModel.Utilisateur.Identifiant != null && viewModel.Utilisateur.MotDePasse != null)
             {
                 Utilisateur utilisateur = us.Authentifier(viewModel.Utilisateur.Identifiant, viewModel.Utilisateur.MotDePasse);
                 if (utilisateur != null)
