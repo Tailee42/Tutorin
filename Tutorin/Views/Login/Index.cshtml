@@ -20,16 +20,6 @@ else
     using (Html.BeginForm())
     {
         <div>
-            @Html.LabelFor(m => m.Utilisateur.Nom)
-            @Html.TextBoxFor(m => m.Utilisateur.Nom)
-            @Html.ValidationMessageFor(m => m.Utilisateur.Nom)
-        </div>
-        <div>
-            @Html.LabelFor(m => m.Utilisateur.Prenom)
-            @Html.PasswordFor(m => m.Utilisateur.Prenom)
-            @Html.ValidationMessageFor(m => m.Utilisateur.Prenom)
-        </div>
-        <div>
             @Html.LabelFor(m => m.Utilisateur.Identifiant)
             @Html.TextBoxFor(m => m.Utilisateur.Identifiant)
             @Html.ValidationMessageFor(m => m.Utilisateur.Identifiant)
