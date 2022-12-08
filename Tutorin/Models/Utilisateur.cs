@@ -18,7 +18,7 @@ namespace Tutorin.Models
         [Required(ErrorMessage = "L'identifiant doit être rempli.")]
         public string Identifiant { get; set; }
 
-        [MaxLength(30)]
+        [MaxLength(50)]
         [Display(Name = "Mot de passe")]
         [Required]
         [RegularExpression(@"^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$", ErrorMessage = "Le mot de passe doit contenir au moins 6 caractères dont au moins une majuscule, une minuscule et un chiffre")]

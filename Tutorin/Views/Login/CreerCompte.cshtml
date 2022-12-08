@@ -1,0 +1,38 @@
+﻿@model Tutorin.Models.Utilisateur
+@{
+    ViewBag.Title = "Créer un compte";
+    Layout = "_LayoutDuSite";
+}
+<p>
+    Veuillez Remplir les champs pour créer voter compte :
+</p>
+@using (Html.BeginForm())
+
+
+{
+    <div>
+        @Html.LabelFor(m => Model.Nom)<br />
+        @Html.TextBoxFor(m => Model.Nom)<br />
+        @Html.ValidationMessageFor(m => Model.Nom)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => Model.Prenom)<br />
+        @Html.TextBoxFor(m => Model.Prenom)<br />
+        @Html.ValidationMessageFor(m => Model.Prenom)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => Model.Identifiant) <br />
+        @Html.TextBoxFor(m => Model.Identifiant)<br />
+        @Html.ValidationMessageFor(m => Model.Identifiant)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => Model.MotDePasse)<br />
+        @Html.TextBoxFor(m => Model.MotDePasse, new {@type = "password" } )<br />
+        @Html.ValidationMessageFor(m => Model.MotDePasse)
+    </div>
+
+        <input type="submit" value="Créer" />
+}

@@ -1,0 +1,51 @@
+﻿@model Tutorin.ViewModels.UtilisateurViewModel
+@{
+    ViewBag.Title = "S'authentifier";
+    Layout = "_LayoutDuSite";
+}
+
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.Utilisateur.Identifiant
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.Utilisateur.Nom)
+            @Html.TextBoxFor(m => m.Utilisateur.Nom)
+            @Html.ValidationMessageFor(m => m.Utilisateur.Nom)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Utilisateur.Prenom)
+            @Html.PasswordFor(m => m.Utilisateur.Prenom)
+            @Html.ValidationMessageFor(m => m.Utilisateur.Prenom)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Utilisateur.Identifiant)
+            @Html.TextBoxFor(m => m.Utilisateur.Identifiant)
+            @Html.ValidationMessageFor(m => m.Utilisateur.Identifiant)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Utilisateur.MotDePasse)
+            @Html.PasswordFor(m => m.Utilisateur.MotDePasse)
+            @Html.ValidationMessageFor(m => m.Utilisateur.MotDePasse)
+        </div>
+        <input type="submit" value="Se connecter" />
+        <br />
+        @Html.ActionLink("Créer un compte", "CreerCompte")
+    }
+}
+@section Script {
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
