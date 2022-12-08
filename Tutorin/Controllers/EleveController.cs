@@ -21,13 +21,8 @@ namespace Tutorin.Controllers
                 evm = new EleveViewModel()
                 {
                     ListeEleves = es.ObtientTousLesEleves()
-
                 };
-
             };
-
-            
-            
             return View("ListeEleves", evm);
         }
 
@@ -45,9 +40,9 @@ namespace Tutorin.Controllers
                 return View("Ajouter", eleve);
             }
 
-            using (EleveServices el = new EleveServices())
+            using (EleveServices es = new EleveServices())
             {
-                el.CreerEleve(eleve);
+                es.CreerEleve(eleve);
                 return RedirectToAction("Index");
             }
         }
@@ -65,7 +60,6 @@ namespace Tutorin.Controllers
                         return View("Error");
                     }
                     Console.WriteLine(eleve.DateNaissance.ToString());
-                    return View("Modifier", eleve);
                 }
             }
             return View("Error");
