@@ -21,13 +21,8 @@ namespace Tutorin.Controllers
                 evm = new EleveViewModel()
                 {
                     ListeEleves = es.ObtientTousLesEleves()
-
                 };
-
             };
-
-            
-            
             return View("ListeEleves", evm);
         }
 
