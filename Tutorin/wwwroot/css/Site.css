@@ -1,3 +1,39 @@
-﻿body {
-    background-color: antiquewhite;
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap');
+
+body {
+    background-color: #f1ede8;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 5em;
 }
+
+
+/* Mise en page du header*/
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#entreprise {
+    display: flex;
+    padding-left: 20px;
+}
+
+img {
+    height: 70px;
+}
+
+ul {
+    display: flex;
+    padding-right: 20px;
+}
+
+li {
+    margin: 1em;
+    list-style-type: none;
+}
+
+/*  */
