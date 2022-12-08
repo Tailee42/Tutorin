@@ -11,6 +11,7 @@ namespace Tutorin.Models
         public DbSet<Abonnement> Abonnements { get; set; }
         public DbSet<Eleve> Eleves { get;set; }
         public DbSet<Prestation> Prestations { get; set; }
+        public DbSet<ContenuPedagogique> ContenusPedagogiques { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
