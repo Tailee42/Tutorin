@@ -58,7 +58,7 @@ namespace Tutorin.Services
         public int AjouterUtilisateur(string nom, string prenom, string identifiant, string motDePasse)
         {
             string motDePasseCode = EncodeMD5(motDePasse);
-            Utilisateur user = new Utilisateur() {Nom= nom, Prenom = prenom, MotDePasse = motDePasseCode };
+            Utilisateur user = new Utilisateur() {Nom= nom, Prenom = prenom, Identifiant = identifiant, MotDePasse = motDePasseCode };
             this._bddContext.Utilisateurs.Add(user);
             this._bddContext.SaveChanges();
             return user.Id;
