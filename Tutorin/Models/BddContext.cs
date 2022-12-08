@@ -49,7 +49,7 @@ namespace Tutorin.Models
             this.Prestations.AddRange(
                 new Prestation { Niveau = TypeNiveau.CM2, DateDebut = new System.DateTime(2022, 12, 06, 14,0,0), 
                     DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0), TypePrestation = TypePrestation.Tuturat, Ville = "Paris",
-                    Prix = 25F, Matiere = TypeMatiere.Maths, Presentiel = true}
+                    Prix = 25F, Matiere = TypeMatiere.Physique, Presentiel = true}
                 );
 
             this.ResponsablesEleves.AddRange(
