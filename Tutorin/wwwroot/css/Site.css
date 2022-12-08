@@ -7,14 +7,14 @@ body {
 }
 
 
-/* Mise en page du header*/
+/* Mise en page du header desktop*/
 header {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 #entreprise {
@@ -26,14 +26,70 @@ img {
     height: 70px;
 }
 
-ul {
+
+
+/* Style menu desktop */
+#navbar-desktop {
+    height: 6rem;
+    line-height: 6rem; /*centre verticalement */
+    text-align: center;
+}
+
+/* Style menu mobile */
+.navbar-mobile {
+    display: none;
+}
+
+.navbar-mobile i {
+    position: fixed;
+    z-index: 9999;
+    top: 9px;
+    right: 15px;
+    font-size: 3em;
+}
+
+.navbar-mobile .modal {
+    transition: top 0.9s;
+    background-color: #e0d7cc;
+    height: 100vh;
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.navbar-mobile .change-modal {
+    top: 0vh;
+}
+
+
+.navbar-mobile #navbar-mobile-list {
     display: flex;
-    padding-right: 20px;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-li {
-    margin: 1em;
-    list-style-type: none;
+.navbar-mobile #navbar-mobile-list a {
+    font-size: 2em;
+    font-weight: 800;
+    padding: 2rem;
 }
 
-/*  */
+/* Style des liens */
+#navbar-desktop a {
+    padding: 1rem;
+}
+
+/* Media Queries */
+@media screen and (max-width : 800px) {
+    #navbar-desktop {
+        display: none;
+    }
+
+    .navbar-mobile {
+        display: block;
+    }
+}
