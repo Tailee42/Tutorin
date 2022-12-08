@@ -49,12 +49,12 @@ namespace Tutorin.Controllers
             return View(viewModel);
         }
 
-        public IActionResult CreerCompte()
+        public IActionResult CreerCompteUtilisateur()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult CreerCompte(Utilisateur utilisateur)
+        public IActionResult CreerCompteUtilisateur(Utilisateur utilisateur)
         {
             if (ModelState.IsValid)
             {
