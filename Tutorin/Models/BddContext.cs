@@ -36,8 +36,14 @@ namespace Tutorin.Models
 
             this.Eleves.AddRange(
                 new Eleve { Id = 1, DateNaissance = new System.DateTime(2013, 07, 14), Niveau = TypeNiveau.CM1, UtilisateurId = 2 },
-                new Eleve { Id = 2, DateNaissance = new System.DateTime(2011, 04, 01), Niveau = TypeNiveau.Sixieme, UtilisateurId    = 4 }
+                new Eleve { Id = 2, DateNaissance = new System.DateTime(2011, 04, 01), Niveau = TypeNiveau.Sixieme, UtilisateurId = 4 }
 
+                );
+
+            this.Prestations.AddRange(
+                new Prestation { Niveau = TypeNiveau.CM2, DateDebut = new System.DateTime(2022, 12, 06, 14,0,0), 
+                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0), TypePrestation = TypePrestation.Tuturat, Ville = "Paris",
+                    Prix = 25F, Matiere = TypeMatiere.Maths, Presentiel = true}
                 );
 
             this.SaveChanges();

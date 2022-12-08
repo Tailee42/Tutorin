@@ -34,6 +34,24 @@ namespace Tutorin.Services
             return prestation.Id;
         }
 
+        public int CreerPrestation(Prestation prestation)
+        {
+           
+            if (prestation.EnseignantId > 0)
+            {
+                prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
+            }
+            else
+            {
+                prestation.EtatPrestation = EtatPrestation.A_affecter;
+            }
+
+            _bddContext.Prestations.Add(prestation);
+            _bddContext.SaveChanges();
+
+            return prestation.Id;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();

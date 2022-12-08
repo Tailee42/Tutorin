@@ -2,6 +2,6 @@
 {
     public enum TypeMatiere
     {
-
+        Maths, Francais, Anglais
     }
 }
