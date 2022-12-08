@@ -79,12 +79,11 @@ namespace Tutorin.Controllers
             
         }
 
-        [HttpPost]
-        public IActionResult Supprimer(ResponsableEleve responsable)
+        public IActionResult Supprimer(int responsableId)
         {
             using (ResponsableServices rs = new ResponsableServices())
             {
-                rs.SupprimerResponsable(responsable);
+                rs.SupprimerResponsable(responsableId);
                 return RedirectToAction("Index");
             }
         }

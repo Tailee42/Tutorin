@@ -52,16 +52,9 @@ namespace Tutorin.Services
         public void SupprimerResponsable(int id)
         {
             ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
-            responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.UtilisateurId) ;
+           responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.UtilisateurId) ;
             _bddContext.ResponsablesEleves.Remove(responsable);
-            _bddContext.Utilisateurs.Remove(responsable.Utilisateur);
-            _bddContext.SaveChanges();
-        }
-
-        public void SupprimerResponsable(ResponsableEleve responsable)
-        {
-            _bddContext.ResponsablesEleves.Remove(responsable);
-            _bddContext.Utilisateurs.Remove(responsable.Utilisateur);
+           _bddContext.Utilisateurs.Remove(responsable.Utilisateur);
             _bddContext.SaveChanges();
         }
 

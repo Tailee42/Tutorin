@@ -8,7 +8,8 @@ namespace Tutorin.Services
     {
         int CreerContenuPedagogique(TypeMatiere matiere, TypeNiveau niveau, string titre, string contenu, int enseignantId);
         int CreerContenuPedagogique(ContenuPedagogique cours);
-        List<ContenuPedagogique> ObtientTousLesContenusPedagogiques();
+        void ModifierContenuPedagogique(ContenuPedagogique cours);
+        List<ContenuPedagogique> ObtenirTousLesContenusPedagogiques();
         void SupprimerContenuPedagogique(int id);
     }
 }
