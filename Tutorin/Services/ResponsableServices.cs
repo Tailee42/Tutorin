@@ -21,10 +21,16 @@ namespace Tutorin.Services
             return responsable.Id;
         }
 
-        public void ModifierResponsable(int id, string nom, string prenom, string identifiant, string motDePasse, string mail, int utilisateurId, List<Abonnement> abonnements)
+        public void CreerResponsable(ResponsableEleve responsable)
+        {
+            _bddContext.ResponsablesEleves.Add(responsable);
+            _bddContext.SaveChanges();
+        }
+
+        public void ModifierResponsable(int id, string nom, string prenom, string identifiant, string motDePasse, string mail, List<Abonnement> abonnements)
         {
             ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
-            responsable.Utilisateur = _bddContext.Utilisateurs.Find(utilisateurId);
+            responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.Utilisateur.Id);
 
             if (responsable != null)
             {
@@ -37,10 +43,23 @@ namespace Tutorin.Services
             }
         }
 
-        public void SupprimerResponsable(int id, int utilisateurId)
+        public void ModifierResponsable(ResponsableEleve responsable)
+        {
+            _bddContext.ResponsablesEleves.Update(responsable);
+            _bddContext.SaveChanges();
+        }
+
+        public void SupprimerResponsable(int id)
         {
             ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
-            responsable.Utilisateur = _bddContext.Utilisateurs.Find(utilisateurId);
+            responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.UtilisateurId) ;
+            _bddContext.ResponsablesEleves.Remove(responsable);
+            _bddContext.Utilisateurs.Remove(responsable.Utilisateur);
+            _bddContext.SaveChanges();
+        }
+
+        public void SupprimerResponsable(ResponsableEleve responsable)
+        {
             _bddContext.ResponsablesEleves.Remove(responsable);
             _bddContext.Utilisateurs.Remove(responsable.Utilisateur);
             _bddContext.SaveChanges();
@@ -48,9 +67,9 @@ namespace Tutorin.Services
 
         public List<ResponsableEleve> ObtenirTousLesResponsables()
         {
-            List<ResponsableEleve> listResponsables = new List<ResponsableEleve>();
+            List<ResponsableEleve> listResponsables = _bddContext.ResponsablesEleves.ToList();
 
-            foreach (var responsable in listResponsables)
+            foreach (ResponsableEleve responsable in listResponsables)
             {
                 responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.UtilisateurId);
             }

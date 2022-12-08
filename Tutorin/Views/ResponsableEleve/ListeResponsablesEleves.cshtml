@@ -1,0 +1,39 @@
+@model Tutorin.ViewModels.ResponsableEleveViewModel
+@{
+    Layout = "_LayoutDuSite";
+    ViewBag.Title = "Liste des Responsables";
+}
+
+
+<h1>Liste des responsables des élèves : </h1>
+<table border="1">
+
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Identifiant</th>
+        <th>Mail</th>
+        @*<th>Abonnements</th>*@
+        <th>Actions</th>
+    </tr>
+
+    @foreach (Tutorin.Models.ResponsableEleve responsable in Model.ListeResponsablesEleves)
+    {
+            <tr>
+                <td>@responsable.Utilisateur.Nom</td>
+                <td>@responsable.Utilisateur.Prenom</td>
+                <td>@responsable.Utilisateur.Identifiant</td>
+                <td>@responsable.Mail</td>
+                @*<td>@responsable.Abonnements</td>*@
+                <td>
+                    <a href="/ResponsableEleve/modifier?responsableId=@responsable.Id">Modifier</a>
+                    <a href="/ResponsableEleve/supprimer?responsableId=@responsable.Id">Supprimer</a>
+                </td>
+            </tr>
+    }
+</table>
+
+<br />
+<a href="/ResponsableEleve/ajouter">Ajouter un responsable</a>
+
+

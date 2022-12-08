@@ -1,17 +1,17 @@
-﻿@model Tutorin.Models.Eleve
-@using Tutorin.Models
+﻿@model Tutorin.Models.ResponsableEleve
 @{
-    ViewBag.Title = "Ajout élève";
+    ViewBag.Title = "Ajout Responsable Eleve";
     Layout = "_LayoutDuSite";
 }
 
-<h1>Ajouter un élève</h1>
+<h1>Ajouter un Responsable d'élève</h1>
+
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Ajouter un élève : </legend>
+            <legend>Ajouter un responsable d'élève : </legend>
 
             <div>
                 @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
@@ -38,17 +38,12 @@
             </div>
 
             <div>
-                @Html.LabelFor(m => Model.DateNaissance)<br />
-                @Html.TextBoxFor(m => Model.DateNaissance, new {@type = "date"} )<br />
-                @Html.ValidationMessageFor(m => Model.DateNaissance)
-            </div>
+                @Html.LabelFor(m => Model.Mail)<br />
 
-            <div>
-                @Html.LabelFor(m => Model.Niveau)
-                @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
-                @Html.ValidationMessageFor(m => Model.Niveau)
-            </div>
+                @Html.TextBoxFor(m => Model.Mail, new {@type = "email"} )<br />
 
+                @Html.ValidationMessageFor(m => Model.Mail)
+            </div>
 
             <input class="bouttonStyle" type="submit" value="Ajouter" />
         </fieldset>
