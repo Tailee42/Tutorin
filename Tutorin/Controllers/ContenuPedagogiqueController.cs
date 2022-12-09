@@ -26,7 +26,7 @@ namespace Tutorin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Ajouter(int enseignantId)
+        public IActionResult Ajouter()
         {
             return View("Ajouter");
         }

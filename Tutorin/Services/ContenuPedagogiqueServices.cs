@@ -23,10 +23,11 @@ namespace Tutorin.Services
                 Niveau = niveau,
                 Titre = titre,
                 ContenuDuCours = contenu,
-                EnseignantId = enseignantId
+                EnseignantId = enseignantId,
             };
 
             cours.Etat = EtatContenuPedagogique.A_Valider;
+            cours.Auteur = _bddContext.Enseignants.Find(cours.EnseignantId);
 
             _bddContext.ContenusPedagogiques.Add(cours);
             _bddContext.SaveChanges();
@@ -37,6 +38,7 @@ namespace Tutorin.Services
         public int CreerContenuPedagogique(ContenuPedagogique cours)
         {
             cours.Etat = EtatContenuPedagogique.A_Valider;
+            cours.Auteur = _bddContext.Enseignants.Find(cours.EnseignantId);
 
             _bddContext.ContenusPedagogiques.Add(cours);
             _bddContext.SaveChanges();
