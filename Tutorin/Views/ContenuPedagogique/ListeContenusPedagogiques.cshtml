@@ -1,0 +1,49 @@
+﻿@model Tutorin.ViewModels.ContenuPedagogiqueViewModel
+@{
+    Layout = "_LayoutDuSite";
+    ViewBag.Title = "Liste des cours";
+}
+
+@section Menu {
+
+    <ul>
+        <li>Accueil</li>
+        <li>Présentation</li>
+    </ul>
+}
+
+<h1>Liste des cours : </h1>
+<table border="1">
+
+    <tr>
+        <th>Numéro</th>
+        <th>Titre</th>
+        <th>Matière</th>
+        <th>Niveau</th>
+        <th>Date de publication</th>
+        <th>Dernière mise à jour</th>
+        <th>Etat</th>
+        <th>Auteur</th>
+    </tr>
+
+    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
+    {
+        <tr>
+            <td>@cours.Id</td>
+            <td>@cours.Titre</td>
+            <td>@cours.Matiere</td>
+            <td>@cours.Niveau</td>
+            <td>@cours.DatePublication</td>
+            <td>@cours.DateMiseAJour</td>
+            <td>@cours.Etat</td>
+            <td>@cours.Auteur</td>
+            <td>
+                <a href="/Prestation/modifier?coursId=@cours.Id">Modifier</a>
+                <a href="/Prestation/supprimer?coursId=@cours.Id">Supprimer</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+<a href="/Prestation/ajouter">Ajouter une prestation</a>

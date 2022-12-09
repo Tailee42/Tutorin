@@ -26,7 +26,7 @@ namespace Tutorin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Ajouter()
+        public IActionResult Ajouter(int enseignantId)
         {
             return View("Ajouter");
         }
@@ -81,11 +81,11 @@ namespace Tutorin.Controllers
 
         }
 
-        public IActionResult Supprimer(int prestationId)
+        public IActionResult Supprimer(int coursId)
         {
-            using (PrestationServices ps = new PrestationServices())
+            using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-                ps.SupprimerPrestation(prestationId);
+                cps.SupprimerContenuPedagogique(coursId);
                 return RedirectToAction("Index");
             }
         }
