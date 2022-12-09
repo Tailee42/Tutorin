@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Claims;
 using Tutorin.Models;
@@ -114,7 +115,7 @@ namespace Tutorin.Controllers
                 int id = us.AjouterUtilisateur(utilisateur.Nom, utilisateur.Prenom, utilisateur.Identifiant, utilisateur.MotDePasse);
                 var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, id.ToString()),
+                    new Claim(ClaimTypes.Name, utilisateur.Id.ToString())
                 };
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
