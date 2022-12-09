@@ -56,7 +56,9 @@ namespace Tutorin.Services
         public void SupprimerEnseignant(int id)
         {
             Enseignant enseignant = _bddContext.Enseignants.Find(id);
+            enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
             _bddContext.Enseignants.Remove(enseignant);
+           _bddContext.Utilisateurs.Remove(enseignant.Utilisateur);
             _bddContext.SaveChanges();
         }
 

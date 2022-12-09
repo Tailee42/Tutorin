@@ -1,0 +1,22 @@
+﻿@model Tutorin.Models.Utilisateur
+@{
+    ViewBag.Title = "Créer un compte utilisateur";
+    Layout = "_LayoutDuSite";
+}
+
+@section Menu {
+
+    <ul>
+        <li>Accueil</li>
+        <li>Présentation</li>
+    </ul>
+}
+<p>Veillez créer votre profil</p>
+<ul>
+
+    @Html.ActionLink("Enseignant","Ajouter" , "Enseignant")
+
+    @Html.ActionLink("Responsable élèves", "Ajouter" , "ResponsableEleve")
+
+</ul>
+
