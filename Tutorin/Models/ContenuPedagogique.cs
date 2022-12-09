@@ -23,6 +23,7 @@ namespace Tutorin.Models
         public string ContenuDuCours { get; set; }
 
         public int EnseignantId { get; set; }
-        public Enseignant Auteur { get; set; }
+
+        public Enseignant Enseignant { get; set; }
     }
 }

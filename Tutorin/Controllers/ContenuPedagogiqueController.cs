@@ -102,6 +102,7 @@ namespace Tutorin.Controllers
                     {
                         return View("Error");
                     }
+
                     return View("Afficher", cours);
                 }
             }

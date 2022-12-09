@@ -1,6 +1,8 @@
 ﻿@model Tutorin.Models.ContenuPedagogique
 
 @using Tutorin.Models
+@using Tutorin.ViewModels
+
 @{
     ViewBag.Title = "Afficher Contenu Pedagogique";
     Layout = "_LayoutDuSite";
@@ -18,7 +20,7 @@
 <div class="infoCours">
     <p>Niveau : @Model.Niveau</p>
     <p>Matiere : @Model.Matiere</p>
-    @*<p>Auteur : @Model.Auteur.Utilisateur.Prenom @Model.Auteur.Utilisateur.Nom</p>*@
+    <p>Auteur : @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
 </div>
 <div class="contenuCours">@Model.ContenuDuCours</div>
 <div class="dateCours">

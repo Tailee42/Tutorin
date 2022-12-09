@@ -26,6 +26,5 @@ namespace Tutorin.Models
         public Eleve Eleve { get; set; }
         public int? EnseignantId { get; set; }
         public Enseignant Enseignant { get; set; }
-
     }
 }

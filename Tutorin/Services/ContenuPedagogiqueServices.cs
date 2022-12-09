@@ -27,7 +27,6 @@ namespace Tutorin.Services
             };
 
             cours.Etat = EtatContenuPedagogique.A_Valider;
-            cours.Auteur = _bddContext.Enseignants.Find(cours.EnseignantId);
 
             _bddContext.ContenusPedagogiques.Add(cours);
             _bddContext.SaveChanges();
@@ -38,7 +37,6 @@ namespace Tutorin.Services
         public int CreerContenuPedagogique(ContenuPedagogique cours)
         {
             cours.Etat = EtatContenuPedagogique.A_Valider;
-            cours.Auteur = _bddContext.Enseignants.Find(cours.EnseignantId);
 
             _bddContext.ContenusPedagogiques.Add(cours);
             _bddContext.SaveChanges();
@@ -57,7 +55,8 @@ namespace Tutorin.Services
             List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.ToList();
             foreach (ContenuPedagogique cours in listeCours)
             {
-                cours.Auteur = _bddContext.Enseignants.Find(cours.EnseignantId);
+                cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
+                cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
             }
 
             return listeCours;
