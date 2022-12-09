@@ -13,6 +13,7 @@ namespace Tutorin.Models
         public DbSet<Eleve> Eleves { get;set; }
         public DbSet<Prestation> Prestations { get; set; }
         public DbSet<ContenuPedagogique> ContenusPedagogiques { get; set; }
+        public DbSet<Gestionnaire> Gestionnaires { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,8 +40,13 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = "Antoine10" },
                 new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = "Anne25" },
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = "Susie33"},
-                new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = "Fraise0" }
+                new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = "Fraise0" },
+                new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = "Marco25" }
 
+                );
+
+            this.Gestionnaires.AddRange(
+                new Gestionnaire { Id = 1, PosteOccupe = "Comptable",UtilisateurId =9}
                 );
 
             this.Eleves.AddRange(
