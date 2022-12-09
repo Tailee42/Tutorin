@@ -86,6 +86,7 @@ namespace Tutorin.Controllers
         {
             using (EnseignantServices ens = new EnseignantServices())
             {
+                
                 ens.SupprimerEnseignant(enseignantId);
                 return RedirectToAction("Index");
             }
