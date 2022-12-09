@@ -69,6 +69,18 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
+        public List<ContenuPedagogique> RechercherCoursParNiveau(TypeNiveau niveau)
+        {
+            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Niveau == niveau).ToList();
+            foreach (ContenuPedagogique cours in listeCours)
+            {
+                cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
+                cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
+            }
+
+            return listeCours;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();

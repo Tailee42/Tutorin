@@ -20,8 +20,8 @@ namespace Tutorin.Controllers
                 {
                     ListeResponsablesEleves = rs.ObtenirTousLesResponsables()
                 };
-            };  
-            return View("ListeResponsablesEleves", revm);
+            };
+                return View("ListeResponsablesEleves", revm);
         }
 
         [HttpGet]

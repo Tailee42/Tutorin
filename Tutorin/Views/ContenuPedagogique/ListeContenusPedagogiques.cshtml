@@ -1,4 +1,6 @@
 ﻿@model Tutorin.ViewModels.ContenuPedagogiqueViewModel
+@using Tutorin.Models
+
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Liste des cours";
@@ -13,7 +15,7 @@
 }
 
 <h1>Liste des cours : </h1>
-<table border="1">
+@*<table border="1">
 
     <tr>
         <th>Numéro</th>
@@ -43,7 +45,31 @@
             </td>
         </tr>
     }
-</table>
+</table>*@
 
-<br />
+ @using (Html.BeginForm("RechercherNiveau", "ContenuPedagogique", FormMethod.Post))
+        {  
+            <table>       
+                <tr>
+                    <td>@Html.Label("Niveau scolaire recherché : ")</td>
+                    <td>@Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
+                    <td><input type="submit" value="Rechercher" /></td>
+                </tr>
+            </table>
+        }
 
+    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
+        {
+        <div class="cards">
+            <article class="card">
+                <header>
+                    <h2>@cours.Titre</h2>
+                </header>
+                @*<img src="maths.jpg" alt="Hot air balloons">*@
+                <div class="content">
+                    <p>@cours.Matiere</p>
+                    <p>@cours.Niveau</p>
+                </div>
+            </article>
+        </div>
+        }

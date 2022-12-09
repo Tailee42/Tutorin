@@ -25,6 +25,19 @@ namespace Tutorin.Controllers
             return View("ListeContenusPedagogiques", cpvm);
         }
 
+        [HttpPost] 
+        public IActionResult RechercherNiveau(TypeNiveau niveau)
+        {
+            List<ContenuPedagogique> listeCours = new List<ContenuPedagogique>();
+            using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
+            {
+                listeCours = cps.RechercherCoursParNiveau(niveau);
+
+            };
+            return View("ListeContenusPedagogiques", listeCours);
+        }
+            
+
         [HttpGet]
         public IActionResult Ajouter()
         {
