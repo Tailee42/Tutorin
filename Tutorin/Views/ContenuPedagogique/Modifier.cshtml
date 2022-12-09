@@ -57,7 +57,7 @@
 
             <div>
                 @Html.LabelFor(m => Model.ContenuDuCours)<br />
-                @Html.TextAreaFor(m => Model.ContenuDuCours, new {style = "max_width:80%", value = Model.ContenuDuCours})<br />
+                @Html.TextAreaFor(m => Model.ContenuDuCours, new {style = "width:700px; height:300px", value = Model.ContenuDuCours})<br />
                 @Html.ValidationMessageFor(m => Model.ContenuDuCours)
             </div>
 
@@ -65,12 +65,6 @@
                 @Html.LabelFor(m => Model.EnseignantId)<br />
                 @Html.TextBoxFor(m => Model.EnseignantId )<br />
                 @Html.ValidationMessageFor(m => Model.EnseignantId)
-            </div>
-
-            <div>
-                @Html.LabelFor(m => Model.Auteur.Utilisateur.Nom)<br />
-                @Html.TextBoxFor(m => Model.Auteur.Utilisateur.Nom)<br />
-                @Html.ValidationMessageFor(m => Model.Auteur.Utilisateur.Nom)
             </div>
 
             <input class="bouttonStyle" type="submit" value="Modifier" />
