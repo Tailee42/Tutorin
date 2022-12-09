@@ -1,0 +1,30 @@
+﻿@model Tutorin.Models.ContenuPedagogique
+
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Afficher Contenu Pedagogique";
+    Layout = "_LayoutDuSite";
+}
+
+@section Menu {
+
+    <ul>
+        <li>Accueil</li>
+        <li>Présentation</li>
+    </ul>
+}
+
+
+<h1>@Model.Titre</h1>
+<div class="infoCours">
+    <p>Niveau : @Model.Niveau</p>
+    <p>Matiere : @Model.Matiere</p>
+    @*<p>Auteur : @Model.Auteur.Utilisateur.Prenom @Model.Auteur.Utilisateur.Nom</p>*@
+</div>
+<div class="contenuCours">@Model.ContenuDuCours</div>
+<div class="dateCours">
+    <p>Publié le : @Model.DatePublication</p>
+    <p>Dernière mise à jour : @Model.DateMiseAJour</p>
+</div>
+<div id="btn-telechargerCours">Télécharger</div>
+

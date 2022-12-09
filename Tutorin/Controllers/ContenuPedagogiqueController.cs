@@ -90,6 +90,23 @@ namespace Tutorin.Controllers
             }
         }
 
+
+        public IActionResult Afficher(int coursId)
+        {
+            if (coursId != 0)
+            {
+                using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
+                {
+                    ContenuPedagogique cours = cps.ObtenirTousLesContenusPedagogiques().Where(c => c.Id == coursId).FirstOrDefault();
+                    if (cours == null)
+                    {
+                        return View("Error");
+                    }
+                    return View("Afficher", cours);
+                }
+            }
+            return View("Error");
+        }
     }
     
 }
