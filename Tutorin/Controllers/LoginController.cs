@@ -91,7 +91,7 @@ namespace Tutorin.Controllers
                         case "Enseignant":
                             return RedirectToAction("Index", "Enseignant");
                         case "Responsable":
-                            return RedirectToAction("Index", "ResponsableEleve");
+                            return RedirectToAction("TableauDeBord", "ResponsableEleve");
                         case "Eleve":
                             return RedirectToAction("Index", "Eleve");
                         default:

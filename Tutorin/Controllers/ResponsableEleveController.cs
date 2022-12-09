@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Tutorin.Models;
 using System.Linq;
 using Tutorin.ViewModels;
+using System.Security.Claims;
 
 namespace Tutorin.Controllers
 {
@@ -86,6 +87,35 @@ namespace Tutorin.Controllers
                 rs.SupprimerResponsable(responsableId);
                 return RedirectToAction("Index");
             }
+        }
+
+        public IActionResult TableauDeBord()
+        {
+            string responsableId = User.FindFirstValue("RoleId");
+            ResponsableEleve responsableEleve = null;
+            int id;
+            List<Abonnement> abonnements = new List<Abonnement>();
+
+            using (ResponsableServices rs = new ResponsableServices())
+            {
+                if (int.TryParse(responsableId, out id))
+                {
+                    responsableEleve = rs.TrouverUnResponsable(id);
+                }
+            }
+
+
+            using (AbonnementServices abs = new AbonnementServices())
+            {
+                abonnements = abs.TrouverAbonnements(id);
+            }
+               
+
+            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { ResponsableEleve = responsableEleve,
+                Abonnements = abonnements};
+
+            return View("TableauDeBord", tbrvm);
+
         }
     }
 }

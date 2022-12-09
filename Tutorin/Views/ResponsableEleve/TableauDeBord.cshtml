@@ -1,0 +1,38 @@
+﻿@model Tutorin.ViewModels.TableauBordResponsableViewModel
+@{
+    ViewBag.Title = "Tableau de Bord Responsable Eleve";
+    Layout = "_LayoutDuSite";
+}
+
+
+@section Menu {
+
+    <a href="/Home/">Accueil</a>
+    <a href="/Prestation/">Prestations</a>
+    <a href="/ResponsableEleve/modifier?responsableId=@Model.ResponsableEleve.Id">Mon Compte</a>
+}
+
+<div>@Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom</div>
+
+<h1>Mes Abonnements :</h1>
+
+@foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) {
+    <div>
+        @abonnement.Type<br>
+        @abonnement.Prix
+    </div>
+}
+
+    <div>
+        Ajouter un abonnement
+    </div>
+
+    <h1>Mes élèves :</h1>
+
+@foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
+{
+    <div>
+        @abonnement.Eleve.Utilisateur.Prenom<br>
+        @abonnement.Eleve.Niveau
+    </div>
+}

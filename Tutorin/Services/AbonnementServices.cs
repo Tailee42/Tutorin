@@ -52,5 +52,21 @@ namespace Tutorin.Services
             return _bddContext.Abonnements.ToList();
         }
 
+        //Permet de trouver tous les abonnements en fonction d'un responsable
+        public List<Abonnement> TrouverAbonnements(int responsableId)
+        {
+            List<Abonnement> abonnements = _bddContext.Abonnements.Where(r=>r.ResponsableEleveId== responsableId).ToList();
+
+            foreach (Abonnement abonnement in abonnements)
+            {
+                abonnement.ResponsableEleve = _bddContext.ResponsablesEleves.Find(abonnement.ResponsableEleveId);
+                abonnement.ResponsableEleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.ResponsableEleve.UtilisateurId);
+                abonnement.Eleve = _bddContext.Eleves.Find(abonnement.EleveId);
+                abonnement.Eleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.Eleve?.UtilisateurId);
+            }
+
+            return abonnements;
+        }
+
     }
 }
