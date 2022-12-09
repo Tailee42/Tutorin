@@ -81,27 +81,9 @@ namespace Tutorin.Controllers
 
         public IActionResult Supprimer(int responsableId)
         {
-            if (responsableId != 0)
-            {
-                using (ResponsableServices rs = new ResponsableServices())
-                {
-                    ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
-                    if (responsable == null)
-                    {
-                        return View("Error");
-                    }
-                    return View("Supprimer", responsable);
-                }
-            }
-            return View("Error");
-        }
-
-        [HttpPost]
-        public IActionResult Supprimer(ResponsableEleve responsable)
-        {
             using (ResponsableServices rs = new ResponsableServices())
             {
-                rs.SupprimerResponsable(responsable);
+                rs.SupprimerResponsable(responsableId);
                 return RedirectToAction("Index");
             }
         }
