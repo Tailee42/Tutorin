@@ -1,0 +1,75 @@
+﻿@model Tutorin.Models.Eleve
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Ajout élève";
+    Layout = "_LayoutDuSite";
+}
+
+@{
+    var responsableId = User.FindFirst("RoleId");
+}
+
+<h1>Ajouter un élève à l'abonnement'</h1>
+<div>
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Ajouter un élève à l'abonnement : </legend>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
+                @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.DateNaissance)<br />
+                @Html.TextBoxFor(m => Model.DateNaissance, new {@type = "date"} )<br />
+                @Html.ValidationMessageFor(m => Model.DateNaissance)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Niveau)
+                @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
+                @Html.ValidationMessageFor(m => Model.Niveau)
+            </div>
+
+
+            <input class="bouttonStyle" type="submit" value="AjouterEleve" />
+        </fieldset>
+    }
+
+</div>
+
+@section Script {
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+
+
+@section Menu {
+
+    <a href="/home/">Accueil</a>
+    <a href="/Prestation/">Prestations</a>
+    <a href="/ResponsableEleve/modifier?responsableId=@responsableId">Mon Compte</a>
+}

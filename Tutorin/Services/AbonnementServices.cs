@@ -38,6 +38,9 @@ namespace Tutorin.Services
                 abonnement.DateFin = dateFin;
                 abonnement.Prix = prix;
             }
+
+            _bddContext.Update(abonnement);
+            _bddContext.SaveChanges();
         }
 
         public void SupprimerAbonnement(int id)
@@ -62,10 +65,23 @@ namespace Tutorin.Services
                 abonnement.ResponsableEleve = _bddContext.ResponsablesEleves.Find(abonnement.ResponsableEleveId);
                 abonnement.ResponsableEleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.ResponsableEleve.UtilisateurId);
                 abonnement.Eleve = _bddContext.Eleves.Find(abonnement.EleveId);
-                abonnement.Eleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.Eleve?.UtilisateurId);
+                if (abonnement.EleveId>0)
+                {
+                    abonnement.Eleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.Eleve?.UtilisateurId);
+                }
             }
 
             return abonnements;
+        }
+
+        public void AjouterEleve (int abonnementId, Eleve eleve)
+        {
+            Abonnement abonnement = _bddContext.Abonnements.Find (abonnementId);
+            abonnement.EleveId = eleve.Id;
+            abonnement.Eleve = eleve;
+
+            _bddContext.Update(abonnement);
+            _bddContext.SaveChanges();
         }
 
     }

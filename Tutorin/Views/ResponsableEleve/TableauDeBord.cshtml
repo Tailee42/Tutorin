@@ -4,6 +4,9 @@
     Layout = "_LayoutDuSite";
 }
 
+@section css {
+    <link href="/css/cards.css" rel="stylesheet" />
+}
 
 @section Menu {
 
@@ -16,23 +19,89 @@
 
 <h1>Mes Abonnements :</h1>
 
-@foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) {
-    <div>
-        @abonnement.Type<br>
-        @abonnement.Prix
-    </div>
-}
+    <div class="cards">
 
-    <div>
-        Ajouter un abonnement
+
+        @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) {
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+
+            <h2 class="card__title">@abonnement.Type</h2>
+
+            <div>
+                Depuis le : @abonnement.DateDebut.ToString("d")<br>
+                Prix mensuel : @abonnement.Prix
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-xmark"></i>
+                    Arrêter l'abonnement
+                </a>
+            </p>
+
+            @if (abonnement.EleveId == null)
+            {
+                <p class="card__button">
+                <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    Ajouter un élève
+                </a>
+                </p>
+            }
+
+        </div>
+
+        }
+
+            <div class="card abonnement">
+                <h2 class="card__title">Ajouter un nouvel abonnement</h2>
+                <div>
+                    
+                </div>
+                <p class="card__button">
+                    <a class="card__link" href="#">
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                        Ajouter un abonnement 
+                    </a>
+                </p>
+            </div>
+
     </div>
+
 
     <h1>Mes élèves :</h1>
 
-@foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
-{
-    <div>
-        @abonnement.Eleve.Utilisateur.Prenom<br>
-        @abonnement.Eleve.Niveau
-    </div>
-}
+    <div class="cards">
+
+    @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
+    {
+        @if (abonnement.EleveId != null)
+        {
+            <div class="card eleve">
+                <div class="card__icon">
+                    <i class="fa-sharp fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <h2 class="card__title">@abonnement.Eleve.Utilisateur.Nom @abonnement.Eleve.Utilisateur.Prenom</h2>
+
+                <div>
+                    Niveau : @abonnement.Eleve.Niveau<br>
+
+                </div>
+
+                <p class="card__button">
+                    <a class="card__link" href="#">
+                        <i class="fa-sharp fa-solid fa-xmark"></i>
+                        Supprimer l'élève
+                    </a>
+                </p>
+
+            </div>
+
+        }
+    }
+
+</div>
