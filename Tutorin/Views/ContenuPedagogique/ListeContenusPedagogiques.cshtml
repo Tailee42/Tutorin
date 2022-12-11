@@ -14,6 +14,10 @@
     </ul>
 }
 
+@section css {
+    <link href="/css/Cours.css" rel="stylesheet" />
+}
+
 <h1>Liste des cours : </h1>
 @*<table border="1">
 
@@ -68,19 +72,19 @@
         </tr>
     </table>
 }
-
+    <div class="cards">
     @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
         {
-        <div class="cards">
+            <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="afficher-cours">
             <article class="card">
-                <header>
+                <header class="titre-card">
                     <h2>@cours.Titre</h2>
                 </header>
-                @*<img src="maths.jpg" alt="Hot air balloons">*@
                 <div class="content">
-                    <p>@cours.Matiere</p>
-                    <p>@cours.Niveau</p>
+                    <p>Matière: @cours.Matiere</p>
+                    <p>Niveau: @cours.Niveau</p>   
                 </div>
             </article>
-        </div>
+            </a>
         }
+    </div>
