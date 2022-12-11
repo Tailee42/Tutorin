@@ -8,6 +8,10 @@
     Layout = "_LayoutDuSite";
 }
 
+@section css {
+    <link href="/css/Cours.css" rel="stylesheet" />
+}
+
 @section Menu {
 
     <ul>
@@ -16,18 +20,20 @@
     </ul>
 }
 
-<h1>@Model.Titre</h1>
-<div class="infoCours">
+<h1 class="titre-cours">@Model.Titre</h1>
+<section class="cours">
+<div class="info-cours">
     <p>Niveau : @Model.Niveau</p>
     <p>Matiere : @Model.Matiere</p>
     <p>Auteur : @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
 </div>
-<div class="contenuCours">@Model.ContenuDuCours</div>
-<div class="dateCours">
+<div class="contenu-cours">@Model.ContenuDuCours</div>
+<div class="date-cours">
     <p>Publié le : @Model.DatePublication</p>
     <p>Dernière mise à jour : @Model.DateMiseAJour</p>
 </div>
 <div class="telecharger">
     <button id="btn-telechargerCours">Télécharger</button>
 </div>
+</section>
 

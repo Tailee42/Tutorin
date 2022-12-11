@@ -10,6 +10,7 @@ namespace Tutorin.Services
         int CreerContenuPedagogique(ContenuPedagogique cours);
         void ModifierContenuPedagogique(ContenuPedagogique cours);
         List<ContenuPedagogique> ObtenirTousLesContenusPedagogiques();
+        List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides();
         void SupprimerContenuPedagogique(int id);
         List<ContenuPedagogique> RechercherCoursParNiveau(TypeNiveau niveau);
         List<ContenuPedagogique> RechercherCoursParMatiere(TypeMatiere matiere);

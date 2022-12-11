@@ -36,3 +36,15 @@
     transform: scale(1.15);
 }
 
+.titre-cours {
+    text-align: center;
+}
+
+.cours {
+    border: 5px, solid, black;
+    margin : 20px, 40px;
+}
+
+.infoCours {
+    line-height: 500px;
+}

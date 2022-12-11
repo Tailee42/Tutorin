@@ -50,6 +50,7 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
+        //Méthode pour récupérer tous le contenu pédagogique, peu importe l'état du contenu
         public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiques()
         {
             List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.ToList();
@@ -59,6 +60,18 @@ namespace Tutorin.Services
                 cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
             }
 
+            return listeCours;
+        }
+
+        //Méthode pour récupérer le contenu pédagogique validé (c'est à dire en ligne ou à modifier)
+        public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides()
+        {
+            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.En_Ligne || c.Etat == EtatContenuPedagogique.A_Modifier).ToList();
+            foreach (ContenuPedagogique cours in listeCours)
+            {
+                    cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
+                    cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
+            }
             return listeCours;
         }
 

@@ -11,14 +11,13 @@ namespace Tutorin.Controllers
     {
         public IActionResult Index()
         {
-            List<ContenuPedagogique> listeCours = new List<ContenuPedagogique>();
             ContenuPedagogiqueViewModel cpvm;
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cpvm = new ContenuPedagogiqueViewModel()
                 {
-                    ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiques()
+                    ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiquesValides()
                 };
             };
 
@@ -48,10 +47,10 @@ namespace Tutorin.Controllers
             {
                 cpvm = new ContenuPedagogiqueViewModel()
                 {
-                    ListeContenusPedagogiques = cps.RechercherCoursParMatiere(matiere)
+                    ListeContenusPedagogiques = cps.RechercherCoursParMatiere(matiere)   
                 };
-
             };
+
             return View("ListeContenusPedagogiques", cpvm);
         }
 
@@ -132,8 +131,7 @@ namespace Tutorin.Controllers
                     if (cours == null)
                     {
                         return View("Error");
-                    }
-
+                    } 
                     return View("Afficher", cours);
                 }
             }
