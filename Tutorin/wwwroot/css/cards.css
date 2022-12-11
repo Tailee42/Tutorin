@@ -1,5 +1,5 @@
-﻿/* Les transitions et positions relatives ne 
-    fonctionnent pas avec le burger menu. Les passent au dessus.*/
+﻿/* Les positions relatives et absolues ne 
+    fonctionnent pas avec le burger menu. Elles passent au dessus.*/
 
 .cards {
     display: flex;
@@ -16,43 +16,32 @@
     flex-direction: column;
     border-radius: 10px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-   /* transition: all 0.2s;*/
+    transition: all 0.2s;
 }
 
-/*.card:hover {
+.card:hover {
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
     transform: scale(1.01);
-}*/
+}
 
-.card__link,
-.card__icon {
-    /*position: relative;*/
+a {
+    cursor: pointer;
     text-decoration: none;
+}
+
+.card__link {
+    padding: 0 5px;
+    box-shadow: inset 0 0 0 0 black;
+    transition: all 0.4s ease-in-out 0s;
+    border-bottom: 1px solid;
     color: black;
 }
 
-.card__button {
-    border-top: thin solid;
-}
-
-/*.card__link::after {
-    position: absolute;
-    top: 25px;
-    left: 0;
-    content: "";
-    width: 0%;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.6);*/
-    /*transition: all 0.5s;*/
-/*}*/
-
-/*.card__link:hover::after {
-    width: 100%;
-}*/
-
-card__link {
-    font-size: 30px;
-}
+    .card__link:hover {
+        box-shadow: inset 300px 0 0 0 black;
+        color: #f1ede8;
+        border-bottom: none;
+    }
 
 .abonnement {
     background: linear-gradient(180deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);

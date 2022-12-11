@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tutorin.Models;
 using Tutorin.Services;
 
@@ -11,12 +12,14 @@ namespace Tutorin.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult AjouterEleve(int abonnementId)
         {
 
             return View("AjouterEleve");
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AjouterEleve(Eleve eleve, int abonnementId)
         {
@@ -36,6 +39,16 @@ namespace Tutorin.Controllers
 
             }
             return View("AjouterEleve");
+        }
+
+        public IActionResult Supprimer(int abonnementId)
+        {
+            using (AbonnementServices abs= new AbonnementServices())
+            {
+                abs.SupprimerAbonnement(abonnementId);
+            }
+
+            return RedirectToAction("TableauDeBord", "ResponsableEleve");
         }
     }
 }

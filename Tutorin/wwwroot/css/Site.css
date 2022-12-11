@@ -3,6 +3,7 @@
 body {
     background-color: #f1ede8;
     font-family: 'Open Sans', sans-serif;
+    padding: 20px;
     padding-top: 7em;
 }
 
@@ -43,7 +44,7 @@ img {
 
 .navbar-mobile i {
     position: fixed;
-    z-index: 9999;
+    z-index: 99999;
     top: 9px;
     right: 15px;
     font-size: 3em;
@@ -58,7 +59,7 @@ img {
     left: 0;
     width: 100%;
     opacity: 0.95;
-    z-index: 286;
+    z-index: 99998;
 }
 
 .navbar-mobile .change-modal {
@@ -78,12 +79,39 @@ img {
     font-size: 2em;
     font-weight: 800;
     padding: 2rem;
+    border-bottom: none;
 }
 
 /* Style des liens */
 #navbar-desktop a {
-    padding: 1rem;
+    padding: 10px;
+    margin: 5px;
 }
+
+
+a {
+    cursor: pointer;
+    text-decoration: solid;
+    padding: 0 5px;
+    box-shadow: inset 0 0 0 0 black;
+    transition: all 0.4s ease-in-out 0s;
+    color: black;
+    font-weight: 600;
+    border-bottom: 1px solid; /* A vailder */
+}
+
+a:hover {
+    box-shadow: inset 400px 0 0 0 black;
+    color: #f1ede8;
+    border-bottom: none;
+}
+
+/* Style du nom utilisateur */
+.nomUtilisateur {
+    text-align: right;
+}
+
+
 
 /* Media Queries */
 @media screen and (max-width : 800px) {
