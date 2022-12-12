@@ -11,7 +11,7 @@ namespace Tutorin.Models
         public float PrixTTC { get; set; }
         public const float TVA = 0.2F; 
 
-        public int? ResponsableEleveId { get; set; }
+        public int ResponsableEleveId { get; set; }
         public ResponsableEleve ResponsableEleve { get; set; }
 
         public int? EleveId { get; set; }

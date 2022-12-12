@@ -69,23 +69,9 @@ namespace Tutorin.Controllers
         [HttpGet]
         public IActionResult AjouterAbonnement()
         {
-            return View("Ajouter");
+            return View("AjouterAbonnement");
         }
 
-        [Authorize]
-        [HttpPost]
-        public IActionResult AjouterAbonnement(Abonnement abonnement)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("AjouterAbonnement", abonnement);
-            }
-
-            using (AbonnementServices abs = new AbonnementServices())
-            {
-                abs.CreerAbonnement(abonnement);
-                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
-            }
-        }
+        
     }
 }
