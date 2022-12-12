@@ -23,6 +23,7 @@ namespace Tutorin.Services
 
         public void CreerResponsable(ResponsableEleve responsable)
         {
+            responsable.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(responsable.Utilisateur.MotDePasse);
             _bddContext.ResponsablesEleves.Add(responsable);
             _bddContext.SaveChanges();
         }
