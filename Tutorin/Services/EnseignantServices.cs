@@ -23,6 +23,7 @@ namespace Tutorin.Services
 
         public int CreerEnseignant(Enseignant enseignant)
         {
+            enseignant.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(enseignant.Utilisateur.MotDePasse);
             _bddContext.Enseignants.Add(enseignant);
             _bddContext.SaveChanges();
 

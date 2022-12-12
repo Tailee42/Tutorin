@@ -25,6 +25,7 @@ namespace Tutorin.Services
 
         public int CreerGestionnaire(Gestionnaire gestionnaire)
         {
+            gestionnaire.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(gestionnaire.Utilisateur.MotDePasse);
             _bddContext.Gestionnaires.Add(gestionnaire);
             _bddContext.SaveChanges();
 
