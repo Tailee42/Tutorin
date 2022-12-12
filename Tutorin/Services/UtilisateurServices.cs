@@ -19,7 +19,7 @@ namespace Tutorin.Services
 
         public int CreerUtilisateur(string nom, string prenom, string identifiant, string motDePasse)
         {
-            Utilisateur utilisateur = new Utilisateur() { Nom = nom, Prenom = prenom, Identifiant = identifiant, MotDePasse = motDePasse};
+            Utilisateur utilisateur = new Utilisateur() { Nom = nom, Prenom = prenom, Identifiant = identifiant, MotDePasse = EncodeMD5(motDePasse)};
             _bddContext.Utilisateurs.Add(utilisateur);
             _bddContext.SaveChanges();
             return utilisateur.Id;
@@ -33,7 +33,7 @@ namespace Tutorin.Services
                 utilisateur.Nom = nom;
                 utilisateur.Prenom = prenom;
                 utilisateur.Identifiant = identifiant;
-                utilisateur.MotDePasse = motDePasse;
+                utilisateur.MotDePasse = EncodeMD5(motDePasse);
                 _bddContext.SaveChanges();
             }
         }

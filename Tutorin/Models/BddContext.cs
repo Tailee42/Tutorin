@@ -34,12 +34,12 @@ namespace Tutorin.Models
 
                 new Utilisateur { Id = 1, Nom = "Albrand", Prenom = "Pierre", Identifiant = "apierre", MotDePasse = UtilisateurServices.EncodeMD5("Pierre7") },
                 new Utilisateur { Id = 2, Nom = "Roux", Prenom = "Louis", Identifiant = "rlouis", MotDePasse = UtilisateurServices.EncodeMD5("Louis12") },
-                new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = "Antoine9" },
-                new Utilisateur { Id = 4, Nom = "Dupond", Prenom = "Anne", Identifiant = "danne", MotDePasse = "Anne456" },
-                new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = "Antoine10" },
-                new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = "Anne25" },
-                new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = "Susie33"},
-                new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = "Fraise0" }
+                new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine9") },
+                new Utilisateur { Id = 4, Nom = "Dupond", Prenom = "Anne", Identifiant = "danne", MotDePasse = UtilisateurServices.EncodeMD5("Anne456") },
+                new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine10") },
+                new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne25") },
+                new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
+                new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") }
 
                 );
 
@@ -62,7 +62,9 @@ namespace Tutorin.Models
                 );
 
             this.Abonnements.AddRange(
-                new Abonnement { Id = 1, Type = TypeAbonnement.CoursEnLigne, DateDebut = new System.DateTime(2022, 02, 23), DateFin = new System.DateTime(2023, 02, 23), Prix = (5.99F + (1+Abonnement.TVA)), ResponsableEleveId = 2, EleveId = 1 }
+                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, EleveId = 1 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2 }
                 );
 
 

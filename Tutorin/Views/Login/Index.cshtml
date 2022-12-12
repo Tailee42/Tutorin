@@ -31,7 +31,7 @@ else
         </div>
         <input type="submit" value="Se connecter" />
         <br />
-        @Html.ActionLink("Créer un compte", "CreerCompte")
+        @Html.ActionLink("Créer un compte", "CreerCompteUtilisateur")
     }
 }
 @section Script {
@@ -40,9 +40,6 @@ else
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
 @section Menu {
-
-        <ul>
-            <li>Accueil</li>
-            <li>Présentation</li>
-        </ul>
+    <a href="/home/">Accueil</a>
+    <a>Présentation</a>
 }

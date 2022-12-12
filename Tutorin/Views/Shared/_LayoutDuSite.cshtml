@@ -1,31 +1,51 @@
 ﻿<!DOCTYPE html>
 
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="/css/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <title>@ViewBag.Title</title>
     @RenderSection("css", required: false)
 </head>
 <body>
     <header>
-        <div>
-            <img />
+
+        <div id="entreprise">
+            <img src="/Images/Visages-removebg-preview.png" alt="Logo" />
             <h1>Tutor'in</h1>
         </div>
-        <nav>
-            <ul>
-                @RenderSection("Menu")
-            </ul>
+
+        <!-- Menu desktop -->
+        <nav Id="navbar-desktop">
+            
+            @RenderSection("Menu")
+            
         </nav>
+
+
+        <!-- Menu mobile -->
+        <nav class="navbar-mobile">
+            <i class="fas fa-bars"></i>
+            <div class="modal">
+                <div id="navbar-mobile-list">>
+                    <!-- Se recopie tout seul avec le code burgerMenu.js -->
+                </div>
+            </div>
+        </nav>
+
     </header>
-    <div>
+
+
+    <div id="container">
         @RenderBody()
     </div>
     <footer>
         <p>Contact</p>
     </footer>
 
+    <script type="text/javascript" src="~/Scripts/BurgerMenu.js"></script>
     @RenderSection("Script", required: false)
 </body>
 </html>
