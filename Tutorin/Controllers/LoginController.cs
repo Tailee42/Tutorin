@@ -70,6 +70,16 @@ namespace Tutorin.Controllers
                         }
                     }
 
+                    using (GestionnaireServices gs = new GestionnaireServices())
+                    {
+                        Gestionnaire gestionnaire = gs.ObtientTousLesGestionnaires().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
+                        if (gestionnaire != null)
+                        {
+                            role = "Gestionnaire";
+                            roleId = gestionnaire.Id;
+                        }
+                    }
+
                     var userClaims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, utilisateur.Id.ToString()),
@@ -94,6 +104,8 @@ namespace Tutorin.Controllers
                             return RedirectToAction("TableauDeBord", "ResponsableEleve");
                         case "Eleve":
                             return RedirectToAction("TableauDeBord", "Eleve");
+                        case "Gestionnaire":
+                            return RedirectToAction("TableauDeBord", "Gestionnaire");
                         default:
                             return Redirect("/");
                     }

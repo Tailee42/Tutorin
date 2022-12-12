@@ -72,6 +72,14 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
+        public Gestionnaire TrouverUnGestionnaire(int id)
+        {
+            Gestionnaire gestionnaire = _bddContext.Gestionnaires.Find(id);
+            gestionnaire.Utilisateur = _bddContext.Utilisateurs.Find(gestionnaire.UtilisateurId);
+
+            return gestionnaire;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();
