@@ -51,27 +51,21 @@
     }
 </table>*@
 
- @using (Html.BeginForm("RechercherNiveau", "ContenuPedagogique", FormMethod.Post))
+ @using (Html.BeginForm("Rechercher", "ContenuPedagogique", FormMethod.Post))
         {  
             <table>       
                 <tr>
                     <td>@Html.Label("Niveau scolaire recherché : ")</td>
                     <td>@Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
-                    <td><input type="submit" value="Rechercher" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Matière recherchée : ")</td>
+                    <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
                 </tr>
             </table>
+            <input type="submit" value="Rechercher" />
         }
 
-@using (Html.BeginForm("RechercherMatiere", "ContenuPedagogique", FormMethod.Post))
-{
-    <table>
-        <tr>
-            <td>@Html.Label("Matière recherchée : ")</td>
-            <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
-            <td><input type="submit" value="Rechercher" /></td>
-        </tr>
-    </table>
-}
     <div class="cards">
     @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
         {

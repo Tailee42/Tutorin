@@ -12,7 +12,7 @@ namespace Tutorin.Services
         List<ContenuPedagogique> ObtenirTousLesContenusPedagogiques();
         List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides();
         void SupprimerContenuPedagogique(int id);
-        List<ContenuPedagogique> RechercherCoursParNiveau(TypeNiveau niveau);
-        List<ContenuPedagogique> RechercherCoursParMatiere(TypeMatiere matiere);
+        List<ContenuPedagogique> RechercherCours(TypeNiveau niveau, TypeMatiere matiere);
+
     }
 }

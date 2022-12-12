@@ -41,10 +41,20 @@
 }
 
 .cours {
-    border: 5px, solid, black;
-    margin : 20px, 40px;
+    margin: 20px 20px;
 }
 
-.infoCours {
-    line-height: 500px;
+.info-cours, .date-cours {
+    line-height: 15px;
 }
+
+span {
+    font-weight: bold;
+    color: crimson;
+}
+
+.contenu-cours {
+    margin: 20px;
+    text-align: justify;
+}
+

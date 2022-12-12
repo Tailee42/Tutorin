@@ -66,7 +66,7 @@ namespace Tutorin.Services
         //Méthode pour récupérer le contenu pédagogique validé (c'est à dire en ligne ou à modifier)
         public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides()
         {
-            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.En_Ligne || c.Etat == EtatContenuPedagogique.A_Modifier).ToList();
+            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.En_Ligne).ToList();
             foreach (ContenuPedagogique cours in listeCours)
             {
                     cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
@@ -82,21 +82,9 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
-        public List<ContenuPedagogique> RechercherCoursParNiveau(TypeNiveau niveau)
+        public List<ContenuPedagogique> RechercherCours(TypeNiveau niveau, TypeMatiere matiere)
         {
-            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Niveau == niveau).ToList();
-            foreach (ContenuPedagogique cours in listeCours)
-            {
-                cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
-                cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
-            }
-
-            return listeCours;
-        }
-
-        public List<ContenuPedagogique> RechercherCoursParMatiere(TypeMatiere matiere)
-        {
-            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Matiere == matiere).ToList();
+            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Niveau == niveau && c.Matiere == matiere).ToList();
             foreach (ContenuPedagogique cours in listeCours)
             {
                 cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);

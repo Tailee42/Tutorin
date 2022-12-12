@@ -23,14 +23,14 @@
 <h1 class="titre-cours">@Model.Titre</h1>
 <section class="cours">
 <div class="info-cours">
-    <p>Niveau : @Model.Niveau</p>
-    <p>Matiere : @Model.Matiere</p>
-    <p>Auteur : @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
+    <p><span>Niveau :</span> @Model.Niveau</p>
+    <p><span>Matiere :</span> @Model.Matiere</p>
+    <p><span>Auteur :</span> @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
 </div>
 <div class="contenu-cours">@Model.ContenuDuCours</div>
 <div class="date-cours">
-    <p>Publié le : @Model.DatePublication</p>
-    <p>Dernière mise à jour : @Model.DateMiseAJour</p>
+        <p><span>Publié le :</span> @Model.DatePublication</p>
+        <p><span>Dernière mise à jour :</span> @Model.DateMiseAJour</p>
 </div>
 <div class="telecharger">
     <button id="btn-telechargerCours">Télécharger</button>
