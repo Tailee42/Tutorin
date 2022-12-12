@@ -19,9 +19,16 @@ namespace Tutorin.Services
             _bddContext.Dispose();
         }
 
-        public int CreerAbonnement(TypeAbonnement type, DateTime dateDebut, DateTime dateFin, float prix, int responsableEleveId, int eleveId)
+        public int CreerAbonnement(TypeAbonnement type, int responsableEleveId, int eleveId)
         {
-            Abonnement abonnement = new Abonnement() { Type = type, DateDebut = dateDebut, DateFin = dateFin, Prix = prix, ResponsableEleveId = responsableEleveId, EleveId = eleveId};
+            Abonnement abonnement = new Abonnement(type) { ResponsableEleveId = responsableEleveId, EleveId = eleveId};
+            _bddContext.Abonnements.Add(abonnement);
+            _bddContext.SaveChanges();
+            return abonnement.Id;
+        }
+
+        public int CreerAbonnement(Abonnement abonnement)
+        {
             _bddContext.Abonnements.Add(abonnement);
             _bddContext.SaveChanges();
             return abonnement.Id;
@@ -36,10 +43,9 @@ namespace Tutorin.Services
                 abonnement.Type = type;
                 abonnement.DateDebut = dateDebut;
                 abonnement.DateFin = dateFin;
-                abonnement.Prix = prix;
             }
 
-            _bddContext.Update(abonnement);
+            _bddContext.Abonnements.Update(abonnement);
             _bddContext.SaveChanges();
         }
 
@@ -47,6 +53,14 @@ namespace Tutorin.Services
         {
             Abonnement abonnement = _bddContext.Abonnements.Find(id);
             _bddContext.Abonnements.Remove(abonnement);
+            _bddContext.SaveChanges();
+        }
+
+        public void FinAbonnement(int id)
+        {
+            Abonnement abonnement = _bddContext.Abonnements.Find(id);
+            abonnement.DateFin = DateTime.Now;
+            _bddContext.Abonnements.Update(abonnement);
             _bddContext.SaveChanges();
         }
 
@@ -80,7 +94,22 @@ namespace Tutorin.Services
             abonnement.EleveId = eleve.Id;
             abonnement.Eleve = eleve;
 
-            _bddContext.Update(abonnement);
+            _bddContext.Abonnements.Update(abonnement);
+            _bddContext.SaveChanges();
+        }
+
+        public void SupprimerEleve(int abonnementId)
+        {
+            Abonnement abonnement = _bddContext.Abonnements.Find(abonnementId);
+
+            Eleve eleve = _bddContext.Eleves.Find(abonnement.EleveId);
+            Utilisateur utlisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
+            _bddContext.Eleves.Remove(eleve);
+            _bddContext.Utilisateurs.Remove(utlisateur);
+
+            abonnement.EleveId = null;
+
+            _bddContext.Abonnements.Update(abonnement);
             _bddContext.SaveChanges();
         }
 

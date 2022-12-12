@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
 
@@ -35,20 +36,56 @@ namespace Tutorin.Controllers
                     abs.AjouterEleve(abonnementId, eleve);
                 }
 
-                return RedirectToAction("TableauDeBord", "ResponsableEleve");
+                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
 
             }
             return View("AjouterEleve");
         }
 
-        public IActionResult Supprimer(int abonnementId)
+        [Authorize]
+        public IActionResult FinAbonnement(int abonnementId)
         {
             using (AbonnementServices abs= new AbonnementServices())
             {
-                abs.SupprimerAbonnement(abonnementId);
+                abs.FinAbonnement(abonnementId);
             }
 
-            return RedirectToAction("TableauDeBord", "ResponsableEleve");
+            return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+        }
+
+        [Authorize]
+        public IActionResult SupprimerEleve(int abonnementId)
+        {
+
+            using (AbonnementServices abs = new AbonnementServices())
+            {
+                abs.SupprimerEleve(abonnementId);
+            }
+
+            return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult AjouterAbonnement()
+        {
+            return View("Ajouter");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult AjouterAbonnement(Abonnement abonnement)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AjouterAbonnement", abonnement);
+            }
+
+            using (AbonnementServices abs = new AbonnementServices())
+            {
+                abs.CreerAbonnement(abonnement);
+                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+            }
         }
     }
 }

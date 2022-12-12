@@ -8,7 +8,7 @@ namespace Tutorin.Models
         public TypeAbonnement Type { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
-        public float Prix { get; set; }
+        public float PrixTTC { get; set; }
         public const float TVA = 0.2F; 
 
         public int? ResponsableEleveId { get; set; }
@@ -16,6 +16,15 @@ namespace Tutorin.Models
 
         public int? EleveId { get; set; }
         public Eleve Eleve { get; set; }
+
+        public Abonnement(TypeAbonnement type) 
+        {
+            Type = type;
+            DateDebut = DateTime.Today;
+            PrixTTC = TypeAbonnementExtensions.PrixTTCAbonnement(Type);
+        }
+
     }
+    
 }
 

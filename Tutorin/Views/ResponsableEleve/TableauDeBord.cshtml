@@ -1,4 +1,5 @@
 ﻿@model Tutorin.ViewModels.TableauBordResponsableViewModel
+@using Tutorin.Models
 @{
     ViewBag.Title = "Tableau de Bord Responsable Eleve";
     Layout = "_LayoutDuSite";
@@ -13,6 +14,7 @@
     <a href="/Home/">Accueil</a>
     <a href="/Prestation/">Prestations</a>
     <a href="/ResponsableEleve/modifier?responsableId=@Model.ResponsableEleve.Id">Mon Compte</a>
+    <a href="/login/Deconnexion">Déconnexion</a>
 }
 
 <div class="nomUtilisateur">
@@ -24,38 +26,40 @@
     <div class="cards">
 
 
-        @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) {
-        <div class="card abonnement">
-            <div class="card__icon">
-                <i class="fa-solid fa-file-contract"></i>
-            </div>
-
-            <h2 class="card__title">@abonnement.Type</h2>
-
-            <div>
-                Depuis le : @abonnement.DateDebut.ToString("d")<br>
-                Prix mensuel : @abonnement.Prix €
-            </div>
-
-            <p class="card__button">
-                <a class="card__link" href="/Abonnement/supprimer?abonnementid=@abonnement.Id">
-                    <i class="fa-sharp fa-solid fa-xmark"></i>
-                    Arrêter l'abonnement
-                </a>
-            </p>
-
-            @if (abonnement.EleveId == null)
+        @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) 
+        {
+            @if (abonnement.DateFin == DateTime.MinValue)
             {
-                <p class="card__button">
-                <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
-                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                    Ajouter un élève
-                </a>
-                </p>
+                <div class="card abonnement">
+                    <div class="card__icon">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+
+                    <h2 class="card__title">@TypeAbonnementExtensions.NomAbonnement(abonnement.Type)</h2>
+
+                    <div>
+                        Depuis le : @abonnement.DateDebut.ToString("d")<br>
+                        Prix mensuel : @abonnement.PrixTTC €
+                    </div>
+
+                    <p class="card__button">
+                        <a class="card__link" href="/Abonnement/FinAbonnement?abonnementid=@abonnement.Id">
+                            <i class="fa-sharp fa-solid fa-xmark"></i>
+                            Arrêter l'abonnement
+                        </a>
+                    </p>
+
+                    @if (abonnement.EleveId == null)
+                    {
+                        <p class="card__button">
+                            <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
+                                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                                Ajouter un élève
+                            </a>
+                        </p>
+                    }
+                </div>
             }
-
-        </div>
-
         }
 
             <div class="card abonnement">
@@ -80,7 +84,7 @@
 
     @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
     {
-        @if (abonnement.EleveId != null)
+        @if (abonnement.EleveId != null && abonnement.DateFin == DateTime.MinValue)
         {
             <div class="card eleve">
                 <div class="card__icon">
@@ -91,11 +95,11 @@
 
                 <div>
                     Niveau : @abonnement.Eleve.Niveau<br>
-                    Abonnement : @abonnement.Type
+                    Abonnement : @TypeAbonnementExtensions.NomAbonnement(abonnement.Type)
                 </div>
 
                 <p class="card__button">
-                    <a class="card__link" href="#">
+                    <a class="card__link" href="/Abonnement/supprimerEleve?abonnementId=@abonnement.Id">
                         <i class="fa-sharp fa-solid fa-xmark"></i>
                         Supprimer l'élève
                     </a>
@@ -105,5 +109,45 @@
 
         }
     }
+
+</div>
+
+<h1>Historique des abonnements :</h1>
+
+<div class="cards">
+
+
+    @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
+    {
+        @if (abonnement.DateFin != DateTime.MinValue)
+        {
+            <div class="card historique">
+                <div class="card__icon">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+
+                <h2 class="card__title">@TypeAbonnementExtensions.NomAbonnement(abonnement.Type)</h2>
+
+                <div>
+                    Eleve : @abonnement.Eleve.Utilisateur.Prenom @abonnement.Eleve.Utilisateur.Nom<br>
+                    Début : @abonnement.DateDebut.ToString("d")<br>
+                    Fin : @abonnement.DateFin.ToString("d")<br>
+                    Prix mensuel : @abonnement.PrixTTC €
+                </div>
+
+
+                @if (abonnement.EleveId == null)
+                {
+                    <p class="card__button">
+                        <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
+                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                            Ajouter un élève
+                        </a>
+                    </p>
+                }
+            </div>
+        }
+    }
+
 
 </div>

@@ -50,3 +50,7 @@ a {
 .eleve {
     background: linear-gradient(180deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
 }
+
+.historique {
+    background: linear-gradient(360deg, hsla(0, 0%, 95%, 1) 0%, hsla(0, 0%, 65%, 1) 100%);
+}

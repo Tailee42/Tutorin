@@ -55,7 +55,7 @@ namespace Tutorin.Controllers
                         ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
                         if (responsable != null)
                         {
-                            role = "Responsable";
+                            role = "ResponsableEleve";
                             roleId = responsable.Id;
                         }
                     }
@@ -90,7 +90,7 @@ namespace Tutorin.Controllers
                     {
                         case "Enseignant":
                             return RedirectToAction("Index", "Enseignant");
-                        case "Responsable":
+                        case "ResponsableEleve":
                             return RedirectToAction("TableauDeBord", "ResponsableEleve");
                         case "Eleve":
                             return RedirectToAction("Index", "Eleve");
