@@ -6,7 +6,7 @@ namespace Tutorin.Services
 {
     public interface IPayementServices : IDisposable
     {
-        int CreerPayement(string nomDuTitulairee, int numeroCarte, int dateExpiration, int cvc, float montant);
+        int CreerPayement(string nomDuTitulairee, string numeroCarte, string dateExpiration, string cvc, float montant);
         void SupprimerPayement(int id);
         List<Payement> ObtientTousLesPayements();
     }

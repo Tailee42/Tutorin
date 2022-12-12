@@ -129,7 +129,12 @@
                 <h2 class="card__title">@TypeAbonnementExtensions.NomAbonnement(abonnement.Type)</h2>
 
                 <div>
-                    Eleve : @abonnement.Eleve.Utilisateur.Prenom @abonnement.Eleve.Utilisateur.Nom<br>
+                    @if (abonnement.EleveId > 0)
+                    {
+                        <text>
+                            Eleve : @abonnement.Eleve.Utilisateur.Prenom @abonnement.Eleve.Utilisateur.Nom<br>
+                        </text>
+                    }
                     Début : @abonnement.DateDebut.ToString("d")<br>
                     Fin : @abonnement.DateFin.ToString("d")<br>
                     Prix mensuel : @abonnement.PrixTTC €

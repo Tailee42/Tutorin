@@ -15,7 +15,7 @@ namespace Tutorin.Services
             _bddContext = new BddContext();
         }
 
-        public int CreerPayement(string nomDuTitulairee, int numeroCarte, int dateExpiration, int cvc, float montant)
+        public int CreerPayement(string nomDuTitulairee, string numeroCarte, string dateExpiration, string cvc, float montant)
         {
             Payement payement = new Payement() { NomTitulaireCarte = nomDuTitulairee, NumeroCarte = numeroCarte, 
                 DateExpiration = dateExpiration, CVC = cvc, MontantTTC = montant };
