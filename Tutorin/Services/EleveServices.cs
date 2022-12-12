@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Tutorin.Models;
 
@@ -31,8 +30,6 @@ namespace Tutorin.Services
 
             return eleve.Id;
         }
-
-
 
         public void Dispose()
         {

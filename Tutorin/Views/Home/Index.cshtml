@@ -1,20 +1,30 @@
-﻿@{
+﻿
+@{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Index";
 }
 
+@{
+    var authentifie = User.Identity.IsAuthenticated;
+}
+
 @section Menu {
 
-    <ul>
-        <li>Devenir enseignant</li>
-        <li>Prestation</li>
-        <li>Connexion</li>
-        <li>Inscription</li>
-    </ul>
+    <a>Devenir enseignant</a>
+    <a href="/Prestation/">Prestations</a>
+    @if (authentifie)
+    {
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }else
+    {
+        <a href="/login/">Connexion</a>
+    }
+    
 }
 
 <h1>S'authentifier</h1>
 <a href="/login/">S'authentifier</a>
+
 
 <h1>Les utilisateurs</h1>
 

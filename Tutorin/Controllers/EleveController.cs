@@ -60,6 +60,7 @@ namespace Tutorin.Controllers
                         return View("Error");
                     }
                     Console.WriteLine(eleve.DateNaissance.ToString());
+                    return View("Modifier", eleve);
                 }
             }
             return View("Error");
