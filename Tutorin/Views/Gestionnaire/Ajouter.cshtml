@@ -1,0 +1,66 @@
+﻿@model Tutorin.Models.Gestionnaire
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Ajouter un gestionnaire";
+    Layout = "_LayoutDuSite";
+}
+
+<h1>Ajouter un gestionnaire</h1>
+<div>
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Ajouter un gestionnaire: </legend>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
+                @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.PosteOccupe) <br />
+                @Html.TextBoxFor(m => Model.PosteOccupe)<br />
+                @Html.ValidationMessageFor(m => Model.PosteOccupe)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
+                @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
+                @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
+            </div>
+
+
+
+            <input class="bouttonStyle" type="submit" value="Ajouter" />
+        </fieldset>
+    }
+
+</div>
+
+@section Script {
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+
+@section Menu {
+
+    <ul>
+        <li>Accueil</li>
+        <li>Présentation</li>
+    </ul>
+}

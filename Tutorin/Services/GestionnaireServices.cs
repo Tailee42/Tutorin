@@ -66,7 +66,9 @@ namespace Tutorin.Services
         public void SupprimerGestionnaire(int id)
         {
             Gestionnaire gestionnaire = _bddContext.Gestionnaires.Find(id);
+            gestionnaire.Utilisateur = _bddContext.Utilisateurs.Find(gestionnaire.UtilisateurId);
             _bddContext.Gestionnaires.Remove(gestionnaire);
+            _bddContext.Utilisateurs.Remove(gestionnaire.Utilisateur);
             _bddContext.SaveChanges();
         }
 
