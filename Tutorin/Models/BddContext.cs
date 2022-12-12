@@ -13,6 +13,7 @@ namespace Tutorin.Models
         public DbSet<Eleve> Eleves { get;set; }
         public DbSet<Prestation> Prestations { get; set; }
         public DbSet<ContenuPedagogique> ContenusPedagogiques { get; set; }
+        public DbSet<Payement> Payements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,9 +63,9 @@ namespace Tutorin.Models
                 );
 
             this.Abonnements.AddRange(
-                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, EleveId = 1 },
-                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2 },
-                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2 }
+                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, EleveId = 1, PayementId = 2 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2, PayementId = 3 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2, PayementId = 1 }
                 );
 
 
@@ -79,6 +80,12 @@ namespace Tutorin.Models
                 new ContenuPedagogique { Id = 1, Matiere = TypeMatiere.Geographie, Niveau = TypeNiveau.Troisieme, Titre = "La France dans le Monde", DatePublication = new System.DateTime(2022, 05, 02), DateMiseAJour = new System.DateTime(2022, 08, 15), Etat = EtatContenuPedagogique.A_Valider, ContenuDuCours = "Dès le Moyen Âge, notre pays a largement influencé ses voisins européens (puis de nombreux pays à travers le monde) par sa politique, son économie, sa langue et sa culture.\r\nAvec l’Angleterre, la France a longtemps été en concurrence pour la domination du Monde.\r\nDepuis le siècle dernier, il est vrai que d’autres pays sont venus jouer les premiers rôles (Les Etats-Unis, la Chine, la Russie, …), mais la place de la France dans le Monde reste très importante. ", EnseignantId = 3},
                 new ContenuPedagogique { Id = 2, Matiere = TypeMatiere.Physique, Niveau = TypeNiveau.CM1, Titre = "La lumière", DatePublication = new System.DateTime(2021, 10, 29), DateMiseAJour = new System.DateTime(2022, 01, 18), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Sans lumière c'est tout noir.", EnseignantId = 2 },
                 new ContenuPedagogique { Id = 3, Matiere = TypeMatiere.Mathematique, Niveau = TypeNiveau.CM1, Titre = "1+1=?", DatePublication = new System.DateTime(2022, 03, 11), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "2 ! Bravo !", EnseignantId = 1 }
+                );
+
+            this.Payements.AddRange(
+                new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = 1111222233334444, DateExpiration = 0122, CVC = 741, ResponsableEleveId = 1},
+                new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = 1111222233334444, DateExpiration = 0324, CVC = 123, ResponsableEleveId = 1 },
+                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = 1111222233334444, DateExpiration = 0324, CVC = 123, ResponsableEleveId = 1 }
                 );
 
             this.SaveChanges();

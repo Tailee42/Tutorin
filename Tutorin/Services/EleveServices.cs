@@ -31,8 +31,6 @@ namespace Tutorin.Services
             return eleve.Id;
         }
 
-
-
         public void Dispose()
         {
             _bddContext.Dispose();
@@ -74,6 +72,7 @@ namespace Tutorin.Services
         public void SupprimerEleve(int id)
         {
             Eleve eleve = _bddContext.Eleves.Find(id);
+
             _bddContext.Eleves.Remove(eleve);
             _bddContext.SaveChanges();
         }
