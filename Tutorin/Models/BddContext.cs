@@ -13,6 +13,7 @@ namespace Tutorin.Models
         public DbSet<Eleve> Eleves { get;set; }
         public DbSet<Prestation> Prestations { get; set; }
         public DbSet<ContenuPedagogique> ContenusPedagogiques { get; set; }
+        public DbSet<Gestionnaire> Gestionnaires { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,6 +33,9 @@ namespace Tutorin.Models
 
             this.Utilisateurs.AddRange(
 
+
+                
+
                 new Utilisateur { Id = 1, Nom = "Albrand", Prenom = "Pierre", Identifiant = "apierre", MotDePasse = UtilisateurServices.EncodeMD5("Pierre7") },
                 new Utilisateur { Id = 2, Nom = "Roux", Prenom = "Louis", Identifiant = "rlouis", MotDePasse = UtilisateurServices.EncodeMD5("Louis12") },
                 new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine9") },
@@ -39,8 +43,13 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine10") },
                 new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne25") },
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
-                new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") }
+                new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") },
+                new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") }
 
+                );
+
+            this.Gestionnaires.AddRange(
+                new Gestionnaire { Id = 1, PosteOccupe = "Comptable",UtilisateurId =9}
                 );
 
             this.Eleves.AddRange(
