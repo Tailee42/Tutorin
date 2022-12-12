@@ -70,6 +70,16 @@ namespace Tutorin.Controllers
                         }
                     }
 
+                    using (GestionnaireServices els = new GestionnaireServices())
+                    {
+                        Gestionnaire gestionnaire = els.ObtientTousLesGestionnaires().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
+                        if (gestionnaire != null)
+                        {
+                            role = "Gestionnaire";
+                            roleId = gestionnaire.Id;
+                        }
+                    }
+
                     var userClaims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, utilisateur.Id.ToString()),
