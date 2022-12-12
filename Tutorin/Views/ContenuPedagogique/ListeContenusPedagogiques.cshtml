@@ -1,4 +1,6 @@
 ﻿@model Tutorin.ViewModels.ContenuPedagogiqueViewModel
+@using Tutorin.Models
+
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Liste des cours";
@@ -10,8 +12,12 @@
     <a>Présentation</a>
 }
 
+@section css {
+    <link href="/css/Cours.css" rel="stylesheet" />
+}
+
 <h1>Liste des cours : </h1>
-<table border="1">
+@*<table border="1">
 
     <tr>
         <th>Numéro</th>
@@ -37,10 +43,40 @@
             <td>
                 <a href="/ContenuPedagogique/modifier?coursId=@cours.Id">Modifier</a>
                 <a href="/ContenuPedagogique/supprimer?coursId=@cours.Id">Supprimer</a>
+                <a href="/ContenuPedagogique/afficher?coursId=@cours.Id">Afficher</a>
             </td>
         </tr>
     }
-</table>
+</table>*@
 
-<br />
+ @using (Html.BeginForm("Rechercher", "ContenuPedagogique", FormMethod.Post))
+        {  
+            <table>       
+                <tr>
+                    <td>@Html.Label("Niveau scolaire recherché : ")</td>
+                    <td>@Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Matière recherchée : ")</td>
+                    <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
+                </tr>
+            </table>
+            <input type="submit" value="Rechercher" />
+        }
 
+    <div class="cards">
+    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
+        {
+            <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="afficher-cours">
+            <article class="card">
+                <header class="titre-card">
+                    <h2>@cours.Titre</h2>
+                </header>
+                <div class="content">
+                    <p>Matière: @cours.Matiere</p>
+                    <p>Niveau: @cours.Niveau</p>   
+                </div>
+            </article>
+            </a>
+        }
+    </div>
