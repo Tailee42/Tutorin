@@ -6,6 +6,7 @@ using Tutorin.Models;
 using System.Security.Cryptography.X509Certificates;
 using System.Linq;
 using System;
+using System.Security.Claims;
 
 namespace Tutorin.Controllers
 {
@@ -89,6 +90,28 @@ namespace Tutorin.Controllers
                 es.SupprimerEleve(eleveId);
                 return RedirectToAction("Index");
             }
+        }
+
+        public IActionResult TableauDeBord()
+        {
+            string EleveId = User.FindFirstValue("RoleId");
+            Eleve Eleve = null;
+            int id;
+
+            using (EleveServices es = new EleveServices())
+            {
+                if (int.TryParse(EleveId, out id))
+                {
+                    Eleve = es.TrouverUnEleve(id);
+                }
+            }
+
+            TableauBordEleveViewModel tbevm = new TableauBordEleveViewModel()
+            {
+                Eleve = Eleve,
+            };
+
+            return View("TableauDeBord", tbevm);
         }
     }
 }

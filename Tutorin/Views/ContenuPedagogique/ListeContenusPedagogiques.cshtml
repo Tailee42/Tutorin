@@ -64,11 +64,11 @@
             <input type="submit" value="Rechercher" />
         }
 
-    <div class="cards">
+    <div class="cards-cours">
     @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
         {
             <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="afficher-cours">
-            <article class="card">
+            <article class="card-cours">
                 <header class="titre-card">
                     <h2>@cours.Titre</h2>
                 </header>
