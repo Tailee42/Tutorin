@@ -89,7 +89,7 @@ img {
 }
 
 
-a {
+/*a {
     cursor: pointer;
     text-decoration: solid;
     padding: 0 5px;
@@ -97,14 +97,14 @@ a {
     transition: all 0.4s ease-in-out 0s;
     color: black;
     font-weight: 600;
-    border-bottom: 1px solid; /* A vailder */
-}
+    border-bottom: 1px solid;*/ /* A vailder */
+/*}*/
 
-a:hover {
+/*a:hover {
     box-shadow: inset 400px 0 0 0 black;
     color: #f1ede8;
     border-bottom: none;
-}
+}*/
 
 /* Style du nom utilisateur */
 .nomUtilisateur {

@@ -1,16 +1,16 @@
 ﻿
-.cards {
+.cards-cours {
     display: grid;
     /*The 1fr is what tells the browser to distribute the space between the columns so that each column equally gets one fraction of that space*/
-    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
     gap: 30px 0px;
     margin: 40px 20px;
 
 }
 
-.card {
-    height: 180px;
-    width: 180px;
+.card-cours {
+    min-height: 180px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -25,6 +25,10 @@
     color: black;
     transform: scale(1);
     transition: transform 0.5s;
+}
+
+.afficher-cours:hover{
+
 }
 
 .titre-card, .content{

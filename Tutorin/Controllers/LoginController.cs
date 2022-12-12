@@ -93,7 +93,7 @@ namespace Tutorin.Controllers
                         case "ResponsableEleve":
                             return RedirectToAction("TableauDeBord", "ResponsableEleve");
                         case "Eleve":
-                            return RedirectToAction("Index", "Eleve");
+                            return RedirectToAction("TableauDeBord", "Eleve");
                         default:
                             return Redirect("/");
                     }
