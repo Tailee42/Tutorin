@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Tutorin.Models
@@ -15,5 +16,8 @@ namespace Tutorin.Models
 
         public int UtilisateurId { get; set; }
         public Utilisateur Utilisateur { get; set; }
+
+        //public ICollection<Prestation> Prestations { get; set; }
+        public List<PrestationEleve> PrestationsEleves { get; set;}
     }
 }

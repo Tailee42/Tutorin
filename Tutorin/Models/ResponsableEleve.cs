@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tutorin.Models
 {
@@ -6,6 +7,7 @@ namespace Tutorin.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string Mail { get; set; }
 
         public int UtilisateurId { get; set; }
