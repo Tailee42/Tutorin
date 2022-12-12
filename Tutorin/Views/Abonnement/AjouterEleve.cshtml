@@ -1,17 +1,21 @@
-﻿@model Tutorin.Models.Enseignant
+﻿@model Tutorin.Models.Eleve
 @using Tutorin.Models
 @{
-    ViewBag.Title = "Ajouter un enseignant";
+    ViewBag.Title = "Ajout élève";
     Layout = "_LayoutDuSite";
 }
 
-<h1>Ajouter un enseignant</h1>
+@{
+    var responsableId = User.FindFirst("RoleId");
+}
+
+<h1>Ajouter un élève à l'abonnement</h1>
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Ajouter un enseignant: </legend>
+            <legend>Ajouter un élève à l'abonnement : </legend>
 
             <div>
                 @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
@@ -38,19 +42,19 @@
             </div>
 
             <div>
-                @Html.LabelFor(m => Model.Matiere)
-                @Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))
-                @Html.ValidationMessageFor(m => Model.Matiere)
+                @Html.LabelFor(m => Model.DateNaissance)<br />
+                @Html.TextBoxFor(m => Model.DateNaissance, new {@type = "date"} )<br />
+                @Html.ValidationMessageFor(m => Model.DateNaissance)
             </div>
 
             <div>
-                @Html.LabelFor(m => Model.Niveaux)
-                @Html.DropDownListFor(m => Model.Niveaux, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
-                @Html.ValidationMessageFor(m => Model.Niveaux)
+                @Html.LabelFor(m => Model.Niveau)
+                @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
+                @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
 
-            <input class="bouttonStyle" type="submit" value="Ajouter" />
+            <input class="bouttonStyle" type="submit" value="AjouterEleve" />
         </fieldset>
     }
 
@@ -62,9 +66,11 @@
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
 
+
 @section Menu {
 
     <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+    <a href="/Prestation/">Prestations</a>
+    <a href="/ResponsableEleve/modifier?responsableId=@responsableId">Mon Compte</a>
+    <a href="/login/Deconnexion">Déconnexion</a>
 }
-

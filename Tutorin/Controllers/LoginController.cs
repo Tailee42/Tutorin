@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -56,7 +55,7 @@ namespace Tutorin.Controllers
                         ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
                         if (responsable != null)
                         {
-                            role = "Responsable";
+                            role = "ResponsableEleve";
                             roleId = responsable.Id;
                         }
                     }
@@ -74,9 +73,11 @@ namespace Tutorin.Controllers
                     var userClaims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, utilisateur.Id.ToString()),
-                        new Claim(ClaimTypes.Actor, role.ToString()),
+                        new Claim(ClaimTypes.Role, role.ToString()),
                         new Claim("RoleId", roleId.ToString())
                     };
+
+                    User.FindFirstValue(ClaimTypes.Role);
 
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
@@ -89,8 +90,8 @@ namespace Tutorin.Controllers
                     {
                         case "Enseignant":
                             return RedirectToAction("Index", "Enseignant");
-                        case "Responsable":
-                            return RedirectToAction("Index", "ResponsableEleve");
+                        case "ResponsableEleve":
+                            return RedirectToAction("TableauDeBord", "ResponsableEleve");
                         case "Eleve":
                             return RedirectToAction("Index", "Eleve");
                         default:

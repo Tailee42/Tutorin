@@ -19,9 +19,16 @@ namespace Tutorin.Services
             _bddContext.Dispose();
         }
 
-        public int CreerAbonnement(TypeAbonnement type, DateTime dateDebut, DateTime dateFin, float prix, int responsableEleveId, int eleveId)
+        public int CreerAbonnement(TypeAbonnement type, int responsableEleveId, int eleveId)
         {
-            Abonnement abonnement = new Abonnement() { Type = type, DateDebut = dateDebut, DateFin = dateFin, Prix = prix, ResponsableEleveId = responsableEleveId, EleveId = eleveId};
+            Abonnement abonnement = new Abonnement(type) { ResponsableEleveId = responsableEleveId, EleveId = eleveId};
+            _bddContext.Abonnements.Add(abonnement);
+            _bddContext.SaveChanges();
+            return abonnement.Id;
+        }
+
+        public int CreerAbonnement(Abonnement abonnement)
+        {
             _bddContext.Abonnements.Add(abonnement);
             _bddContext.SaveChanges();
             return abonnement.Id;
@@ -36,8 +43,10 @@ namespace Tutorin.Services
                 abonnement.Type = type;
                 abonnement.DateDebut = dateDebut;
                 abonnement.DateFin = dateFin;
-                abonnement.Prix = prix;
             }
+
+            _bddContext.Abonnements.Update(abonnement);
+            _bddContext.SaveChanges();
         }
 
         public void SupprimerAbonnement(int id)
@@ -47,9 +56,61 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
+        public void FinAbonnement(int id)
+        {
+            Abonnement abonnement = _bddContext.Abonnements.Find(id);
+            abonnement.DateFin = DateTime.Now;
+            _bddContext.Abonnements.Update(abonnement);
+            _bddContext.SaveChanges();
+        }
+
         public List<Abonnement> ObtenirTousLesAbonnements()
         {
             return _bddContext.Abonnements.ToList();
+        }
+
+        //Permet de trouver tous les abonnements en fonction d'un responsable
+        public List<Abonnement> TrouverAbonnements(int responsableId)
+        {
+            List<Abonnement> abonnements = _bddContext.Abonnements.Where(r=>r.ResponsableEleveId== responsableId).ToList();
+
+            foreach (Abonnement abonnement in abonnements)
+            {
+                abonnement.ResponsableEleve = _bddContext.ResponsablesEleves.Find(abonnement.ResponsableEleveId);
+                abonnement.ResponsableEleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.ResponsableEleve.UtilisateurId);
+                abonnement.Eleve = _bddContext.Eleves.Find(abonnement.EleveId);
+                if (abonnement.EleveId>0)
+                {
+                    abonnement.Eleve.Utilisateur = _bddContext.Utilisateurs.Find(abonnement.Eleve?.UtilisateurId);
+                }
+            }
+
+            return abonnements;
+        }
+
+        public void AjouterEleve (int abonnementId, Eleve eleve)
+        {
+            Abonnement abonnement = _bddContext.Abonnements.Find (abonnementId);
+            abonnement.EleveId = eleve.Id;
+            abonnement.Eleve = eleve;
+
+            _bddContext.Abonnements.Update(abonnement);
+            _bddContext.SaveChanges();
+        }
+
+        public void SupprimerEleve(int abonnementId)
+        {
+            Abonnement abonnement = _bddContext.Abonnements.Find(abonnementId);
+
+            Eleve eleve = _bddContext.Eleves.Find(abonnement.EleveId);
+            Utilisateur utlisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
+            _bddContext.Eleves.Remove(eleve);
+            _bddContext.Utilisateurs.Remove(utlisateur);
+
+            abonnement.EleveId = null;
+
+            _bddContext.Abonnements.Update(abonnement);
+            _bddContext.SaveChanges();
         }
 
     }
