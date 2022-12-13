@@ -95,6 +95,16 @@ namespace Tutorin.Services
             return listePrestations;
         }
 
+        public List<Prestation> ObtientToutesLesPrestationsCreees()
+        {
+            List<Prestation> listePrestations = _bddContext.Prestations.Where(c => c.EtatPrestation == EtatPrestation.A_affecter).ToList();
+            foreach (Prestation prestation in listePrestations)
+            {
+                listePrestations.Add(prestation);
+            }
+            return listePrestations;
+        }
+
         public void SupprimerPrestation(int id)
         {
             Prestation prestation = _bddContext.Prestations.Find(id);

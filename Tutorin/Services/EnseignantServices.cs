@@ -81,6 +81,16 @@ namespace Tutorin.Services
 
             prestation.EnseignantId = enseignant.Id;
             prestation.Enseignant = enseignant;
+
+            prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
+        }
+
+        public Enseignant TrouverUnEnseignant(int id)
+        {
+            Enseignant enseignant = _bddContext.Enseignants.Find(id);
+            enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
+
+            return enseignant;
         }
 
         public void Dispose()
