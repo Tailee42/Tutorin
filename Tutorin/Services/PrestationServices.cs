@@ -104,14 +104,21 @@ namespace Tutorin.Services
 
         public void InscrireEleveAPrestation(int eleveId, int prestationId)
         {
-            Eleve eleve = _bddContext.Eleves.Find(eleveId);
-            Prestation prestation = _bddContext.Prestations.Find(prestationId);
-            PrestationEleve pe = _bddContext.PrestationsEleves.Find(prestationId);
+            PrestationEleve pe = new PrestationEleve();
+            pe.EleveId = eleveId;
+            pe.PrestationId = prestationId;         
 
-            pe.EleveId = eleve.Id;
-            pe.Eleve = eleve;
-            eleve.PrestationsEleves.Add(pe);
-            prestation.PrestationsEleves.Add(pe);
+            _bddContext.PrestationsEleves.Add(pe);
+            _bddContext.SaveChanges();
+        }
+
+        public Prestation TrouverUnePrestation(int id)
+        {
+            Prestation prestation = _bddContext.Prestations.Find(id);
+            prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+            prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+
+            return prestation;
         }
 
     }
