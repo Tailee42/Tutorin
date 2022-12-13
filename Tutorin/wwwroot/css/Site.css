@@ -123,3 +123,9 @@ img {
         display: block;
     }
 }
+
+
+/*Div cachées formulaires (id, mdp)*/
+.hidden{
+    visibility:hidden;
+}
