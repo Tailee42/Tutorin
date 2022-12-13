@@ -17,6 +17,9 @@ namespace Tutorin.Models
         public int? EleveId { get; set; }
         public Eleve Eleve { get; set; }
 
+        public int? PayementId { get; set; }
+        public Payement Payement { get; set; }
+
         public Abonnement(TypeAbonnement type) 
         {
             Type = type;

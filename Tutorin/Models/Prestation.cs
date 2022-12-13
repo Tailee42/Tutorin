@@ -26,6 +26,8 @@ namespace Tutorin.Models
 
         public int? EnseignantId { get; set; }
         public Enseignant Enseignant { get; set; }
+        public int? PayementId { get; set; }
+        public Payement Payement { get; set; }
 
         //public ICollection<Eleve> Eleves { get; set; }
         public List<PrestationEleve> PrestationsEleves { get; set; }

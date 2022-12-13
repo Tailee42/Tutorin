@@ -1,0 +1,64 @@
+﻿@model Tutorin.ViewModels.PayementViewModel
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Payement";
+    Layout = "_LayoutDuSite";
+}
+
+@{
+    var responsableId = User.FindFirst("RoleId");
+}
+
+<h1>Payement de l'abonnement : @TypeAbonnementExtensions.NomAbonnement(Model.TypeAbonnement) </h1>
+<div>
+
+    @using (Html.BeginForm())
+    {
+            <fieldset>
+                <legend>Prix de l'abonnement : @TypeAbonnementExtensions.PrixTTCAbonnement(Model.TypeAbonnement) € </legend>
+
+                <div>
+                @Html.LabelFor(m => Model.Payement.NomTitulaireCarte)<br />
+                @Html.TextBoxFor(m => Model.Payement.NomTitulaireCarte)<br />
+                @Html.ValidationMessageFor(m => Model.Payement.NomTitulaireCarte)
+                </div>
+
+                <div>
+                @Html.LabelFor(m => Model.Payement.NumeroCarte)<br />
+                @Html.TextBoxFor(m => Model.Payement.NumeroCarte, new {@type = "number"})<br />
+                @Html.ValidationMessageFor(m => Model.Payement.NumeroCarte)
+                </div>
+
+                <div>
+                @Html.LabelFor(m => Model.Payement.DateExpiration) <br />
+                @Html.TextBoxFor(m => Model.Payement.DateExpiration)<br />
+                @Html.ValidationMessageFor(m => Model.Payement.DateExpiration)
+                </div>
+
+                <div>
+                @Html.LabelFor(m => Model.Payement.CVC)<br />
+                @Html.TextBoxFor(m => Model.Payement.CVC, new {@type = "number"} )<br />
+                @Html.ValidationMessageFor(m => Model.Payement.CVC)
+                </div>
+
+
+                <input class="bouttonStyle" type="submit" value="Payer" />
+            </fieldset>
+    }
+
+</div>
+
+@section Script {
+        <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+
+
+@section Menu {
+
+        <a href="/home/">Accueil</a>
+        <a href="/Prestation/">Prestations</a>
+        <a href="/ResponsableEleve/modifier?responsableId=@responsableId">Mon Compte</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+}

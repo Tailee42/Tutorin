@@ -27,6 +27,14 @@ namespace Tutorin.Services
             return abonnement.Id;
         }
 
+        public int CreerAbonnement(int payementId, TypeAbonnement type, int responsableEleveId)
+        {
+            Abonnement abonnement = new Abonnement(type) { ResponsableEleveId = responsableEleveId, PayementId = payementId };
+            _bddContext.Abonnements.Add(abonnement);
+            _bddContext.SaveChanges();
+            return abonnement.Id;
+        }
+
         public int CreerAbonnement(Abonnement abonnement)
         {
             _bddContext.Abonnements.Add(abonnement);

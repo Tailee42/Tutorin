@@ -14,6 +14,7 @@ namespace Tutorin.Models
         public DbSet<Eleve> Eleves { get;set; }
         public DbSet<Prestation> Prestations { get; set; }
         public DbSet<ContenuPedagogique> ContenusPedagogiques { get; set; }
+        public DbSet<Payement> Payements { get; set; }
         public DbSet<Gestionnaire> Gestionnaires { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -69,9 +70,9 @@ namespace Tutorin.Models
                 );
 
             this.Abonnements.AddRange(
-                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, EleveId = 1 },
-                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2 },
-                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2 }
+                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, EleveId = 1, PayementId = 2 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2, PayementId = 3 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2, PayementId = 1 }
                 );
 
 
@@ -91,6 +92,12 @@ namespace Tutorin.Models
                 new ContenuPedagogique { Id = 6, Matiere = TypeMatiere.Geographie, Niveau = TypeNiveau.Sixieme, Titre = "L'Union Européenne", DatePublication = new System.DateTime(2022, 01, 12), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis sapien et est vehicula euismod vitae ac mauris. Vivamus et justo mauris. Nullam augue sem, consectetur vitae euismod varius, placerat aliquet sem. Fusce eget euismod nulla. Quisque dapibus orci vitae nisl semper eleifend non in purus. Mauris tempor erat a leo dictum, ac pretium lacus molestie. Morbi sed nibh est. Cras nulla metus, iaculis quis rhoncus ut, ultricies sit amet metus. Nunc varius sagittis ipsum, sed tincidunt eros ultricies sit amet. Maecenas sed magna at ex commodo pretium. Aenean venenatis faucibus dolor, vulputate consectetur ante pharetra gravida. Pellentesque sed turpis mauris.", EnseignantId = 3 },
                 new ContenuPedagogique { Id = 7, Matiere = TypeMatiere.Physique, Niveau = TypeNiveau.Seconde, Titre = "PH et titrage", DatePublication = new System.DateTime(2021, 11, 24), DateMiseAJour = new System.DateTime(2022, 12, 02), Etat = EtatContenuPedagogique.A_Publier, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", EnseignantId = 2 },
                 new ContenuPedagogique { Id = 8, Matiere = TypeMatiere.Français, Niveau = TypeNiveau.CE2, Titre = "L'imparfait et le passé composé", DatePublication = new System.DateTime(2021, 08, 29), DateMiseAJour = new System.DateTime(2022, 04, 17), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis tristique tellus, egestas feugiat nibh. Vivamus in vehicula turpis, sit amet blandit ligula. In viverra lacinia vestibulum. Aenean nec felis semper, imperdiet odio nec, molestie mauris. Aliquam magna nisl, blandit ac tincidunt at, finibus vel sapien. Suspendisse pretium tincidunt est, suscipit rutrum felis finibus vitae. In et lorem tristique risus blandit auctor id in magna.", EnseignantId = 3 }
+                );
+
+            this.Payements.AddRange(
+                new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "01/22", CVC = "741", ResponsableEleveId = 1},
+                new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 1 },
+                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 1 }
                 );
 
             this.SaveChanges();

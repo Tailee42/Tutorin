@@ -107,14 +107,10 @@ namespace Tutorin.Controllers
 
             using (AbonnementServices abs = new AbonnementServices())
             {
-                abonnements = abs.TrouverAbonnements(id);
+                responsableEleve.Abonnements = abs.TrouverAbonnements(id);
             }
-               
 
-            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { ResponsableEleve = responsableEleve,
-                Abonnements = abonnements};
-
-            return View("TableauDeBord", tbrvm);
+            return View("TableauDeBord", responsableEleve);
 
         }
     }
