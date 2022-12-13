@@ -11,19 +11,34 @@ namespace Tutorin.Controllers
     {
         public IActionResult Index()
         {
-            List<ContenuPedagogique> listeCours = new List<ContenuPedagogique>();
             ContenuPedagogiqueViewModel cpvm;
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cpvm = new ContenuPedagogiqueViewModel()
                 {
-                    ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiques()
+                    ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiquesValides()
                 };
             };
 
             return View("ListeContenusPedagogiques", cpvm);
         }
+
+        [HttpPost] 
+        public IActionResult Rechercher(TypeNiveau niveau, TypeMatiere matiere)
+        {
+            ContenuPedagogiqueViewModel cpvm;
+            using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
+            {
+                cpvm = new ContenuPedagogiqueViewModel()
+                {
+                    ListeContenusPedagogiques = cps.RechercherCours(niveau, matiere)
+                };
+
+            };
+            return View("ListeContenusPedagogiques", cpvm);
+        }
+
 
         [HttpGet]
         public IActionResult Ajouter()
@@ -90,6 +105,23 @@ namespace Tutorin.Controllers
             }
         }
 
+
+        public IActionResult Afficher(int coursId)
+        {
+            if (coursId != 0)
+            {
+                using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
+                {
+                    ContenuPedagogique cours = cps.ObtenirTousLesContenusPedagogiques().Where(c => c.Id == coursId).FirstOrDefault();
+                    if (cours == null)
+                    {
+                        return View("Error");
+                    } 
+                    return View("Afficher", cours);
+                }
+            }
+            return View("Error");
+        }
     }
     
 }

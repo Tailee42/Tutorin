@@ -68,7 +68,6 @@ namespace Tutorin.Services
             List<Prestation> listePrestations = _bddContext.Prestations.ToList();
             foreach (Prestation prestation in listePrestations)
             {
-                prestation.Eleve = _bddContext.Eleves.Find(prestation.EleveId);
                 prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
             }
 

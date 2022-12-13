@@ -72,9 +72,18 @@ namespace Tutorin.Services
         public void SupprimerEleve(int id)
         {
             Eleve eleve = _bddContext.Eleves.Find(id);
-
+            eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
             _bddContext.Eleves.Remove(eleve);
+            _bddContext.Utilisateurs.Remove(eleve.Utilisateur);
             _bddContext.SaveChanges();
+        }
+
+        public Eleve TrouverUnEleve(int id)
+        {
+            Eleve eleve = _bddContext.Eleves.Find(id);
+            eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
+
+            return eleve;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Tutorin.Models
@@ -22,12 +23,13 @@ namespace Tutorin.Models
         public Boolean Presentiel { get; set; }
         public EtatPrestation EtatPrestation { get; set; }
         public string LienVisio { get; set; }
-        public int? EleveId { get; set; }
-        public Eleve Eleve { get; set; }
+
         public int? EnseignantId { get; set; }
         public Enseignant Enseignant { get; set; }
         public int? PayementId { get; set; }
         public Payement Payement { get; set; }
 
+        //public ICollection<Eleve> Eleves { get; set; }
+        public List<PrestationEleve> PrestationsEleves { get; set; }
     }
 }
