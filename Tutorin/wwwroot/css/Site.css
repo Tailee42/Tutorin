@@ -162,6 +162,11 @@ footer {
    text-align: center;
 }
 
+/*Div cachées formulaires (id, mdp)*/
+.hidden{
+    visibility:hidden;
+}
+
 /* Media Queries */
 @media screen and (max-width : 1000px) {
     #navbar-desktop {
@@ -177,5 +182,8 @@ footer {
         height: 15rem;
     }
 }
+
+
+
 
 

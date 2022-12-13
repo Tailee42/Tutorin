@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
 using Tutorin.ViewModels;
@@ -24,6 +25,22 @@ namespace Tutorin.Controllers
             };
 
             return View("ListePrestations", pvm);
+        }
+
+        public IActionResult VoirPrestationsValidees(int responsableId)
+        {
+            PrestationViewModel pvm;
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm = new PrestationViewModel()
+                {
+                    ListePrestations = ps.ObtientToutesLesPrestationsValidees(),
+
+                };
+            };
+
+            return View("ListePrestationsCards", pvm);
         }
 
         [HttpGet]
@@ -88,6 +105,51 @@ namespace Tutorin.Controllers
             {
                 ps.SupprimerPrestation(prestationId);
                 return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult InscrireEleve(int prestationId)
+        {
+            string responsableId = User.FindFirstValue("RoleId");
+            int id;
+            ResponsableEleve responsable = new ResponsableEleve();
+            Prestation prestation = new Prestation();
+
+            using (ResponsableServices rs = new ResponsableServices())
+            {
+                if (int.TryParse(responsableId, out id))
+                {
+                    responsable = rs.TrouverUnResponsable(id);
+                }
+            }
+            using (AbonnementServices aas = new AbonnementServices())
+            {
+                responsable.Abonnements = aas.TrouverAbonnements(id);
+            }
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                prestation = ps.TrouverUnePrestation(id);
+            }
+
+            PrestationViewModel pvm = new PrestationViewModel()
+            {
+                ResponsableEleve = responsable,
+                Prestation = prestation
+            };
+
+            return View("InscrireEleve", pvm);
+        }
+
+        [HttpPost]
+        public IActionResult AjoutEleveAPrestation(int prestationId, List<int> eleveIds)
+        {
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                foreach(int id in eleveIds)
+                    ps.InscrireEleveAPrestation(id, prestationId);
+                return RedirectToAction("TableauDeBord", "ResponsableEleve");
             }
         }
     }
