@@ -10,7 +10,7 @@
 .card {
     margin: 20px;
     padding: 20px;
-    width: 300px;
+    width: 280px;
     min-height: 100px;
     display: flex;
     flex-direction: column;

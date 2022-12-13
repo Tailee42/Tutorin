@@ -39,9 +39,9 @@
             switch ((int)abonnement)
             {
                 case 0:
-                    return 5.99F * (1 + Abonnement.TVA);
+                    return 6.99F;
                 case 1:
-                    return 14.99F * (1 + Abonnement.TVA);
+                    return 16.99F;
 
             }
             return 0;
