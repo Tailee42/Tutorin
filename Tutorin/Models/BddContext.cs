@@ -60,7 +60,19 @@ namespace Tutorin.Models
             this.Prestations.AddRange(
                 new Prestation { Niveau = TypeNiveau.CM2, DateDebut = new System.DateTime(2022, 12, 06, 14,0,0), 
                     DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0), TypePrestation = TypePrestation.Tuturat, Ville = "Paris",
-                    Prix = 25F, Matiere = TypeMatiere.Physique, Presentiel = true}
+                    Prix = 25F, Matiere = TypeMatiere.Physique, Presentiel = true},
+                new Prestation
+                {
+                    Niveau = TypeNiveau.Troisieme,
+                    DateDebut = new System.DateTime(2022, 11, 03, 16, 0, 0),
+                    DateFin = new System.DateTime(2022, 11, 03, 16, 0, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Histoire,
+                    Presentiel = false,
+                    EnseignantId = 3,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                }
                 );
 
             this.ResponsablesEleves.AddRange(

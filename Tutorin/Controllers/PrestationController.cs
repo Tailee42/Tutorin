@@ -26,7 +26,7 @@ namespace Tutorin.Controllers
             return View("ListePrestations", pvm);
         }
 
-        public IActionResult Index2()
+        public IActionResult VoirPrestationsValidees(int responsableId)
         {
             PrestationViewModel pvm;
 
@@ -106,13 +106,16 @@ namespace Tutorin.Controllers
             }
         }
 
-        public IActionResult InscrireEleve(int eleveId, int prestationId)
+
+        [HttpPost]
+        public IActionResult InscrireEleve(ResponsableEleve responsable, int eleveId, int prestationId, int prestationEleveId)
         {
             using (PrestationServices ps = new PrestationServices())
             {
-                ps.InscrireEleveAPrestation(eleveId, prestationId);
+                ps.InscrireEleveAPrestation(eleveId, prestationId, prestationEleveId);
                 return RedirectToAction("Index2");
             }
+
         }
     }
 }

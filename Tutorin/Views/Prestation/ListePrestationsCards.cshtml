@@ -1,4 +1,4 @@
-﻿@@model Tutorin.Models.PrestationViewModel
+﻿@model Tutorin.ViewModels.PrestationViewModel
 @using Tutorin.Models
 @{
     ViewBag.Title = "Voir prestations";
@@ -33,17 +33,13 @@
                 Lieu : @prestation.Ville
             </div>
 
-            <p class="card__button">
-                <a class="card__link" href="/Prestation/inscrire">
-                    <i class="fa-sharp fa-solid fa-credit-card"></i>
-                    Payer l'abonnement
-                </a>
+            <p>
+                <a href="/">Inscrire Eleve</a>
             </p>
-
+        
         </div>
     }
 </div>
-
 
 
 @section Script {
@@ -54,7 +50,6 @@
 
 
 @section Menu {
-
     <a href="/home/">Accueil</a>
     <a href="/Prestation/">Prestations</a>
     <a href="/ResponsableEleve/modifier?responsableId=@responsableId">Mon Compte</a>

@@ -11,7 +11,7 @@ namespace Tutorin.Services
         void ModifierPrestation(Prestation prestation);
         void SupprimerPrestation(int id);
         List<Prestation> ObtientTousLesPrestations();
-        void InscrireEleveAPrestation(int eleveId, int prestationEleveId);
+        void InscrireEleveAPrestation(int eleveId, int prestationId, int prestationEleveId);
         List<Prestation> ObtientToutesLesPrestationsValidees();
     }
 }
