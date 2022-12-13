@@ -175,8 +175,12 @@ namespace Tutorin.Controllers
             {
                 Prestations = ps.ObtientToutesLesPrestationsCreees();
             }
+            PrestationViewModel pvm = new PrestationViewModel()
+            {
+                ListePrestations = Prestations,
+            };
 
-            return View("ListePrestationsEnseignant", Prestations);
+            return View("ListePrestationsEnseignant", pvm);
         }
 
         public IActionResult InscrireEnseignant(int prestationId)
@@ -192,13 +196,12 @@ namespace Tutorin.Controllers
                 {
                     enseignant = es.TrouverUnEnseignant(id);
                 }
-
-                es.SinscrireAPrestation(id, prestationId);
             }
 
             using (PrestationServices ps = new PrestationServices())
             {
-                prestation = ps.TrouverUnePrestation(id);
+                prestation = ps.TrouverUnePrestationNonAffectee(id);
+                ps.InscrireEnseignantAPrestation(id, prestationId);
             }
 
             PrestationViewModel pvm = new PrestationViewModel()
@@ -207,7 +210,7 @@ namespace Tutorin.Controllers
                 Prestation = prestation
             };
 
-            return RedirectToAction("ListePrestationEnseignant", "Prestation"); 
+            return RedirectToAction("Index", pvm); 
         }
     }
 }

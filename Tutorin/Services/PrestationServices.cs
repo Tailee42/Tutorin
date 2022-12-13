@@ -98,10 +98,6 @@ namespace Tutorin.Services
         public List<Prestation> ObtientToutesLesPrestationsCreees()
         {
             List<Prestation> listePrestations = _bddContext.Prestations.Where(c => c.EtatPrestation == EtatPrestation.A_affecter).ToList();
-            foreach (Prestation prestation in listePrestations)
-            {
-                listePrestations.Add(prestation);
-            }
             return listePrestations;
         }
 
@@ -131,5 +127,21 @@ namespace Tutorin.Services
             return prestation;
         }
 
+        public Prestation TrouverUnePrestationNonAffectee(int id)
+        {
+            Prestation prestation = _bddContext.Prestations.Find(id);
+
+            return prestation;
+        }
+
+        public void InscrireEnseignantAPrestation(int id, int prestationId)
+        {
+            Enseignant enseignant = _bddContext.Enseignants.Find(id);
+            Prestation prestation = _bddContext.Prestations.Find(prestationId);
+
+            prestation.EnseignantId = enseignant.Id;
+            prestation.Enseignant = enseignant;
+            prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
+        }
     }
 }
