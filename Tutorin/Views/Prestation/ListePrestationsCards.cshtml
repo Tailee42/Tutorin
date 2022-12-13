@@ -6,7 +6,7 @@
 }
 
 @{
-    var responsableId = User.FindFirst("RoleId");
+    var responsableId = User.FindFirst("RoleId").Value;
 }
 
 
@@ -34,7 +34,7 @@
             </div>
 
             <p>
-                <a href="/">Inscrire Eleve</a>
+                <a href="/ResponsableEleve/ListeEleve?ResponsableId=@responsableId">Inscrire Eleve</a>
             </p>
         
         </div>

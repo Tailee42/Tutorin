@@ -102,11 +102,11 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
-        public void InscrireEleveAPrestation(int eleveId, int prestationId, int prestationEleveId)
+        public void InscrireEleveAPrestation(int eleveId, int prestationId)
         {
             Eleve eleve = _bddContext.Eleves.Find(eleveId);
             Prestation prestation = _bddContext.Prestations.Find(prestationId);
-            PrestationEleve pe = _bddContext.PrestationsEleves.Find(prestationEleveId);
+            PrestationEleve pe = _bddContext.PrestationsEleves.Find(prestationId);
 
             pe.EleveId = eleve.Id;
             pe.Eleve = eleve;

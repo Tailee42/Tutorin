@@ -108,11 +108,11 @@ namespace Tutorin.Controllers
 
 
         [HttpPost]
-        public IActionResult InscrireEleve(ResponsableEleve responsable, int eleveId, int prestationId, int prestationEleveId)
+        public IActionResult InscrireEleve(int eleveId, int prestationId)
         {
             using (PrestationServices ps = new PrestationServices())
             {
-                ps.InscrireEleveAPrestation(eleveId, prestationId, prestationEleveId);
+                ps.InscrireEleveAPrestation(eleveId, prestationId);
                 return RedirectToAction("Index2");
             }
 
