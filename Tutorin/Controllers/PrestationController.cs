@@ -26,6 +26,21 @@ namespace Tutorin.Controllers
             return View("ListePrestations", pvm);
         }
 
+        public IActionResult Index2()
+        {
+            PrestationViewModel pvm;
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm = new PrestationViewModel()
+                {
+                    ListePrestations = ps.ObtientToutesLesPrestationsValidees()
+                };
+            };
+
+            return View("ListePrestationsCards", pvm);
+        }
+
         [HttpGet]
         public IActionResult Ajouter()
         {
@@ -88,6 +103,15 @@ namespace Tutorin.Controllers
             {
                 ps.SupprimerPrestation(prestationId);
                 return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult InscrireEleve(int eleveId, int prestationId)
+        {
+            using (PrestationServices ps = new PrestationServices())
+            {
+                ps.InscrireEleveAPrestation(eleveId, prestationId);
+                return RedirectToAction("Index2");
             }
         }
     }

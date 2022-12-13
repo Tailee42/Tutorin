@@ -73,6 +73,15 @@ namespace Tutorin.Services
             return listeEnseignants;
         }
 
+        public void SinscrireAPrestation(int id, int prestationId)
+        {
+            Enseignant enseignant = _bddContext.Enseignants.Find(id);
+            Prestation prestation = _bddContext.Prestations.Find(prestationId);
+
+            prestation.EnseignantId = enseignant.Id;
+            prestation.Enseignant = enseignant;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();
