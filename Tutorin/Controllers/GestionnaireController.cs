@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
 using Tutorin.ViewModels;
@@ -90,6 +91,40 @@ namespace Tutorin.Controllers
                 ges.SupprimerGestionnaire(gestionnaireId);
                 return RedirectToAction("Index");
             }
+        }
+
+        public IActionResult TableauDeBord()
+        {
+            string GestionnaireId = User.FindFirstValue("RoleId");
+            Gestionnaire gestionnaire = null;
+            int id;
+
+            using (GestionnaireServices gs = new GestionnaireServices())
+            {
+                if (int.TryParse(GestionnaireId, out id))
+                {
+                    gestionnaire = gs.TrouverUnGestionnaire(id);
+                }
+            }
+
+            TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel()
+            {
+                Gestionnaire = gestionnaire,
+            };
+
+            return View("TableauDeBord", tbevm);
+        }
+
+        public IActionResult GererUtilisateurs()
+        {
+            //Gestionnaire gestionnaire = 
+
+            //TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel()
+            //{
+            //    Gestionnaire = gestionnaire,
+            //};
+
+            return View("GererUtilisateurs");
         }
     }
 }
