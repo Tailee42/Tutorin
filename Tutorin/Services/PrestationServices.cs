@@ -157,5 +157,16 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
+        public List<Prestation> TouverLesPrestationsDUnEleve(int eleveId)
+        {
+            List<PrestationEleve> listePrestationsEleve = _bddContext.PrestationsEleves.Where(c => c.EleveId == eleveId).ToList();
+            List<Prestation> prestations = new List<Prestation>();
+
+            foreach(PrestationEleve prestationEleve in listePrestationsEleve)
+            {
+                prestations.Add(_bddContext.Prestations.Find(prestationEleve.PrestationId));
+            }
+            return prestations;
+        }
     }
 }

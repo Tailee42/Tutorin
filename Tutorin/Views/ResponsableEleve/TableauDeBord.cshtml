@@ -1,4 +1,4 @@
-﻿@model Tutorin.Models.ResponsableEleve
+﻿@model Tutorin.ViewModels.TableauBordResponsableViewModel
 @using Tutorin.Models
 @{
     ViewBag.Title = "Tableau de Bord Responsable Eleve";
@@ -12,13 +12,13 @@
 @section Menu {
 
     <a href="/Home/">Accueil</a>
-    <a href="/Prestation/VoirPrestationsValidees?responsableId=@Model.Id">Prestations</a>
-    <a href="/ResponsableEleve/modifier?responsableId=@Model.Id">Mon Compte</a>
+    <a href="/Prestation/VoirPrestationsValidees?responsableId=@Model.ResponsableEleve.Id">Prestations</a>
+    <a href="/ResponsableEleve/modifier?responsableId=@Model.ResponsableEleve.Id">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
 }
 
 <div class="nomUtilisateur">
-    <h2>@Model.Utilisateur.Nom @Model.Utilisateur.Prenom</h2>
+    <h2>@Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom</h2>
 </div>
 
 <h1>Mes Abonnements :</h1>
@@ -26,7 +26,7 @@
     <div class="cards">
 
 
-        @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) 
+        @foreach (Tutorin.Models.Abonnement abonnement in Model.ResponsableEleve.Abonnements) 
         {
             @if (abonnement.DateFin == DateTime.MinValue)
             {
@@ -99,12 +99,89 @@
     </div>
 
 
+<h1>Mes Abonnements :</h1>
+
+<div class="cards">
+
+
+    @foreach (Tutorin.Models.Abonnement abonnement in Model.ResponsableEleve.Abonnements)
+    {
+        @if (abonnement.DateFin == DateTime.MinValue)
+        {
+            <div class="card abonnement">
+                <div class="card__icon">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+
+                <h2 class="card__title">@TypeAbonnementExtensions.NomAbonnement(abonnement.Type)</h2>
+
+                <div>
+                    Depuis le : @abonnement.DateDebut.ToString("d")<br>
+                    Prix mensuel : @abonnement.PrixTTC €
+                </div>
+
+                <p class="card__button">
+                    <a class="card__link" href="/Abonnement/FinAbonnement?abonnementid=@abonnement.Id">
+                        <i class="fa-sharp fa-solid fa-xmark"></i>
+                        Arrêter l'abonnement
+                    </a>
+                </p>
+
+                <br />
+
+                @if (abonnement.EleveId == null)
+                {
+                    <p class="card__button">
+                        <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
+                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                            Ajouter un élève
+                        </a>
+                    </p>
+                }
+                else
+                {
+                    <div>
+                        Eleve : @abonnement.Eleve.Utilisateur.Nom @abonnement.Eleve.Utilisateur.Prenom<br>
+                        Niveau : @abonnement.Eleve.Niveau
+                    </div>
+                    <p class="card__button">
+                        <a class="card__link" href="#">
+                            <i class="fa-regular fa-face-smile"></i>
+                            Suivi de l'élèvé
+                        </a>
+                    </p>
+                    <p class="card__button">
+                        <a class="card__link" href="/Abonnement/supprimerEleve?abonnementId=@abonnement.Id">
+                            <i class="fa-sharp fa-solid fa-xmark"></i>
+                            Supprimer l'élève
+                        </a>
+                    </p>
+
+                }
+            </div>
+        }
+    }
+
+    <div class="card abonnement">
+        <h2 class="card__title">Ajouter un nouvel abonnement</h2>
+        <div>
+        </div>
+        <p class="card__button">
+            <a class="card__link" href="/Abonnement/ajouterAbonnement">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                Ajouter un abonnement
+            </a>
+        </p>
+    </div>
+
+</div>
+
 <h1>Historique des abonnements :</h1>
 
 <div class="cards">
 
 
-    @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
+    @foreach (Tutorin.Models.Abonnement abonnement in Model.ResponsableEleve.Abonnements)
     {
         @if (abonnement.DateFin != DateTime.MinValue)
         {

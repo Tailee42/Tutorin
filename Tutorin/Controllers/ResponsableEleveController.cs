@@ -104,13 +104,35 @@ namespace Tutorin.Controllers
                 }
             }
 
-
             using (AbonnementServices abs = new AbonnementServices())
             {
                 responsableEleve.Abonnements = abs.TrouverAbonnements(id);
             }
 
-            return View("TableauDeBord", responsableEleve);
+            List<Eleve> eleves = new List<Eleve>();
+            foreach (Abonnement abonnement in abonnements)
+            {
+                if (abonnement.EleveId != null)
+                {
+                    Eleve eleve = new Eleve();
+                    using (EleveServices es = new EleveServices())
+                    {
+                        eleve = es.TrouverUnEleve((int)abonnement.EleveId);
+                    }
+
+                    using (PrestationServices ps = new PrestationServices())
+                    {
+                        eleve.Prestations = ps.TouverLesPrestationsDUnEleve(eleve.Id);
+                    }
+
+                    eleves.Add(eleve);
+                }
+                
+            }
+
+            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { ResponsableEleve = responsableEleve};
+
+            return View("TableauDeBord", tbrvm);
 
         }
 
