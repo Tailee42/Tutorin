@@ -60,9 +60,19 @@ namespace Tutorin.Models
                 );
 
             this.Prestations.AddRange(
-                new Prestation { Niveau = TypeNiveau.CM2, DateDebut = new System.DateTime(2022, 12, 06, 14,0,0), 
-                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0), TypePrestation = TypePrestation.Tuturat, Ville = "Paris",
-                    Prix = 25F, Matiere = TypeMatiere.Physique, Presentiel = true},
+                new Prestation
+                {
+                    Niveau = TypeNiveau.CM2,
+                    DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    TypePrestation = TypePrestation.Tuturat,
+                    Ville = "Paris",
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Physique,
+                    Presentiel = true,
+                    EnseignantId = 2,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
                 new Prestation
                 {
                     Niveau = TypeNiveau.Troisieme,
@@ -74,6 +84,18 @@ namespace Tutorin.Models
                     Presentiel = false,
                     EnseignantId = 3,
                     EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Niveau = TypeNiveau.Terminale,
+                    DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    TypePrestation = TypePrestation.Stage_de_revision,
+                    Ville = "Paris",
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Mathematique,
+                    Presentiel = true,
+                    EtatPrestation = EtatPrestation.A_affecter
                 }
                 );
 
