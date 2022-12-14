@@ -17,6 +17,7 @@ namespace Tutorin.Models
         public DbSet<Payement> Payements { get; set; }
         public DbSet<Gestionnaire> Gestionnaires { get; set; }
         public DbSet<PrestationEleve> PrestationsEleves { get; set; }
+        public DbSet<PrestationPayement> PrestationsPayements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -120,9 +121,9 @@ namespace Tutorin.Models
                 );
 
             this.Payements.AddRange(
-                new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "01/22", CVC = "741", ResponsableEleveId = 1},
-                new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 1 },
-                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 1 }
+                new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "01/22", CVC = "741", ResponsableEleveId = 2},
+                new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 },
+                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 }
                 );
 
             this.SaveChanges();

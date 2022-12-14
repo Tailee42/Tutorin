@@ -160,11 +160,25 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult AjoutEleveAPrestation(int prestationId, List<int> eleveIds)
         {
+            Prestation prestation = new Prestation();
+
             using (PrestationServices ps = new PrestationServices())
             {
-                foreach(int id in eleveIds)
-                    ps.InscrireEleveAPrestation(id, prestationId);
-                return RedirectToAction("TableauDeBord", "ResponsableEleve");
+                prestation = ps.TrouverUnePrestation(prestationId);
+
+                if (prestation.Prix == 0)
+                {
+                    foreach (int id in eleveIds)
+                        ps.InscrireEleveAPrestation(id, prestationId);
+
+                    return RedirectToAction("TableauDeBord", "ResponsableEleve");
+
+                } else
+                {
+                    PrestationViewModel pvm = new PrestationViewModel() { ElevesId= eleveIds, PrestationId = prestationId };
+                    return RedirectToAction("PayerPrestation", "Payement", pvm);
+                }
+                
             }
         }
 

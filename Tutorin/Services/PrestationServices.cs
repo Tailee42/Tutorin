@@ -147,5 +147,15 @@ namespace Tutorin.Services
             prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
             _bddContext.SaveChanges();
         }
+        public void AjouterUnPayement(int prestationId, int payementId)
+        {
+            PrestationPayement pp = new PrestationPayement();
+            pp.PayementId = payementId;
+            pp.PrestationId = prestationId;
+
+            _bddContext.PrestationsPayements.Add(pp);
+            _bddContext.SaveChanges();
+        }
+
     }
 }
