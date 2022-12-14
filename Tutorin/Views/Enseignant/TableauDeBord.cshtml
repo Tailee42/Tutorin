@@ -1,0 +1,64 @@
+﻿@model Tutorin.ViewModels.EnseignantViewModel
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Tableau de Bord enseignant";
+    Layout = "_LayoutDuSite";
+}
+
+@section css {
+    <link href="/css/cards.css" rel="stylesheet" />
+}
+
+@section Menu {
+
+    <a href="/Enseignant/TableauDeBord">Accueil</a>
+    <a href="/ContenuPedagogique/">Les cours</a>
+    <a href="/Enseignant/modifier?enseignantId=@Model.Enseignant.Id">Mon Compte</a>
+    <a href="/login/Deconnexion">Déconnexion</a>
+}
+
+<div class="nomUtilisateur">
+    <h2>@Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</h2>
+</div>
+
+
+<h1>Liste de mes cours :</h1>
+
+<div class="cards">
+    @foreach (Tutorin.Models.ContenuPedagogique contenuPedagogiques in Model.Enseignant.ContenuPedagogiques)
+    {
+    <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+            <h2 class="card__title">@contenuPedagogiques.Titre</h2>
+            <h2 class="card__title">@contenuPedagogiques.Etat</h2>
+
+           @*if (!ModelState.IsValid)
+            {
+                return View("Modifier", enseignant);
+            }*@
+            <p class="card__button">
+                <a class="card__link" href="/Prestation/modifier">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    Modifier le contenu
+                </a>
+            </p>
+    </div>
+    }
+     
+
+
+    <div class="card abonnement">
+        <h2 class="card__title">Mes prestations</h2>
+
+        <p class="card__button">
+            <a class="card__link" href="/ContenuPedagogique">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+    
+            </a>
+        </p>
+    </div>
+
+
+</div>

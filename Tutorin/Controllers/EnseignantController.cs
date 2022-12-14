@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
 using Tutorin.ViewModels;
@@ -91,6 +92,43 @@ namespace Tutorin.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public IActionResult TableauDeBord()
+        {
+            string enseignantId = User.FindFirstValue("RoleId");
+            Enseignant enseignant = null;
+            int id;
+            List<Enseignant> enseignants = new List<Enseignant>();
+            
+           
+            EnseignantViewModel envm = new EnseignantViewModel( );
+
+            using (EnseignantServices ens = new EnseignantServices())
+            {
+                if (int.TryParse(enseignantId, out id))
+                {
+                    enseignant = ens.TrouverUnEnseignant(id);
+                }
+            }
+
+            using (PrestationServices prs = new PrestationServices())
+            {
+                enseignant.Prestations = prs.TrouverPrestations(id);
+            }
+
+            using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
+            {
+                enseignant.ContenuPedagogiques = cps.TrouverLesCours(id);
+            }
+            envm.Enseignant = enseignant;
+           
+            return View("TableauDeBord", envm);
+
+        }
+
+        
+       
+        
     }
 
 
