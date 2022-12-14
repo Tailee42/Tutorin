@@ -62,6 +62,7 @@ namespace Tutorin.Models
             this.Prestations.AddRange(
                 new Prestation
                 {
+                    Id = 1,
                     Niveau = TypeNiveau.CM2,
                     DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
                     DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
@@ -75,6 +76,7 @@ namespace Tutorin.Models
                 },
                 new Prestation
                 {
+                    Id = 2,
                     Niveau = TypeNiveau.Troisieme,
                     DateDebut = new System.DateTime(2022, 11, 03, 16, 0, 0),
                     DateFin = new System.DateTime(2022, 11, 03, 16, 0, 0),
@@ -87,15 +89,44 @@ namespace Tutorin.Models
                 },
                 new Prestation
                 {
+                    Id = 3,
                     Niveau = TypeNiveau.Terminale,
                     DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
                     DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
                     TypePrestation = TypePrestation.Stage_de_revision,
                     Ville = "Paris",
                     Prix = 25F,
-                    Matiere = TypeMatiere.Mathematique,
+                    Matiere = TypeMatiere.Mathematiques,
                     Presentiel = true,
                     EtatPrestation = EtatPrestation.A_affecter
+                },
+                new Prestation
+                {
+                    Id = 4,
+                    Niveau = TypeNiveau.CM1,
+                    DateDebut = new System.DateTime(2022, 12, 23, 14, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 23, 15, 0, 0),
+                    TypePrestation = TypePrestation.Tutorat,
+                    Ville = "Paris",
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Mathematiques,
+                    Presentiel = true,
+                    EnseignantId = 2,
+                    EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
+                },
+                new Prestation
+                {
+                    Id = 5,
+                    Niveau = TypeNiveau.Sixieme,
+                    DateDebut = new System.DateTime(2022, 12, 06, 17, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 06, 18, 0, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Mathematiques,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 1,
+                    EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
                 }
                 );
 
@@ -106,14 +137,14 @@ namespace Tutorin.Models
                 );
 
             this.Abonnements.AddRange(
-                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, EleveId = 1, PayementId = 2 },
-                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2, PayementId = 3 },
+                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, PayementId = 2 },
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2, EleveId = 1, PayementId = 3 },
                 new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2, PayementId = 1 }
                 );
 
 
             this.Enseignants.AddRange(
-                new Enseignant{ Id = 1, Matiere = TypeMatiere.Mathematique, Niveaux = TypeNiveau.CM1, UtilisateurId = 5 },
+                new Enseignant{ Id = 1, Matiere = TypeMatiere.Mathematiques, Niveaux = TypeNiveau.CM1, UtilisateurId = 5 },
                 new Enseignant { Id = 2, Matiere = TypeMatiere.Physique, Niveaux = TypeNiveau.CM1, UtilisateurId = 6 },
                 new Enseignant { Id = 3, Matiere = TypeMatiere.Geographie, Niveaux = TypeNiveau.Troisieme, UtilisateurId = 8 },
                 new Enseignant { Id = 4, Matiere = TypeMatiere.Français, Niveaux = TypeNiveau.CP, UtilisateurId = 3}
@@ -122,8 +153,8 @@ namespace Tutorin.Models
             this.ContenusPedagogiques.AddRange(
                 new ContenuPedagogique { Id = 1, Matiere = TypeMatiere.Geographie, Niveau = TypeNiveau.Troisieme, Titre = "La France dans le Monde", DatePublication = new System.DateTime(2022, 05, 02), DateMiseAJour = new System.DateTime(2022, 08, 15), Etat = EtatContenuPedagogique.A_Valider, ContenuDuCours = "Dès le Moyen Âge, notre pays a largement influencé ses voisins européens (puis de nombreux pays à travers le monde) par sa politique, son économie, sa langue et sa culture.\r\nAvec l’Angleterre, la France a longtemps été en concurrence pour la domination du Monde.\r\nDepuis le siècle dernier, il est vrai que d’autres pays sont venus jouer les premiers rôles (Les Etats-Unis, la Chine, la Russie, …), mais la place de la France dans le Monde reste très importante. ", EnseignantId = 3},
                 new ContenuPedagogique { Id = 2, Matiere = TypeMatiere.Physique, Niveau = TypeNiveau.CM1, Titre = "La lumière", DatePublication = new System.DateTime(2021, 10, 29), DateMiseAJour = new System.DateTime(2022, 01, 18), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Sans lumière c'est tout noir.", EnseignantId = 2 },
-                new ContenuPedagogique { Id = 3, Matiere = TypeMatiere.Mathematique, Niveau = TypeNiveau.CM1, Titre = "1+1=?", DatePublication = new System.DateTime(2022, 03, 11), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "2 ! Bravo !", EnseignantId = 1 },
-                new ContenuPedagogique { Id = 4, Matiere = TypeMatiere.Mathematique, Niveau = TypeNiveau.Terminale, Titre = "Primitives et équations différentielles", DatePublication = new System.DateTime(2022, 12, 11), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Une équation différentielle est une équation dont l’inconnue est une fonction. Soit f une fonction définie sur un intervalle I de R. On dit que la fonction g est une solution de l’équation différentielle y’ = f sur I si et seulement si, g est dérivable sur I et, pour tout réel x de I, on a : g’(x) = f(x).", EnseignantId = 1 },
+                new ContenuPedagogique { Id = 3, Matiere = TypeMatiere.Mathematiques, Niveau = TypeNiveau.CM1, Titre = "1+1=?", DatePublication = new System.DateTime(2022, 03, 11), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "2 ! Bravo !", EnseignantId = 1 },
+                new ContenuPedagogique { Id = 4, Matiere = TypeMatiere.Mathematiques, Niveau = TypeNiveau.Terminale, Titre = "Primitives et équations différentielles", DatePublication = new System.DateTime(2022, 12, 11), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Une équation différentielle est une équation dont l’inconnue est une fonction. Soit f une fonction définie sur un intervalle I de R. On dit que la fonction g est une solution de l’équation différentielle y’ = f sur I si et seulement si, g est dérivable sur I et, pour tout réel x de I, on a : g’(x) = f(x).", EnseignantId = 1 },
                 new ContenuPedagogique { Id = 5, Matiere = TypeMatiere.Français, Niveau = TypeNiveau.CP, Titre = "Les verbes", DatePublication = new System.DateTime(2021, 08, 29), DateMiseAJour = new System.DateTime(2022, 04, 17), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "On distingue : Les verbes d'action : Un verbe d'action exprime une action faite ou subie par le sujet. Ex. : Marion prend un gâteau. Le bébé dort, il rêve. Le sapin est décoré. Les verbes d'état : Un verbe d'état (demeurer, devenir, paraître, rester, sembler) exprime un état du sujet. Ex. : Les invités semblaient heureux.", EnseignantId = 3 },
                 new ContenuPedagogique { Id = 6, Matiere = TypeMatiere.Geographie, Niveau = TypeNiveau.Sixieme, Titre = "L'Union Européenne", DatePublication = new System.DateTime(2022, 01, 12), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis sapien et est vehicula euismod vitae ac mauris. Vivamus et justo mauris. Nullam augue sem, consectetur vitae euismod varius, placerat aliquet sem. Fusce eget euismod nulla. Quisque dapibus orci vitae nisl semper eleifend non in purus. Mauris tempor erat a leo dictum, ac pretium lacus molestie. Morbi sed nibh est. Cras nulla metus, iaculis quis rhoncus ut, ultricies sit amet metus. Nunc varius sagittis ipsum, sed tincidunt eros ultricies sit amet. Maecenas sed magna at ex commodo pretium. Aenean venenatis faucibus dolor, vulputate consectetur ante pharetra gravida. Pellentesque sed turpis mauris.", EnseignantId = 3 },
                 new ContenuPedagogique { Id = 7, Matiere = TypeMatiere.Physique, Niveau = TypeNiveau.Seconde, Titre = "PH et titrage", DatePublication = new System.DateTime(2021, 11, 24), DateMiseAJour = new System.DateTime(2022, 12, 02), Etat = EtatContenuPedagogique.A_Publier, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", EnseignantId = 2 },
@@ -133,7 +164,17 @@ namespace Tutorin.Models
             this.Payements.AddRange(
                 new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "01/22", CVC = "741", ResponsableEleveId = 2},
                 new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 },
-                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 }
+                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 },
+                new Payement { Id = 4, MontantTTC = 25F, DatePayement = new System.DateTime(2022, 12, 3, 15, 15, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 }
+                );
+
+            this.PrestationsEleves.AddRange(
+                new PrestationEleve { Id = 1, EleveId = 1, PrestationId = 4},
+                new PrestationEleve { Id = 2, EleveId = 2, PrestationId = 5}
+                );
+
+            this.PrestationsPayements.AddRange(
+                new PrestationPayement { Id = 1, PrestationId = 4, PayementId = 4}
                 );
 
             this.SaveChanges();

@@ -171,9 +171,28 @@ namespace Tutorin.Services
             pp.PayementId = payementId;
             pp.PrestationId = prestationId;
 
+            Prestation prestation = _bddContext.Prestations.Find(prestationId);
+            prestation.EtatPrestation = EtatPrestation.Payee_par_responsable_eleve;
+
             _bddContext.PrestationsPayements.Add(pp);
+            _bddContext.Prestations.Update(prestation);
             _bddContext.SaveChanges();
         }
 
+        public List<Prestation> TouverLesPrestationsDUnEleve(int eleveId)
+        {
+            List<PrestationEleve> listePrestationsEleve = _bddContext.PrestationsEleves.Where(c => c.EleveId == eleveId).ToList();
+            List<Prestation> prestations = new List<Prestation>();
+
+            foreach(PrestationEleve prestationEleve in listePrestationsEleve)
+            {
+                Prestation prestation = new Prestation();
+                prestation = _bddContext.Prestations.Find(prestationEleve.PrestationId);
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+                prestations.Add(prestation);
+            }
+            return prestations;
+        }
     }
 }
