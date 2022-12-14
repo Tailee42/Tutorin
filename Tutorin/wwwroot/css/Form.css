@@ -1,0 +1,16 @@
+﻿#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+i {
+    color: black;
+}
+
+table {
+    width: 50vw;
+    border-collapse: collapse;
+    text-align: center;
+}

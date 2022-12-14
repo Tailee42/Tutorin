@@ -18,22 +18,26 @@
 }
 
 @section css {
-    <link href="/css/Cours.css" rel="stylesheet" />
+    <link href="/css/Footer.css" rel="stylesheet" />
+    <link href="/css/Tableaux.css" rel="stylesheet" />
+   @* <link href="/css/Cours.css" rel="stylesheet" />*@
 }
 
-<h1>Liste des cours : </h1>
+<h1 class="titre">Liste des cours</h1>
 <table border="1">
 
+    <thead>
     <tr>
-        <th>Numéro</th>
-        <th>Titre</th>
-        <th>Matière</th>
-        <th>Niveau</th>
-        <th>Date de publication</th>
-        <th>Dernière mise à jour</th>
-        <th>Etat</th>
-        <th>Actions</th>
+        <td>Numéro</td>
+        <td>Titre</td>
+        <td>Matière</td>
+        <td>Niveau</td>
+        <td>Date de publication</td>
+        <td>Dernière mise à jour</td>
+        <td>Etat</td>
+        <td colspan="3">Actions</td>
     </tr>
+    </thead>
 
     @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
     {
@@ -45,11 +49,9 @@
             <td>@cours.DatePublication</td>
             <td>@cours.DateMiseAJour</td>
             <td>@cours.Etat</td>
-            <td>
-                <a href="/ContenuPedagogique/modifier?coursId=@cours.Id">Modifier</a>
-                <a href="/ContenuPedagogique/supprimer?coursId=@cours.Id">Supprimer</a>
-                <a href="/ContenuPedagogique/afficher?coursId=@cours.Id">Afficher</a>
-            </td>
+            <td><a href="/ContenuPedagogique/afficher?coursId=@cours.Id"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+            <td><a href="/ContenuPedagogique/modifier?coursId=@cours.Id"><i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="/ContenuPedagogique/supprimer?coursId=@cours.Id"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
     }
 </table>

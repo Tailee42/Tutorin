@@ -6,7 +6,12 @@
 @*Vue visible par le gestionnaire*@
 
 @{
-    var gestionnaireId = User.FindFirst("RoleId").Value;
+    var gestionnaireId = User.FindFirst("RoleId");
+}
+
+@section css {
+    <link href="/css/Footer.css" rel="stylesheet" />
+    <link href="/css/Tableaux.css" rel="stylesheet" />
 }
 
 @section Menu {
@@ -17,18 +22,18 @@
     <a href="/login/Deconnexion">Déconnexion</a>
 }
 
-<h1>Liste des prestations : </h1>
+<h1 class="titre">Liste des prestations</h1>
 <table border="1">
-
-    <tr>
-        <th>Type de prestation</th>
-        <th>Matière</th>
-        <th>Niveau</th>
-        <th>Presentiel</th>
-        <th>Etat de la presation</th>
-        <th>Actions</th>
-    </tr>
-
+    <thead>
+        <tr>
+            <td>Type de prestation</td>
+            <td>Matière</td>
+            <td>Niveau</td>
+            <td>Presentiel</td>
+            <td>Etat de la presation</td>
+            <td colspan="2">Actions</td>
+        </tr>
+    </thead>
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
     {
         <tr>
@@ -37,13 +42,11 @@
             <td>@prestation.Niveau</td>
             <td>@prestation.Presentiel</td>
             <td>@prestation.EtatPrestation</td>
-            <td>
-                <a href="/Prestation/modifier?prestationId=@prestation.Id">Modifier</a>
-                <a href="/Prestation/supprimer?prestationId=@prestation.Id">Supprimer</a>
-            </td>
+            <td><a href="/Prestation/modifier?prestationId=@prestation.Id"><i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="/Prestation/supprimer?prestationId=@prestation.Id"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
     }
 </table>
 
 <br />
-<a href="/Prestation/ajouter">Ajouter une prestation</a>
+<a href="/Prestation/ajouter"><i class="fa-solid fa-plus fa-lg"></i>Ajouter une prestation</a>

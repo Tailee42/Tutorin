@@ -5,7 +5,7 @@
 }
 
 @section css {
-
+    <link href="/css/Footer.css" rel="stylesheet" />
     <link href="/css/Login.css" rel="stylesheet" />
 }
 
@@ -40,7 +40,7 @@ else
             </div>
 
             <input class="btn-connecter" type="submit" value="Se connecter"/>
-            <span class="lien">@Html.ActionLink("Créer un compte", "CreerCompteUtilisateur", new {})</span>
+            <a class="lien-compte" href="/Login/CreerCompteUtilisateur">Créer un compte</a>
         </div>
     }
 

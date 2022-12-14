@@ -57,6 +57,10 @@ input:focus {
     background-color: #cae6f6;
 }
 
+::placeholder {
+    color: black;
+}
+
 .btn-connecter {
     text-transform: uppercase;
     border: none;
@@ -75,14 +79,13 @@ input:focus {
     background: #F68712;
 }
 
-a {
+.lien-compte, .lien-compte:visited {
     text-decoration: none;
+    color: black;
+    font-size: 14px;
 }
 
-footer {
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 10vh;
+.lien-compte:hover {
+    border-left: 3px solid #e71f93;
+    font-weight: bold;
 }
