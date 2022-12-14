@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Tutorin.Models
@@ -28,6 +29,8 @@ namespace Tutorin.Models
         public float MontantTTC { get; set; }
         public int ResponsableEleveId { get; set; }
         public ResponsableEleve ResponsableEleve { get; set; }
+        public List<PrestationPayement> PrestationsPayements { get; set; }
+
 
         public Payement()
         {

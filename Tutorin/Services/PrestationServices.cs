@@ -121,5 +121,15 @@ namespace Tutorin.Services
             return prestation;
         }
 
+        public void AjouterUnPayement(int prestationId, int payementId)
+        {
+            PrestationPayement pp = new PrestationPayement();
+            pp.PayementId = payementId;
+            pp.PrestationId = prestationId;
+
+            _bddContext.PrestationsPayements.Add(pp);
+            _bddContext.SaveChanges();
+        }
+
     }
 }
