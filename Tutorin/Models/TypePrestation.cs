@@ -2,7 +2,7 @@
 {
     public enum TypePrestation
     {
-        Tuturat, Aide_aux_devoirs, Stage_de_revision, Cours_particulier
+        Tutorat, Aide_aux_devoirs, Stage_de_revision, Cours_particulier
     }
 
 

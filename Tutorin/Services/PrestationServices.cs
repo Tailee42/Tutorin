@@ -95,6 +95,12 @@ namespace Tutorin.Services
             return listePrestations;
         }
 
+        public List<Prestation> ObtientToutesLesPrestationsCreees()
+        {
+            List<Prestation> listePrestations = _bddContext.Prestations.Where(c => c.EtatPrestation == EtatPrestation.A_affecter).ToList();
+            return listePrestations;
+        }
+
         public void SupprimerPrestation(int id)
         {
             Prestation prestation = _bddContext.Prestations.Find(id);
@@ -115,12 +121,32 @@ namespace Tutorin.Services
         public Prestation TrouverUnePrestation(int id)
         {
             Prestation prestation = _bddContext.Prestations.Find(id);
-            prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
-            prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+            if (prestation.EnseignantId != null)
+            {
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+            }
 
             return prestation;
         }
 
+        public Prestation TrouverUnePrestationNonAffectee(int id)
+        {
+            Prestation prestation = _bddContext.Prestations.Find(id);
+
+            return prestation;
+        }
+
+        public void InscrireEnseignantAPrestation(int id, int prestationId)
+        {
+            Enseignant enseignant = _bddContext.Enseignants.Find(id);
+            Prestation prestation = _bddContext.Prestations.Find(prestationId);
+
+            prestation.EnseignantId = enseignant.Id;
+            prestation.Enseignant = enseignant;
+            prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
+            _bddContext.SaveChanges();
+        }
         public void AjouterUnPayement(int prestationId, int payementId)
         {
             PrestationPayement pp = new PrestationPayement();

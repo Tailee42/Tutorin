@@ -40,7 +40,23 @@ namespace Tutorin.Controllers
                 };
             };
 
-            return View("ListePrestationsCards", pvm);
+            return View("ListePrestationsResponsable", pvm);
+        }
+
+        public IActionResult VoirPrestationsCrees(int enseignantId)
+        {
+            PrestationViewModel pvm;
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm = new PrestationViewModel()
+                {
+                    ListePrestations = ps.ObtientToutesLesPrestationsCreees(),
+
+                };
+            };
+
+            return View("ListePrestationsEnseignant", pvm);
         }
 
         [HttpGet]
@@ -164,6 +180,51 @@ namespace Tutorin.Controllers
                 }
                 
             }
+        }
+
+        public IActionResult VoirPrestationAAffecter()
+        {
+            List<Prestation> Prestations = new List<Prestation>();
+            using (PrestationServices ps = new PrestationServices())
+            {
+                Prestations = ps.ObtientToutesLesPrestationsCreees();
+            }
+            PrestationViewModel pvm = new PrestationViewModel()
+            {
+                ListePrestations = Prestations,
+            };
+
+            return View("ListePrestationsEnseignant", pvm);
+        }
+
+        public IActionResult InscrireEnseignant(int prestationId)
+        {
+            string enseignantId = User.FindFirstValue("RoleId");
+            int id;
+            Enseignant enseignant = new Enseignant();
+            Prestation prestation = new Prestation();
+
+            using (EnseignantServices es = new EnseignantServices())
+            {
+                if (int.TryParse(enseignantId, out id))
+                {
+                    enseignant = es.TrouverUnEnseignant(id);
+                }
+            }
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                prestation = ps.TrouverUnePrestationNonAffectee(prestationId);
+                ps.InscrireEnseignantAPrestation(id, prestationId);
+            }
+
+            PrestationViewModel pvm = new PrestationViewModel()
+            {
+               Enseignant = enseignant,
+                Prestation = prestation
+            };
+
+            return RedirectToAction("Index", pvm); 
         }
     }
 }

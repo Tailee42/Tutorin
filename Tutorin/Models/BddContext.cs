@@ -42,7 +42,7 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine9") },
                 new Utilisateur { Id = 4, Nom = "Dupond", Prenom = "Anne", Identifiant = "danne", MotDePasse = UtilisateurServices.EncodeMD5("Anne456") },
                 new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine10") },
-                new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne25") },
+                new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne0025") },
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
                 new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") },
                 new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") }
@@ -65,7 +65,7 @@ namespace Tutorin.Models
                     Niveau = TypeNiveau.CM2,
                     DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
                     DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
-                    TypePrestation = TypePrestation.Tuturat,
+                    TypePrestation = TypePrestation.Tutorat,
                     Ville = "Paris",
                     Prix = 25F,
                     Matiere = TypeMatiere.Physique,
