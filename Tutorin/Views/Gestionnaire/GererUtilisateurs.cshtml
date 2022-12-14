@@ -1,5 +1,4 @@
-﻿
-@using Tutorin.Models
+﻿@using Tutorin.Models
 @{
     ViewBag.Title = "Gestion des Utilisateurs par Gestionnaire";
     Layout = "_LayoutDuSite";
@@ -10,9 +9,8 @@
 }
 
 @section Menu {
-    <a href="/Gestionnaire/TableauDeBord">Accueil</a>
-    <a href="/ContenuPedagogique/Index2">Les cours</a>
-    <a href="/Gestionnaire/GererUtilisateurs">Les utilisateurs</a>
+    <a href="/Home/Index">Accueil</a>
+    <a href="/Gestionnaire/TableauDeBord"
     <a href="/Gestionnaire/modifier?gestionnaireId=@gestionnaireId">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
 }
