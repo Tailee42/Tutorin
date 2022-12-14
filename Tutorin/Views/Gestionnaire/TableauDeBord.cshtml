@@ -6,15 +6,12 @@
 }
 
 @section css {
-    <link href="/css/cards.css" rel="stylesheet" />
+    <link href="/css/Tableaux.css" rel="stylesheet" />
 }
 
 @section Menu {
 
-    <a href="/Gestionnaire/TableauDeBord">Accueil</a>
-    <a href="/ContenuPedagogique/Index2">Les cours</a>
-    <a href="/Gestionnaire/GererUtilisateurs">Les utilisateurs</a>
-    <a href="/Prestation/">Les prestations</a>
+    <a href="/Home/Index">Accueil</a>
     <a href="/Gestionnaire/modifier?gestionnaireId=@Model.Gestionnaire.Id">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
 }
@@ -23,6 +20,119 @@
     <h2>@Model.Gestionnaire.Utilisateur.Nom.ToUpper() @Model.Gestionnaire.Utilisateur.Prenom</h2>
 </div>
 
-<h1>Les cours en attente de validation :</h1>
-<h1>Les prestations en attente d'affectation :</h1>
- 
+<h1>Les cours</h1>
+<div class="table">
+    <table>
+        <thead>
+            <tr>
+                <td>Etat des cours</td>
+                <td>Nombre de cours</td>
+            </tr>
+        </thead>
+            <tr>
+                <td>A Valider :</td>
+                <td>@Model.NbCoursAValider</td>
+            </tr>
+            <tr>
+                <td>A Modifier :</td>
+                <td>@Model.NbCoursAModifier</td>
+            </tr>
+            <tr>
+                <td>En Ligne :</td>
+                <td>@Model.NbCoursEnLigne</td>
+            </tr>
+        <tfoot>
+            <tr>
+                <td>Total de cours :</td>
+                <td>@Model.NbCoursTotal</td>
+            </tr>
+        </tfoot>
+    </table>
+    <a href="/ContenuPedagogique/Index2">Voir les cours</a>
+</div>
+
+
+<h1>Les prestations </h1>
+<div class="table">
+    <table>
+        <thead>
+            <tr>
+                <td>Etat des prestations</td>
+                <td>Nombre de prestations</td>
+            </tr>
+        </thead>
+            <tr>
+                <td>En cours d'affectation :</td>
+                <td>@Model.NbPrestationAAffecter</td>
+            </tr>
+            <tr>
+                <td>Enseignants inscrits :</td>
+                <td>@Model.NbPrestationEnseignantsInscrits</td>
+            </tr>
+            <tr>
+                <td>Payées par les responsables élèves :</td>
+                <td>@Model.NbPrestationPayeeParResponsable</td>
+            </tr>
+            <tr>
+                <td>Réalisées :</td>
+                <td>@Model.NbPrestationRealisees</td>
+            </tr>
+            <tr>
+                  
+                <td>Enseignants payés :</td>
+                <td>@Model.NbPrestationEnseigantPayes</td>
+            </tr>
+            <tr>
+                <td>Facturées :</td>
+                <td>@Model.NbPrestationFacturees</td>
+            </tr>
+            <tr>
+                <td>Annulées :</td>
+                <td>@Model.NbPrestationAnnulees</td>
+            </tr>
+        <tfoot>
+            <tr>
+                <td>Total de prestations :</td>
+                <td>@Model.NbPrestationTotal</td>
+            </tr>
+        </tfoot>
+</table>
+<a href="/Prestation/">Voir les prestations</a>
+</div>
+
+
+<h1>Les utilisateurs</h1>
+<div class="table">
+<table>
+    <thead>
+        <tr>
+            <td>Utilisateurs inscrits</td>
+            <td>Nombre d'utilisateurs</td>
+        </tr>
+    </thead>
+        <tr>
+            <td>Les Responsables d'élèves :</td>
+        <td>@Model.NbResponsableEleve</td>
+        </tr>
+        <tr>
+            <td>Les Elèves :</td>
+            <td>@Model.NbEleve</td>
+        </tr>
+        <tr>
+            <td>Les Enseignants :</td>
+            <td>@Model.NbEnseignant</td>
+        </tr>
+        <tr>
+            <td>Les Gestionnaires :</td>
+            <td>@Model.NbGestionnaire</td>
+        </tr>
+    <tfoot>
+        <tr>
+            <td>Total d'utilisateurs :</td>
+            <td>@Model.NbUtilisateurTotal</td>
+        </tr>
+    </tfoot>
+</table>
+<a href="/Gestionnaire/GererUtilisateurs">Voir les utilisateurs</a>
+</div>
+

@@ -82,5 +82,11 @@ namespace Tutorin.Services
         {
             _bddContext.Dispose();
         }
+
+        public int CompterResponsableEleve()
+        {
+            int nbResponsable = _bddContext.ResponsablesEleves.Count();
+            return nbResponsable;
+        }
     }
 }
