@@ -94,21 +94,33 @@ namespace Tutorin.Controllers
 
         public IActionResult TableauDeBord()
         {
-            string EleveId = User.FindFirstValue("RoleId");
-            Eleve Eleve = null;
+            string eleveId = User.FindFirstValue("RoleId");
+            Eleve eleve = null;
             int id;
 
             using (EleveServices es = new EleveServices())
             {
-                if (int.TryParse(EleveId, out id))
+                if (int.TryParse(eleveId, out id))
                 {
-                    Eleve = es.TrouverUnEleve(id);
+                    eleve = es.TrouverUnEleve(id);
                 }
+            }
+
+            using (PrestationServices pp = new PrestationServices())
+            {
+                eleve.Prestations = pp.TouverLesPrestationsDUnEleve(id);
+            }
+
+
+            Abonnement abonnement = null;
+            using (AbonnementServices abs = new AbonnementServices())
+            {
+                abonnement = abs.TrouverAbonnementEleve(id);
             }
 
             TableauBordEleveViewModel tbevm = new TableauBordEleveViewModel()
             {
-                Eleve = Eleve,
+                Eleve = eleve, Abonnement = abonnement
             };
 
             return View("TableauDeBord", tbevm);
