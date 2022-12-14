@@ -200,7 +200,7 @@ namespace Tutorin.Controllers
 
             using (PrestationServices ps = new PrestationServices())
             {
-                prestation = ps.TrouverUnePrestationNonAffectee(id);
+                prestation = ps.TrouverUnePrestationNonAffectee(prestationId);
                 ps.InscrireEnseignantAPrestation(id, prestationId);
             }
 

@@ -121,8 +121,11 @@ namespace Tutorin.Services
         public Prestation TrouverUnePrestation(int id)
         {
             Prestation prestation = _bddContext.Prestations.Find(id);
-            prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
-            prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+            if (prestation.EnseignantId != null)
+            {
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+            }
 
             return prestation;
         }
@@ -142,6 +145,7 @@ namespace Tutorin.Services
             prestation.EnseignantId = enseignant.Id;
             prestation.Enseignant = enseignant;
             prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
+            _bddContext.SaveChanges();
         }
     }
 }
