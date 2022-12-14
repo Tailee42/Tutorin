@@ -145,7 +145,7 @@ namespace Tutorin.Controllers
 
             using (PrestationServices ps = new PrestationServices())
             {
-                prestation = ps.TrouverUnePrestation(id);
+                prestation = ps.TrouverUnePrestation(prestationId);
             }
 
             PrestationViewModel pvm = new PrestationViewModel()
