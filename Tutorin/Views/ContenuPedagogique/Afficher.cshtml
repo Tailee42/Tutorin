@@ -20,20 +20,34 @@
     </ul>
 }
 
-<h1 class="titre-cours">@Model.Titre</h1>
-<section class="cours">
-<div class="info-cours">
-    <p><span>Niveau :</span> @Model.Niveau</p>
-    <p><span>Matiere :</span> @Model.Matiere</p>
-    <p><span>Auteur :</span> @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
+<div class="outils">
+    <i class="fa-duotone fa-copy"></i>
+    <i class="fa-sharp fa-solid fa-line-height"></i>
+    <i class="fa-solid fa-font"></i>
+    <i class="fa-solid fa-text-size"></i>
 </div>
-<div class="contenu-cours">@Model.ContenuDuCours</div>
-<div class="date-cours">
+
+<div class="cours">
+    <h1 class="titre-cours">@Model.Titre</h1>
+    
+
+    <div class="info-cours">
+        <p><span>Niveau :</span> @Model.Niveau</p>
+        <p><span>Matiere :</span> @Model.Matiere</p>
+        <p><span>Auteur :</span> @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
+    </div>
+
+    <div class="contenu-cours">@Model.ContenuDuCours</div>
+
+    <div class="date-cours">
         <p><span>Publié le :</span> @Model.DatePublication</p>
         <p><span>Dernière mise à jour :</span> @Model.DateMiseAJour</p>
+    </div>
+
+    <div class="telecharger"> @* Imprimer ?*@
+        <button id="btn-telechargerCours">Télécharger</button>
+    </div>
+    
 </div>
-<div class="telecharger">
-    <button id="btn-telechargerCours">Télécharger</button>
-</div>
-</section>
+
 
