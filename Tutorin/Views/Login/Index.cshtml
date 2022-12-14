@@ -13,7 +13,7 @@
 {
     <div class="msg-deconnexion">
         <h3>
-            Vous êtes déjà authentifié avec le login :
+            Vous êtes connecté avec l'identifiant :
             @Model.Utilisateur.Identifiant
         </h3>
         @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
@@ -21,27 +21,26 @@
 }
 else
 {
-    <h1>
+@*    <h1 class="titre">
         Veuillez vous authentifier :
-    </h1>
+    </h1>*@
 
     @using (Html.BeginForm())
     {
         <div class="login-form">
 
             <div class="id">
-                <span class="textbox">@Html.TextBoxFor(m => m.Utilisateur.Identifiant,  new {placeholder = "Identifiant"})</span>
+                <i class="fa-solid fa-user">&ensp;@Html.TextBoxFor(m => m.Utilisateur.Identifiant,  new {placeholder = "Identifiant"})</i>
                 <span class="msg-erreur">@Html.ValidationMessageFor(m => m.Utilisateur.Identifiant)</span>
             </div>
 
             <div class="mdp">
-                <span class="textbox">@Html.PasswordFor(m => m.Utilisateur.MotDePasse, new {placeholder = "Mot de passe"})</span>
+                <i class="fa-solid fa-lock">&ensp;@Html.PasswordFor(m => m.Utilisateur.MotDePasse, new {placeholder = "Mot de passe"})</i>
                 <span class="msg-erreur">@Html.ValidationMessageFor(m => m.Utilisateur.MotDePasse)</span>
             </div>
 
             <input class="btn-connecter" type="submit" value="Se connecter"/>
-            <br/>
-            @Html.ActionLink("Créer un compte", "CreerCompteUtilisateur")
+            <span class="lien">@Html.ActionLink("Créer un compte", "CreerCompteUtilisateur", new {})</span>
         </div>
     }
 
