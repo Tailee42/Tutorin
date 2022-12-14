@@ -12,9 +12,6 @@
 @section Menu {
 
     <a href="/Gestionnaire/TableauDeBord">Accueil</a>
-    <a href="/ContenuPedagogique/Index2">Les cours</a>
-    <a href="/Gestionnaire/GererUtilisateurs">Les utilisateurs</a>
-    <a href="/Prestation/">Les prestations</a>
     <a href="/Gestionnaire/modifier?gestionnaireId=@Model.Gestionnaire.Id">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
 }
@@ -24,7 +21,6 @@
 </div>
 
 <h1>Les cours</h1>
-<fieldset>
     <table>
         <thead>
             <tr>
@@ -32,7 +28,6 @@
                 <td>Nombre de cours</td>
             </tr>
         </thead>
-        <tbody>
             <tr>
                 <td>A Valider :</td>
                 <td>@Model.NbCoursAValider</td>
@@ -45,17 +40,14 @@
                 <td>En Ligne :</td>
                 <td>@Model.NbCoursEnLigne</td>
             </tr>
-        </tbody>
-        <tfoot>
             <tr>
                 <td>Total de cours :</td>
                 <td>@Model.NbCoursTotal</td>
             </tr>
     </table>
-</fieldset>
+<a href="/ContenuPedagogique/Index2">Voir les cours</a>
 
 <h1>Les prestations :</h1>
-<fieldset>
     <table>
         <thead>
             <tr>
@@ -64,37 +56,68 @@
             </tr>
         </thead>
             <tr>
-            A_affecter, Enseignants_inscrits, Payee_par_responsable_eleve, Realisée, Enseigants_payes, Attestation_a_faire, Facturee, Annulee
                 <td>En cours d'affectation :</td>
-                <td>@Model.NbCoursAValider</td>
+                <td>@Model.NbPrestationAAffecter</td>
             </tr>
             <tr>
                 <td>Enseignants inscrits :</td>
-                <td>@Model.NbCoursAModifier</td>
+                <td>@Model.NbPrestationEnseignantsInscrits</td>
             </tr>
             <tr>
                 <td>Payées par les responsables élèves :</td>
-                <td>@Model.NbCoursEnLigne</td>
+                <td>@Model.NbPrestationPayeeParResponsable</td>
             </tr>
             <tr>
                 <td>Réalisées :</td>
-                <td>@Model.NbCoursEnLigne</td>
+                <td>@Model.NbPrestationRealisees</td>
             </tr>
             <tr>
                 <td>Enseignants payés :</td>
-                <td>@Model.NbCoursEnLigne</td>
+                <td>@Model.NbPrestationEnseigantPayes</td>
             </tr>
             <tr>
                 <td>Facturées :</td>
-                <td>@Model.NbCoursEnLigne</td>
+                <td>@Model.NbPrestationFacturees</td>
             </tr>
             <tr>
                 <td>Annulées :</td>
-                <td>@Model.NbCoursTotal</td>
+                <td>@Model.NbPrestationAnnulees</td>
             </tr>
             <tr>
                 <td>Total de prestations :</td>
-                <td>@Model.NbCoursTotal</td>
+                <td>@Model.NbPrestationTotal</td>
             </tr>
     </table>
-</fieldset>
+<a href="/Prestation/">Voir les prestations</a>
+
+<h1>Les Utilisateurs</h1>
+<table>
+    <thead>
+        <tr>
+            <td>Utilisateurs inscrits</td>
+            <td>Nombre d'utilisateurs</td>
+        </tr>
+    </thead>
+        <tr>
+            <td>Les Responsables d'élèves :</td>
+        <td>@Model.NbResponsableEleve</td>
+        </tr>
+        <tr>
+            <td>Les Elèves :</td>
+            <td>@Model.NbEleve</td>
+        </tr>
+        <tr>
+            <td>Les Enseignants :</td>
+            <td>@Model.NbEnseignant</td>
+        </tr>
+        <tr>
+            <td>Les Gestionnaires :</td>
+            <td>@Model.NbGestionnaire</td>
+        </tr>
+        <tr>
+            <td>Total d'utilisateurs :</td>
+            <td>@Model.NbUtilisateurTotal</td>
+        </tr>
+</table>
+
+<a href="/Gestionnaire/GererUtilisateurs">Voir les utilisateurs</a>

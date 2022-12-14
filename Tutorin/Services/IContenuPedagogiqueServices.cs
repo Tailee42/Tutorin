@@ -13,6 +13,8 @@ namespace Tutorin.Services
         List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides();
         void SupprimerContenuPedagogique(int id);
         List<ContenuPedagogique> RechercherCours(TypeNiveau niveau, TypeMatiere matiere);
+        int CompterCoursSelonEtat(EtatContenuPedagogique etat);
+        int CompterTotalCours();
 
     }
 }

@@ -147,5 +147,25 @@ namespace Tutorin.Services
             prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
             _bddContext.SaveChanges();
         }
+
+        public int CompterPrestationSelonEtat(EtatPrestation etat)
+        {
+            List<Prestation> listePrestations = _bddContext.Prestations.ToList();
+            int nbPrestation = 0;
+            foreach (Prestation prestation in listePrestations)
+            {
+                if (etat == prestation.EtatPrestation)
+                {
+                    nbPrestation = _bddContext.Prestations.Where(c => c.EtatPrestation == etat).Count();
+                }
+            }
+            return nbPrestation;
+        }
+
+        public int CompterTotalPrestations()
+        {
+            int nbPrestation = _bddContext.Prestations.Count();
+            return nbPrestation;
+        }
     }
 }

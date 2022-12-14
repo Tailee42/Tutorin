@@ -85,6 +85,12 @@ namespace Tutorin.Services
 
             return eleve;
         }
+
+        public int CompterEleve()
+        {
+            int nbEleve = _bddContext.Eleves.Count();
+            return nbEleve;
+        }
     }
 }
 

@@ -14,5 +14,6 @@ namespace Tutorin.Services
         Utilisateur Authentifier(string identifiant, string motDePasse);
         Utilisateur ObtenirUtilisateur(int id);
         Utilisateur ObtenirUtilisateur(string idStr);
+        int CompterUtilisateur();
     }
 }

@@ -82,6 +82,12 @@ namespace Tutorin.Services
             return enseignant;
         }
 
+        public int CompterEnseignant()
+        {
+            int nbEnseignant = _bddContext.Enseignants.Count();
+            return nbEnseignant;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();

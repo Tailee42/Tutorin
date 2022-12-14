@@ -81,6 +81,12 @@ namespace Tutorin.Services
             return gestionnaire;
         }
 
+        public int CompterGestionnaire()
+        {
+            int nbGestionnaire = _bddContext.Gestionnaires.Count();
+            return nbGestionnaire;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();

@@ -12,5 +12,6 @@ namespace Tutorin.Services
         void ModifierEnseignant(int id, string nom, string prenom, string identifiant, string motDePasse, TypeMatiere matiere, TypeNiveau niveau, int utilisateurID);
         void SupprimerEnseignant(int id);
         List<Enseignant> ObtientTousLesEnseignants();
+        int CompterEnseignant();
     }
 }

@@ -94,5 +94,11 @@ namespace Tutorin.Services
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
 
+        public int CompterUtilisateur()
+        {
+            int nbUtilisateur = _bddContext.Utilisateurs.Count();
+            return nbUtilisateur;
+        }
+
     }
 }

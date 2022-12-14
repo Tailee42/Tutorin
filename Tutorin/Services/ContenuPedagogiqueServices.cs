@@ -75,18 +75,6 @@ namespace Tutorin.Services
             return listeCours;
         }
 
-        //Méthode pour récupérer le contenu pédagogique créé mais non validé ou publié (apparait chez le gestionnaire)
-        public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesAPublier()
-        {
-            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.A_Valider).ToList();
-            foreach (ContenuPedagogique cours in listeCours)
-            {
-                cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
-                cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
-            }
-            return listeCours;
-        }
-
         public void SupprimerContenuPedagogique(int id)
         {
             ContenuPedagogique cours = _bddContext.ContenusPedagogiques.Find(id);
