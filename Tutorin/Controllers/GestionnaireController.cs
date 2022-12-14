@@ -107,10 +107,15 @@ namespace Tutorin.Controllers
                 }
             }
 
-            TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel()
+            TableauBordGestionnaireViewModel tbevm;
+            using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-                Gestionnaire = gestionnaire,
-            };
+                tbevm = new TableauBordGestionnaireViewModel()
+                {
+                    Gestionnaire = gestionnaire,
+                    CoursAPublier = cps.ObtenirTousLesContenusPedagogiquesAPublier(),
+                };
+            }
 
             return View("TableauDeBord", tbevm);
         }

@@ -63,7 +63,7 @@ namespace Tutorin.Services
             return listeCours;
         }
 
-        //Méthode pour récupérer le contenu pédagogique validé (c'est à dire en ligne ou à modifier)
+        //Méthode pour récupérer le contenu pédagogique validé (c'est à dire en ligne, apparait pour l'élève/enseignant)
         public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides()
         {
             List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.En_Ligne).ToList();
@@ -71,6 +71,18 @@ namespace Tutorin.Services
             {
                     cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
                     cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
+            }
+            return listeCours;
+        }
+
+        //Méthode pour récupérer le contenu pédagogique créé mais non validé ou publié (apparait chez le gestionnaire)
+        public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesAPublier()
+        {
+            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.A_Valider || c.Etat == EtatContenuPedagogique.A_Publier).ToList();
+            foreach (ContenuPedagogique cours in listeCours)
+            {
+                cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
+                cours.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(cours.Enseignant.UtilisateurId);
             }
             return listeCours;
         }

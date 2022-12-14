@@ -24,5 +24,26 @@
 </div>
 
 <h1>Les cours en attente de validation :</h1>
+<div class="cards">
+    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.CoursAPublier)
+    {
+        <div class="card">
+
+            <h2 class="card__title">@cours.Titre</h2>
+
+            <div>
+                Niveau : @cours.Niveau
+                Matière : @cours.Matiere
+                Etat : @cours.Etat
+            </div>
+
+            <p>
+@*                <a href="/ContenuPedagogique/Voir?prestationId=@prestation.Id">S'inscrire</a>*@
+            </p>
+
+        </div>
+    }
+</div>
+
 <h1>Les prestations en attente d'affectation :</h1>
  
