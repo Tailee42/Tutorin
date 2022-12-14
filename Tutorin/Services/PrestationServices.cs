@@ -74,6 +74,22 @@ namespace Tutorin.Services
             return listePrestations;
         }
 
+        //Permet de trouver toutes les abonnements d'un enseignant
+        public List<Prestation> TrouverPrestations(int enseignantId)
+        {
+            List<Prestation> prestations = _bddContext.Prestations.Where(r => r.EnseignantId == enseignantId).ToList();
+
+            foreach (Prestation prestation in prestations)
+            {
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+            }
+
+            return prestations;
+        }
+
+        
+
         public void SupprimerPrestation(int id)
         {
             Prestation prestation = _bddContext.Prestations.Find(id);

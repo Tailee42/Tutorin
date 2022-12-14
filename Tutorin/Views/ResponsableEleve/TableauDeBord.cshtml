@@ -26,7 +26,7 @@
     <div class="cards">
 
 
-        @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) 
+        @foreach (@Abonnement abonnement in Model.Abonnements) 
         {
             @if (abonnement.DateFin == DateTime.MinValue)
             {

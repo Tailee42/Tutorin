@@ -99,7 +99,7 @@ namespace Tutorin.Controllers
                     switch (role)
                     {
                         case "Enseignant":
-                            return RedirectToAction("Index", "Enseignant");
+                            return RedirectToAction("TableauDeBord", "Enseignant");
                         case "ResponsableEleve":
                             return RedirectToAction("TableauDeBord", "ResponsableEleve");
                         case "Eleve":
