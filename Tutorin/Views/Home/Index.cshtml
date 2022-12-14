@@ -10,8 +10,8 @@
 
 @section Menu {
 
-    <a>Devenir enseignant</a>
-    <a href="/Prestation/">Prestations</a>
+    <a href ="/Enseignant/">Les enseignant</a>
+    <a href="/Prestation/">Les Prestations</a>
     @if (authentifie)
     {
         <a href="/login/Deconnexion">Déconnexion</a>
@@ -22,23 +22,261 @@
     
 }
 
-<h1>S'authentifier</h1>
-<a href="/login/">S'authentifier</a>
+@section css {
+    <link href="/css/cards.css" rel="stylesheet" />
+}
+
+<div class="section title">
+    <div class="titre">
+        <img src="~/Images/Visages-removebg-preview.png" alt="logo" />
+        <h1 class="grosTitre">Tutor'in</h1>
+        <h1>Le tutorat inclusif</h1>
+        <a href="#"><i class="fa-sharp fa-solid fa-circle-plus"></i> En savoir plus</a>
+        
+    </div>
+    <div class="image">
+        <img src="~/Images/pexels-julia-m-cameron-4145153(1).jpg" alt="Enfant devant son ordinateur, avec un professeur en visio" />
+    </div>
+</div>
 
 
-<h1>Les utilisateurs</h1>
+<div class="section">
+    <h1 class="grosTitre">Les atouts de la réussite</h1>
+    <div class="cards">
 
-<a href="/eleve/">Les élèves</a>
-<a href="/enseignant/">Les enseignants</a>
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
 
-<a href="/ResponsableEleve/">Les responsables des élèves</a>
+            <h2 class="card__title">Des enseignants formés</h2>
 
-<a href="/Gestionnaire/">Les Gestionnaires</a>
+            <div>
+               Nos enseignants sont formés aux difficultés des élèves à besoins partculiers. Gage d'un suivi précis, attentif et efficace.
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    En savoir plus
+                </a>
+            </p>
+
+        </div>
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-regular fa-file-lines"></i>
+            </div>
+
+            <h2 class="card__title">Des contenus adaptés pour tous</h2>
+
+            <div>
+                Les contenus pédagogiques proposés aux élèves sont adaptables pour un accès facilité à tous les élèves.
+            </div>
+
+            <p class="card__button">
+            <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                En savoir plus
+            </a>
+            </p>
+
+        </div>
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-solid fa-crop-simple"></i>
+            </div>
+
+            <h2 class="card__title">Une équipe bienveillante</h2>
+
+            <div>
+                Parce que la confiance en soi se nourrit de bienveillance, chaque élève est encouragé et simulé en toute circonstance.
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    En savoir plus
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+</div>
 
 
-<h1>Les prestations</h1>
-<a href="/Prestation/">Les prestations</a>
+<div class="section">
+    <h1 class="grosTitre">Les prestations</h1>
 
-<h1>Les Cours</h1>
-<a href="/ContenuPedagogique/">Les cours</a>
+    <div class="cards">
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-hands-helping"></i>
+            </div>
+
+            <h2 class="card__title">Tutorat</h2>
+
+            <div>
+                Un moment privilégié entre l'enseignant et l'élève. Pour faire le point sur sa semaine et travailler la méthodologie.
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    En savoir plus
+                </a>
+            </p>
+
+        </div>
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-life-ring"></i>
+            </div>
+
+            <h2 class="card__title">Aides aux devoirs</h2>
+
+            <div>
+                Chaque soir, un créneau est prévu pour aider les élèves dans la réalisation leur devoir.
+            </div>
+
+            <p class="card__button">
+            <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                En savoir plus
+            </a>
+            </p>
+
+        </div>
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+
+            <h2 class="card__title">Contenus pédagogiques</h2>
+
+            <div>
+                Les élèves peuvent retrouver leur leçon avec les adaptations dont ils ont besoin.
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    En savoir plus
+                </a>
+            </p>
+
+        </div>
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <h2 class="card__title">Stages de révisions</h2>
+
+            <div>
+                Pendant les vacances, ils permettent aux élèves de se remettre à niveau dans la matière choisie.
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    En savoir plus
+                </a>
+            </p>
+
+        </div>
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+
+            <h2 class="card__title">Cours particuliers</h2>
+
+            <div>
+                Un tête-à-tête avec l'enseignant de son choix pour progresser dans la matière choisie.
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    En savoir plus
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="section">
+    <h1 class="grosTitre">Les abonnements</h1>
+
+    <div class="cards">
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+
+            <h2 class="card__title">Contenus pédagogiques</h2>
+
+            <div>
+                <p>
+                    Un accés illimité au contenu pédagogique en ligne
+                </p>
+                
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    6,99
+                    <i class="fas fa-euro-sign"></i>
+              
+                </a>
+            </p>
+
+        </div>
+
+
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fas fa-hands-helping"></i>
+            </div>
+
+            <h2 class="card__title">Tutorat</h2>
+
+            <div>
+                <p>
+                    Un accés illimité au contenu pédagogique en ligne <br />
+                    Un accès à l'aide aux devoirs tous les soirs du lundi au vendredi <br />
+                    Une séance d'une heure de tutorat par semaine.
+                </p>
+               
+            </div>
+
+            <p class="card__button">
+                <a class="card__link" href="#">
+                    16,99
+                    <i class="fas fa-euro-sign"></i>
+                    
+                </a>
+            </p>
+
+        </div>
+
+
+      
+
+    </div>
+</div>
+
+
 

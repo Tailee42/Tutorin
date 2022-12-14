@@ -10,7 +10,7 @@
 .card {
     margin: 20px;
     padding: 20px;
-    width: 300px;
+    width: 280px;
     min-height: 100px;
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@ a {
     background: linear-gradient(180deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
 }
 
-.eleve {
+.prestation {
     background: linear-gradient(180deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
 }
 

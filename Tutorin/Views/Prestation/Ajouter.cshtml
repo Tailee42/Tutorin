@@ -27,8 +27,8 @@
 
                 <div>
                 @Html.LabelFor(m => Model.Matiere) <br />
-                @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeMatiere))))<br />
-                @Html.ValidationMessageFor(m => Model.Niveau)
+                @Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))<br />
+                @Html.ValidationMessageFor(m => Model.Matiere)
                 </div>
 
                 <div>

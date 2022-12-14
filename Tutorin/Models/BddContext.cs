@@ -16,6 +16,8 @@ namespace Tutorin.Models
         public DbSet<ContenuPedagogique> ContenusPedagogiques { get; set; }
         public DbSet<Payement> Payements { get; set; }
         public DbSet<Gestionnaire> Gestionnaires { get; set; }
+        public DbSet<PrestationEleve> PrestationsEleves { get; set; }
+        public DbSet<PrestationPayement> PrestationsPayements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,7 +42,7 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine9") },
                 new Utilisateur { Id = 4, Nom = "Dupond", Prenom = "Anne", Identifiant = "danne", MotDePasse = UtilisateurServices.EncodeMD5("Anne456") },
                 new Utilisateur { Id = 5, Nom = "Bonheur", Prenom = "Antoine", Identifiant = "bantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine10") },
-                new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne25") },
+                new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne0025") },
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
                 new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") },
                 new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") }
@@ -58,9 +60,43 @@ namespace Tutorin.Models
                 );
 
             this.Prestations.AddRange(
-                new Prestation { Niveau = TypeNiveau.CM2, DateDebut = new System.DateTime(2022, 12, 06, 14,0,0), 
-                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0), TypePrestation = TypePrestation.Tuturat, Ville = "Paris",
-                    Prix = 25F, Matiere = TypeMatiere.Physique, Presentiel = true}
+                new Prestation
+                {
+                    Niveau = TypeNiveau.CM2,
+                    DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    TypePrestation = TypePrestation.Tutorat,
+                    Ville = "Paris",
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Physique,
+                    Presentiel = true,
+                    EnseignantId = 2,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Niveau = TypeNiveau.Troisieme,
+                    DateDebut = new System.DateTime(2022, 11, 03, 16, 0, 0),
+                    DateFin = new System.DateTime(2022, 11, 03, 16, 0, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Histoire,
+                    Presentiel = false,
+                    EnseignantId = 3,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Niveau = TypeNiveau.Terminale,
+                    DateDebut = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 06, 14, 0, 0),
+                    TypePrestation = TypePrestation.Stage_de_revision,
+                    Ville = "Paris",
+                    Prix = 25F,
+                    Matiere = TypeMatiere.Mathematique,
+                    Presentiel = true,
+                    EtatPrestation = EtatPrestation.A_affecter
+                }
                 );
 
             this.ResponsablesEleves.AddRange(
@@ -95,9 +131,9 @@ namespace Tutorin.Models
                 );
 
             this.Payements.AddRange(
-                new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "01/22", CVC = "741", ResponsableEleveId = 1},
-                new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 1 },
-                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 1 }
+                new Payement { Id = 1, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2021, 02, 08, 15, 21,12), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "01/22", CVC = "741", ResponsableEleveId = 2},
+                new Payement { Id = 2, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.CoursEnLigne), DatePayement = new System.DateTime(2022, 02, 23, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 },
+                new Payement { Id = 3, MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(TypeAbonnement.Tutorat), DatePayement = new System.DateTime(2022, 04, 10, 9, 10, 0), NomTitulaireCarte = "Albrand", NumeroCarte = "1111222233334444", DateExpiration = "03/24", CVC = "123", ResponsableEleveId = 2 }
                 );
 
             this.SaveChanges();

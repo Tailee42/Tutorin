@@ -1,0 +1,56 @@
+﻿@model Tutorin.ViewModels.ContenuPedagogiqueViewModel
+@using Tutorin.Models
+
+@{
+    Layout = "_LayoutDuSite";
+    ViewBag.Title = "Liste des cours";
+}
+
+@{
+    var gestionnaireId = User.FindFirst("RoleId").Value ;
+}
+
+@section Menu {
+    <a href="/Gestionnaire/TableauDeBord">Accueil</a>
+    <a href="/ContenuPedagogique/Index2">Les cours</a>
+    <a href="/Gestionnaire/GererUtilisateurs">Les utilisateurs</a>
+    <a href="/Gestionnaire/modifier?gestionnaireId=@gestionnaireId">Mon Compte</a>
+    <a href="/login/Deconnexion">Déconnexion</a>
+}
+
+@section css {
+    <link href="/css/Cours.css" rel="stylesheet" />
+}
+
+<h1>Liste des cours : </h1>
+<table border="1">
+
+    <tr>
+        <th>Numéro</th>
+        <th>Titre</th>
+        <th>Matière</th>
+        <th>Niveau</th>
+        <th>Date de publication</th>
+        <th>Dernière mise à jour</th>
+        <th>Etat</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
+    {
+        <tr>
+            <td>@cours.Id</td>
+            <td>@cours.Titre</td>
+            <td>@cours.Matiere</td>
+            <td>@cours.Niveau</td>
+            <td>@cours.DatePublication</td>
+            <td>@cours.DateMiseAJour</td>
+            <td>@cours.Etat</td>
+            <td>
+                <a href="/ContenuPedagogique/modifier?coursId=@cours.Id">Modifier</a>
+                <a href="/ContenuPedagogique/supprimer?coursId=@cours.Id">Supprimer</a>
+                <a href="/ContenuPedagogique/afficher?coursId=@cours.Id">Afficher</a>
+            </td>
+        </tr>
+    }
+</table>

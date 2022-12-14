@@ -1,0 +1,55 @@
+﻿@model Tutorin.ViewModels.PrestationViewModel
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Voir prestations";
+    Layout = "_LayoutDuSite";
+}
+
+@{
+    var enseignantId = User.FindFirst("RoleId").Value;
+}
+
+
+@section css {
+    <link href="/css/cards.css" rel="stylesheet" />
+}
+
+<h1>S'inscrire à une prestation : </h1>
+
+
+<div class="cards">
+    @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
+    {
+        <div class="card">
+
+            <h2 class="card__title">@prestation.TypePrestation</h2>
+
+            <div>
+                Date : du @prestation.DateDebut au @prestation.DateFin
+                Prix mensuel : @prestation.Prix €
+                Niveau : @prestation.Niveau
+                Matière : @prestation.Matiere
+                Lieu : @prestation.Ville
+            </div>
+
+            <p>
+                <a href="/Prestation/InscrireEnseignant?prestationId=@prestation.Id">S'inscrire</a>
+            </p>
+
+        </div>
+    }
+</div>
+
+
+@section Script {
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+
+
+@section Menu {
+
+    <a href="/home/">Accueil</a>
+    <a>Présentation</a>
+}

@@ -3,7 +3,7 @@
     public class PrestationEleve
     {
         //table intermédiaire liant les prestations aux éleves (relation pls à pls)
-        //création de liste dans les tables prestations et éleves
+        //création de liste dans les tables prestation et éleve
         public int Id { get; set; }
 
         public int EleveId { get; set; }

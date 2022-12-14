@@ -17,6 +17,7 @@
 }
 
 <h1>Liste des cours : </h1>
+
 @*<table border="1">
 
     <tr>
@@ -58,7 +59,7 @@
                 </tr>
                 <tr>
                     <td>@Html.Label("Matière recherchée : ")</td>
-                    <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
+            <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
                 </tr>
             </table>
             <input type="submit" value="Rechercher" />
