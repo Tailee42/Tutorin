@@ -94,7 +94,6 @@ namespace Tutorin.Controllers
             string responsableId = User.FindFirstValue("RoleId");
             ResponsableEleve responsableEleve = null;
             int id;
-            List<Abonnement> abonnements = new List<Abonnement>();
 
             using (ResponsableServices rs = new ResponsableServices())
             {
@@ -110,7 +109,7 @@ namespace Tutorin.Controllers
             }
 
             List<Eleve> eleves = new List<Eleve>();
-            foreach (Abonnement abonnement in abonnements)
+            foreach (Abonnement abonnement in responsableEleve.Abonnements)
             {
                 if (abonnement.EleveId != null)
                 {
@@ -130,7 +129,7 @@ namespace Tutorin.Controllers
                 
             }
 
-            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { ResponsableEleve = responsableEleve};
+            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { ResponsableEleve = responsableEleve, Eleves = eleves};
 
             return View("TableauDeBord", tbrvm);
 

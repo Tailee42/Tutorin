@@ -8,7 +8,6 @@ namespace Tutorin.ViewModels
         public ResponsableEleve ResponsableEleve { get; set; }
         public List<Eleve> Eleves { get; set; }
 
-        public List<Prestation> Prestations { get; set; }
         
     }
 }

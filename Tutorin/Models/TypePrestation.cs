@@ -25,6 +25,22 @@
             return null;
         }
 
-       
+        public static string IconHTMLPrestation(TypePrestation prestation)
+        {
+            switch ((int)prestation)
+            {
+                case 0:
+                    return "<i class=\"fas fa-hands-helping\"></i>";
+                case 1:
+                    return "<i class=\"fas fa-life-ring\"></i>";
+                case 2:
+                    return "<i class=\"fas fa-clipboard-list\"></i>";
+                case 3:
+                    return "<i class=\"fas fa-users\"></i>";
+
+            }
+            return null;
+        }
+
     }
 }
