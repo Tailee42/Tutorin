@@ -23,27 +23,78 @@
     <h2>@Model.Gestionnaire.Utilisateur.Nom.ToUpper() @Model.Gestionnaire.Utilisateur.Prenom</h2>
 </div>
 
-<h1>Les cours en attente de validation :</h1>
-<div class="cards">
-    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.CoursAPublier)
-    {
-        <div class="card">
+<h1>Les cours</h1>
+<fieldset>
+    <table>
+        <thead>
+            <tr>
+                <td>Etat des cours</td>
+                <td>Nombre de cours</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A Valider :</td>
+                <td>@Model.NbCoursAValider</td>
+            </tr>
+            <tr>
+                <td>A Modifier :</td>
+                <td>@Model.NbCoursAModifier</td>
+            </tr>
+            <tr>
+                <td>En Ligne :</td>
+                <td>@Model.NbCoursEnLigne</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total de cours :</td>
+                <td>@Model.NbCoursTotal</td>
+            </tr>
+    </table>
+</fieldset>
 
-            <h2 class="card__title">@cours.Titre</h2>
-
-            <div>
-                Niveau : @cours.Niveau
-                Matière : @cours.Matiere
-                Etat : @cours.Etat
-            </div>
-
-            <p>
-@*                <a href="/ContenuPedagogique/Voir?prestationId=@prestation.Id">S'inscrire</a>*@
-            </p>
-
-        </div>
-    }
-</div>
-
-<h1>Les prestations en attente d'affectation :</h1>
- 
+<h1>Les prestations :</h1>
+<fieldset>
+    <table>
+        <thead>
+            <tr>
+                <td>Etat des prestations</td>
+                <td>Nombre de prestations</td>
+            </tr>
+        </thead>
+            <tr>
+            A_affecter, Enseignants_inscrits, Payee_par_responsable_eleve, Realisée, Enseigants_payes, Attestation_a_faire, Facturee, Annulee
+                <td>En cours d'affectation :</td>
+                <td>@Model.NbCoursAValider</td>
+            </tr>
+            <tr>
+                <td>Enseignants inscrits :</td>
+                <td>@Model.NbCoursAModifier</td>
+            </tr>
+            <tr>
+                <td>Payées par les responsables élèves :</td>
+                <td>@Model.NbCoursEnLigne</td>
+            </tr>
+            <tr>
+                <td>Réalisées :</td>
+                <td>@Model.NbCoursEnLigne</td>
+            </tr>
+            <tr>
+                <td>Enseignants payés :</td>
+                <td>@Model.NbCoursEnLigne</td>
+            </tr>
+            <tr>
+                <td>Facturées :</td>
+                <td>@Model.NbCoursEnLigne</td>
+            </tr>
+            <tr>
+                <td>Annulées :</td>
+                <td>@Model.NbCoursTotal</td>
+            </tr>
+            <tr>
+                <td>Total de prestations :</td>
+                <td>@Model.NbCoursTotal</td>
+            </tr>
+    </table>
+</fieldset>

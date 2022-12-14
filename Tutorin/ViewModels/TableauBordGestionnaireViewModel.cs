@@ -6,7 +6,10 @@ namespace Tutorin.ViewModels
     public class TableauBordGestionnaireViewModel
     {
         public Gestionnaire Gestionnaire { get; set; }
-        public List<Prestation> PrestationsAAffectees { get; set; }
-        public List<ContenuPedagogique> CoursAPublier { get; set; }
+        public int NbCoursAValider { get; set; }
+        public int NbCoursAModifier { get; set; }
+        public int NbCoursEnLigne { get; set; }
+        public int NbCoursTotal { get; set; }
+
     }
 }

@@ -97,7 +97,7 @@ namespace Tutorin.Controllers
         {
             string GestionnaireId = User.FindFirstValue("RoleId");
             Gestionnaire gestionnaire = null;
-            int id;
+            int id; 
 
             using (GestionnaireServices gs = new GestionnaireServices())
             {
@@ -113,7 +113,10 @@ namespace Tutorin.Controllers
                 tbevm = new TableauBordGestionnaireViewModel()
                 {
                     Gestionnaire = gestionnaire,
-                    CoursAPublier = cps.ObtenirTousLesContenusPedagogiquesAPublier(),
+                    NbCoursAModifier = cps.CompterCoursSelonEtat(EtatContenuPedagogique.A_Modifier),
+                    NbCoursAValider = cps.CompterCoursSelonEtat(EtatContenuPedagogique.A_Valider),
+                    NbCoursEnLigne = cps.CompterCoursSelonEtat(EtatContenuPedagogique.En_Ligne),
+                    NbCoursTotal = cps.CompterTotalCours()
                 };
             }
 

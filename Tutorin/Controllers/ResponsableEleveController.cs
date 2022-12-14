@@ -104,7 +104,6 @@ namespace Tutorin.Controllers
                 }
             }
 
-
             using (AbonnementServices abs = new AbonnementServices())
             {
                 responsableEleve.Abonnements = abs.TrouverAbonnements(id);
