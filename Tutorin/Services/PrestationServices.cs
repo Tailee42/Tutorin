@@ -84,7 +84,7 @@ namespace Tutorin.Services
         }
 
 
-        //Permet de trouver toutes les abonnements d'un enseignant
+        //Permet de trouver toutes les prestations d'un enseignant
         public List<Prestation> TrouverPrestations(int enseignantId)
         {
             List<Prestation> prestations = _bddContext.Prestations.Where(r => r.EnseignantId == enseignantId).ToList();

@@ -147,49 +147,52 @@
 }
 
 <h1>Hitorique des prestations :</h1>
-@foreach (Eleve eleve in Model.Eleves)
-{
 
-    <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
-    <div class="cards">
-        @foreach (Prestation prestation in eleve.Prestations)
-        {
-            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) <= 0)
+<div class="cards">
+    @foreach (Eleve eleve in Model.Eleves)
+    {
+
+        <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
+        <div class="cards">
+            @foreach (Prestation prestation in eleve.Prestations)
             {
-                <div class="card historique">
-                    <div class="card__icon">
-                        @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                @if (DateTime.Compare(prestation.DateFin, DateTime.Now) <= 0)
+                {
+                    <div class="card historique">
+                        <div class="card__icon">
+                            @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                        </div>
+
+                        <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+
+                        <div>
+                            Date de début : @prestation.DateDebut<br>
+                            Date de fin : @prestation.DateFin<br>
+                            Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                            Matière : @prestation.Matiere <br>
+                            <hr />
+                            @if (prestation.Presentiel)
+                            {
+                                <text>
+                                    En Presentiel : <br>
+                                    Ville : @prestation.Ville
+                                </text>
+                            } else
+                            {
+                                <text>
+                                    En distantiel : <br>
+                                    Lien de la visio : @prestation.LienVisio
+                                </text>
+                            }
+                        </div>
+
                     </div>
+                }
 
-                    <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
-
-                    <div>
-                        Date de début : @prestation.DateDebut<br>
-                        Date de fin : @prestation.DateFin<br>
-                        Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
-                        Matière : @prestation.Matiere <br>
-                        <hr />
-                        @if (prestation.Presentiel)
-                        {
-                            <text>
-                                En Presentiel : <br>
-                                Ville : @prestation.Ville
-                            </text>
-                        } else
-                        {
-                            <text>
-                                En distantiel : <br>
-                                Lien de la visio : @prestation.LienVisio
-                            </text>
-                        }
-                    </div>
-
-                </div>
             }
-
-        }
-    </div>
-}
+        </div>
+    }
+</div>
 
 
 <h1>Historique des abonnements :</h1>

@@ -7,5 +7,7 @@ namespace Tutorin.ViewModels
     {
         public Eleve Eleve { get; set; }
         public List<ContenuPedagogique> CoursSuivis { get; set; }
+        public Abonnement Abonnement { get; set; }
+
     }
 }
