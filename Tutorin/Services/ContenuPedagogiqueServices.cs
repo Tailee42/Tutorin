@@ -93,6 +93,19 @@ namespace Tutorin.Services
 
             return listeCours;
         }
+        //Méthode pour récupérer l'ensemble des cours d'un enseignant)
+        public List<ContenuPedagogique> TrouverLesCours(int enseignantId)
+        {
+            List<ContenuPedagogique> contenuPedagogiques = _bddContext.ContenusPedagogiques.Where(r => r.EnseignantId == enseignantId).ToList();
+
+            foreach (ContenuPedagogique contenuPedagogique in contenuPedagogiques)
+            {
+                contenuPedagogique.Enseignant = _bddContext.Enseignants.Find(contenuPedagogique.EnseignantId);
+                contenuPedagogique.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(contenuPedagogique.Enseignant.UtilisateurId);
+            }
+
+            return contenuPedagogiques;
+        }
 
         public void Dispose()
         {

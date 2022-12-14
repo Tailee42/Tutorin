@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tutorin.Models
 {
@@ -9,6 +10,8 @@ namespace Tutorin.Models
         public TypeNiveau Niveaux { get; set; }
         public int UtilisateurId { get; set; }
         public Utilisateur Utilisateur { get; set; }
+        public List<Prestation> Prestations { get; set; }
+        public List<ContenuPedagogique> ContenuPedagogiques { get; set; }
 
     }
 }

@@ -21,21 +21,25 @@
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
     {
 
-        <div class="card-prestation">
+        <div class="card prestation">
 
-            <h2 class="card__title">@prestation.TypePrestation</h2>
+            <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
             <div>
-                Date : du @prestation.DateDebut au @prestation.DateFin
-                Prix mensuel : @prestation.Prix €
-                Niveau : @prestation.Niveau
-                Matière : @prestation.Matiere
-                Lieu : @prestation.Ville
+                Date : du @prestation.DateDebut au @prestation.DateFin <br />
+                Prix : @prestation.Prix € <br />
+                Niveau : @prestation.Niveau <br />
+                Matière : @prestation.Matiere <br />
+                Lieu : @prestation.Ville <br />
             </div>
 
-            <p>
-                <a href="/Prestation/InscrireEleve?prestationId=@prestation.Id">Inscrire Eleve</a>
+            <p class="card__button">
+                <a class="card__link" href="/Prestation/InscrireEleve?prestationId=@prestation.Id">
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    Inscrire un élève
+                </a>
             </p>
+            
         
         </div>
     }

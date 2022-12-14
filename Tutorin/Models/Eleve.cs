@@ -19,5 +19,6 @@ namespace Tutorin.Models
 
         //public ICollection<Prestation> Prestations { get; set; }
         public List<PrestationEleve> PrestationsEleves { get; set;}
+        public List<Prestation> Prestations { get; set;}
     }
 }

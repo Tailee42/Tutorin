@@ -1,4 +1,4 @@
-﻿@model Tutorin.Models.ResponsableEleve
+﻿@model Tutorin.ViewModels.TableauBordResponsableViewModel
 @using Tutorin.Models
 @{
     ViewBag.Title = "Tableau de Bord Responsable Eleve";
@@ -12,13 +12,13 @@
 @section Menu {
 
     <a href="/Home/">Accueil</a>
-    <a href="/Prestation/VoirPrestationsValidees?responsableId=@Model.Id">Prestations</a>
-    <a href="/ResponsableEleve/modifier?responsableId=@Model.Id">Mon Compte</a>
+    <a href="/Prestation/VoirPrestationsValidees?responsableId=@Model.ResponsableEleve.Id">Prestations</a>
+    <a href="/ResponsableEleve/modifier?responsableId=@Model.ResponsableEleve.Id">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
 }
 
 <div class="nomUtilisateur">
-    <h2>@Model.Utilisateur.Nom @Model.Utilisateur.Prenom</h2>
+    <h2>@Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom</h2>
 </div>
 
 <h1>Mes Abonnements :</h1>
@@ -26,7 +26,7 @@
     <div class="cards">
 
 
-        @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements) 
+        @foreach (Abonnement abonnement in Model.ResponsableEleve.Abonnements) 
         {
             @if (abonnement.DateFin == DateTime.MinValue)
             {
@@ -99,12 +99,105 @@
     </div>
 
 
+<h1>Les Prestations Réservées :</h1>
+
+@foreach (Eleve eleve in Model.Eleves)
+{
+
+    <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
+    <div class="cards">
+    @foreach (Prestation prestation in eleve.Prestations)
+    {
+        @if (DateTime.Compare(prestation.DateFin, DateTime.Now)>=0)
+        {
+            <div class="card prestation">
+                <div class="card__icon">
+                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                </div>
+
+                <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+
+                <div>
+                    Date de début : @prestation.DateDebut<br>
+                    Date de fin : @prestation.DateFin<br>
+                    Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                    Matière : @prestation.Matiere <br>
+                    <hr />
+                        @if (prestation.Presentiel)
+                        {
+                            <text>
+                                En Presentiel : <br>
+                                Ville : @prestation.Ville
+                            </text>
+                        } else
+                        {
+                            <text>
+                                En distantiel : <br>
+                                Lien de la visio : @prestation.LienVisio
+                            </text>
+                        }
+
+                </div>
+
+            </div>
+        }
+        
+    }
+    </div>
+}
+
+<h1>Hitorique des prestations :</h1>
+@foreach (Eleve eleve in Model.Eleves)
+{
+
+    <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
+    <div class="cards">
+        @foreach (Prestation prestation in eleve.Prestations)
+        {
+            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) <= 0)
+            {
+                <div class="card historique">
+                    <div class="card__icon">
+                        @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                    </div>
+
+                    <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+
+                    <div>
+                        Date de début : @prestation.DateDebut<br>
+                        Date de fin : @prestation.DateFin<br>
+                        Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                        Matière : @prestation.Matiere <br>
+                        <hr />
+                        @if (prestation.Presentiel)
+                        {
+                            <text>
+                                En Presentiel : <br>
+                                Ville : @prestation.Ville
+                            </text>
+                        } else
+                        {
+                            <text>
+                                En distantiel : <br>
+                                Lien de la visio : @prestation.LienVisio
+                            </text>
+                        }
+                    </div>
+
+                </div>
+            }
+
+        }
+    </div>
+}
+
+
 <h1>Historique des abonnements :</h1>
 
 <div class="cards">
 
 
-    @foreach (Tutorin.Models.Abonnement abonnement in Model.Abonnements)
+    @foreach (Tutorin.Models.Abonnement abonnement in Model.ResponsableEleve.Abonnements)
     {
         @if (abonnement.DateFin != DateTime.MinValue)
         {

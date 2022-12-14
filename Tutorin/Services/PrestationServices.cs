@@ -83,15 +83,32 @@ namespace Tutorin.Services
             return listePrestations;
         }
 
+
+        //Permet de trouver toutes les abonnements d'un enseignant
+        public List<Prestation> TrouverPrestations(int enseignantId)
+        {
+            List<Prestation> prestations = _bddContext.Prestations.Where(r => r.EnseignantId == enseignantId).ToList();
+
+            foreach (Prestation prestation in prestations)
+        {
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+            }
+              return prestations;
+        }
+        
+        
         //Méthode pour récupérer les prestations pour lesquelles un enseignant est affecté et pas encore payées par un responsable
         public List<Prestation> ObtientToutesLesPrestationsValidees()
         {
             List<Prestation> listePrestations = _bddContext.Prestations.Where(c => c.EtatPrestation == EtatPrestation.Enseignants_inscrits).ToList();
             foreach (Prestation prestation in listePrestations)
+
             {
                 prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
                 prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
             }
+
             return listePrestations;
         }
 
@@ -100,6 +117,7 @@ namespace Tutorin.Services
             List<Prestation> listePrestations = _bddContext.Prestations.Where(c => c.EtatPrestation == EtatPrestation.A_affecter).ToList();
             return listePrestations;
         }
+
 
         public void SupprimerPrestation(int id)
         {
@@ -166,6 +184,36 @@ namespace Tutorin.Services
         {
             int nbPrestation = _bddContext.Prestations.Count();
             return nbPrestation;
+        }
+        
+        public void AjouterUnPayement(int prestationId, int payementId)
+        {
+            PrestationPayement pp = new PrestationPayement();
+            pp.PayementId = payementId;
+            pp.PrestationId = prestationId;
+
+            Prestation prestation = _bddContext.Prestations.Find(prestationId);
+            prestation.EtatPrestation = EtatPrestation.Payee_par_responsable_eleve;
+
+            _bddContext.PrestationsPayements.Add(pp);
+            _bddContext.Prestations.Update(prestation);
+            _bddContext.SaveChanges();
+        }
+
+        public List<Prestation> TouverLesPrestationsDUnEleve(int eleveId)
+        {
+            List<PrestationEleve> listePrestationsEleve = _bddContext.PrestationsEleves.Where(c => c.EleveId == eleveId).ToList();
+            List<Prestation> prestations = new List<Prestation>();
+
+            foreach(PrestationEleve prestationEleve in listePrestationsEleve)
+            {
+                Prestation prestation = new Prestation();
+                prestation = _bddContext.Prestations.Find(prestationEleve.PrestationId);
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+                prestations.Add(prestation);
+            }
+            return prestations;
         }
     }
 }
