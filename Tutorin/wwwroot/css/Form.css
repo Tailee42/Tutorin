@@ -8,7 +8,6 @@
 
 fieldset {
     width: 700px;
-    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,3 +74,5 @@ label {
 .input-validation-error {
     text-align: center;
 }
+
+/* box contenu d'un cours */

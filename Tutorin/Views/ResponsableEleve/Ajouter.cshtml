@@ -6,18 +6,17 @@
 
 @section css {
 
-    <link href="/css/Footer.css" rel="stylesheet" />
     <link href="/css/Form.css" rel="stylesheet" />
 }
 
-<h1>Ajouter</h1>
+<h1>Créer un profil</h1>
 
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Responsable d'élève : </legend>
+            <legend>Responsable élève</legend>
 
             <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
@@ -51,7 +50,7 @@
                 @Html.ValidationMessageFor(m => Model.Mail)
             </div>
 
-            <input class="boutonStyle" type="submit" value="Ajouter" />
+            <input class="boutonStyle" type="submit" value="Créer" />
         </fieldset>
     }
 
