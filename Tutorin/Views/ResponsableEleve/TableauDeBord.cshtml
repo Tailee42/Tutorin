@@ -121,6 +121,7 @@
                     Date de début : @prestation.DateDebut<br>
                     Date de fin : @prestation.DateFin<br>
                     Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                    Niveau : @prestation.Niveau<br>
                     Matière : @prestation.Matiere <br>
                     <hr />
                         @if (prestation.Presentiel)
@@ -156,7 +157,7 @@
         <div class="cards">
             @foreach (Prestation prestation in eleve.Prestations)
             {
-                @if (DateTime.Compare(prestation.DateFin, DateTime.Now) <= 0)
+                @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
                 {
                     <div class="card historique">
                         <div class="card__icon">
@@ -169,6 +170,7 @@
                             Date de début : @prestation.DateDebut<br>
                             Date de fin : @prestation.DateFin<br>
                             Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                            Niveau : @prestation.Niveau<br>
                             Matière : @prestation.Matiere <br>
                             <hr />
                             @if (prestation.Presentiel)
