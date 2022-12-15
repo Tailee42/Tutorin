@@ -3,7 +3,7 @@ let iconeCouleur = document.getElementById("couleur");
 
 iconeCouleur.addEventListener('click', function () {
     _formatElement(contenu, "sd");
-    iconeCouleur.classList.toggle('fa-fade');
+    iconeCouleur.classList.toggle('fade');
 });
 
 let iconeInterligne = document.getElementById("interligne");
@@ -20,14 +20,14 @@ iconeInterligne.addEventListener('click', function () {
         }
         indexInterligne = 0;
     }
-    iconeInterligne.classList.toggle('fa-fade');
+    iconeInterligne.classList.toggle('fade');
     contenu.classList.toggle('interligne');
 });
 
 let iconePolice = document.getElementById("police");
 
 iconePolice.addEventListener('click', function () {
-    iconePolice.classList.toggle('fa-fade');
+    iconePolice.classList.toggle('fade');
     contenu.classList.toggle('police');
 });
 
@@ -46,7 +46,7 @@ iconeSize.addEventListener('click', function () {
         }
         indexSize = 0;
     }
-    iconeSize.classList.toggle('fa-fade');
+    iconeSize.classList.toggle('fade');
     contenu.classList.toggle('size');
 });
 

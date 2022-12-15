@@ -33,18 +33,20 @@
 </div>
 
 <div class="cours">
-    <h1 class="titre-cours">@Model.Titre</h1>
+    <h1 class="titre-cours">@Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(Model.Matiere)) @Model.Titre</h1>
     
 
     <div class="info-cours">
-        <h4><span>Niveau :</span> @Model.Niveau</h4>
-        <h4><span>Matiere :</span> @Model.Matiere</h4>
-        <h4><span>Auteur :</span> @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</h4>
+        <h4>@Model.Niveau</h4>
+        
     </div>
+    <hr />
 
-    <p class="contenu-cours">@Model.ContenuDuCours</p>
+    <p class="contenu-cours">@Html.Raw(Model.ContenuDuCours)</p>
 
+    <hr />
     <div class="date-cours">
+        <h4><span>Auteur :</span> @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</h4>
         <h4><span>Publié le :</span> @Model.DatePublication.ToString("d")</h4>
         <h4><span>Dernière mise à jour :</span> @Model.DateMiseAJour.ToString("d")</h4>
     </div>

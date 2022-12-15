@@ -11,7 +11,6 @@
     margin: 20px;
     margin-bottom: 40px;
 
-
 }
 
 .outils{
@@ -25,16 +24,20 @@
     padding: 5px;
     margin-bottom: 30px;
     cursor: pointer;
-    --fa-animation-duration: 2s;
 }
 
 .cours {
     max-width: 1400px;
+    min-width: 65vw;
     margin: auto
 }
 
 p .contenu-cours {
     margin: 40px 0 40px 0;
+}
+
+.fade {
+    color: grey;
 }
 
 .interligne {
@@ -52,5 +55,19 @@ p .contenu-cours {
 
 .interligneGrand {
     line-height: 6rem;
+}
+
+h1 {
+    text-align: center;
+    color: #5e2791;
+}
+
+h4 {
+    font-weight: 500;
+    color: #c33c3c;
+}
+
+hr {
+    height: 1px;
 }
 
