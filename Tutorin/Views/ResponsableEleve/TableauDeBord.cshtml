@@ -69,7 +69,7 @@
                         <p class="card__button">
                             <a class="card__link" href="#">
                             <i class="fa-regular fa-face-smile"></i>
-                                Suivi de l'élèvé
+                                Suivi de l'élève
                             </a>
                         </p>
                         <p class="card__button">
@@ -121,7 +121,7 @@
                 <div>
                     Date de début : @prestation.DateDebut<br>
                     Date de fin : @prestation.DateFin<br>
-                    Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                    Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
                     Niveau : @prestation.Niveau<br>
                     Matière : @prestation.Matiere <br>
                     <hr />

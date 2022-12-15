@@ -121,10 +121,16 @@ namespace Tutorin.Controllers
 
             }
 
+            string role = User.FindFirstValue(ClaimTypes.Role);
+
+            if(role == "Enseignant") {
+                cours.Etat = EtatContenuPedagogique.A_Valider;
+            }
+
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cps.ModifierContenuPedagogique(cours);
-                return RedirectToAction("TableauDeBord", "enseignant");
+                return RedirectToAction("TableauDeBord", role);
             }
 
         }
@@ -134,7 +140,7 @@ namespace Tutorin.Controllers
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cps.SupprimerContenuPedagogique(coursId);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index2");
             }
         }
 

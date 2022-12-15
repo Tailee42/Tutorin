@@ -71,11 +71,11 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", responsable);
             }
-            
+            string role = User.FindFirstValue(ClaimTypes.Role);
             using (ResponsableServices rs = new ResponsableServices())
             {
                 rs.ModifierResponsable(responsable);
-                return RedirectToAction("Index");
+                return RedirectToAction("TableauDeBord", role);
             }
             
         }
