@@ -23,7 +23,8 @@
 }
 
 <h1 class="titre">Liste des prestations</h1>
-<table border="1">
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Rechercher">
+<table id="table" border="1">
     <thead>
         <tr>
             <td>Type de prestation</td>
@@ -50,3 +51,7 @@
 
 <br />
 <a href="/Prestation/ajouter"><i class="fa-solid fa-plus fa-lg"></i>Ajouter une prestation</a>
+
+@section Script {
+    <script type="text/javascript" src="~/Scripts/RechercheTable.js"></script>
+}

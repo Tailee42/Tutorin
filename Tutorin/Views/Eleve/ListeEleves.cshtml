@@ -21,7 +21,8 @@
 }
 
 <h1 class="titre">Liste des élèves</h1>
-<table border="1">
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Rechercher">
+<table id="table" border="1">
 
     <thead>
         <tr>
@@ -51,3 +52,6 @@
 <br />
 <a href="/Eleve/ajouter"><i class="fa-sharp fa-solid fa-plus fa-lg"></i>Ajouter un élève</a>
 
+@section Script {
+    <script type="text/javascript" src="~/Scripts/RechercheTable.js"></script>
+}

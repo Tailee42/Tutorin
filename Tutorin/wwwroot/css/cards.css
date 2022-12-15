@@ -58,3 +58,10 @@ a {
 .lien-afficher-cours, .lien-afficher-cours:visited {
     color: black;
 }
+
+/* Vue GererUtilisateurs */
+.lien-user, .lien-user:visited {
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}

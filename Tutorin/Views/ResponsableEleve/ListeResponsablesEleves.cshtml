@@ -22,7 +22,8 @@
 
 
 <h1 class="titre">Liste des responsables des élèves</h1>
-<table border="1">
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Rechercher">
+<table id="table" border="1">
     <thead>
         <tr>
             <td>Nom</td>
@@ -51,4 +52,6 @@
 <br />
 <a href="/ResponsableEleve/ajouter"><i class="fa-solid fa-plus fa-lg"></i>Ajouter un responsable</a>
 
-
+@section Script {
+    <script type="text/javascript" src="~/Scripts/RechercheTable.js"></script>
+}

@@ -184,4 +184,9 @@ footer {
     }
 }
 
+/* Vue GererUtilisateur du gestionnaire */
+.titre-gererUtilisateur {
+    text-align: center;
+    margin-top: 50px;
+}
 

@@ -24,7 +24,8 @@
 }
 
 <h1 class="titre">Liste des cours</h1>
-<table border="1">
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Rechercher">
+<table id="table" border="1">
 
     <thead>
     <tr>
@@ -55,3 +56,7 @@
         </tr>
     }
 </table>
+
+@section Script {
+<script type="text/javascript" src="~/Scripts/RechercheTable.js"></script>
+}
