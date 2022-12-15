@@ -84,7 +84,7 @@ namespace Tutorin.Services
         }
 
 
-        //Permet de trouver toutes les abonnements d'un enseignant
+        //Permet de trouver toutes les prestations d'un enseignant
         public List<Prestation> TrouverPrestations(int enseignantId)
         {
             List<Prestation> prestations = _bddContext.Prestations.Where(r => r.EnseignantId == enseignantId).ToList();
@@ -165,6 +165,27 @@ namespace Tutorin.Services
             prestation.EtatPrestation = EtatPrestation.Enseignants_inscrits;
             _bddContext.SaveChanges();
         }
+
+        public int CompterPrestationSelonEtat(EtatPrestation etat)
+        {
+            List<Prestation> listePrestations = _bddContext.Prestations.ToList();
+            int nbPrestation = 0;
+            foreach (Prestation prestation in listePrestations)
+            {
+                if (etat == prestation.EtatPrestation)
+                {
+                    nbPrestation = _bddContext.Prestations.Where(c => c.EtatPrestation == etat).Count();
+                }
+            }
+            return nbPrestation;
+        }
+
+        public int CompterTotalPrestations()
+        {
+            int nbPrestation = _bddContext.Prestations.Count();
+            return nbPrestation;
+        }
+        
         public void AjouterUnPayement(int prestationId, int payementId)
         {
             PrestationPayement pp = new PrestationPayement();

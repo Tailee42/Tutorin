@@ -1,0 +1,73 @@
+﻿@font-face {
+    font-family: 'opendyslexicregular';
+    src: url('/Fonts/opendyslexic-regular-webfont.woff2') format('woff2'), url('/Fonts/opendyslexic-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    margin-bottom: 40px;
+
+}
+
+.outils{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}
+
+.outils i {
+    font-size: 3rem;
+    padding: 5px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.cours {
+    max-width: 1400px;
+    min-width: 65vw;
+    margin: auto
+}
+
+p .contenu-cours {
+    margin: 40px 0 40px 0;
+}
+
+.fade {
+    color: grey;
+}
+
+.interligne {
+    line-height: 4rem;
+}
+
+.police {
+    font-family: 'opendyslexicregular', open;
+    font-size: 1.3rem;
+}
+
+.size {
+    font-size: 2rem;
+}
+
+.interligneGrand {
+    line-height: 6rem;
+}
+
+h1 {
+    text-align: center;
+    color: #5e2791;
+}
+
+h4 {
+    font-weight: 500;
+    color: #c33c3c;
+}
+
+hr {
+    height: 1px;
+}
+

@@ -1,19 +1,29 @@
-﻿
+﻿@using System.Security.Claims;
+
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Index";
 }
 
 @{
-    var authentifie = User.Identity.IsAuthenticated;
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
+    
 }
 
 @section Menu {
 
-    <a href ="/Enseignant/">Les enseignants</a>
-    <a href="/Prestation/">Les Prestations</a>
+
+    <a href ="/Enseignant/">Les Enseignants</a>
+    <a href="/Prestation/ListeVisiteur">Les Prestations</a>
+
     @if (authentifie)
     {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
         <a href="/login/Deconnexion">Déconnexion</a>
     }else
     {
@@ -92,7 +102,7 @@
             <h2 class="card__title">Une équipe bienveillante</h2>
 
             <div>
-                Parce que la confiance en soi se nourrit de bienveillance, chaque élève est encouragé et simulé en toute circonstance.
+                Parce que la confiance en soi se nourrit de bienveillance, chaque élève est encouragé et stimulé en toute circonstance.
             </div>
 
             <p class="card__button">
@@ -161,7 +171,7 @@
             <h2 class="card__title">Contenus pédagogiques</h2>
 
             <div>
-                Les élèves peuvent retrouver leur leçon avec les adaptations dont ils ont besoin.
+                Les élèves peuvent retrouver leurs leçons avec les adaptations dont ils ont besoin.
             </div>
 
             <p class="card__button">
@@ -230,7 +240,9 @@
 
             <div>
                 <p>
-                    Un accés illimité au contenu pédagogique en ligne
+                    <ul>
+                        <li>Un accés illimité au contenu pédagogique en ligne</li>
+                    </ul> 
                 </p>
                 
             </div>
@@ -239,7 +251,7 @@
                 <a class="card__link" href="#">
                     6,99
                     <i class="fas fa-euro-sign"></i>
-              
+                     par mois
                 </a>
             </p>
 
@@ -255,9 +267,11 @@
 
             <div>
                 <p>
-                    Un accés illimité au contenu pédagogique en ligne <br />
-                    Un accès à l'aide aux devoirs tous les soirs du lundi au vendredi <br />
-                    Une séance d'une heure de tutorat par semaine.
+                    <ul>
+                        <li>Un accés illimité au contenu pédagogique en ligne</li>
+                        <li>Un accès à l'aide aux devoirs tous les soirs du lundi au vendredi</li>
+                        <li>Une séance d'une heure de tutorat par semaine</li>
+                    </ul>                 
                 </p>
                
             </div>
@@ -266,7 +280,7 @@
                 <a class="card__link" href="#">
                     16,99
                     <i class="fas fa-euro-sign"></i>
-                    
+                     par mois
                 </a>
             </p>
 

@@ -106,12 +106,53 @@ namespace Tutorin.Controllers
                     gestionnaire = gs.TrouverUnGestionnaire(id);
                 }
             }
-
-            TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel()
+            TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel();
+            using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-                Gestionnaire = gestionnaire,
+                tbevm.NbCoursAValider = cps.CompterCoursSelonEtat(EtatContenuPedagogique.A_Valider);
+                tbevm.NbCoursAModifier = cps.CompterCoursSelonEtat(EtatContenuPedagogique.A_Modifier);
+                tbevm.NbCoursEnLigne = cps.CompterCoursSelonEtat(EtatContenuPedagogique.En_Ligne);
+                tbevm.NbCoursTotal = cps.CompterTotalCours();
             };
 
+            using (PrestationServices ps = new PrestationServices())
+            {
+                tbevm.NbPrestationAAffecter = ps.CompterPrestationSelonEtat(EtatPrestation.A_affecter);
+                tbevm.NbPrestationEnseignantsInscrits = ps.CompterPrestationSelonEtat(EtatPrestation.Enseignants_inscrits);
+                tbevm.NbPrestationPayeeParResponsable = ps.CompterPrestationSelonEtat(EtatPrestation.Payee_par_responsable_eleve);
+                tbevm.NbPrestationRealisees = ps.CompterPrestationSelonEtat(EtatPrestation.Realisée);
+                tbevm.NbPrestationEnseigantPayes = ps.CompterPrestationSelonEtat(EtatPrestation.Enseigants_payes);
+                tbevm.NbPrestationFacturees = ps.CompterPrestationSelonEtat(EtatPrestation.Facturee);
+                tbevm.NbPrestationAnnulees = ps.CompterPrestationSelonEtat(EtatPrestation.Annulee);
+                tbevm.NbPrestationTotal = ps.CompterTotalPrestations();
+            };
+
+            using (ResponsableServices rs = new ResponsableServices())
+            {
+                tbevm.NbResponsableEleve = rs.CompterResponsableEleve();
+            };
+
+            using (EleveServices es = new EleveServices())
+            {
+                tbevm.NbEleve = es.CompterEleve();
+            };
+
+            using (EnseignantServices ens = new EnseignantServices())
+            {
+                tbevm.NbEnseignant = ens.CompterEnseignant();
+            };
+
+            using (GestionnaireServices gs = new GestionnaireServices())
+            {
+                tbevm.Gestionnaire = gestionnaire;
+                tbevm.NbGestionnaire = gs.CompterGestionnaire();
+            };
+                    
+            using (UtilisateurServices us = new UtilisateurServices())
+            {
+                tbevm.NbUtilisateurTotal = us.CompterUtilisateur();
+                
+            };
             return View("TableauDeBord", tbevm);
         }
 

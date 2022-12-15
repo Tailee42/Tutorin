@@ -63,7 +63,7 @@ namespace Tutorin.Services
             return listeCours;
         }
 
-        //Méthode pour récupérer le contenu pédagogique validé (c'est à dire en ligne ou à modifier)
+        //Méthode pour récupérer le contenu pédagogique validé (c'est à dire en ligne, apparait pour l'élève/enseignant)
         public List<ContenuPedagogique> ObtenirTousLesContenusPedagogiquesValides()
         {
             List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == EtatContenuPedagogique.En_Ligne).ToList();
@@ -110,6 +110,26 @@ namespace Tutorin.Services
         public void Dispose()
         {
             _bddContext.Dispose();
+        }
+
+        public int CompterCoursSelonEtat(EtatContenuPedagogique etat)
+        {
+            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.ToList();
+            int nbCours = 0;
+            foreach (ContenuPedagogique cours in listeCours)
+            {
+                if (etat == cours.Etat)
+                {
+                    nbCours = _bddContext.ContenusPedagogiques.Where(c => c.Etat == etat).Count();
+                }
+            }
+            return nbCours;
+        }
+
+        public int CompterTotalCours()
+        {
+            int nbCours = _bddContext.ContenusPedagogiques.Count();
+            return nbCours;
         }
     }
 }

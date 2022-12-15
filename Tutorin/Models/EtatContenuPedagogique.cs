@@ -4,7 +4,6 @@
     {
         A_Valider,
         A_Modifier,
-        A_Publier,
         En_Ligne
     }
 }

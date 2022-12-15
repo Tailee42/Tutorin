@@ -12,6 +12,8 @@ namespace Tutorin.Services
         void ModifierResponsable(ResponsableEleve responsable);
         void SupprimerResponsable(int id);
         List<ResponsableEleve> ObtenirTousLesResponsables();
-        
+        int CompterResponsableEleve();
+
+
     }
 }

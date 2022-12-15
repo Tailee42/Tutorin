@@ -15,5 +15,7 @@ namespace Tutorin.Services
         void InscrireEnseignantAPrestation(int id, int prestationId);
         List<Prestation> ObtientToutesLesPrestationsValidees();
         List<Prestation> ObtientToutesLesPrestationsCreees();
+        int CompterTotalPrestations();
+        int CompterPrestationSelonEtat(EtatPrestation etat);
     }
 }

@@ -28,6 +28,22 @@ namespace Tutorin.Controllers
             return View("ListePrestations", pvm);
         }
 
+        public IActionResult ListeVisiteur()
+        {
+            List<Prestation> listePrestations = new List<Prestation>();
+            PrestationViewModel pvm;
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm = new PrestationViewModel()
+                {
+                    ListePrestations = ps.ObtientToutesLesPrestationsValidees()
+                };
+            };
+
+            return View("ListeVisiteur", pvm);
+        }
+
         public IActionResult VoirPrestationsValidees(int responsableId)
         {
             PrestationViewModel pvm;

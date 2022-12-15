@@ -92,10 +92,17 @@ namespace Tutorin.Services
             return eleve;
         }
 
+
         public static string EncodeMD5(string motDePasse)
         {
             string motDePasseSel = "ChoixResto" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
+
+        public int CompterEleve()
+        {
+            int nbEleve = _bddContext.Eleves.Count();
+            return nbEleve;
+
         }
     }
 }

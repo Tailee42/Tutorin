@@ -10,5 +10,6 @@ namespace Tutorin.Services
         void ModifierEleve(int id, string nom, string prenom, string identifiant, string motDePasse, DateTime dateNaissance, TypeNiveau niveau);
         void SupprimerEleve(int id);
         List<Eleve> ObtientTousLesEleves();
+        int CompterEleve();
     }
 }
