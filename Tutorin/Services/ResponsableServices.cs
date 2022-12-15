@@ -46,6 +46,7 @@ namespace Tutorin.Services
 
         public void ModifierResponsable(ResponsableEleve responsable)
         {
+            responsable.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(responsable.Utilisateur.MotDePasse);
             _bddContext.ResponsablesEleves.Update(responsable);
             _bddContext.SaveChanges();
         }

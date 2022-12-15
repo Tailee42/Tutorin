@@ -18,7 +18,7 @@ namespace Tutorin.Services
 
         public int CreerEleve(DateTime dateNaissance, TypeNiveau niveau, int utilisateurID)
         {
-            Eleve eleve = new Eleve() { DateNaissance = dateNaissance, Niveau = niveau, UtilisateurId = utilisateurID};
+            Eleve eleve = new Eleve() { DateNaissance = dateNaissance, Niveau = niveau, UtilisateurId = utilisateurID };
             _bddContext.Eleves.Add(eleve);
             _bddContext.SaveChanges();
 
@@ -46,27 +46,28 @@ namespace Tutorin.Services
             {
                 eleve.Utilisateur.Nom = nom;
                 eleve.Utilisateur.Prenom = prenom;
-                eleve.Utilisateur.Identifiant= identifiant;
+                eleve.Utilisateur.Identifiant = identifiant;
                 eleve.Utilisateur.MotDePasse = EncodeMD5(motDePasse); ;
                 eleve.DateNaissance = dateNaissance;
                 eleve.Niveau = niveau;
-               _bddContext.SaveChanges();
+                _bddContext.SaveChanges();
             }
         }
 
-        
 
-        
+
+
 
         public void ModifierEleve(Eleve eleve)
         {
+            eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(eleve.Utilisateur.MotDePasse);
             _bddContext.Eleves.Update(eleve);
             _bddContext.SaveChanges();
         }
 
         public List<Eleve> ObtientTousLesEleves()
         {
-            List <Eleve> listeEleves = _bddContext.Eleves.ToList();
+            List<Eleve> listeEleves = _bddContext.Eleves.ToList();
             foreach (Eleve eleve in listeEleves)
             {
                 eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
@@ -98,6 +99,8 @@ namespace Tutorin.Services
             string motDePasseSel = "ChoixResto" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
 
+        }
+
         public int CompterEleve()
         {
             int nbEleve = _bddContext.Eleves.Count();
@@ -105,5 +108,6 @@ namespace Tutorin.Services
 
         }
     }
+    
 }
 
