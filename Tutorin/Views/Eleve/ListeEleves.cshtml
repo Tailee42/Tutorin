@@ -1,21 +1,40 @@
+@using Tutorin.Models;
 @model Tutorin.ViewModels.EleveViewModel
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Liste des élèves";
 }
 
+@{
+    var gestionnaireId = User.FindFirst("RoleId").Value;
+}
 
-<h1>Liste des élèves : </h1>
-<table border="1">
+@section Menu {
+    <a href="/Home/Index">Accueil</a>
+    <a href="/Gestionnaire/TableauDeBord">Tableau de Bord</a>
+    <a href="/Gestionnaire/modifier?gestionnaireId=@gestionnaireId">Mon Compte</a>
+    <a href="/login/Deconnexion">Déconnexion</a>
+}
 
-    <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Identifiant</th>
-        <th>Date de naissance</th>
-        <th>Niveau</th>
-        <th>Actions</th>
-    </tr>
+@section css {
+    <link href="/css/Footer.css" rel="stylesheet" />
+    <link href="/css/Tableaux.css" rel="stylesheet" />
+}
+
+<h1 class="titre">Liste des élèves</h1>
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Rechercher">
+<table id="table" border="1">
+
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Identifiant</td>
+            <td>Date de naissance</td>
+            <td>Niveau</td>
+            <td colspan="2">Actions</td>
+        </tr>
+    </thead>
 
     @foreach (Tutorin.Models.Eleve eleve in Model.ListeEleves)
     {
@@ -24,22 +43,16 @@
                 <td>@eleve.Utilisateur.Prenom</td>
                 <td>@eleve.Utilisateur.Identifiant</td>
                 <td>@eleve.DateNaissance</td>
-                <td>@eleve.Niveau</td>
-                <td>
-                    <a href="/Eleve/modifier?eleveId=@eleve.Id">Modifier</a>
-                    <a href="/Eleve/supprimer?eleveId=@eleve.Id">Supprimer</a>
-                </td>
+                <td>@TypeNiveauExtensions.NomDuNiveau(eleve.Niveau)</td>
+                <td><a href="/Eleve/modifier?eleveId=@eleve.Id"><i class="fa-solid fa-pen"></i></a></td>
+                <td><a href="/Eleve/supprimer?eleveId=@eleve.Id"><i class="fa-solid fa-trash"></i></a></td>
             </tr>
     }
 </table>
 
 <br />
-<a href="/Eleve/ajouter">Ajouter un élève</a>
+@*<a href="/Eleve/ajouter"><i class="fa-sharp fa-solid fa-plus fa-lg"></i>Ajouter un élève</a>*@
 
-@section Menu {
-
-
-    <a href="/home/">Accueil</a>
-        <a>Présentation</a>
-    
+@section Script {
+    <script type="text/javascript" src="~/Scripts/RechercheTable.js"></script>
 }

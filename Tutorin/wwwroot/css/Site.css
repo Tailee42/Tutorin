@@ -168,14 +168,15 @@ li {
 
 
 /* footer */
-
 footer {
-   text-align: center;
+    text-align: center;
 }
 
 /*Div cachées formulaires (id, mdp)*/
 .hidden{
-    visibility:hidden;
+    display: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* Media Queries */
@@ -194,4 +195,14 @@ footer {
     }
 }
 
+/* Vue GererUtilisateur du gestionnaire */
+.titre-gererUtilisateur {
+    text-align: center;
+    margin-top: 50px;
+}
 
+/* Vue Creer compte utilisateur */
+.titre-creerprofil {
+    text-align: center;
+    margin-top: 50px;
+}

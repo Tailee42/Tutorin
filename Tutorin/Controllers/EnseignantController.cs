@@ -45,7 +45,7 @@ namespace Tutorin.Controllers
             using (EnseignantServices en = new EnseignantServices())
             {
                 en.CreerEnseignant(enseignant);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Login");
             }
         }
 

@@ -27,8 +27,8 @@
             <div>
                 Date : du @prestation.DateDebut au @prestation.DateFin
                 Prix mensuel : @prestation.Prix €
-                Niveau : @prestation.Niveau
-                Matière : @prestation.Matiere
+                Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau)
+                Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)
                 Lieu : @prestation.Ville
             </div>
 

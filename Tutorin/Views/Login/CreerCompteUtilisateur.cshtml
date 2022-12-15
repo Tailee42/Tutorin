@@ -4,19 +4,19 @@
     Layout = "_LayoutDuSite";
 }
 
-@section Menu {
+@section css {
+    <link href="/css/Site.css" rel="stylesheet"/>
+    <link href="/css/cards.css" rel="stylesheet"/>
+}
 
+@section Menu {
     <a href="/home/">Accueil</a>
     <a>Présentation</a>
 }
-<p>Veillez créer votre profil</p>
-<ul>
 
-    @Html.ActionLink("Enseignant","Ajouter" , "Enseignant")
-
-    @Html.ActionLink("Responsable élèves", "Ajouter" , "ResponsableEleve")
-
-    @Html.ActionLink("Gestionnaire", "Ajouter" , "Gestionnaire")
-
-</ul>
-
+<h1 class="titre-creerprofil">Votre profil ?</h1>
+<div class="cards">
+    <div class="card prestation"><a class="lien-user" href="/Enseignant/Ajouter">Enseignant</a></div>
+    <div class="card prestation"><a class="lien-user" href="/ResponsableEleve/Ajouter">Responsable d'élève</a></div>
+    @*<div class="card prestation"><a class="lien-user" href="/Gestionnaire/Ajouter">Gestionnaire</a></div>*@
+</div>
