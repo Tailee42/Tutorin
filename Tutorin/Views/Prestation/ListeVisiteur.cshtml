@@ -1,0 +1,86 @@
+﻿@model Tutorin.ViewModels.PrestationViewModel
+@using System.Security.Claims;
+@using Tutorin.Models
+@{
+    ViewBag.Title = "Les prestations";
+    Layout = "_LayoutDuSite";
+}
+
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
+    
+}
+
+@section Menu {
+
+    <a href="/Enseignant/ListeVisiteur">Les Enseignants</a>
+    <a href="/Prestation/ListeVisteur">Les Prestations</a>
+    @if (authentifie)
+    {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
+    else
+    {
+        <a href="/login/">Connexion</a>
+    }
+}
+
+
+@section css {
+        <link href="/css/cards.css" rel="stylesheet" />
+}
+
+<h1>Liste des prestations disponibles : </h1>
+
+
+<div class="cards">
+    @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
+    {
+        if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
+        {
+            <div class="card prestation">
+                <div class="card__icon">
+                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                </div>
+
+                <h2 class="card__title">@TypePrestationExtensions.NomPrestation( prestation.TypePrestation)</h2>
+
+                <div>
+                    Date : du @prestation.DateDebut au @prestation.DateFin <br>
+                    Prix mensuel : @prestation.Prix € <br>
+                    Niveau : @prestation.Niveau <br>
+                    Matière : @prestation.Matiere
+                    <hr />
+                    @if (prestation.Presentiel)
+                    {
+                        <text>
+                            En Presentiel : <br>
+                            Ville : @prestation.Ville
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                            En distantiel : <br>
+                            Lien de la visio : @prestation.LienVisio
+                        </text>
+                    }
+                </div>
+
+                
+
+            </div>
+        }
+    }
+</div>
+
+
+
+
+

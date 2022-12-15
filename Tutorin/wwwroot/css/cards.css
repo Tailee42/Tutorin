@@ -37,11 +37,14 @@ a {
     color: black;
 }
 
-    .card__link:hover {
-        box-shadow: inset 300px 0 0 0 black;
-        color: #f1ede8;
-        border-bottom: none;
-    }
+.card__link:hover {
+    box-shadow: inset 300px 0 0 0 black;
+    color: #f1ede8;
+    border-bottom: none;
+}
+
+
+
 
 .abonnement {
     background: linear-gradient(180deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
