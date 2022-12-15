@@ -12,20 +12,26 @@ namespace Tutorin.Controllers
     {
         public IActionResult Index()
         {
-            List<Enseignant> listeEnseignants = new List<Enseignant>();
-            EnseignantViewModel envm;
+            EnseignantViewModel envm = new EnseignantViewModel();
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                envm = new EnseignantViewModel()
-                {
-                    ListeEnseignants = ens.ObtientTousLesEnseignants()
-
-                };
-
+                envm.ListeEnseignants = ens.ObtientTousLesEnseignants();
             };
 
             return View("ListeEnseignants", envm);
+        }
+
+        public IActionResult ListeVisiteur()
+        {
+            EnseignantViewModel evm = new EnseignantViewModel();
+
+            using (EnseignantServices es = new EnseignantServices())
+            {
+                evm.ListeEnseignants = es.ObtientTousLesEnseignants();
+            };
+
+            return View("ListeVisiteur", evm);
         }
 
         [HttpGet]
