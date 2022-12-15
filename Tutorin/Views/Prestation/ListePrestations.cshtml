@@ -1,4 +1,5 @@
-﻿@model Tutorin.ViewModels.PrestationViewModel
+﻿@using Tutorin.Models;
+@model Tutorin.ViewModels.PrestationViewModel
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Liste des prestations";
@@ -38,11 +39,11 @@
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
     {
         <tr>
-            <td>@prestation.TypePrestation</td>
-            <td>@prestation.Matiere</td>
-            <td>@prestation.Niveau</td>
+            <td>@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</td>
+            <td>@TypeMatiereExtensions.NomMatiere(prestation.Matiere)</td>
+            <td>@TypeNiveauExtensions.NomDuNiveau(prestation.Niveau)</td>
             <td>@prestation.Presentiel</td>
-            <td>@prestation.EtatPrestation</td>
+            <td>@EtatPrestationExtensions.NomEtat(prestation.EtatPrestation)</td>
             <td><a href="/Prestation/modifier?prestationId=@prestation.Id"><i class="fa-solid fa-pen"></i></a></td>
             <td><a href="/Prestation/supprimer?prestationId=@prestation.Id"><i class="fa-solid fa-trash"></i></a></td>
         </tr>

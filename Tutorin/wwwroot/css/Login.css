@@ -1,5 +1,4 @@
-﻿/*Balise div #container visible sur la page web, dans inspecter*/
-#container {
+﻿#container {
     width: 100vw;
     height: 70vh;
     display: flex;

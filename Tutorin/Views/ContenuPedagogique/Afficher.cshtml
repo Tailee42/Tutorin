@@ -23,8 +23,8 @@
 <h1 class="titre-cours">@Model.Titre</h1>
 <section class="cours">
 <div class="info-cours">
-    <p><span>Niveau :</span> @Model.Niveau</p>
-    <p><span>Matiere :</span> @Model.Matiere</p>
+        <p><span>Niveau :</span> @TypeNiveauExtensions.NomDuNiveau(Model.Niveau)</p>
+        <p><span>Matiere :</span> @TypeMatiereExtensions.NomMatiere(Model.Matiere)</p>
     <p><span>Auteur :</span> @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</p>
 </div>
 <div class="contenu-cours">@Model.ContenuDuCours</div>

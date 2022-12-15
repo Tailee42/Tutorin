@@ -1,3 +1,4 @@
+@using Tutorin.Models;
 @model Tutorin.ViewModels.EleveViewModel
 @{
     Layout = "_LayoutDuSite";
@@ -42,7 +43,7 @@
                 <td>@eleve.Utilisateur.Prenom</td>
                 <td>@eleve.Utilisateur.Identifiant</td>
                 <td>@eleve.DateNaissance</td>
-                <td>@eleve.Niveau</td>
+                <td>@TypeNiveauExtensions.NomDuNiveau(eleve.Niveau)</td>
                 <td><a href="/Eleve/modifier?eleveId=@eleve.Id"><i class="fa-solid fa-pen"></i></a></td>
                 <td><a href="/Eleve/supprimer?eleveId=@eleve.Id"><i class="fa-solid fa-trash"></i></a></td>
             </tr>

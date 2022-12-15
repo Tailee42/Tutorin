@@ -5,12 +5,24 @@
     align-items: center;
 }
 
-i {
-    color: black;
+form {
+    width: 300px;
+    min-width: 200px;
 }
 
-table {
-    width: 50vw;
-    border-collapse: collapse;
-    text-align: center;
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #F68712;
+    background: linear-gradient(180deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+legend {
+    background-color: #f1ede8;
+    border-radius: 5px;
+    border-bottom: 2px solid #F68712;
+    box-shadow: 0px 0px 5px #808080;
 }

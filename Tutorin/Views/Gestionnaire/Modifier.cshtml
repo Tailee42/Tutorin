@@ -16,13 +16,19 @@
     <a href="/login/Deconnexion">Déconnexion</a>
 }
 
-<h1>Modifier un gestionnaire</h1>
+@section css {
+
+    <link href="/css/Footer.css" rel="stylesheet" />
+    <link href="/css/Form.css" rel="stylesheet" />
+}
+
+<h1>Modifier le profil</h1>
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Modifier un gestionnaire : </legend>
+            <legend>Gestionnaire</legend>
 
             <div class="hidden">
                 @Html.LabelFor(m => Model.Id)<br />

@@ -1,11 +1,12 @@
-﻿@model Tutorin.ViewModels.EnseignantViewModel
+﻿@using Tutorin.Models;
+@model Tutorin.ViewModels.EnseignantViewModel
 @{
     Layout = "_LayoutDuSite";
     ViewBag.Title = "Liste des enseignants";
 }
 
 @{
-    var gestionnaireId = User.FindFirst("RoleId").Value;
+    var gestionnaireId = User.FindFirst("RoleId");
 }
 
 @section Menu {
@@ -41,8 +42,8 @@
             <td>@enseignant.Utilisateur.Nom</td>
             <td>@enseignant.Utilisateur.Prenom</td>
             <td>@enseignant.Utilisateur.Identifiant</td>
-            <td>@enseignant.Matiere</td>
-            <td>@enseignant.Niveaux</td>
+            <td>@TypeMatiereExtensions.NomMatiere(enseignant.Matiere)</td>
+            <td>@TypeNiveauExtensions.NomDuNiveau(enseignant.Niveaux)</td>
 @*            <td><a href="/ContenuPedagogique/ajouter?enseignantId=@enseignant.Id"><i class="fa-solid fa-plus"></i></a></td>*@
             <td><a href="/Enseignant/modifier?enseignantId=@enseignant.Id"><i class="fa-solid fa-pen"></i></a></td>
             <td><a href="/Enseignant/supprimer?enseignantId=@enseignant.Id"><i class="fa-solid fa-trash"></i></a></td>

@@ -45,11 +45,11 @@
         <tr>
             <td>@cours.Id</td>
             <td>@cours.Titre</td>
-            <td>@cours.Matiere</td>
-            <td>@cours.Niveau</td>
+            <td>@TypeMatiereExtensions.NomMatiere(cours.Matiere)</td>
+            <td>@TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</td>
             <td>@cours.DatePublication</td>
             <td>@cours.DateMiseAJour</td>
-            <td>@cours.Etat</td>
+            <td>@EtatContenuPedagogiqueExtensions.NomEtat(cours.Etat)</td>
             <td><a href="/ContenuPedagogique/afficher?coursId=@cours.Id"><i class="fa-solid fa-magnifying-glass"></i></a></td>
             <td><a href="/ContenuPedagogique/modifier?coursId=@cours.Id"><i class="fa-solid fa-pen"></i></a></td>
             <td><a href="/ContenuPedagogique/supprimer?coursId=@cours.Id"><i class="fa-solid fa-trash"></i></a></td>
