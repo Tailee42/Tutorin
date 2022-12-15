@@ -4,23 +4,35 @@
     ViewBag.Title = "Liste des Responsables";
 }
 
+@{
+    var gestionnaireId = User.FindFirst("RoleId").Value;
+}
+
 @section Menu {
-    <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+    <a href="/Home/Index">Accueil</a>
+    <a href="/Gestionnaire/TableauDeBord">Tableau de Bord</a>
+    <a href="/Gestionnaire/modifier?gestionnaireId=@gestionnaireId">Mon Compte</a>
+    <a href="/login/Deconnexion">Déconnexion</a>
+}
+
+@section css {
+    <link href="/css/Tableaux.css" rel="stylesheet" />
 }
 
 
-<h1>Liste des responsables des élèves : </h1>
-<table border="1">
-
-    <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Identifiant</th>
-        <th>Mail</th>
-        @*<th>Abonnements</th>*@
-        <th>Actions</th>
-    </tr>
+<h1 class="titre">Liste des responsables des élèves</h1>
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Rechercher">
+<table id="table" border="1">
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Identifiant</td>
+            <td>Mail</td>
+            @*<th>Abonnements</th>*@
+            <td colspan="2">Actions</td>
+        </tr>
+    </thead>
 
     @foreach (Tutorin.Models.ResponsableEleve responsable in Model.ListeResponsablesEleves)
     {
@@ -30,15 +42,15 @@
                 <td>@responsable.Utilisateur.Identifiant</td>
                 <td>@responsable.Mail</td>
                 @*<td>@responsable.Abonnements</td>*@
-                <td>
-                    <a href="/ResponsableEleve/modifier?responsableId=@responsable.Id">Modifier</a>
-                    <a href="/ResponsableEleve/supprimer?responsableId=@responsable.Id">Supprimer</a>
-                </td>
+                <td><a href="/ResponsableEleve/modifier?responsableId=@responsable.Id"><i class="fa-solid fa-pen"></i></a></td>
+                <td><a href="/ResponsableEleve/supprimer?responsableId=@responsable.Id"><i class="fa-solid fa-trash"></i></a></td>
             </tr>
     }
 </table>
 
 <br />
-<a href="/ResponsableEleve/ajouter">Ajouter un responsable</a>
+@*<a href="/ResponsableEleve/ajouter"><i class="fa-solid fa-plus fa-lg"></i>Ajouter un responsable</a>*@
 
-
+@section Script {
+    <script type="text/javascript" src="~/Scripts/RechercheTable.js"></script>
+}

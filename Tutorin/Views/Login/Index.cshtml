@@ -4,35 +4,45 @@
     Layout = "_LayoutDuSite";
 }
 
+@section css {
+    <link href="/css/Login.css" rel="stylesheet" />
+}
+
 @if (Model.Authentifie)
 {
-    <h3>
-        Vous êtes déjà authentifié avec le login :
-        @Model.Utilisateur.Identifiant
-    </h3>
-    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+    <div class="msg-deconnexion">
+        <h3>
+            Vous êtes connecté avec l'identifiant :
+            @Model.Utilisateur.Identifiant
+        </h3>
+        @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+    </div>
 }
 else
 {
-    <p>
+@*    <h1 class="titre">
         Veuillez vous authentifier :
-    </p>
-    using (Html.BeginForm())
+    </h1>*@
+
+    @using (Html.BeginForm())
     {
-        <div>
-            @Html.LabelFor(m => m.Utilisateur.Identifiant)
-            @Html.TextBoxFor(m => m.Utilisateur.Identifiant)
-            @Html.ValidationMessageFor(m => m.Utilisateur.Identifiant)
+        <div class="login-form">
+
+            <div class="id">
+                <i class="fa-solid fa-user">&ensp;@Html.TextBoxFor(m => m.Utilisateur.Identifiant,  new {placeholder = "Identifiant"})</i>
+                <span class="msg-erreur">@Html.ValidationMessageFor(m => m.Utilisateur.Identifiant)</span>
+            </div>
+
+            <div class="mdp">
+                <i class="fa-solid fa-lock">&ensp;@Html.PasswordFor(m => m.Utilisateur.MotDePasse, new {placeholder = "Mot de passe"})</i>
+                <span class="msg-erreur">@Html.ValidationMessageFor(m => m.Utilisateur.MotDePasse)</span>
+            </div>
+
+            <input class="btn-connecter" type="submit" value="Se connecter"/>
+            <a class="lien-compte" href="/Login/CreerCompteUtilisateur">Créer un compte</a>
         </div>
-        <div>
-            @Html.LabelFor(m => m.Utilisateur.MotDePasse)
-            @Html.PasswordFor(m => m.Utilisateur.MotDePasse)
-            @Html.ValidationMessageFor(m => m.Utilisateur.MotDePasse)
-        </div>
-        <input type="submit" value="Se connecter" />
-        <br />
-        @Html.ActionLink("Créer un compte", "CreerCompteUtilisateur")
     }
+
 }
 
 
@@ -41,6 +51,7 @@ else
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
+
 @section Menu {
     <a href="/home/">Accueil</a>
     <a>Présentation</a>

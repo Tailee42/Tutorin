@@ -55,7 +55,9 @@ namespace Tutorin.Controllers
             {
                 using (EleveServices es = new EleveServices())
                 {
+                    
                     Eleve eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
+                    
                     if (eleve == null)
                     {
                         return View("Error");
@@ -77,6 +79,7 @@ namespace Tutorin.Controllers
             
                 using (EleveServices es = new EleveServices())
                 {
+
                     es.ModifierEleve(eleve);
                     return RedirectToAction("Index");
                 }

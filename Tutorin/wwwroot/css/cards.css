@@ -57,3 +57,15 @@ a {
 .historique {
     background: linear-gradient(360deg, hsla(0, 0%, 95%, 1) 0%, hsla(0, 0%, 65%, 1) 100%);
 }
+
+.lien-afficher-cours, .lien-afficher-cours:visited {
+    color: black;
+}
+
+/* Vue GererUtilisateurs */
+.lien-user, .lien-user:visited {
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 30px;
+}

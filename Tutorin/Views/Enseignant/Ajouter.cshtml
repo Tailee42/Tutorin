@@ -5,52 +5,56 @@
     Layout = "_LayoutDuSite";
 }
 
-<h1>Ajouter un enseignant</h1>
+@section css {
+    <link href="/css/Form.css" rel="stylesheet" />
+}
+
+<h1>Créer un profil</h1>
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Ajouter un enseignant: </legend>
+            <legend>Enseignant</legend>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Matiere)
                 @Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))
                 @Html.ValidationMessageFor(m => Model.Matiere)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Niveaux)
                 @Html.DropDownListFor(m => Model.Niveaux, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
                 @Html.ValidationMessageFor(m => Model.Niveaux)
             </div>
 
 
-            <input class="bouttonStyle" type="submit" value="Ajouter" />
+            <input class="boutonStyle" type="submit" value="Créer" />
         </fieldset>
     }
 

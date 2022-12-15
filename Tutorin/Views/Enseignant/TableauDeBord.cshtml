@@ -11,7 +11,7 @@
 
 @section Menu {
 
-    <a href="/Enseignant/TableauDeBord">Accueil</a>
+    <a href="/Home/Index">Accueil</a>
     <a href="/ContenuPedagogique/">Les cours</a>
     <a href="/Enseignant/modifier?enseignantId=@Model.Enseignant.Id">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
@@ -19,6 +19,7 @@
 
 <div class="nomUtilisateur">
     <h2>@Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</h2>
+    <h3>Enseignant</h3>
 </div>
 
 
@@ -33,8 +34,8 @@
             </div>
             <h2 class="card__title">@contenuPedagogique.Titre</h2>
             <div>
-                Etat : @contenuPedagogique.Etat<br>
-                Niveau : @contenuPedagogique.Niveau<br>
+                Etat : @EtatContenuPedagogiqueExtensions.NomEtat(contenuPedagogique.Etat)<br>
+                Niveau : @TypeNiveauExtensions.NomDuNiveau(contenuPedagogique.Niveau)<br>
             </div>
 
             @if (contenuPedagogique.Etat == EtatContenuPedagogique.A_Modifier)

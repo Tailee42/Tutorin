@@ -42,7 +42,7 @@ namespace Tutorin.Controllers
             using (ResponsableServices rs = new ResponsableServices())
             {
                 rs.CreerResponsable(responsable);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Login");
             }
         }
 

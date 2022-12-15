@@ -5,87 +5,92 @@
     Layout = "_LayoutDuSite";
 }
 
-<h1>Modifier une prestation</h1>
+@section css {
+
+    <link href="/css/Form.css" rel="stylesheet" />
+}
+
+<h1>Modifier</h1>
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Modifier une prestation : </legend>
+            <legend>Prestation</legend>
 
-            <div>
+            <div class="hidden">
                 @Html.LabelFor(m => Model.Id)<br />
                 @Html.TextBoxFor(m => Model.Id)<br />
                 @Html.ValidationMessageFor(m => Model.Id)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.TypePrestation)<br />
                 @Html.DropDownListFor(m => Model.TypePrestation, new SelectList(Enum.GetValues(typeof(TypePrestation))))<br />
                 @Html.ValidationMessageFor(m => Model.TypePrestation)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Niveau)<br />
                 @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))<br />
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Matiere) <br />
                 @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeMatiere))))<br />
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.DateDebut)<br />
                 @Html.EditorFor(m => Model.DateDebut, new {@type = "date"} )<br />
                 @Html.ValidationMessageFor(m => Model.DateDebut)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.DateFin)<br />
                 @Html.EditorFor(m => Model.DateFin, new {@type = "date"} )<br />
                 @Html.ValidationMessageFor(m => Model.DateFin)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Presentiel)<br />
                 @Html.DropDownListFor(model => Model.Presentiel ,new List<SelectListItem>(){ new SelectListItem(){ Text = "Oui", Value="True"}, new SelectListItem(){ Text = "Non", Value="False"}})<br />
                 @Html.ValidationMessageFor(m => Model.Presentiel)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Ville)<br />
                 @Html.TextBoxFor(m => Model.Ville )<br />
                 @Html.ValidationMessageFor(m => Model.Ville)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Prix)<br />
                 @Html.TextBoxFor(m => Model.Prix )<br />
                 @Html.ValidationMessageFor(m => Model.Prix) @*Trouver comment obtenir que des float*@
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.LienVisio)<br />
                 @Html.TextBoxFor(m => Model.LienVisio )<br />
                 @Html.ValidationMessageFor(m => Model.LienVisio)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.EtatPrestation)<br />
                 @Html.DropDownListFor(m => Model.EtatPrestation, new SelectList(Enum.GetValues(typeof(EtatPrestation))))<br />
                 @Html.ValidationMessageFor(m => Model.EtatPrestation)
             </div>
 
-            <div>
+            <div class="hidden">
                 @Html.LabelFor(m => Model.EnseignantId)<br />
                 @Html.TextBoxFor(m => Model.EnseignantId)<br />
                 @Html.ValidationMessageFor(m => Model.EnseignantId)
             </div>
 
-            <input class="bouttonStyle" type="submit" value="Modifier" />
+            <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
 
