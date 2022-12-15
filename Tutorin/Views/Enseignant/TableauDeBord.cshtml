@@ -35,7 +35,7 @@
             <h2 class="card__title">@contenuPedagogique.Titre</h2>
             <div>
                 Etat : @EtatContenuPedagogiqueExtensions.NomEtat(contenuPedagogique.Etat)<br>
-                Niveau : @contenuPedagogique.Niveau<br>
+                Niveau : @TypeNiveauExtensions.NomDuNiveau(contenuPedagogique.Niveau)<br>
             </div>
 
             @if (contenuPedagogique.Etat == EtatContenuPedagogique.A_Modifier)

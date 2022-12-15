@@ -29,12 +29,6 @@
             return null;
         }
 
-
-    }
-
-
-    public static class TypeMatiereExtensions
-    {
         public static string IconHTMLPrestation(TypeMatiere matiere)
         {
             switch ((int)matiere)
