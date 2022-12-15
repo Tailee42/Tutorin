@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Tutorin.Models;
+using System.Security.Cryptography;
 
 namespace Tutorin.Services
 {
@@ -45,12 +47,16 @@ namespace Tutorin.Services
                 eleve.Utilisateur.Nom = nom;
                 eleve.Utilisateur.Prenom = prenom;
                 eleve.Utilisateur.Identifiant= identifiant;
-                eleve.Utilisateur.MotDePasse= motDePasse;
+                eleve.Utilisateur.MotDePasse = EncodeMD5(motDePasse); ;
                 eleve.DateNaissance = dateNaissance;
                 eleve.Niveau = niveau;
                _bddContext.SaveChanges();
             }
         }
+
+        
+
+        
 
         public void ModifierEleve(Eleve eleve)
         {
@@ -86,10 +92,17 @@ namespace Tutorin.Services
             return eleve;
         }
 
+
+        public static string EncodeMD5(string motDePasse)
+        {
+            string motDePasseSel = "ChoixResto" + motDePasse + "ASP.NET MVC";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
+
         public int CompterEleve()
         {
             int nbEleve = _bddContext.Eleves.Count();
             return nbEleve;
+
         }
     }
 }
