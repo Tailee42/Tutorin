@@ -80,13 +80,46 @@ namespace Tutorin.Controllers
             
         }
 
+        public IActionResult SupprimerProfil(int responsableId)
+        {
+            if (responsableId != 0)
+            {
+                using (ResponsableServices rs = new ResponsableServices())
+                {
+                    ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
+                    if (responsable == null)
+                    {
+                        return View("Error");
+                    }
+                    return View("SupprimerProfil", responsable);
+                }
+            }
+            return View("Error");
+        }
+
         public IActionResult Supprimer(int responsableId)
         {
             using (ResponsableServices rs = new ResponsableServices())
             {
+                ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
+                if (responsable == null)
+                {
+                    return View("Error");
+                }
+                foreach (Abonnement abonnement in responsable.Abonnements)
+                {
+                    if (abonnement.EleveId != null)
+                    {
+                        using(EleveServices es = new EleveServices())
+                        {
+                            es.SupprimerEleve((int)abonnement.EleveId);
+                        }
+                    }
+                }
                 rs.SupprimerResponsable(responsableId);
                 return RedirectToAction("Index");
             }
+
         }
 
         public IActionResult TableauDeBord()
