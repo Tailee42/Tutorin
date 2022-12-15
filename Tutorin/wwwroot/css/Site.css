@@ -7,10 +7,6 @@ body {
     padding-top: 6em;
 }
 
-#container {
-    min-width: 90vw;
-}
-
 /* Mise en page du header desktop*/
 header {
     width: 100%;
@@ -167,7 +163,7 @@ footer {
 
 /*Div cachées formulaires (id, mdp)*/
 .hidden{
-    visibility:hidden;
+    display: none;
     margin: 0;
     padding: 0;
 }

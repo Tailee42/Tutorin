@@ -3,14 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-form {
-    width: 300px;
-    min-width: 200px;
+    min-width: 750px;
 }
 
 fieldset {
+    width: 700px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,9 +18,60 @@ fieldset {
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
 }
 
+.boite-form {
+    width: 400px;
+    display: block;
+    text-align: center;
+    margin: 5px 0;
+}
+
 legend {
     background-color: #f1ede8;
     border-radius: 5px;
     border-bottom: 2px solid #F68712;
     box-shadow: 0px 0px 5px #808080;
+}
+
+input {
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+    background: hsl(16, 100%, 94%);
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.boutonStyle {
+    margin: 20px 0;
+    width: 300px;
+    height: 40px;
+    text-transform: uppercase;
+    border: none;
+    background: #dab9f7;
+    border-radius: 20px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+
+.boutonStyle:hover, boutonStyle:active, boutonStyle:focus {
+    background: #F68712;
+}
+
+/*Message erreur*/
+.field-validation-error {
+    text-align: center;
+    font-size: 12px;
+    color: #c12727;
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+/*Input lors d'une erreur*/
+.input-validation-error {
+    text-align: center;
 }
