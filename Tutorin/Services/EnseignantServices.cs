@@ -50,6 +50,7 @@ namespace Tutorin.Services
 
         public void ModifierEnseignant(Enseignant enseignant)
         {
+            enseignant.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(enseignant.Utilisateur.MotDePasse);
             _bddContext.Enseignants.Update(enseignant);
             _bddContext.SaveChanges();
         }

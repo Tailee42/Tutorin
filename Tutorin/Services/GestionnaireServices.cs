@@ -49,6 +49,7 @@ namespace Tutorin.Services
 
         public void ModifierGestionnaire(Gestionnaire gestionnaire)
         {
+            gestionnaire.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(gestionnaire.Utilisateur.MotDePasse);
             _bddContext.Gestionnaires.Update(gestionnaire);
             _bddContext.SaveChanges();
         }
