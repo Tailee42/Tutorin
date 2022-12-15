@@ -14,15 +14,11 @@ namespace Tutorin.Controllers
     {
         public IActionResult Index()
         {
-            List<Prestation> listePrestations = new List<Prestation>();
-            PrestationViewModel pvm;
+            PrestationViewModel pvm = new PrestationViewModel();
 
             using (PrestationServices ps = new PrestationServices())
             {
-                pvm = new PrestationViewModel()
-                {
-                    ListePrestations = ps.ObtientTousLesPrestations()
-                };
+                pvm.ListePrestations = ps.ObtientTousLesPrestations();
             };
 
             return View("ListePrestations", pvm);
@@ -30,15 +26,11 @@ namespace Tutorin.Controllers
 
         public IActionResult ListeVisiteur()
         {
-            List<Prestation> listePrestations = new List<Prestation>();
-            PrestationViewModel pvm;
+            PrestationViewModel pvm = new PrestationViewModel();
 
             using (PrestationServices ps = new PrestationServices())
             {
-                pvm = new PrestationViewModel()
-                {
-                    ListePrestations = ps.ObtientToutesLesPrestationsValidees()
-                };
+                pvm.ListePrestations = ps.ObtientToutesLesPrestationsValidees();
             };
 
             return View("ListeVisiteur", pvm);

@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims;
+
+@{
+    Layout = "_LayoutDuSite";
+    ViewBag.Title = "Erreur";
+}
+
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
+
+}
+
+@section Menu {
+
+
+    <a href="/Enseignant/ListeVisiteur">Les Enseignants</a>
+    <a href="/Prestation/ListeVisiteur">Les Prestations</a>
+
+    @if (authentifie)
+    {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
+    else
+    {
+        <a href="/login/">Connexion</a>
+    }
+
+}
+
+@section css {
+    <link href="/css/cards.css" rel="stylesheet" />
+}
+
+<h1 class="centre">Votre abonnement est fini. Vous ne pouvez plus vous connecter.</h1>
+
