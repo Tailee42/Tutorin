@@ -22,43 +22,101 @@
 </div>
 
 
-<h1>Liste de mes cours :</h1>
+<h1>Liste de mes contenus pédagogiques :</h1>
 
 <div class="cards">
-    @foreach (Tutorin.Models.ContenuPedagogique contenuPedagogiques in Model.Enseignant.ContenuPedagogiques)
+    @foreach (Tutorin.Models.ContenuPedagogique contenuPedagogique in Model.Enseignant.ContenuPedagogiques)
     {
-    <div class="card abonnement">
+        <div class="card abonnement">
             <div class="card__icon">
                 <i class="fa-solid fa-file-contract"></i>
             </div>
-            <h2 class="card__title">@contenuPedagogiques.Titre</h2>
-            <h2 class="card__title">@contenuPedagogiques.Etat</h2>
+            <h2 class="card__title">@contenuPedagogique.Titre</h2>
+            <div>
+                Etat : @contenuPedagogique.Etat<br>
+                Niveau : @contenuPedagogique.Niveau<br>
+            </div>
 
-           @*if (!ModelState.IsValid)
+            @if (contenuPedagogique.Etat == EtatContenuPedagogique.A_Modifier)
             {
-                return View("Modifier", enseignant);
-            }*@
-            <p class="card__button">
-                <a class="card__link" href="/Prestation/modifier">
-                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                    Modifier le contenu
-                </a>
-            </p>
-    </div>
+                <p class="card__button">
+                    <a class="card__link" href="/ContenuPedagogique/modifier?coursId=@contenuPedagogique.Id">
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                        Modifier le contenu
+                    </a>
+                </p>
+            }
+
+
+        </div>
     }
-     
-
-
     <div class="card abonnement">
-        <h2 class="card__title">Mes prestations</h2>
-
+        <h2 class="card__title">Ajouter un contenu pédagogique</h2>
+        <div>
+        </div>
         <p class="card__button">
-            <a class="card__link" href="/ContenuPedagogique">
+            <a class="card__link" href="/ContenuPedagogique/ajouter">
                 <i class="fa-sharp fa-solid fa-circle-plus"></i>
-    
+                Ajouter du contenu
             </a>
         </p>
     </div>
+
+</div>
+
+<h1>Liste de mes prestations :</h1>
+
+
+<div class="cards">
+    @foreach (Tutorin.Models.Prestation prestation in Model.Enseignant.Prestations)
+    {
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+            <h2 class="card__title">@prestation.TypePrestation</h2>
+            <div>
+                Matière : @prestation.Matiere<br>
+                Niveau: @prestation.Niveau<br>
+                Date: @prestation.DateDebut<br>
+            </div>
+
+        </div>
+
+    }
+
+    
+</div>
+
+<h1>Les prestations disponibles</h1>
+<div class="cards">
+    @foreach (Tutorin.Models.Prestation prestation in Model.Prestations)
+    {
+        @if (prestation.EtatPrestation == EtatPrestation.A_affecter)
+        {
+            <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+            <h2 class="card__title">@prestation.TypePrestation</h2>
+            <div>
+                Matière : @prestation.Matiere<br>
+                Niveau: @prestation.Niveau<br>
+                Date: @prestation.DateDebut<br>
+            </div>
+                <p class="card__button">
+                    <a class="card__link" href="/Prestation/InscrireEnseignant?prestationId=@prestation.Id">
+                        
+                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                    s'inscrire à la prestation
+                </a>
+                </p>
+                
+        </div>
+        }
+        
+
+    }
 
 
 </div>

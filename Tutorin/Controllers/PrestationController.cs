@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,14 +174,17 @@ namespace Tutorin.Controllers
 
                     return RedirectToAction("TableauDeBord", "ResponsableEleve");
 
-                } else
+                }
+                else
                 {
-                    PrestationViewModel pvm = new PrestationViewModel() { ElevesId= eleveIds, PrestationId = prestationId };
+                    PrestationViewModel pvm = new PrestationViewModel() { ElevesId = eleveIds, PrestationId = prestationId };
                     return RedirectToAction("PayerPrestation", "Payement", pvm);
                 }
-                
+
             }
         }
+
+
 
         public IActionResult VoirPrestationAAffecter()
         {
@@ -220,13 +224,11 @@ namespace Tutorin.Controllers
 
             PrestationViewModel pvm = new PrestationViewModel()
             {
-               Enseignant = enseignant,
+                Enseignant = enseignant,
                 Prestation = prestation
             };
 
-            return RedirectToAction("Index", pvm); 
+            return RedirectToAction("TableauDeBord", "enseignant");
         }
     }
 }
-
-

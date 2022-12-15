@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
 using Tutorin.ViewModels;
@@ -68,11 +69,20 @@ namespace Tutorin.Controllers
             {
                 return View("Ajouter", cours);
             }
+            string enseignantId = User.FindFirstValue("RoleId");
+
+            int id;
+            if (int.TryParse(enseignantId, out id))
+            {
+                cours.EnseignantId = id;
+
+            }
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
+
                 cps.CreerContenuPedagogique(cours);
-                return RedirectToAction("Index");
+                return RedirectToAction("TableauDeBord", "enseignant");
             }
         }
 
@@ -102,11 +112,19 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", cours);
             }
+            string enseignantId = User.FindFirstValue("RoleId");
+
+            int id;
+            if (int.TryParse(enseignantId, out id))
+            {
+                cours.EnseignantId = id;
+
+            }
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cps.ModifierContenuPedagogique(cours);
-                return RedirectToAction("Index");
+                return RedirectToAction("TableauDeBord", "enseignant");
             }
 
         }

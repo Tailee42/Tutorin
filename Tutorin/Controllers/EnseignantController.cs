@@ -99,6 +99,7 @@ namespace Tutorin.Controllers
             Enseignant enseignant = null;
             int id;
             List<Enseignant> enseignants = new List<Enseignant>();
+            List<Prestation> prestations = new List<Prestation>();
             
            
             EnseignantViewModel envm = new EnseignantViewModel( );
@@ -114,6 +115,9 @@ namespace Tutorin.Controllers
             using (PrestationServices prs = new PrestationServices())
             {
                 enseignant.Prestations = prs.TrouverPrestations(id);
+                prestations = prs.ObtientTousLesPrestations();
+                envm.Prestations = prestations;
+
             }
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
@@ -121,6 +125,7 @@ namespace Tutorin.Controllers
                 enseignant.ContenuPedagogiques = cps.TrouverLesCours(id);
             }
             envm.Enseignant = enseignant;
+
            
             return View("TableauDeBord", envm);
 
