@@ -23,80 +23,88 @@
 
 <h1>Mes Abonnements :</h1>
 
-    <div class="cards">
+
+<div class="cards">
 
 
-        @foreach (Abonnement abonnement in Model.ResponsableEleve.Abonnements) 
+    @foreach (Abonnement abonnement in Model.ResponsableEleve.Abonnements)
+    {
+        @if (abonnement.DateFin == DateTime.MinValue)
         {
-            @if (abonnement.DateFin == DateTime.MinValue)
-            {
-                <div class="card abonnement">
-                    <div class="card__icon">
-                        <i class="fa-solid fa-file-contract"></i>
-                    </div>
+            <div class="card abonnement">
+                <div class="card__icon">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
 
-                    <h2 class="card__title">@TypeAbonnementExtensions.NomAbonnement(abonnement.Type)</h2>
+                <h2 class="card__title">@TypeAbonnementExtensions.NomAbonnement(abonnement.Type)</h2>
 
-                    <div>
-                        Depuis le : @abonnement.DateDebut.ToString("d")<br>
-                        Prix mensuel : @abonnement.PrixTTC €
-                    </div>
+                <div>
+                    Depuis le : @abonnement.DateDebut.ToString("d")<br>
+                    Prix mensuel : @abonnement.PrixTTC €
+                </div>
 
+                <p class="card__button">
+                    <a class="card__link" href="/Abonnement/FinAbonnement?abonnementid=@abonnement.Id">
+                        <i class="fa-sharp fa-solid fa-xmark"></i>
+                        Arrêter l'abonnement
+                    </a>
+                </p>
+
+                <br />
+
+                @if (abonnement.EleveId == null)
+                {
                     <p class="card__button">
-                        <a class="card__link" href="/Abonnement/FinAbonnement?abonnementid=@abonnement.Id">
-                            <i class="fa-sharp fa-solid fa-xmark"></i>
-                            Arrêter l'abonnement
+                        <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
+                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                            Ajouter un élève
                         </a>
                     </p>
-
-                    <br />
-
-                    @if (abonnement.EleveId == null)
-                    {
-                        <p class="card__button">
-                            <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
-                                <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                                Ajouter un élève
-                            </a>
-                        </p>
-                    } else
-                    {
-                        <div>
-                            Eleve : @abonnement.Eleve.Utilisateur.Nom @abonnement.Eleve.Utilisateur.Prenom<br>
-                            Niveau : @abonnement.Eleve.Niveau 
-                        </div>
-                        <p class="card__button">
-                            <a class="card__link" href="#">
+                }
+                else
+                {
+                    <div>
+                        Eleve : @abonnement.Eleve.Utilisateur.Nom @abonnement.Eleve.Utilisateur.Prenom<br>
+                        Niveau : @abonnement.Eleve.Niveau
+                    </div>
+                    <p class="card__button">
+                        <a class="card__link" href="#">
                             <i class="fa-regular fa-face-smile"></i>
-                                Suivi de l'élèvé
-                            </a>
-                        </p>
-                        <p class="card__button">
-                            <a class="card__link" href="/Abonnement/supprimerEleve?abonnementId=@abonnement.Id">
+                            Suivi de l'élèvé
+                        </a>
+                    </p>
+                    <p class="card__button">
+                        <a class="card__link" href="/Eleve/modifier?eleveId=@abonnement.EleveId">
+                            <i class="fa-sharp fa-solid fa-xmark"></i>
+                            Modifier le profi de l'élève
+                        </a>
+
+                    </p>
+                    <p class="card__button">
+                        <a class="card__link" href="/Abonnement/supprimerEleve?abonnementId=@abonnement.Id">
                             <i class="fa-sharp fa-solid fa-xmark"></i>
                             Supprimer l'élève
                         </a>
-                        </p>
+                    </p>
 
-                    }
-                </div>
-            }
-        }
-
-            <div class="card abonnement">
-                <h2 class="card__title">Ajouter un nouvel abonnement</h2>
-                <div>
-                    
-                </div>
-                <p class="card__button">
-                    <a class="card__link" href="/Abonnement/ajouterAbonnement">
-                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                        Ajouter un abonnement 
-                    </a>
-                </p>
+                }
             </div>
+        }
+    }
 
+    <div class="card abonnement">
+        <h2 class="card__title">Ajouter un nouvel abonnement</h2>
+        <div>
+        </div>
+        <p class="card__button">
+            <a class="card__link" href="/Abonnement/ajouterAbonnement">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                Ajouter un abonnement
+            </a>
+        </p>
     </div>
+
+</div>
 
 
 <h1>Les Prestations Réservées :</h1>
@@ -106,31 +114,32 @@
 
     <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
     <div class="cards">
-    @foreach (Prestation prestation in eleve.Prestations)
-    {
-        @if (DateTime.Compare(prestation.DateFin, DateTime.Now)>=0)
+        @foreach (Prestation prestation in eleve.Prestations)
         {
-            <div class="card prestation">
-                <div class="card__icon">
-                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
-                </div>
+            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
+            {
+                <div class="card prestation">
+                    <div class="card__icon">
+                        @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                    </div>
 
-                <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+                    <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
-                <div>
-                    Date de début : @prestation.DateDebut<br>
-                    Date de fin : @prestation.DateFin<br>
-                    Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
-                    Niveau : @prestation.Niveau<br>
-                    Matière : @prestation.Matiere <br>
-                    <hr />
+                    <div>
+                        Date de début : @prestation.DateDebut<br>
+                        Date de fin : @prestation.DateFin<br>
+                        Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                        Niveau : @prestation.Niveau<br>
+                        Matière : @prestation.Matiere <br>
+                        <hr />
                         @if (prestation.Presentiel)
                         {
                             <text>
                                 En Presentiel : <br>
                                 Ville : @prestation.Ville
                             </text>
-                        } else
+                        }
+                        else
                         {
                             <text>
                                 En distantiel : <br>
@@ -138,63 +147,63 @@
                             </text>
                         }
 
-                </div>
+                    </div>
 
-            </div>
+                </div>
+            }
+
         }
-        
-    }
     </div>
 }
 
-<h1>Hitorique des prestations :</h1>
+<h1>Historique des prestations :</h1>
 
-<div class="cards">
-    @foreach (Eleve eleve in Model.Eleves)
-    {
 
-        <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
-        <div class="cards">
-            @foreach (Prestation prestation in eleve.Prestations)
+@foreach (Eleve eleve in Model.Eleves)
+{
+
+    <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
+    <div class="cards">
+        @foreach (Prestation prestation in eleve.Prestations)
+        {
+            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
             {
-                @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
-                {
-                    <div class="card historique">
-                        <div class="card__icon">
-                            @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
-                        </div>
-
-                        <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
-
-                        <div>
-                            Date de début : @prestation.DateDebut<br>
-                            Date de fin : @prestation.DateFin<br>
-                            Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
-                            Niveau : @prestation.Niveau<br>
-                            Matière : @prestation.Matiere <br>
-                            <hr />
-                            @if (prestation.Presentiel)
-                            {
-                                <text>
-                                    En Presentiel : <br>
-                                    Ville : @prestation.Ville
-                                </text>
-                            } else
-                            {
-                                <text>
-                                    En distantiel : <br>
-                                    Lien de la visio : @prestation.LienVisio
-                                </text>
-                            }
-                        </div>
-
+                <div class="card historique">
+                    <div class="card__icon">
+                        @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
                     </div>
-                }
 
+                    <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+
+                    <div>
+                        Date de début : @prestation.DateDebut<br>
+                        Date de fin : @prestation.DateFin<br>
+                        Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                        Niveau : @prestation.Niveau<br>
+                        Matière : @prestation.Matiere <br>
+                        <hr />
+                        @if (prestation.Presentiel)
+                        {
+                            <text>
+                                En Presentiel : <br>
+                                Ville : @prestation.Ville
+                            </text>
+                        }
+                        else
+                        {
+                            <text>
+                                En distantiel : <br>
+                                Lien de la visio : @prestation.LienVisio
+                            </text>
+                        }
+                    </div>
+
+                </div>
             }
-        </div>
-    }
-</div>
+
+        }
+    </div>
+}
 
 
 <h1>Historique des abonnements :</h1>
@@ -225,19 +234,8 @@
                     Prix mensuel : @abonnement.PrixTTC €
                 </div>
 
-
-                @if (abonnement.EleveId == null)
-                {
-                    <p class="card__button">
-                        <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
-                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                            Ajouter un élève
-                        </a>
-                    </p>
-                }
             </div>
         }
     }
-
 
 </div>

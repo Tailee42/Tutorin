@@ -70,10 +70,10 @@
 <div class="cards">
     @foreach (Tutorin.Models.Prestation prestation in Model.Enseignant.Prestations)
     {
-        <div class="card abonnement">
-            <div class="card__icon">
-                <i class="fa-solid fa-file-contract"></i>
-            </div>
+        <div class="card historique">
+                        <div class="card__icon">
+                @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                        </div>
             <h2 class="card__title">@prestation.TypePrestation</h2>
             <div>
                 Matière : @prestation.Matiere<br>
@@ -94,10 +94,10 @@
     {
         @if (prestation.EtatPrestation == EtatPrestation.A_affecter)
         {
-            <div class="card abonnement">
-            <div class="card__icon">
-                <i class="fa-solid fa-file-contract"></i>
-            </div>
+            <div class="card historique">
+                <div class="card__icon">
+                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                </div>
             <h2 class="card__title">@prestation.TypePrestation</h2>
             <div>
                 Matière : @prestation.Matiere<br>

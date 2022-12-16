@@ -81,7 +81,7 @@ namespace Tutorin.Controllers
                 {
 
                     es.ModifierEleve(eleve);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
                 }
             
         }
