@@ -74,11 +74,11 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", gestionnaire);
             }
-
+            string role = User.FindFirstValue(ClaimTypes.Role);
             using (GestionnaireServices ges = new GestionnaireServices())
             {
                 ges.ModifierGestionnaire(gestionnaire);
-                return RedirectToAction("Index");
+                return RedirectToAction("TableauDeBord", role);
             }
 
         }

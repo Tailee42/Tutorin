@@ -5,6 +5,10 @@
     Layout = "_LayoutDuSite";
 }
 
+@section css {
+    <link href="/css/Form.css" rel="stylesheet" />
+}
+
 @{
     var responsableId = User.FindFirst("RoleId").Value;
 }
@@ -15,46 +19,46 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Ajouter un élève à l'abonnement : </legend>
+            <legend>Eleve</legend>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
                 @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.DateNaissance)<br />
                 @Html.TextBoxFor(m => Model.DateNaissance, new {@type = "date"} )<br />
                 @Html.ValidationMessageFor(m => Model.DateNaissance)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Niveau)
                 @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
 
-            <input class="bouttonStyle" type="submit" value="AjouterEleve" />
+            <input class="boutonStyle" type="submit" value="Ajouter" />
         </fieldset>
     }
 

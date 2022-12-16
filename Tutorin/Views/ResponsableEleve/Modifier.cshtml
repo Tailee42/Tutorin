@@ -4,6 +4,10 @@
     ViewBag.Title = "Modifier responsable";
 }
 
+@{
+    var responsableId = User.FindFirst("RoleId").Value;
+}
+
 @section css {
 
     <link href="/css/Form.css" rel="stylesheet" />
@@ -69,7 +73,7 @@
             <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
-
+    <a href="/ResponsableEleve/supprimerProfil?responsableId=@responsableId">Supprimer le profil</a>
 </div>
 
 @section Script {

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System;
 using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
@@ -64,6 +66,44 @@ namespace Tutorin.Controllers
 
             return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
         }
+
+        public IActionResult Modifier(int eleveId)
+        {
+            if (eleveId != 0)
+            {
+                using (EleveServices es = new EleveServices())
+                {
+
+                    Eleve eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
+
+                    if (eleve == null)
+                    {
+                        return View("Error");
+                    }
+                    Console.WriteLine(eleve.DateNaissance.ToString());
+                    return View("Modifier", eleve);
+                }
+            }
+            return View("Error");
+        }
+
+        [HttpPost]
+        public IActionResult Modifier(Eleve eleve)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Modifier", eleve);
+            }
+
+            using (EleveServices es = new EleveServices())
+            {
+
+                es.ModifierEleve(eleve);
+                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+            }
+
+        }
+
 
         [Authorize]
         [HttpGet]

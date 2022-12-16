@@ -117,6 +117,7 @@ a:hover {
 /* Style du nom utilisateur */
 .nomUtilisateur {
     text-align: right;
+    margin-left: 30px;
 }
 
 
