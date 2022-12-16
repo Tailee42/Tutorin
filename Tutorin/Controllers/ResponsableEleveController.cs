@@ -5,6 +5,7 @@ using Tutorin.Models;
 using System.Linq;
 using Tutorin.ViewModels;
 using System.Security.Claims;
+using System.Data;
 
 namespace Tutorin.Controllers
 {
@@ -99,6 +100,7 @@ namespace Tutorin.Controllers
 
         public IActionResult Supprimer(int responsableId)
         {
+            string role = User.FindFirstValue("RoleId");
             using (ResponsableServices rs = new ResponsableServices())
             {
                 ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
@@ -106,18 +108,35 @@ namespace Tutorin.Controllers
                 {
                     return View("Error");
                 }
-                foreach (Abonnement abonnement in responsable.Abonnements)
+
+                using (AbonnementServices abos = new AbonnementServices())
                 {
-                    if (abonnement.EleveId != null)
+                    foreach (Abonnement abonnement in abos.TrouverAbonnements(responsableId))
                     {
-                        using(EleveServices es = new EleveServices())
+                        abos.FinAbonnement(abonnement.Id);
+                        if (abonnement.EleveId != null)
                         {
-                            es.SupprimerEleve((int)abonnement.EleveId);
+                            using (EleveServices es = new EleveServices())
+                            {
+                                es.SupprimerEleve((int)abonnement.EleveId);
+                            }
                         }
-                    }
+                    }                    
                 }
+
                 rs.SupprimerResponsable(responsableId);
-                return RedirectToAction("Index");
+                if (role == "ResponsableEleve")
+                {
+                    return RedirectToAction("Index", "Home");
+                } else
+                {
+                    ResponsableEleveViewModel revm = revm = new ResponsableEleveViewModel()
+                    {
+                        ListeResponsablesEleves = rs.ObtenirTousLesResponsables()
+                    };
+                    return View("ListeResponsablesEleves", revm);
+                }           
+                     
             }
 
         }
