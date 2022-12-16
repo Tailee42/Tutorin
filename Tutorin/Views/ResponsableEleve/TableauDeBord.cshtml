@@ -107,7 +107,7 @@
 
 <h1>Les Prestations Réservées :</h1>
 
-@foreach (Eleve eleve in Model.Eleves)
+@foreach (Eleve eleve in Model.ElevesActifs)
 {
 
     <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
@@ -123,19 +123,21 @@
 
                     <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
-                <div>
-                    Date de début : @prestation.DateDebut<br>
-                    Date de fin : @prestation.DateFin<br>
-                    Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
-                    Niveau : @prestation.Niveau<br>
+                    <div>
+                        Date de début : @prestation.DateDebut<br>
+                        Date de fin : @prestation.DateFin<br>
+                        Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
+                        Niveau : @prestation.Niveau<br>
+
                         @if(prestation.Matiere != 0)
                         {
-                             <text>
+                                <text>
                             Matière: @prestation.Matiere <br>
                             </text>
                         }
 
-                    <hr />
+                        <hr />
+
                         @if (prestation.Presentiel)
                         {
                             <text>
@@ -163,14 +165,14 @@
 <h1>Historique des prestations :</h1>
 
 
-@foreach (Eleve eleve in Model.Eleves)
+@foreach (Eleve eleve in Model.ElevesActifs)
 {
 
     <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
     <div class="cards">
         @foreach (Prestation prestation in eleve.Prestations)
         {
-            @if (DateTime.Compare(DateTime.Now, prestation.DateFin) >= 0)
+            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) <= 0 && (DateTime.Now - prestation.DateFin).Days <= 21)
             {
                 <div class="card historique">
                     <div class="card__icon">
@@ -190,7 +192,9 @@
                             Matière: @prestation.Matiere <br>
                             </text>
                         }
+
                         <hr />
+
                         @if (prestation.Presentiel)
                         {
                             <text>
@@ -205,6 +209,7 @@
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }
+
                     </div>
 
                 </div>

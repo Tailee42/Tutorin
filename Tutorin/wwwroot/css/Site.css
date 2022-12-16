@@ -16,6 +16,10 @@ body>div {
     text-align: center;
 }
 
+h1, h2 {
+    text-align: center;
+}
+
 /* Mise en page du header desktop*/
 header {
     width: 100%;

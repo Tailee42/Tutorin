@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace Tutorin.Controllers
 {
@@ -175,7 +176,8 @@ namespace Tutorin.Controllers
                 responsableEleve.Abonnements = abs.TrouverAbonnements(id);
             }
 
-            List<Eleve> eleves = new List<Eleve>();
+            List<Eleve> elevesActifs = new List<Eleve>();
+            List<Eleve> elevesFins = new List<Eleve>();
             foreach (Abonnement abonnement in responsableEleve.Abonnements)
             {
                 if (abonnement.EleveId != null)
@@ -191,12 +193,23 @@ namespace Tutorin.Controllers
                         eleve.Prestations = ps.TouverLesPrestationsDUnEleve(eleve.Id);
                     }
 
-                    eleves.Add(eleve);
+                    if (abonnement.DateFin == DateTime.MinValue)
+                    {
+                        elevesActifs.Add(eleve);
+                    } else
+                    {
+                        elevesFins.Add(eleve);
+                    }
+
                 }
                 
             }
 
-            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { ResponsableEleve = responsableEleve, Eleves = eleves};
+            TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { 
+                ResponsableEleve = responsableEleve, 
+                ElevesActifs = elevesActifs, 
+                ElevesFinAbonnement = elevesFins
+            };
 
             return View("TableauDeBord", tbrvm);
 

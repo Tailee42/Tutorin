@@ -82,7 +82,7 @@ namespace Tutorin.Controllers
             return RedirectToAction("TableauDeBord", "enseignant");
         }
 
-        [Authorize (Roles = "Enseignant")]
+        [Authorize (Roles = "Enseignant, Gestionnaire")]
         [HttpGet]
         public IActionResult Modifier(int coursId)
         {
@@ -91,7 +91,7 @@ namespace Tutorin.Controllers
                 ContenuPedagogique cours = null;
                 using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
                 {
-                    cps.ObtenirTousLesContenusPedagogiques().Where(c => c.Id == coursId).FirstOrDefault();
+                    cours = cps.ObtenirTousLesContenusPedagogiques().Where(c => c.Id == coursId).FirstOrDefault();
                 }
 
                 if (cours == null)
@@ -104,7 +104,7 @@ namespace Tutorin.Controllers
             return View("Error");
         }
 
-        [Authorize (Roles = "Enseignant")]
+        [Authorize (Roles = "Enseignant, Gestionnaire")]
         [HttpPost]
         public IActionResult Modifier(ContenuPedagogique cours)
         {
