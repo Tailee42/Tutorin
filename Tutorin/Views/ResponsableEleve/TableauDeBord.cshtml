@@ -126,28 +126,30 @@
                     Date de fin : @prestation.DateFin<br>
                     Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
                     Niveau : @prestation.Niveau<br>
-                        @if(prestation.Matiere != 0)
-                        {
-                             <text>
-                            Matière: @prestation.Matiere <br>
-                            </text>
-                        }
+
+                    @if(prestation.Matiere != 0)
+                    {
+                            <text>
+                        Matière: @prestation.Matiere <br>
+                        </text>
+                    }
 
                     <hr />
-                        @if (prestation.Presentiel)
-                        {
-                            <text>
-                                En Presentiel  <br>
-                                Ville : @prestation.Ville
-                            </text>
-                        }
-                        else
-                        {
-                            <text>
-                                En distantiel  <br>
-                                Lien de la visio : @prestation.LienVisio
-                            </text>
-                        }
+
+                    @if (prestation.Presentiel)
+                    {
+                        <text>
+                            En Presentiel  <br>
+                            Ville : @prestation.Ville
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                            En distantiel  <br>
+                            Lien de la visio : @prestation.LienVisio
+                        </text>
+                    }
 
                     </div>
 
@@ -168,7 +170,7 @@
     <div class="cards">
         @foreach (Prestation prestation in eleve.Prestations)
         {
-            @if (DateTime.Compare(DateTime.Now, prestation.DateFin) >= 0)
+            @if ((DateTime.Now-prestation.DateFin).Days <= 21)
             {
                 <div class="card historique">
                     <div class="card__icon">
@@ -188,7 +190,9 @@
                             Matière: @prestation.Matiere <br>
                             </text>
                         }
+
                         <hr />
+
                         @if (prestation.Presentiel)
                         {
                             <text>
@@ -203,6 +207,7 @@
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }
+
                     </div>
 
                 </div>

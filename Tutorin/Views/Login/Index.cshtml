@@ -1,4 +1,5 @@
-﻿@model Tutorin.ViewModels.UtilisateurViewModel
+﻿@using System.Security.Claims;
+@model Tutorin.ViewModels.UtilisateurViewModel
 @{
     ViewBag.Title = "S'authentifier";
     Layout = "_LayoutDuSite";
@@ -52,7 +53,27 @@ else
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
 
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
+
+}
+
 @section Menu {
     <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+
+    @if (authentifie)
+    {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
+    else
+    {
+        <a href="/login/">Connexion</a>
+    }
+
 }

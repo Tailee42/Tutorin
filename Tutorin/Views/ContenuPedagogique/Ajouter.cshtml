@@ -1,5 +1,6 @@
 ﻿@model Tutorin.Models.ContenuPedagogique
 
+@using System.Security.Claims;
 @using Tutorin.Models
 @{
     ViewBag.Title = "Ajout ContenuPedagogique";
@@ -54,9 +55,28 @@
         <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
 
-@section Menu {
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
 
+}
+
+@section Menu {
     <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+
+    @if (authentifie)
+    {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
+    else
+    {
+        <a href="/login/">Connexion</a>
+    }
+
 }
 
