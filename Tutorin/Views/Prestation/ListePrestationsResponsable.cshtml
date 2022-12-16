@@ -20,34 +20,37 @@
 <div class="cards">
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
     {
+        if (((prestation.TypePrestation == TypePrestation.Tutorat || prestation.TypePrestation == TypePrestation.Cours_particulier) && prestation.PrestationsEleves.Count() == 0) 
+        || prestation.TypePrestation == TypePrestation.Aide_aux_devoirs|| prestation.TypePrestation == TypePrestation.Stage_de_revision )
+        {
+            <div class="card prestation">
+                <div class="card__icon">
+                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                </div>
+                <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
-        <div class="card prestation">
-            <div class="card__icon">
-                @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
-            </div>
-            <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+                <div>
+                    Date : du @prestation.DateDebut au @prestation.DateFin <br />
+                    Prix : @prestation.Prix € <br />
+                    Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau) <br />
+                    @if (prestation.Matiere != 0){
+                        <text>
+                        Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)
+                        </text>
+                    } <br />
+                    Lieu : @prestation.Ville <br />
+                </div>
 
-            <div>
-                Date : du @prestation.DateDebut au @prestation.DateFin <br />
-                Prix : @prestation.Prix € <br />
-                Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau) <br />
-                @if (prestation.Matiere != 0){
-                    <text>
-                    Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)
-                    </text>
-                } <br />
-                Lieu : @prestation.Ville <br />
-            </div>
-
-            <p class="card__button">
-                <a class="card__link" href="/Prestation/InscrireEleve?prestationId=@prestation.Id">
-                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                    Inscrire un élève
-                </a>
-            </p>
+                <p class="card__button">
+                    <a class="card__link" href="/Prestation/InscrireEleve?prestationId=@prestation.Id">
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                        Inscrire un élève
+                    </a>
+                </p>
             
+            </div>
+        }
         
-        </div>
     }
 </div>
 

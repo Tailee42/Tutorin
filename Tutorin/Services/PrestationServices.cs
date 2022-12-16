@@ -107,6 +107,7 @@ namespace Tutorin.Services
             {
                 prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
                 prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+                prestation.PrestationsEleves = _bddContext.PrestationsEleves.Where(p => p.PrestationId == prestation.Id).ToList();
             }
 
             return listePrestations;
