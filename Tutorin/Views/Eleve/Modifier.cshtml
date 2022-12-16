@@ -32,7 +32,6 @@
         <fieldset>
             <legend>Elève</legend>
 
-
             <div class="hidden">
                 @Html.LabelFor(m => Model.Id)<br />
                 @Html.TextBoxFor(m => Model.Id)<br />
@@ -58,11 +57,14 @@
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
+@*                @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
                 @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
-            </div>
+                @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)*@
 
+                <!-- bouton qui active le menu deroulant pour modifier le mot de passe -->
+                <button id="btn-modifier">Modifier le mot de passe </button>
+            </div>
+               
             <div class="hidden">
                 @Html.LabelFor(m => Model.Utilisateur.Id) <br />
                 @Html.TextBoxFor(m => Model.Utilisateur.Id)<br />
@@ -87,12 +89,27 @@
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
-
             <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
-
 </div>
+
+<!-- contenu du menu deroulant pour modifier le mot de passe -->
+<form id="form-modifier" method="post" action="/Eleve/ModifierMotDePasse">
+    <div>
+        <label for="ancien-mdp"> Mot de passe actuel </label>
+        <input type="password" name="ancienMdp" id="ancien-mdp" />
+    </div>
+    <div>
+        <label for="new-mdp"> Nouveau mot de passe </label>
+        <input type="password" name="newMdp" id="new-mdp" />
+    </div>
+    <div>
+        <label for="confirm-mdp"> Confirmer mot de passe </label>
+        <input type="password" name="confirmMdp" id="confirm-mdp" />
+    </div>
+    <input class="boutonStyle" type="submit" value="Valider" />
+</form>
 
 @section Script {
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>

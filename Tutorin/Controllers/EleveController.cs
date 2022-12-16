@@ -84,11 +84,31 @@ namespace Tutorin.Controllers
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (EleveServices es = new EleveServices())
             {
-                es.ModifierEleve(eleve); 
+                es.ModifierEleve(eleve.Id, eleve.Utilisateur.Nom, eleve.Utilisateur.Prenom, eleve.Utilisateur.Identifiant, eleve.DateNaissance, eleve.Niveau) ; 
             }
 
             return RedirectToAction("TableauDeBord", role);
         }
+
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire, Eleve")]
+        [HttpPost]
+        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        {
+            string eleveId = User.FindFirstValue("RoleId");
+            Eleve eleve = null;
+            int id;
+
+            using (EleveServices es = new EleveServices())
+            {
+                if (int.TryParse(eleveId, out id))
+                {
+                    eleve = es.TrouverUnEleve(id);
+                    es.ModifierMotdePasse(eleve, ancienMdp, newMdp, confirmMdp);
+                }
+            }
+            return RedirectToAction("TableauDeBord", eleve);
+        }
+
 
         [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
         public IActionResult Supprimer(int eleveId)
