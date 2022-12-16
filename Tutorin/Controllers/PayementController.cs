@@ -11,12 +11,13 @@ namespace Tutorin.Controllers
 {
     public class PayementController : Controller
     {
+        [Authorize (Roles = "ResponsableEleve")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ResponsableEleve")]
         public IActionResult PayerAbonnement(int typeAbonnement)
         {
             int roleId;
@@ -44,16 +45,15 @@ namespace Tutorin.Controllers
                 return View("PayementAbonnement", pvm);
             }
 
-            int roleId;
-            if (int.TryParse(User.FindFirstValue("RoleId"), out roleId))
+            if (int.TryParse(User.FindFirstValue("RoleId"), out int roleId))
             {
                 payement.ResponsableEleveId = roleId;
             }
+
             int payementId;
             using (PayementServices ps = new PayementServices())
             {
                 payement.MontantTTC = TypeAbonnementExtensions.PrixTTCAbonnement(pvm.TypeAbonnement);
-
                 payementId = ps.CreerPayement(payement);
             }
 
@@ -65,73 +65,69 @@ namespace Tutorin.Controllers
             return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
         }
 
-            [Authorize]
-            public IActionResult PayerPrestation(PrestationViewModel pvm)
+        [Authorize]
+        public IActionResult PayerPrestation(PrestationViewModel pvm)
+        {
+            int roleId;
+            ResponsableEleve responsableEleve = null;
+            if (int.TryParse(User.FindFirstValue("RoleId"), out roleId))
             {
-                int roleId;
-                ResponsableEleve responsableEleve = null;
-                if (int.TryParse(User.FindFirstValue("RoleId"), out roleId))
+                using (ResponsableServices rs = new ResponsableServices())
                 {
-                    using (ResponsableServices rs = new ResponsableServices())
-                    {
-                        responsableEleve = rs.TrouverUnResponsable(roleId);
-                    }
+                    responsableEleve = rs.TrouverUnResponsable(roleId);
                 }
+            }
 
-                using (PrestationServices ps = new PrestationServices())
-                {
-                    pvm.Prestation = ps.TrouverUnePrestation(pvm.PrestationId);
-                }
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm.Prestation = ps.TrouverUnePrestation(pvm.PrestationId);
+            }
 
-                Payement payement = new Payement() { NomTitulaireCarte = responsableEleve.Utilisateur.Nom, NumeroCarte = "1234123412341234", DateExpiration = "03/24", CVC = "789", ResponsableEleve = responsableEleve, ResponsableEleveId = roleId };
-                payement.MontantTTC = pvm.Prestation.Prix * pvm.ElevesId.Count;
+            Payement payement = new Payement() { NomTitulaireCarte = responsableEleve.Utilisateur.Nom, NumeroCarte = "1234123412341234", DateExpiration = "03/24", CVC = "789", ResponsableEleve = responsableEleve, ResponsableEleveId = roleId };
+            payement.MontantTTC = pvm.Prestation.Prix * pvm.ElevesId.Count;
 
-                pvm.Payement = payement;
+            pvm.Payement = payement;
                 
+            return View("PayementPrestation", pvm);
+        }
+
+        [Authorize, HttpPost]
+        public IActionResult PayerPrestation(Payement payement, PrestationViewModel pvm)
+        {
+            if (!ModelState.IsValid)
+            {
                 return View("PayementPrestation", pvm);
             }
 
-            [Authorize, HttpPost]
-            public IActionResult PayerPrestation(Payement payement, PrestationViewModel pvm)
+            if (int.TryParse(User.FindFirstValue("RoleId"), out int roleId))
             {
-                if (!ModelState.IsValid)
-                {
-                    return View("PayementPrestation", pvm);
-                }
-
-                int roleId;
-                if (int.TryParse(User.FindFirstValue("RoleId"), out roleId))
-                {
-                    payement.ResponsableEleveId = roleId;
-                }
-
-                using (PrestationServices ps = new PrestationServices())
-                {
-                    pvm.Prestation = ps.TrouverUnePrestation(pvm.PrestationId);
-                }
-
-                int payementId;
-                using (PayementServices ps = new PayementServices())
-                {
-                    payement.MontantTTC = pvm.Prestation.Prix * pvm.ElevesId.Count;
-
-                    payementId = ps.CreerPayement(payement);
-                }
-
-                Prestation prestation = new Prestation();
-
-                using (PrestationServices ps = new PrestationServices())
-                {
-                    prestation = ps.TrouverUnePrestation(pvm.PrestationId);
-
-                    ps.AjouterUnPayement(pvm.PrestationId, payementId);
-
-                    foreach (int id in pvm.ElevesId)
-                        ps.InscrireEleveAPrestation(id, pvm.PrestationId);
-                }
-
-                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
-
+                payement.ResponsableEleveId = roleId;
             }
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm.Prestation = ps.TrouverUnePrestation(pvm.PrestationId);
+            }
+
+            int payementId;
+            using (PayementServices ps = new PayementServices())
+            {
+                payement.MontantTTC = pvm.Prestation.Prix * pvm.ElevesId.Count;
+
+                payementId = ps.CreerPayement(payement);
+            }
+
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                ps.AjouterUnPayement(pvm.PrestationId, payementId);
+
+                foreach (int id in pvm.ElevesId)
+                    ps.InscrireEleveAPrestation(id, pvm.PrestationId);
+            }
+
+            return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+
+        }
     }
 }

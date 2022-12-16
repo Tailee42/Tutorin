@@ -21,7 +21,7 @@ table {
 }
 
 th {
-    min-width: 20vh;
+    width: 50vh;
     border: 1px solid #5e2791;
 }
 
@@ -35,7 +35,7 @@ td {
     text-align: center;
     background-color: white;
     border: 1px solid #5e2791;
-}
+} 
 
 .titre {
     text-align: center;
@@ -48,15 +48,3 @@ td {
 
 
 
-#search {
-    background-image: url('/Images/logoRecherche.png'); /* Add a search icon to input */
-    background-size: 20px;
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 50vw; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid black; /* Add a grey border */
-    margin-top: 20px;
-    margin-bottom: 12px; /* Add some space below the input */
-}

@@ -27,12 +27,12 @@
 <table id="table" border="1">
     <thead>
         <tr>
-            <td>Type de prestation</td>
-            <td>Matière</td>
-            <td>Niveau</td>
-            <td>Presentiel</td>
-            <td>Etat de la presation</td>
-            <td colspan="2">Actions</td>
+            <th>Type de prestation</th>
+            <th>Matière</th>
+            <th>Niveau</th>
+            <th>Presentiel</th>
+            <th>Etat de la prestation</th>
+            <th colspan="2">Actions</th>
         </tr>
     </thead>
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
@@ -41,7 +41,15 @@
             <td>@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</td>
             <td>@TypeMatiereExtensions.NomMatiere(prestation.Matiere)</td>
             <td>@TypeNiveauExtensions.NomDuNiveau(prestation.Niveau)</td>
-            <td>@prestation.Presentiel</td>
+            <td>
+                @if (@prestation.Presentiel)
+                {
+                    <texte>Oui</texte>
+                } else
+                {
+                    <texte> Non </texte>
+                }
+            </td>
             <td>@EtatPrestationExtensions.NomEtat(prestation.EtatPrestation)</td>
             <td><a href="/Prestation/modifier?prestationId=@prestation.Id"><i class="fa-solid fa-pen"></i></a></td>
             <td><a href="/Prestation/supprimer?prestationId=@prestation.Id"><i class="fa-solid fa-trash"></i></a></td>

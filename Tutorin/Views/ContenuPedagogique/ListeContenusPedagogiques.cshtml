@@ -40,7 +40,7 @@
             <div class="card abonnement">
             <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="lien-afficher-cours">
             <div class="card__icon">
-                <i class="fa-solid fa-file-contract"></i>
+                @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(cours.Matiere))
             </div>
 
             <h2 class="card__title">@cours.Titre</h2>
