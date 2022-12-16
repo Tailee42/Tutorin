@@ -6,23 +6,21 @@ using System.Linq;
 using Tutorin.ViewModels;
 using System.Security.Claims;
 using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tutorin.Controllers
 {
     public class ResponsableEleveController : Controller
     {
+        [Authorize (Roles = "Gestionnaire")]
         public IActionResult Index()
         {
-            List<ResponsableEleve> listeResponsable = new List<ResponsableEleve>();
-            ResponsableEleveViewModel revm;
+            ResponsableEleveViewModel revm = new ResponsableEleveViewModel();
 
             using (ResponsableServices rs = new ResponsableServices())
             {
-                revm = new ResponsableEleveViewModel()
-                {
-                    ListeResponsablesEleves = rs.ObtenirTousLesResponsables()
-                };
-            };
+                revm.ListeResponsablesEleves = rs.ObtenirTousLesResponsables();
+            }
                 return View("ListeResponsablesEleves", revm);
         }
 
@@ -43,28 +41,34 @@ namespace Tutorin.Controllers
             using (ResponsableServices rs = new ResponsableServices())
             {
                 rs.CreerResponsable(responsable);
-                return RedirectToAction("Index","Login");
             }
+
+            return RedirectToAction("Index", "Login");
         }
 
+        [Authorize (Roles = "Gestionnaire, ResponsableEleve")]
         [HttpGet]
         public IActionResult Modifier(int responsableId)
         {
             if (responsableId != 0)
             {
+                ResponsableEleve responsable = null;
                 using (ResponsableServices rs = new ResponsableServices())
                 {
-                    ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
-                    if (responsable == null)
-                    {
-                        return View("Error");
-                    }
-                    return View("Modifier", responsable);
+                    responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
                 }
+
+                if (responsable == null)
+                {
+                    return View("Error");
+                }
+
+                return View("Modifier", responsable);
             }
             return View("Error");
         }
 
+        [Authorize(Roles = "Gestionnaire, ResponsableEleve")]
         [HttpPost]
         public IActionResult Modifier(ResponsableEleve responsable)
         {
@@ -72,38 +76,48 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", responsable);
             }
+
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (ResponsableServices rs = new ResponsableServices())
             {
                 rs.ModifierResponsable(responsable);
-                return RedirectToAction("TableauDeBord", role);
             }
-            
+
+            return RedirectToAction("TableauDeBord", role);
+
         }
 
+        [Authorize(Roles = "ResponsableEleve")]
         public IActionResult SupprimerProfil(int responsableId)
         {
             if (responsableId != 0)
             {
+                ResponsableEleve responsable = null;
+
                 using (ResponsableServices rs = new ResponsableServices())
                 {
-                    ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
-                    if (responsable == null)
-                    {
-                        return View("Error");
-                    }
-                    return View("SupprimerProfil", responsable);
+                    responsable = rs.TrouverUnResponsable(responsableId);
                 }
+
+                if (responsable == null)
+                {
+                    return View("Error");
+                }
+
+                return View("SupprimerProfil", responsable);
             }
             return View("Error");
         }
 
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
         public IActionResult Supprimer(int responsableId)
         {
             string role = User.FindFirstValue("RoleId");
+
+            ResponsableEleve responsable;
             using (ResponsableServices rs = new ResponsableServices())
             {
-                ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
+                responsable = rs.TrouverUnResponsable(responsableId);
                 if (responsable == null)
                 {
                     return View("Error");
@@ -130,7 +144,7 @@ namespace Tutorin.Controllers
                     return RedirectToAction("Index", "Home");
                 } else
                 {
-                    ResponsableEleveViewModel revm = revm = new ResponsableEleveViewModel()
+                    ResponsableEleveViewModel revm = new ResponsableEleveViewModel()
                     {
                         ListeResponsablesEleves = rs.ObtenirTousLesResponsables()
                     };
@@ -141,6 +155,7 @@ namespace Tutorin.Controllers
 
         }
 
+        [Authorize (Roles = "ResponsableEleve")]
         public IActionResult TableauDeBord()
         {
             string responsableId = User.FindFirstValue("RoleId");

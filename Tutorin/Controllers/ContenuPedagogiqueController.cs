@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -10,58 +11,54 @@ namespace Tutorin.Controllers
 {
     public class ContenuPedagogiqueController : Controller
     {
+        [Authorize (Roles = "Eleve, Gestionaire")]
         public IActionResult Index()
         {
-            ContenuPedagogiqueViewModel cpvm;
+            ContenuPedagogiqueViewModel cpvm = new ContenuPedagogiqueViewModel();
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-                cpvm = new ContenuPedagogiqueViewModel()
-                {
-                    ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiquesValides()
-                };
+                cpvm.ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiquesValides();
             };
 
             return View("ListeContenusPedagogiques", cpvm);
         }
 
-        public IActionResult Index2()
+        [Authorize (Roles = "Gestionnaire")] 
+        public IActionResult TableauContenuPedagogique()
         {
-            ContenuPedagogiqueViewModel cpvm;
+            ContenuPedagogiqueViewModel cpvm = new ContenuPedagogiqueViewModel();
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-                cpvm = new ContenuPedagogiqueViewModel()
-                {
-                    ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiques()
-                };
+                cpvm.ListeContenusPedagogiques = cps.ObtenirTousLesContenusPedagogiques();
             };
 
             return View("TableauContenusPedagogiques", cpvm);
         }
 
+        [Authorize]
         [HttpPost] 
         public IActionResult Rechercher(TypeNiveau niveau, TypeMatiere matiere)
         {
-            ContenuPedagogiqueViewModel cpvm;
+            ContenuPedagogiqueViewModel cpvm = new ContenuPedagogiqueViewModel();
+
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-                cpvm = new ContenuPedagogiqueViewModel()
-                {
-                    ListeContenusPedagogiques = cps.RechercherCours(niveau, matiere)
-                };
-
+                cpvm.ListeContenusPedagogiques = cps.RechercherCours(niveau, matiere);
             };
+
             return View("ListeContenusPedagogiques", cpvm);
         }
 
-
+        [Authorize (Roles = "Enseignant")]
         [HttpGet]
         public IActionResult Ajouter()
         {
             return View("Ajouter");
         }
 
+        [Authorize(Roles = "Enseignant")]
         [HttpPost]
         public IActionResult Ajouter(ContenuPedagogique cours)
         {
@@ -69,42 +66,45 @@ namespace Tutorin.Controllers
             {
                 return View("Ajouter", cours);
             }
+
             string enseignantId = User.FindFirstValue("RoleId");
 
-            int id;
-            if (int.TryParse(enseignantId, out id))
+            if (int.TryParse(enseignantId, out int id))
             {
                 cours.EnseignantId = id;
-
             }
 
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
-
                 cps.CreerContenuPedagogique(cours);
-                return RedirectToAction("TableauDeBord", "enseignant");
             }
+
+            return RedirectToAction("TableauDeBord", "enseignant");
         }
 
+        [Authorize (Roles = "Enseignant")]
         [HttpGet]
         public IActionResult Modifier(int coursId)
         {
             if (coursId != 0)
             {
+                ContenuPedagogique cours = null;
                 using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
                 {
-                    ContenuPedagogique cours = cps.ObtenirTousLesContenusPedagogiques().Where(c => c.Id == coursId).FirstOrDefault();
-                    if (cours == null)
-                    {
-                        return View("Error");
-                    }
-
-                    return View("Modifier", cours);
+                    cps.ObtenirTousLesContenusPedagogiques().Where(c => c.Id == coursId).FirstOrDefault();
                 }
+
+                if (cours == null)
+                {
+                    return View("Error");
+                }
+
+                return View("Modifier", cours);
             }
             return View("Error");
         }
 
+        [Authorize (Roles = "Enseignant")]
         [HttpPost]
         public IActionResult Modifier(ContenuPedagogique cours)
         {
@@ -114,11 +114,9 @@ namespace Tutorin.Controllers
             }
             string enseignantId = User.FindFirstValue("RoleId");
 
-            int id;
-            if (int.TryParse(enseignantId, out id))
+            if (int.TryParse(enseignantId, out int id))
             {
                 cours.EnseignantId = id;
-
             }
 
             string role = User.FindFirstValue(ClaimTypes.Role);
@@ -130,21 +128,24 @@ namespace Tutorin.Controllers
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cps.ModifierContenuPedagogique(cours);
-                return RedirectToAction("TableauDeBord", role);
             }
+
+            return RedirectToAction("TableauDeBord", role);
 
         }
 
+        [Authorize (Roles = "Gestionnaire")]
         public IActionResult Supprimer(int coursId)
         {
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
                 cps.SupprimerContenuPedagogique(coursId);
-                return RedirectToAction("Index2");
             }
+
+            return RedirectToAction("TableauContenuPedagogique");
         }
 
-
+        [Authorize (Roles = "Enseignant, Eleve")]
         public IActionResult Afficher(int coursId)
         {
             if (coursId != 0)
