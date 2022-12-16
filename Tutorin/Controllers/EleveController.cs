@@ -81,9 +81,9 @@ namespace Tutorin.Controllers
             {
 
                 es.ModifierEleve(eleve);
-                return RedirectToAction("TableauDeBord", role);
-            }
-            
+                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+             }
+
         }
 
         public IActionResult Supprimer(int eleveId)

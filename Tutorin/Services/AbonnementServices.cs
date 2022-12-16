@@ -122,6 +122,8 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
+
+
         public void SupprimerEleve(int abonnementId)
         {
             Abonnement abonnement = _bddContext.Abonnements.Find(abonnementId);
@@ -136,6 +138,7 @@ namespace Tutorin.Services
             _bddContext.Abonnements.Update(abonnement);
             _bddContext.SaveChanges();
         }
+
 
     }
 }
