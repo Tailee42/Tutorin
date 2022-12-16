@@ -7,6 +7,8 @@
 
 @section css {
     <link href="/css/cards.css" rel="stylesheet" />
+    <link href="/css/TableauDeBord.css" rel="stylesheet" />
+   
 }
 
 @section Menu {
@@ -18,8 +20,8 @@
 }
 
 <div class="nomUtilisateur">
-    <h2>@Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom</h2>
-    <h3>Responsable</h3>
+    @Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom<br>
+    Responsable<br>
 </div>
 
 <h1>Mes Abonnements :</h1>

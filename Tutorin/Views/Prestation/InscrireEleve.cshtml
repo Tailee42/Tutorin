@@ -11,6 +11,8 @@
 
 @section css {
     <link href="/css/cards.css" rel="stylesheet" />
+    <link href="/css/Eleve.css" rel="stylesheet" />
+   
 }
 
 @section Menu {
@@ -36,7 +38,10 @@
     {
         @if (abonnement.EleveId != null && abonnement.DateFin == DateTime.MinValue)
         {
-          <input name="eleveIds" type="checkbox" value="@abonnement.Eleve.Id" /> @abonnement.Eleve.Utilisateur.Prenom @abonnement.Eleve.Utilisateur.Nom
+          <input name="eleveIds" type="checkbox" value="@abonnement.Eleve.Id" />
+                <div>
+                    @abonnement.Eleve.Utilisateur.Prenom @abonnement.Eleve.Utilisateur.Nom 
+                </div>
         }
     }
       <input type="submit" value="Inscrire" />

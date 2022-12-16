@@ -7,6 +7,7 @@
 
 @section css {
     <link href="/css/Tableaux.css" rel="stylesheet" />
+    <link href="/css/TableauDeBord.css" rel="stylesheet" />
 }
 
 @section Menu {
@@ -17,8 +18,8 @@
 }
 
 <div class="nomUtilisateur">
-    <h2>@Model.Gestionnaire.Utilisateur.Nom.ToUpper() @Model.Gestionnaire.Utilisateur.Prenom</h2>
-    <h3>Gestionnaire</h3>
+    @Model.Gestionnaire.Utilisateur.Nom.ToUpper() @Model.Gestionnaire.Utilisateur.Prenom<br>
+    Gestionnaire<br>
 </div>
 
 <h1 class="titre">Les cours</h1>
