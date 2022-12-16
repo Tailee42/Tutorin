@@ -96,6 +96,9 @@ header {
     margin: 5px;
 }
 
+i {
+    color: #e71f93;
+}
 
 a {
     cursor: pointer;
