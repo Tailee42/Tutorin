@@ -19,8 +19,8 @@
 }
 
 <div class="nomUtilisateur">
-    @Model.Eleve.Utilisateur.Nom.ToUpper() @Model.Eleve.Utilisateur.Prenom<br>
-    Eleve<br>
+    <h2>@Model.Eleve.Utilisateur.Nom.ToUpper() @Model.Eleve.Utilisateur.Prenom</h2>
+    <h3><i class="fa-solid fa-graduation-cap"></i>&ensp;Elève</h3>
 </div>
 
 <h1>Mon abonnement :</h1>
@@ -69,14 +69,14 @@
                     @if (prestation.Presentiel)
                     {
                         <text>
-                            En Presentiel : <br>
+                            En Presentiel  <br>
                             Ville : @prestation.Ville
                         </text>
                     }
                     else
                     {
                         <text>
-                            En distantiel : <br>
+                            En distantiel  <br>
                             Lien de la visio : @prestation.LienVisio
                         </text>
                     }

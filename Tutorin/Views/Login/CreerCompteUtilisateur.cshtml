@@ -5,18 +5,24 @@
 }
 
 @section css {
-    <link href="/css/Site.css" rel="stylesheet"/>
-    <link href="/css/cards.css" rel="stylesheet"/>
+        <link href="/css/Site.css" rel="stylesheet"/>
+        <link href="/css/cards.css" rel="stylesheet"/>
 }
 
 @section Menu {
-    <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+        <a href="/home/">Accueil</a>
+        <a>Présentation</a>
 }
 
 <h1 class="titre-creerprofil">Votre profil ?</h1>
 <div class="cards">
-    <div class="card prestation"><a class="lien-user" href="/Enseignant/Ajouter">Enseignant</a></div>
-    <div class="card prestation"><a class="lien-user" href="/ResponsableEleve/Ajouter">Responsable d'élève</a></div>
+    <div class="card prestation">
+        <div class="cards--iconUser"><i class="fa-sharp fa-solid fa-chalkboard-user fa-2xl"></i></div>
+        <a class="lien-user" href="/Enseignant/Ajouter">Enseignant</a>
+    </div>
+    <div class="card prestation">
+        <div class="cards--iconUser"><i class="fa-solid fa-user fa-2xl"></i></div>
+        <a class="lien-user" href="/ResponsableEleve/Ajouter">Responsable d'élève</a>
+    </div>
     @*<div class="card prestation"><a class="lien-user" href="/Gestionnaire/Ajouter">Gestionnaire</a></div>*@
 </div>

@@ -20,8 +20,8 @@
 }
 
 <div class="nomUtilisateur">
-    @Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom<br>
-    Responsable<br>
+    <h2>@Model.ResponsableEleve.Utilisateur.Nom.ToUpper() @Model.ResponsableEleve.Utilisateur.Prenom</h2>
+    <h3><i class="fa-solid fa-user"></i>&ensp;Responsable</h3>
 </div>
 
 <h1>Mes Abonnements :</h1>
@@ -128,19 +128,25 @@
                     Date de fin : @prestation.DateFin<br>
                     Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
                     Niveau : @prestation.Niveau<br>
-                    Matière : @prestation.Matiere <br>
+                        @if(prestation.Matiere != 0)
+                        {
+                             <text>
+                            Matière: @prestation.Matiere <br>
+                            </text>
+                        }
+
                     <hr />
                         @if (prestation.Presentiel)
                         {
                             <text>
-                                En Presentiel : <br>
+                                En Presentiel  <br>
                                 Ville : @prestation.Ville
                             </text>
                         }
                         else
                         {
                             <text>
-                                En distantiel : <br>
+                                En distantiel  <br>
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }
@@ -164,7 +170,7 @@
     <div class="cards">
         @foreach (Prestation prestation in eleve.Prestations)
         {
-            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
+            @if (DateTime.Compare(DateTime.Now, prestation.DateFin) >= 0)
             {
                 <div class="card historique">
                     <div class="card__icon">
@@ -178,19 +184,24 @@
                         Date de fin : @prestation.DateFin<br>
                         Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
                         Niveau : @prestation.Niveau<br>
-                        Matière : @prestation.Matiere <br>
+                        @if(prestation.Matiere != 0)
+                        {
+                             <text>
+                            Matière: @prestation.Matiere <br>
+                            </text>
+                        }
                         <hr />
                         @if (prestation.Presentiel)
                         {
                             <text>
-                                En Presentiel : <br>
+                                En Presentiel  <br>
                                 Ville : @prestation.Ville
                             </text>
                         }
                         else
                         {
                             <text>
-                                En distantiel : <br>
+                                En distantiel  <br>
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }

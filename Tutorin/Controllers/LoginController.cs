@@ -14,22 +14,26 @@ namespace Tutorin.Controllers
     public class LoginController : Controller
     {
         private UtilisateurServices us;
+
         public LoginController()
         {
             us = new UtilisateurServices();
         }
+
         public IActionResult Index()
         {
             UtilisateurViewModel viewModel = new UtilisateurViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+
             if (viewModel.Authentifie)
             {
                 viewModel.Utilisateur = us.ObtenirUtilisateur(HttpContext.User.Identity.Name);
 
                 return View(viewModel);
-                
             }
+
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Index(UtilisateurViewModel viewModel, string returnUrl)
         {
@@ -40,7 +44,8 @@ namespace Tutorin.Controllers
                 {
                     int roleId = 0;
                     string role = "";
-                    // Cherche l'utilisateur dans les tables enseignants, responsables, élèves
+
+                    // Cherche l'utilisateur dans les tables enseignants, responsables, élèves, gestionnaire
                     using (EnseignantServices ens = new EnseignantServices())
                     {
                         Enseignant enseignant = ens.ObtientTousLesEnseignants().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
@@ -67,6 +72,7 @@ namespace Tutorin.Controllers
                         eleve = els.ObtientTousLesEleves().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
                     }
 
+                    //vérifie si l'abonnement de l'élève est en cours pour pouvoir se connecter.
                     if (eleve != null)
                     {
                         Abonnement abonnement = null;
@@ -83,7 +89,6 @@ namespace Tutorin.Controllers
                         role = "Eleve";
                         roleId = eleve.Id;
                     }
-
 
 
                     using (GestionnaireServices gs = new GestionnaireServices())
@@ -108,6 +113,7 @@ namespace Tutorin.Controllers
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                     HttpContext.SignInAsync(userPrincipal);
+
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
 
@@ -137,6 +143,8 @@ namespace Tutorin.Controllers
         {
             return View();
         }
+
+        //Non utilisé ici
         [HttpPost]
         public IActionResult CreerCompteUtilisateur(Utilisateur utilisateur)
         {
