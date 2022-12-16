@@ -95,3 +95,8 @@ textarea {
 .boite-contenu {
     width: 700px;
 }
+
+.lien-suppression {
+    float: right;
+    margin-top: 30px;
+}
