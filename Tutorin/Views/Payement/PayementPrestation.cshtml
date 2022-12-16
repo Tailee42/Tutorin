@@ -5,6 +5,10 @@
     Layout = "_LayoutDuSite";
 }
 
+@section css {
+    <link href="/css/Form.css" rel="stylesheet" />
+}
+
 @{
     var responsableId = User.FindFirst("RoleId");
 }
@@ -15,34 +19,34 @@
     @using (Html.BeginForm())
     {
             <fieldset>
-                <legend>Prix de l'abonnement : @Model.Payement.MontantTTC € </legend>
+                <legend>Prix de la prestation : @Model.Payement.MontantTTC € </legend>
 
-                <div>
+                <div class="boite-form">
                 @Html.LabelFor(m => Model.Payement.NomTitulaireCarte)<br />
                 @Html.TextBoxFor(m => Model.Payement.NomTitulaireCarte)<br />
                 @Html.ValidationMessageFor(m => Model.Payement.NomTitulaireCarte)
                 </div>
 
-                <div>
+                <div class="boite-form">
                 @Html.LabelFor(m => Model.Payement.NumeroCarte)<br />
                 @Html.TextBoxFor(m => Model.Payement.NumeroCarte, new {@type = "number"})<br />
                 @Html.ValidationMessageFor(m => Model.Payement.NumeroCarte)
                 </div>
 
-                <div>
+                <div class="boite-form">
                 @Html.LabelFor(m => Model.Payement.DateExpiration) <br />
                 @Html.TextBoxFor(m => Model.Payement.DateExpiration)<br />
                 @Html.ValidationMessageFor(m => Model.Payement.DateExpiration)
                 </div>
 
-                <div>
+                <div class="boite-form">
                 @Html.LabelFor(m => Model.Payement.CVC)<br />
                 @Html.TextBoxFor(m => Model.Payement.CVC, new {@type = "number"} )<br />
                 @Html.ValidationMessageFor(m => Model.Payement.CVC)
                 </div>
 
 
-                <input class="bouttonStyle" type="submit" value="Payer" />
+                <input class="boutonStyle" type="submit" value="Payer" />
             </fieldset>
     }
 

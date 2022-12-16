@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -60,15 +61,30 @@ namespace Tutorin.Controllers
                         }
                     }
 
+                    Eleve eleve = null;
                     using (EleveServices els = new EleveServices())
                     {
-                        Eleve eleve = els.ObtientTousLesEleves().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
-                        if (eleve != null)
-                        {
-                            role = "Eleve";
-                            roleId = eleve.Id;
-                        }
+                        eleve = els.ObtientTousLesEleves().Where(r => r.UtilisateurId == utilisateur.Id).FirstOrDefault();
                     }
+
+                    if (eleve != null)
+                    {
+                        Abonnement abonnement = null;
+                        using (AbonnementServices abs = new AbonnementServices())
+                        {
+                            abonnement = abs.TrouverAbonnementEleve(eleve.Id);
+                        }
+
+                        if (abonnement.DateFin != DateTime.MinValue)
+                        {
+                            return View("ErreurFinAbonnement");
+                        }
+
+                        role = "Eleve";
+                        roleId = eleve.Id;
+                    }
+
+
 
                     using (GestionnaireServices gs = new GestionnaireServices())
                     {

@@ -76,14 +76,14 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", eleve);
             }
-            
-                using (EleveServices es = new EleveServices())
-                {
+            string role = User.FindFirstValue(ClaimTypes.Role);
+            using (EleveServices es = new EleveServices())
+            {
 
-                    es.ModifierEleve(eleve);
-                    return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
-                }
-            
+                es.ModifierEleve(eleve);
+                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+             }
+
         }
 
         public IActionResult Supprimer(int eleveId)

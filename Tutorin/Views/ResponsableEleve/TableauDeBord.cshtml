@@ -19,6 +19,7 @@
 
 <div class="nomUtilisateur">
     <h2>@Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom</h2>
+    <h3>Responsable</h3>
 </div>
 
 <h1>Mes Abonnements :</h1>
@@ -67,16 +68,11 @@
                         Eleve : @abonnement.Eleve.Utilisateur.Nom @abonnement.Eleve.Utilisateur.Prenom<br>
                         Niveau : @abonnement.Eleve.Niveau
                     </div>
-                    <p class="card__button">
-                        <a class="card__link" href="#">
-                            <i class="fa-regular fa-face-smile"></i>
-                            Suivi de l'élèvé
-                        </a>
-                    </p>
+     
                     <p class="card__button">
                         <a class="card__link" href="/Eleve/modifier?eleveId=@abonnement.EleveId">
-                            <i class="fa-sharp fa-solid fa-xmark"></i>
-                            Modifier le profi de l'élève
+                            <i class="fa-solid fa-pen"></i>
+                            Modifier le profil de l'élève
                         </a>
 
                     </p>
@@ -125,13 +121,13 @@
 
                     <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
-                    <div>
-                        Date de début : @prestation.DateDebut<br>
-                        Date de fin : @prestation.DateFin<br>
-                        Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
-                        Niveau : @prestation.Niveau<br>
-                        Matière : @prestation.Matiere <br>
-                        <hr />
+                <div>
+                    Date de début : @prestation.DateDebut<br>
+                    Date de fin : @prestation.DateFin<br>
+                    Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
+                    Niveau : @prestation.Niveau<br>
+                    Matière : @prestation.Matiere <br>
+                    <hr />
                         @if (prestation.Presentiel)
                         {
                             <text>
@@ -204,7 +200,6 @@
         }
     </div>
 }
-
 
 <h1>Historique des abonnements :</h1>
 

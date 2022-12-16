@@ -13,42 +13,11 @@
 }
 
 @section css {
-    <link href="/css/Cours.css" rel="stylesheet" />
+    <link href="/css/Footer.css" rel="stylesheet" />
+    <link href="/css/cards.css" rel="stylesheet" />
 }
 
-<h1>Liste des cours : </h1>
-
-@*<table border="1">
-
-    <tr>
-        <th>Numéro</th>
-        <th>Titre</th>
-        <th>Matière</th>
-        <th>Niveau</th>
-        <th>Date de publication</th>
-        <th>Dernière mise à jour</th>
-        <th>Etat</th>
-        <th>Auteur</th>
-    </tr>
-
-    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
-    {
-        <tr>
-            <td>@cours.Id</td>
-            <td>@cours.Titre</td>
-            <td>@cours.Matiere</td>
-            <td>@cours.Niveau</td>
-            <td>@cours.DatePublication</td>
-            <td>@cours.DateMiseAJour</td>
-            <td>@cours.Etat</td>
-            <td>
-                <a href="/ContenuPedagogique/modifier?coursId=@cours.Id">Modifier</a>
-                <a href="/ContenuPedagogique/supprimer?coursId=@cours.Id">Supprimer</a>
-                <a href="/ContenuPedagogique/afficher?coursId=@cours.Id">Afficher</a>
-            </td>
-        </tr>
-    }
-</table>*@
+<h1>Liste des cours </h1>
 
  @using (Html.BeginForm("Rechercher", "ContenuPedagogique", FormMethod.Post))
         {  
@@ -65,19 +34,23 @@
             <input type="submit" value="Rechercher" />
         }
 
-    <div class="cards-cours">
-    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
-        {
-            <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="afficher-cours">
-            <article class="card-cours">
-                <header class="titre-card">
-                    <h2>@cours.Titre</h2>
-                </header>
-                <div class="content">
-                    <p>Matière: @cours.Matiere</p>
-                    <p>Niveau: @cours.Niveau</p>   
-                </div>
-            </article>
+    <div class="cards">
+        @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
+        {  
+            <div class="card abonnement">
+            <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="lien-afficher-cours">
+            <div class="card__icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+
+            <h2 class="card__title">@cours.Titre</h2>
+
+            <div>                    
+                <p>Matière: @TypeMatiereExtensions.NomMatiere(cours.Matiere)</p>
+                <p>Niveau: @TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</p>
+            </div>
             </a>
+            </div>
+
         }
     </div>

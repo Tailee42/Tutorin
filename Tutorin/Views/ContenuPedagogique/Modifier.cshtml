@@ -5,69 +5,73 @@
     Layout = "_LayoutDuSite";
 }
 
-<h1>Modifier un cours</h1>
+@section css {
+    <link href="/css/Form.css" rel="stylesheet" />
+}
+
+<h1>Modifier</h1>
 <div>
 
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Modifier un cours : </legend>
+            <legend>Cours</legend>
 
-            <div>
+            <div class="hidden">
                 @Html.LabelFor(m => Model.Id) <br />
                 @Html.TextBoxFor(m => Model.Id)<br />
                 @Html.ValidationMessageFor(m => Model.Id)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Matiere)<br />
                 @Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))<br />
                 @Html.ValidationMessageFor(m => Model.Matiere)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Niveau)<br />
                 @Html.DropDownListFor(m => Model.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))<br />
                 @Html.ValidationMessageFor(m => Model.Niveau)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Titre) <br />
                 @Html.TextBoxFor(m => Model.Titre)<br />
                 @Html.ValidationMessageFor(m => Model.Titre)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.DatePublication)<br />
                 @Html.EditorFor(m => Model.DatePublication, new {@type = "date"} )<br />
                 @Html.ValidationMessageFor(m => Model.DatePublication)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.DateMiseAJour)<br />
                 @Html.EditorFor(m => Model.DateMiseAJour, new {@type = "date"} )<br />
                 @Html.ValidationMessageFor(m => Model.DateMiseAJour)
             </div>
 
-            <div>
+            <div class="boite-form">
                 @Html.LabelFor(m => Model.Etat)<br />
                 @Html.DropDownListFor(model => Model.Etat ,new SelectList(Enum.GetValues(typeof(EtatContenuPedagogique))))<br/>
                 @Html.ValidationMessageFor(m => Model.Etat)
             </div>
 
-            <div>
+            <di class="boite-contenu">
                 @Html.LabelFor(m => Model.ContenuDuCours)<br />
                 @Html.TextAreaFor(m => Model.ContenuDuCours, new {style = "width:700px; height:300px", value = Model.ContenuDuCours})<br />
                 @Html.ValidationMessageFor(m => Model.ContenuDuCours)
-            </div>
+            </di>
 
-            <div>
+            <div class="hidden">
                 @Html.LabelFor(m => Model.EnseignantId)<br />
                 @Html.TextBoxFor(m => Model.EnseignantId )<br />
                 @Html.ValidationMessageFor(m => Model.EnseignantId)
             </div>
 
-            <input class="bouttonStyle" type="submit" value="Modifier" />
+            <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
 

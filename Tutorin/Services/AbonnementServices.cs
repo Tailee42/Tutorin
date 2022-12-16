@@ -22,6 +22,7 @@ namespace Tutorin.Services
         public int CreerAbonnement(TypeAbonnement type, int responsableEleveId, int eleveId)
         {
             Abonnement abonnement = new Abonnement(type) { ResponsableEleveId = responsableEleveId, EleveId = eleveId};
+
             _bddContext.Abonnements.Add(abonnement);
             _bddContext.SaveChanges();
             return abonnement.Id;
@@ -30,6 +31,7 @@ namespace Tutorin.Services
         public int CreerAbonnement(int payementId, TypeAbonnement type, int responsableEleveId)
         {
             Abonnement abonnement = new Abonnement(type) { ResponsableEleveId = responsableEleveId, PayementId = payementId };
+
             _bddContext.Abonnements.Add(abonnement);
             _bddContext.SaveChanges();
             return abonnement.Id;
@@ -96,7 +98,7 @@ namespace Tutorin.Services
             return abonnements;
         }
 
-        //Permet de trouver tous les abonnements en fonction d'un responsable
+        //Permet de trouver tous les abonnements en fonction d'un eleve
         public Abonnement TrouverAbonnementEleve(int eleveId)
         {
             List<Abonnement> abonnements = _bddContext.Abonnements.Where(r => r.EleveId == eleveId).ToList();

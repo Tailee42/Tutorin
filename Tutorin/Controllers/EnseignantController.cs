@@ -12,20 +12,26 @@ namespace Tutorin.Controllers
     {
         public IActionResult Index()
         {
-            List<Enseignant> listeEnseignants = new List<Enseignant>();
-            EnseignantViewModel envm;
+            EnseignantViewModel envm = new EnseignantViewModel();
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                envm = new EnseignantViewModel()
-                {
-                    ListeEnseignants = ens.ObtientTousLesEnseignants()
-
-                };
-
+                envm.ListeEnseignants = ens.ObtientTousLesEnseignants();
             };
 
             return View("ListeEnseignants", envm);
+        }
+
+        public IActionResult ListeVisiteur()
+        {
+            EnseignantViewModel evm = new EnseignantViewModel();
+
+            using (EnseignantServices es = new EnseignantServices())
+            {
+                evm.ListeEnseignants = es.ObtientTousLesEnseignants();
+            };
+
+            return View("ListeVisiteur", evm);
         }
 
         [HttpGet]
@@ -45,7 +51,7 @@ namespace Tutorin.Controllers
             using (EnseignantServices en = new EnseignantServices())
             {
                 en.CreerEnseignant(enseignant);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Login");
             }
         }
 
@@ -74,11 +80,11 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", enseignant);
             }
-
+            string role = User.FindFirstValue(ClaimTypes.Role);
             using (EnseignantServices ens = new EnseignantServices())
             {
                 ens.ModifierEnseignant(enseignant);
-                return RedirectToAction("Index");
+                return RedirectToAction("TableauDeBord", role);
             }
 
         }

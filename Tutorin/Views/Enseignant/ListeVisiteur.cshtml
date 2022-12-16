@@ -1,0 +1,67 @@
+﻿@using System.Security.Claims;
+@model Tutorin.ViewModels.EnseignantViewModel
+@{
+    Layout = "_LayoutDuSite";
+    ViewBag.Title = "Liste des enseignants";
+}
+
+
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
+
+}
+
+@section Menu {
+
+    <a href="/Enseignant/ListeVisiteur">Les Enseignants</a>
+    <a href="/Prestation/ListeVisteur">Les Prestations</a>
+    @if (authentifie)
+    {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
+    else
+    {
+        <a href="/login/">Connexion</a>
+    }
+}
+
+
+@section css {
+    <link href="/css/cards.css" rel="stylesheet" />
+}
+
+<h1>Liste des enseignants : </h1>
+
+
+<div class="cards">
+    @foreach (Tutorin.Models.Enseignant enseignant in Model.ListeEnseignants)
+    {
+        
+        <div class="card abonnement">
+            <div class="card__icon">
+                <i class="fa-solid fa-person-chalkboard"></i>
+            </div>
+
+            <h2 class="card__title">@enseignant.Utilisateur.Nom @enseignant.Utilisateur.Prenom</h2>
+
+            <div>
+                Niveau : @enseignant.Niveaux <br>
+                Matière : @enseignant.Matiere
+            </div>
+
+
+
+        </div>
+        
+    }
+</div>
+
+
+
+
