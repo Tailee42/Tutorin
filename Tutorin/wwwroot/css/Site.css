@@ -7,8 +7,9 @@ body {
     padding-top: 6em;
 }
 
-#container {
+body>div {
     padding: 10px;
+    min-height: 75vh;
 }
 
 .centre {
@@ -117,57 +118,6 @@ a:hover {
 .nomUtilisateur {
     text-align: right;
 }
-
-/* Page d'accueil */
-
-.section {
-    min-height: 40rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    padding-bottom: 20px;
-}
-
-.title {
-    flex-direction: row;
-}
-
-.titre {
-    width: 40%;
-    margin-bottom: 20px;
-}
-
-.grosTitre {
-    font-size: 5rem;
-    color: black;
-    margin: 20px 0 20px 0;
-}
-
-.image{
-    object-fit: contain;
-}
-
-.image img {
-    height: 35rem;
-    border-left: 5px solid #e71f93;
-    border-bottom: 5px solid #53afe6;
-}
-
-.section .card__icon {
-    font-size: 4rem;
-}
-
-.section:nth-child(even) {
-    background-color: #a6d6f2;
-}
-
-li {
-    text-align: left;
-}
-
 
 
 /* footer */

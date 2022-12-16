@@ -1,5 +1,4 @@
 ﻿#container {
-    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,7 +6,6 @@
 }
 
 .table {
-    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,11 +17,15 @@ table {
     border: 2px solid #5e2791;
     border-collapse: collapse;
     margin-bottom: 20px;
-    width: 70vw;
     box-shadow: 3px 3px 3px #5f5f5f;
 }
 
-thead td, tfoot td {
+th {
+    width: 50vh;
+    border: 1px solid #5e2791;
+}
+
+thead th, tfoot td {
     font-weight: bold;
     text-align: center;
     background-color: #a6d6f2;
@@ -44,9 +46,7 @@ td {
     margin-right: 20px;
 }
 
-i {
-    color: #e71f93;
-}
+
 
 #search {
     background-image: url('/Images/logoRecherche.png'); /* Add a search icon to input */

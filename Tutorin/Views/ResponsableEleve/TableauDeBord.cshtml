@@ -148,54 +148,54 @@
     </div>
 }
 
-<h1>Hitorique des prestations :</h1>
+<h1>Historique des prestations :</h1>
 
-<div class="cards">
-    @foreach (Eleve eleve in Model.Eleves)
-    {
 
-        <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
-        <div class="cards">
-            @foreach (Prestation prestation in eleve.Prestations)
+@foreach (Eleve eleve in Model.Eleves)
+{
+
+    <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
+    <div class="cards">
+        @foreach (Prestation prestation in eleve.Prestations)
+        {
+            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
             {
-                @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
-                {
-                    <div class="card historique">
-                        <div class="card__icon">
-                            @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
-                        </div>
-
-                        <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
-
-                        <div>
-                            Date de début : @prestation.DateDebut<br>
-                            Date de fin : @prestation.DateFin<br>
-                            Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
-                            Niveau : @prestation.Niveau<br>
-                            Matière : @prestation.Matiere <br>
-                            <hr />
-                            @if (prestation.Presentiel)
-                            {
-                                <text>
-                                    En Presentiel : <br>
-                                    Ville : @prestation.Ville
-                                </text>
-                            } else
-                            {
-                                <text>
-                                    En distantiel : <br>
-                                    Lien de la visio : @prestation.LienVisio
-                                </text>
-                            }
-                        </div>
-
+                <div class="card historique">
+                    <div class="card__icon">
+                        @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
                     </div>
-                }
 
+                    <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+
+                    <div>
+                        Date de début : @prestation.DateDebut<br>
+                        Date de fin : @prestation.DateFin<br>
+                        Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
+                        Niveau : @prestation.Niveau<br>
+                        Matière : @prestation.Matiere <br>
+                        <hr />
+                        @if (prestation.Presentiel)
+                        {
+                            <text>
+                                En Presentiel : <br>
+                                Ville : @prestation.Ville
+                            </text>
+                        } else
+                        {
+                            <text>
+                                En distantiel : <br>
+                                Lien de la visio : @prestation.LienVisio
+                            </text>
+                        }
+                    </div>
+
+                </div>
             }
-        </div>
-    }
-</div>
+
+        }
+    </div>
+}
+
 
 <h1>Historique des abonnements :</h1>
 
@@ -225,16 +225,6 @@
                     Prix mensuel : @abonnement.PrixTTC €
                 </div>
 
-
-                @if (abonnement.EleveId == null)
-                {
-                    <p class="card__button">
-                        <a class="card__link" href="/Abonnement/ajouterEleve?abonnementid=@abonnement.Id">
-                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                            Ajouter un élève
-                        </a>
-                    </p>
-                }
             </div>
         }
     }
