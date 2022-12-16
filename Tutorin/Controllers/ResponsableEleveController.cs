@@ -6,6 +6,7 @@ using System.Linq;
 using Tutorin.ViewModels;
 using System.Security.Claims;
 using System.Data;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Tutorin.Controllers
 {
@@ -100,7 +101,7 @@ namespace Tutorin.Controllers
 
         public IActionResult Supprimer(int responsableId)
         {
-            string role = User.FindFirstValue("RoleId");
+            string role = User.FindFirstValue(ClaimTypes.Role);
             using (ResponsableServices rs = new ResponsableServices())
             {
                 ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
@@ -127,6 +128,7 @@ namespace Tutorin.Controllers
                 rs.SupprimerResponsable(responsableId);
                 if (role == "ResponsableEleve")
                 {
+                    HttpContext.SignOutAsync();
                     return RedirectToAction("Index", "Home");
                 } else
                 {
