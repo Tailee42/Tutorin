@@ -100,8 +100,6 @@ namespace Tutorin.Services
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
 
-        }
-
         public int CompterEleve()
         {
             int nbEleve = _bddContext.Eleves.Count();
