@@ -137,10 +137,8 @@ namespace Tutorin.Controllers
                         ListeResponsablesEleves = rs.ObtenirTousLesResponsables()
                     };
                     return View("ListeResponsablesEleves", revm);
-                }           
-                     
+                }                          
             }
-
         }
 
         public IActionResult TableauDeBord()

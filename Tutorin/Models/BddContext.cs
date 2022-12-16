@@ -36,7 +36,6 @@ namespace Tutorin.Models
             this.Database.EnsureCreated();
 
             this.Utilisateurs.AddRange(
-
                 new Utilisateur { Id = 1, Nom = "Albrand", Prenom = "Pierre", Identifiant = "apierre", MotDePasse = UtilisateurServices.EncodeMD5("Pierre7") },
                 new Utilisateur { Id = 2, Nom = "Roux", Prenom = "Louis", Identifiant = "rlouis", MotDePasse = UtilisateurServices.EncodeMD5("Louis12") },
                 new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine9") },
@@ -46,7 +45,6 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
                 new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") },
                 new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") }
-
                 );
 
             this.Gestionnaires.AddRange(
@@ -68,8 +66,7 @@ namespace Tutorin.Models
                     DateFin = new System.DateTime(2022, 12, 23, 14, 0, 0),
                     TypePrestation = TypePrestation.Tutorat,
                     Ville = "Paris",
-                    Prix = 25F,
-                    Matiere = TypeMatiere.Physique,
+                    Prix = 0,
                     Presentiel = true,
                     EnseignantId = 2,
                     EtatPrestation = EtatPrestation.Enseignants_inscrits
@@ -81,7 +78,7 @@ namespace Tutorin.Models
                     DateDebut = new System.DateTime(2022, 12, 30, 16, 0, 0),
                     DateFin = new System.DateTime(2022, 12, 30, 16, 0, 0),
                     TypePrestation = TypePrestation.Aide_aux_devoirs,
-                    Prix = 25F,
+                    Prix = 0,
                     Matiere = TypeMatiere.Histoire,
                     Presentiel = false,
                     EnseignantId = 3,
@@ -108,8 +105,7 @@ namespace Tutorin.Models
                     DateFin = new System.DateTime(2022, 12, 23, 15, 0, 0),
                     TypePrestation = TypePrestation.Tutorat,
                     Ville = "Paris",
-                    Prix = 25F,
-                    Matiere = TypeMatiere.Mathematiques,
+                    Prix = 0,
                     Presentiel = true,
                     EnseignantId = 2,
                     EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
@@ -127,6 +123,114 @@ namespace Tutorin.Models
                     LienVisio = "zoom.us",
                     EnseignantId = 1,
                     EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
+                },
+                new Prestation
+                {
+                    Id = 6,
+                    Niveau = TypeNiveau.CM1,
+                    DateDebut = new System.DateTime(2023, 01, 12, 17, 0, 0),
+                    DateFin = new System.DateTime(2023, 01, 12, 18, 30, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Histoire,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 3,
+                    EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
+                },
+                new Prestation
+                {
+                    Id = 7,
+                    Niveau = TypeNiveau.CM1,
+                    DateDebut = new System.DateTime(2023, 01, 30, 17, 30, 0),
+                    DateFin = new System.DateTime(2023, 01, 30, 19, 00, 0),
+                    TypePrestation = TypePrestation.Cours_particulier,
+                    Prix = 20F,
+                    Matiere = TypeMatiere.Mathematiques,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 1,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 8,
+                    Niveau = TypeNiveau.Sixieme,
+                    DateDebut = new System.DateTime(2023, 01, 05, 18, 00, 0),
+                    DateFin = new System.DateTime(2023, 01, 05, 20, 00, 0),
+                    TypePrestation = TypePrestation.Cours_particulier,
+                    Prix = 20F,
+                    Matiere = TypeMatiere.Français,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 4,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 9,
+                    Niveau = TypeNiveau.Premiere,
+                    DateDebut = new System.DateTime(2023, 01, 26, 18, 0, 0),
+                    DateFin = new System.DateTime(2023, 01, 26, 19, 0, 0),
+                    TypePrestation = TypePrestation.Tutorat,
+                    Prix = 0,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 4,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 10,
+                    Niveau = TypeNiveau.Terminale,
+                    DateDebut = new System.DateTime(2023, 02, 02, 17, 0, 0),
+                    DateFin = new System.DateTime(2023, 02, 02, 19, 0, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Chimie,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EtatPrestation = EtatPrestation.A_affecter
+                },
+                new Prestation
+                {
+                    Id = 11,
+                    Niveau = TypeNiveau.CM2,
+                    DateDebut = new System.DateTime(2023, 01, 23, 18, 0, 0),
+                    DateFin = new System.DateTime(2023, 01, 23, 19, 0, 0),
+                    TypePrestation = TypePrestation.Cours_particulier,
+                    Prix = 20F,
+                    Matiere = TypeMatiere.Français,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 4,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 12,
+                    Niveau = TypeNiveau.CE1,
+                    DateDebut = new System.DateTime(2023, 02, 08, 17, 30, 0),
+                    DateFin = new System.DateTime(2023, 02, 08, 19, 30, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Mathematiques,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 1,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 13,
+                    Niveau = TypeNiveau.Quatrieme,
+                    DateDebut = new System.DateTime(2023, 02, 27, 17, 0, 0),
+                    DateFin = new System.DateTime(2023, 02, 27, 19, 0, 0),
+                    TypePrestation = TypePrestation.Tutorat,
+                    Prix = 0,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EtatPrestation = EtatPrestation.A_affecter
                 }
                 );
 
@@ -170,7 +274,9 @@ namespace Tutorin.Models
 
             this.PrestationsEleves.AddRange(
                 new PrestationEleve { Id = 1, EleveId = 1, PrestationId = 4},
-                new PrestationEleve { Id = 2, EleveId = 2, PrestationId = 5}
+                new PrestationEleve { Id = 2, EleveId = 2, PrestationId = 5},
+                new PrestationEleve { Id = 3, EleveId = 1, PrestationId = 6},
+                new PrestationEleve { Id = 4, EleveId = 1, PrestationId = 7}
                 );
 
             this.PrestationsPayements.AddRange(

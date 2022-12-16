@@ -158,13 +158,6 @@ namespace Tutorin.Controllers
 
         public IActionResult GererUtilisateurs()
         {
-            //Gestionnaire gestionnaire = 
-
-            //TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel()
-            //{
-            //    Gestionnaire = gestionnaire,
-            //};
-
             return View("GererUtilisateurs");
         }
     }
