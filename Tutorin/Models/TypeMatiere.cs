@@ -2,7 +2,7 @@
 {
     public enum TypeMatiere
     {
-       Anglais, Français, Mathematiques, Physique, Chimie, Histoire, Geographie
+       Choix_Matiere, Anglais, Français, Mathematiques, Physique, Chimie, Histoire, Geographie
     }
 
     public static class TypeMatiereExtensions
@@ -12,18 +12,20 @@
             switch ((int)matiere)
             {
                 case 0:
-                    return "Anglais";
+                    return "Choisir une matière";
                 case 1:
-                    return "Français";
+                    return "Anglais";
                 case 2:
-                    return "Mathématiques";
+                    return "Français";
                 case 3:
-                    return "Physique";
+                    return "Mathématiques";
                 case 4:
-                    return "Chimie";
+                    return "Physique";
                 case 5:
-                    return "Histoire";
+                    return "Chimie";
                 case 6:
+                    return "Histoire";
+                case 7:
                     return "Géographie";
             }
             return null;
@@ -33,19 +35,19 @@
         {
             switch ((int)matiere)
             {
-                case 0:
-                    return "<i class=\"fa-solid fa-language\"></i>";
                 case 1:
-                    return "<i class=\"fa-solid fa-book-bookmark\"></i>";
+                    return "<i class=\"fa-solid fa-language\"></i>";
                 case 2:
-                    return "<i class=\"fa-solid fa-square-root-variable\"></i>";
+                    return "<i class=\"fa-solid fa-book-bookmark\"></i>";
                 case 3:
-                    return "<i class=\"fa-solid fa-gears\"></i>";
+                    return "<i class=\"fa-solid fa-square-root-variable\"></i>";
                 case 4:
-                    return "<i class=\"fa-solid fa-flask-vial\"></i>";
+                    return "<i class=\"fa-solid fa-gears\"></i>";
                 case 5:
-                    return "<i class=\"fa-solid fa-landmark\"></i>";
+                    return "<i class=\"fa-solid fa-flask-vial\"></i>";
                 case 6:
+                    return "<i class=\"fa-solid fa-landmark\"></i>";
+                case 7:
                     return "<i class=\"fa-solid fa-earth-europe\"></i>";
 
             }
