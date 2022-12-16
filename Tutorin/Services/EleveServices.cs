@@ -54,10 +54,6 @@ namespace Tutorin.Services
             }
         }
 
-
-
-
-
         public void ModifierEleve(Eleve eleve)
         {
             eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(eleve.Utilisateur.MotDePasse);
@@ -80,6 +76,10 @@ namespace Tutorin.Services
         {
             Eleve eleve = _bddContext.Eleves.Find(id);
             eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
+
+            Abonnement abonnement = _bddContext.Abonnements.Where(a => a.EleveId == eleve.Id).FirstOrDefault();
+            abonnement.EleveId = null;
+            _bddContext.Abonnements.Update(abonnement);
             _bddContext.Eleves.Remove(eleve);
             _bddContext.Utilisateurs.Remove(eleve.Utilisateur);
             _bddContext.SaveChanges();

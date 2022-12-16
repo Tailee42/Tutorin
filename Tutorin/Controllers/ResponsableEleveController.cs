@@ -5,6 +5,7 @@ using Tutorin.Models;
 using System.Linq;
 using Tutorin.ViewModels;
 using System.Security.Claims;
+using System.Data;
 
 namespace Tutorin.Controllers
 {
@@ -71,22 +72,73 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", responsable);
             }
-            
+            string role = User.FindFirstValue(ClaimTypes.Role);
             using (ResponsableServices rs = new ResponsableServices())
             {
                 rs.ModifierResponsable(responsable);
-                return RedirectToAction("Index");
+                return RedirectToAction("TableauDeBord", role);
             }
             
         }
 
+        public IActionResult SupprimerProfil(int responsableId)
+        {
+            if (responsableId != 0)
+            {
+                using (ResponsableServices rs = new ResponsableServices())
+                {
+                    ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
+                    if (responsable == null)
+                    {
+                        return View("Error");
+                    }
+                    return View("SupprimerProfil", responsable);
+                }
+            }
+            return View("Error");
+        }
+
         public IActionResult Supprimer(int responsableId)
         {
+            string role = User.FindFirstValue("RoleId");
             using (ResponsableServices rs = new ResponsableServices())
             {
+                ResponsableEleve responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
+                if (responsable == null)
+                {
+                    return View("Error");
+                }
+
+                using (AbonnementServices abos = new AbonnementServices())
+                {
+                    foreach (Abonnement abonnement in abos.TrouverAbonnements(responsableId))
+                    {
+                        abos.FinAbonnement(abonnement.Id);
+                        if (abonnement.EleveId != null)
+                        {
+                            using (EleveServices es = new EleveServices())
+                            {
+                                es.SupprimerEleve((int)abonnement.EleveId);
+                            }
+                        }
+                    }                    
+                }
+
                 rs.SupprimerResponsable(responsableId);
-                return RedirectToAction("Index");
+                if (role == "ResponsableEleve")
+                {
+                    return RedirectToAction("Index", "Home");
+                } else
+                {
+                    ResponsableEleveViewModel revm = revm = new ResponsableEleveViewModel()
+                    {
+                        ListeResponsablesEleves = rs.ObtenirTousLesResponsables()
+                    };
+                    return View("ListeResponsablesEleves", revm);
+                }           
+                     
             }
+
         }
 
         public IActionResult TableauDeBord()
