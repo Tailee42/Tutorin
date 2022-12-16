@@ -27,14 +27,14 @@
 
     <thead>
     <tr>
-        <td>Numéro</td>
-        <td>Titre</td>
-        <td>Matière</td>
-        <td>Niveau</td>
-        <td>Date de publication</td>
-        <td>Dernière mise à jour</td>
-        <td>Etat</td>
-        <td colspan="3">Actions</td>
+        <th>Numéro</th>
+        <th>Titre</th>
+        <th>Matière</th>
+        <th>Niveau</th>
+        <th>Date de publication</th>
+        <th>Dernière mise à jour</th>
+        <th>Etat</th>
+        <th colspan="3">Actions</th>
     </tr>
     </thead>
 
@@ -45,8 +45,13 @@
             <td>@cours.Titre</td>
             <td>@TypeMatiereExtensions.NomMatiere(cours.Matiere)</td>
             <td>@TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</td>
-            <td>@cours.DatePublication</td>
-            <td>@cours.DateMiseAJour</td>
+            <td>@cours.DatePublication.ToString("d")</td>
+            <td>
+                @if (cours.DateMiseAJour != DateTime.MinValue)
+                {
+                    <text>@cours.DateMiseAJour.ToString("d")</text>
+                }
+            </td>
             <td>@EtatContenuPedagogiqueExtensions.NomEtat(cours.Etat)</td>
             <td><a href="/ContenuPedagogique/afficher?coursId=@cours.Id"><i class="fa-solid fa-magnifying-glass"></i></a></td>
             <td><a href="/ContenuPedagogique/modifier?coursId=@cours.Id"><i class="fa-solid fa-pen"></i></a></td>

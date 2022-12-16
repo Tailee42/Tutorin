@@ -27,12 +27,12 @@
 
     <thead>
         <tr>
-            <td>Nom</td>
-            <td>Prénom</td>
-            <td>Identifiant</td>
-            <td>Date de naissance</td>
-            <td>Niveau</td>
-            <td colspan="2">Actions</td>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Identifiant</th>
+            <th>Date de naissance</th>
+            <th>Niveau</th>
+            <th colspan="2">Actions</th>
         </tr>
     </thead>
 
@@ -42,7 +42,7 @@
                 <td>@eleve.Utilisateur.Nom</td>
                 <td>@eleve.Utilisateur.Prenom</td>
                 <td>@eleve.Utilisateur.Identifiant</td>
-                <td>@eleve.DateNaissance</td>
+                <td>@eleve.DateNaissance.ToString("d")</td>
                 <td>@TypeNiveauExtensions.NomDuNiveau(eleve.Niveau)</td>
                 <td><a href="/Eleve/modifier?eleveId=@eleve.Id"><i class="fa-solid fa-pen"></i></a></td>
                 <td><a href="/Eleve/supprimer?eleveId=@eleve.Id"><i class="fa-solid fa-trash"></i></a></td>
