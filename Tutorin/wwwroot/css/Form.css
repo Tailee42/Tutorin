@@ -96,7 +96,20 @@ textarea {
     width: 700px;
 }
 
+/* vue modifier responsable élève */
 .lien-suppression {
     float: right;
     margin-top: 30px;
+}
+
+/* form caché pour modification du mot de passe */
+#form-modifier {
+    display: block;
+    margin-top : 10px;
+    border: 2px solid #F68712;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+#form-modifier label {
+    margin: 5px 0;
 }

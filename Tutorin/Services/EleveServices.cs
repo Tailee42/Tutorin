@@ -49,6 +49,7 @@ namespace Tutorin.Services
                 eleve.Utilisateur.Identifiant = identifiant;
                 eleve.DateNaissance = dateNaissance;
                 eleve.Niveau = niveau;
+                _bddContext.Eleves.Update(eleve);
                 _bddContext.SaveChanges();
             }
         }
