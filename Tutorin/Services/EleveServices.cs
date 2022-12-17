@@ -67,11 +67,11 @@ namespace Tutorin.Services
             {
                 if (newMdp == confirmMdp)
                 {
-                    eleve.Utilisateur.MotDePasse = newMdp;
-                    eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(eleve.Utilisateur.MotDePasse);
-                    _bddContext.Eleves.Update(eleve);
+                    eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(newMdp);
+                    _bddContext.Utilisateurs.Update(eleve.Utilisateur);
                 }
             }
+            _bddContext.SaveChanges();
         }
 
         public List<Eleve> ObtientTousLesEleves()
