@@ -76,10 +76,10 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(Eleve eleve)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Modifier", eleve);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Modifier", eleve);
+            //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (EleveServices es = new EleveServices())
@@ -106,7 +106,7 @@ namespace Tutorin.Controllers
                     es.ModifierMotdePasse(eleve, ancienMdp, newMdp, confirmMdp);
                 }
             }
-            return RedirectToAction("TableauDeBord", eleve);
+            return View("Modifier", eleve);
         }
 
 

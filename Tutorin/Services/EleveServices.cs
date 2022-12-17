@@ -49,7 +49,6 @@ namespace Tutorin.Services
                 eleve.Utilisateur.Identifiant = identifiant;
                 eleve.DateNaissance = dateNaissance;
                 eleve.Niveau = niveau;
-                _bddContext.Eleves.Update(eleve);
                 _bddContext.SaveChanges();
             }
         }
@@ -64,15 +63,17 @@ namespace Tutorin.Services
         public void ModifierMotdePasse(Eleve eleve, string ancienMdp, string newMdp, string confirmMdp)
         {
             ancienMdp = UtilisateurServices.EncodeMD5(ancienMdp);
+            newMdp = UtilisateurServices.EncodeMD5(newMdp);
+            confirmMdp = UtilisateurServices.EncodeMD5(confirmMdp);
             if (ancienMdp == eleve.Utilisateur.MotDePasse)
             {
                 if (newMdp == confirmMdp)
                 {
-                    eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(newMdp);
+                    eleve.Utilisateur.MotDePasse = newMdp;
                     _bddContext.Utilisateurs.Update(eleve.Utilisateur);
+                    _bddContext.SaveChanges();
                 }
             }
-            _bddContext.SaveChanges();
         }
 
         public List<Eleve> ObtientTousLesEleves()

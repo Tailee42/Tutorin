@@ -1,9 +1,10 @@
-﻿function afficher()
-{
-    if (document.getElementById(form-modifier).style.display == "none") { 
-        document.getElementById(form-modifier).style.display = "block";
+﻿let btn = document.getElementById("btn-modifier");
+let form = document.getElementById("form-modifier");
+
+btn.addEventListener("click", () => {
+    if (getComputedStyle(form).display == "none") {
+        form.style.display = "block";
+    } else {
+        form.style.display = "none";
     }
-    else { 
-        document.getElementById(form-modifier).style.display = "none";
-    }
-}
+});
