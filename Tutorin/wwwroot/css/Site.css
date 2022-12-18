@@ -127,6 +127,9 @@ a:hover {
     margin-left: 30px;
 }
 
+.nomUtilisateur h2 {
+    text-align: right;
+}
 
 /* footer */
 footer {
@@ -167,3 +170,4 @@ footer {
     text-align: center;
     margin-top: 50px;
 }
+

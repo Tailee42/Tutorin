@@ -146,18 +146,17 @@ namespace Tutorin.Controllers
             int id;
             ResponsableEleve responsable = new ResponsableEleve();
             Prestation prestation = new Prestation();
+            List<Eleve> listeEleves = new List<Eleve>();
 
             using (ResponsableServices rs = new ResponsableServices())
             {
                 if (int.TryParse(responsableId, out id))
                 {
                     responsable = rs.TrouverUnResponsable(id);
+                    listeEleves = rs.TouverLesElevesDUnResponsable(id);
                 }
             }
-            using (AbonnementServices aas = new AbonnementServices())
-            {
-                responsable.Abonnements = aas.TrouverAbonnements(id);
-            }
+
 
             using (PrestationServices ps = new PrestationServices())
             {
@@ -167,7 +166,8 @@ namespace Tutorin.Controllers
             PrestationViewModel pvm = new PrestationViewModel()
             {
                 ResponsableEleve = responsable,
-                Prestation = prestation
+                Prestation = prestation,
+                ListeEleves = listeEleves
             };
 
             return View("InscrireEleve", pvm);

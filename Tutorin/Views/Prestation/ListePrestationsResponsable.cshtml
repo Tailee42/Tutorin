@@ -35,10 +35,24 @@
                     Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau) <br />
                     @if (prestation.Matiere != 0){
                         <text>
-                        Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)
+                            Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)<br />
                         </text>
-                    } <br />
-                    Lieu : @prestation.Ville <br />
+                    } 
+
+                    @if (prestation.Presentiel)
+                    {
+                        <text>
+                            En présentiel : <br />
+                            Lieu: @prestation.Ville <br />
+                        </text>
+                    } else
+                    {
+                        <text>
+                            En distanciel : <br />
+                            Lien de la visio: @prestation.LienVisio<br />
+                        </text>
+                    }
+                    
                 </div>
 
                 <p class="card__button">

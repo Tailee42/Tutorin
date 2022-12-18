@@ -89,5 +89,26 @@ namespace Tutorin.Services
             int nbResponsable = _bddContext.ResponsablesEleves.Count();
             return nbResponsable;
         }
+
+        public List<Eleve> TouverLesElevesDUnResponsable(int responsableId)
+        {
+            List<Abonnement> listeAbonnements = _bddContext.Abonnements.Where(a => a.ResponsableEleveId == responsableId).ToList();
+
+            List<Eleve> listeEleves = new List<Eleve>();
+
+            foreach (Abonnement abonnement in listeAbonnements)
+            {
+                if (abonnement.DateFin == System.DateTime.MinValue && abonnement.EleveId > 0)
+                {
+                    Eleve eleve = new Eleve();
+                    eleve = _bddContext.Eleves.Find(abonnement.EleveId);
+                    eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
+                    listeEleves.Add(eleve);
+                }
+                
+            }
+
+            return listeEleves;
+        }
     }
 }
