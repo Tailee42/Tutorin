@@ -73,19 +73,39 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(ResponsableEleve responsable)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Modifier", responsable);
-            }
+            //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Modifier", responsable);
+            //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (ResponsableServices rs = new ResponsableServices())
             {
-                rs.ModifierResponsable(responsable);
+                rs.ModifierResponsable(responsable.Id, responsable.Utilisateur.Nom, responsable.Utilisateur.Prenom, responsable.Utilisateur.Identifiant, responsable.Mail, responsable.Abonnements);
             }
 
             return RedirectToAction("TableauDeBord", role);
 
+        }
+
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
+        [HttpPost]
+        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        {
+            string responsableId = User.FindFirstValue("RoleId");
+            ResponsableEleve responsable = null;
+            int id;
+
+            using (ResponsableServices rs = new ResponsableServices())
+            {
+                if (int.TryParse(responsableId, out id))
+                {
+                    responsable = rs.TrouverUnResponsable(id);
+                    rs.ModifierMotdePasse(responsable, ancienMdp, newMdp, confirmMdp);
+                }
+            }
+            return View("Modifier", responsable);
         }
 
         [Authorize(Roles = "ResponsableEleve")]

@@ -57,10 +57,6 @@
             </div>
 
             <div class="boite-form">
-@*               @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
-                @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)*@
-
                 <!-- bouton qui active le menu deroulant pour modifier le mdp, il a le type=button pour ne pas être submit par défaut -->
                 <label class="mdp-modifier">Modifier le mot de passe&ensp;</label>
                 <button type="button" id="btn-modifier"><i class="fa-solid fa-arrow-down"></i></button>

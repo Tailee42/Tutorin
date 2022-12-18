@@ -85,19 +85,39 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(Enseignant enseignant)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Modifier", enseignant);
-            }
+            //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Modifier", enseignant);
+            //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                ens.ModifierEnseignant(enseignant);
+                ens.ModifierEnseignant(enseignant.Id, enseignant.Utilisateur.Nom, enseignant.Utilisateur.Prenom, enseignant.Utilisateur.Identifiant, enseignant.Matiere, enseignant.Niveaux);
             }
 
             return RedirectToAction("TableauDeBord", role);
+        }
+
+        [Authorize(Roles = "Gestionnaire, Enseignant")]
+        [HttpPost]
+        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        {
+            string enseignantId = User.FindFirstValue("RoleId");
+            Enseignant enseignant = null;
+            int id;
+
+            using (EnseignantServices ens = new EnseignantServices())
+            {
+                if (int.TryParse(enseignantId, out id))
+                {
+                    enseignant = ens.TrouverUnEnseignant(id);
+                    ens.ModifierMotdePasse(enseignant, ancienMdp, newMdp, confirmMdp);
+                }
+            }
+            return View("Modifier", enseignant);
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]

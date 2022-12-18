@@ -76,6 +76,7 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(Eleve eleve)
         {
+            //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
             //if (!ModelState.IsValid)
             //{
             //    return View("Modifier", eleve);

@@ -73,21 +73,42 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(Gestionnaire gestionnaire)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Modifier", gestionnaire);
-            }
+            //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Modifier", gestionnaire);
+            //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
 
             using (GestionnaireServices ges = new GestionnaireServices())
             {
-                ges.ModifierGestionnaire(gestionnaire);
+                ges.ModifierGestionnaire(gestionnaire.Id, gestionnaire.Utilisateur.Nom, gestionnaire.Utilisateur.Prenom, gestionnaire.Utilisateur.Identifiant, gestionnaire.PosteOccupe);
             }
 
             return RedirectToAction("TableauDeBord", role);
 
         }
+
+        [Authorize(Roles = "Gestionnaire")]
+        [HttpPost]
+        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        {
+            string gestionnaireId = User.FindFirstValue("RoleId");
+            Gestionnaire gestionnaire = null;
+            int id;
+
+            using (GestionnaireServices es = new GestionnaireServices())
+            {
+                if (int.TryParse(gestionnaireId, out id))
+                {
+                    gestionnaire = es.TrouverUnGestionnaire(id);
+                    es.ModifierMotdePasse(gestionnaire, ancienMdp, newMdp, confirmMdp);
+                }
+            }
+            return View("Modifier", gestionnaire);
+        }
+
 
         [Authorize(Roles = "Gestionnaire")]
         public IActionResult Supprimer(int gestionnaireId)
