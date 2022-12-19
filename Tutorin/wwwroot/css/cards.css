@@ -28,11 +28,6 @@
     font-size: 1.5rem;
 }
 
-a {
-    cursor: pointer;
-    text-decoration: none;
-}
-
 .card__link {
     padding: 0 5px;
     box-shadow: inset 0 0 0 0 black;
@@ -58,10 +53,6 @@ a {
 
 .historique {
     background: linear-gradient(360deg, hsla(0, 0%, 95%, 1) 0%, hsla(0, 0%, 65%, 1) 100%);
-}
-
-.lien-afficher-cours, .lien-afficher-cours:visited {
-    color: black;
 }
 
 /* Vue GererUtilisateurs */

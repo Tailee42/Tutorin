@@ -39,7 +39,7 @@
 }
 
 @section css {
-    <link href="/css/Footer.css" rel="stylesheet" />
+    <link href="/css/FormCours.css" rel="stylesheet" />
     <link href="/css/cards.css" rel="stylesheet" />
 }
 
@@ -60,23 +60,23 @@
     <input type="submit" value="Rechercher" />
 }
 
-    <div class="cards">
-        @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
-        {  
-            <div class="card abonnement">
-            <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="lien-afficher-cours">
-            <div class="card__icon">
-                @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(cours.Matiere))
-            </div>
+<div class="cards">
+    @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
+    {  
+        <div class="card prestation">
+        <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="lien-afficher-cours">
+        <div class="card__icon">
+            @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(cours.Matiere))
+        </div>
 
-            <h2 class="card__title">@cours.Titre</h2>
+        <h2 class="card__title">@cours.Titre</h2>
 
-            <div>                    
-                <p>Matière: @TypeMatiereExtensions.NomMatiere(cours.Matiere)</p>
-                <p>Niveau: @TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</p>
-            </div>
-            </a>
-            </div>
+        <div>                    
+            <p>Matière: @TypeMatiereExtensions.NomMatiere(cours.Matiere)</p>
+            <p>Niveau: @TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</p>
+        </div>
+        </a>
+        </div>
 
-        }
-    </div>
+    }
+</div>

@@ -11,7 +11,7 @@ namespace Tutorin.Controllers
 {
     public class ContenuPedagogiqueController : Controller
     {
-        [Authorize (Roles = "Eleve, Gestionaire")]
+        [Authorize (Roles = "Eleve, Gestionaire, Enseignant")]
         public IActionResult Index()
         {
             ContenuPedagogiqueViewModel cpvm = new ContenuPedagogiqueViewModel();

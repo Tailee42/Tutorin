@@ -12,6 +12,7 @@
 
 @section css {
     <link href="/css/cards.css" rel="stylesheet" />
+    <link href="/css/FormCours.css" rel="stylesheet" />
 }
 
 <h1>Inscrire un élève à une prestation : </h1>
@@ -28,7 +29,7 @@
     <td>@Html.DropDownListFor(m => Model.Prestation.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
         </tr>
     </table>
-    <input type="submit" value="Rechercher" />
+    <input type="submit" value="Rechercher"  class="boutonStyle"/>
 }
 
 

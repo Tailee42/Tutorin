@@ -1,4 +1,5 @@
 ﻿@model Tutorin.Models.ContenuPedagogique
+@using System.Security.Claims;
 @using Tutorin.Models
 @{
     ViewBag.Title = "Modification Contenu Pédagogique";
@@ -59,11 +60,11 @@
                 @Html.ValidationMessageFor(m => Model.Etat)
             </div>
 
-            <di class="boite-contenu">
+            <div class="boite-contenu">
                 @Html.LabelFor(m => Model.ContenuDuCours)<br />
                 @Html.TextAreaFor(m => Model.ContenuDuCours, new {style = "width:700px; height:300px", value = Model.ContenuDuCours})<br />
                 @Html.ValidationMessageFor(m => Model.ContenuDuCours)
-            </di>
+            </div>
 
             <div class="hidden">
                 @Html.LabelFor(m => Model.EnseignantId)<br />
@@ -83,9 +84,31 @@
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
 
-@section Menu {
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    string roleId = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+        roleId = User.FindFirst("RoleId").Value;
+    }
+}
 
-    <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+@section Menu {
+    @if (role.Equals("Gestionnaire"))
+    {
+        <a href="/Index">Accueil</a>
+        <a href="/Eleve/TableauDeBord">Tableau de Bord</a>
+        <a href="/Eleve/modifier?eleveId=@roleId">Mon Compte</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+
+    } else if (role.Equals("Enseignant"))
+    {
+        <a href="/Home/Index">Accueil</a>
+        <a href="/Enseignant/TableauDeBord">Tableau de bord</a>
+        <a href="/Enseignant/modifier?enseignantId=@roleId">Mon Compte</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
 }
 
