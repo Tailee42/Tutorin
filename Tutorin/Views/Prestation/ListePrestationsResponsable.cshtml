@@ -29,7 +29,10 @@
     <td>@Html.DropDownListFor(m => Model.Prestation.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
         </tr>
     </table>
-    <input type="submit" value="Rechercher"  class="boutonStyle"/>
+    <div>
+        <input type="submit" value="Rechercher" class="boutonStyle" />
+        <button class="boutonStyle" formaction="/Prestation/VoirPrestationsValidees?responsableId=@responsableId">Retour</button>
+    </div>
 }
 
 

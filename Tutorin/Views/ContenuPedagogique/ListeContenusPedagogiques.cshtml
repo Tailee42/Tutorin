@@ -54,28 +54,33 @@
         </tr>
         <tr>
             <td>@Html.Label("Matière recherchée : ")</td>
-    <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
+            <td>@Html.DropDownListFor(m => Model.Matiere, new SelectList(Enum.GetValues(typeof(TypeMatiere))))</td>
         </tr>
     </table>
-    <input type="submit" value="Rechercher" />
+
+    <div>
+        <input type="submit" value="Rechercher" class="boutonStyle" />
+        <button class="boutonStyle" formaction="/ContenuPedagogique/">Retour</button>
+    </div>
+    
 }
 
 <div class="cards">
     @foreach (Tutorin.Models.ContenuPedagogique cours in Model.ListeContenusPedagogiques)
     {  
         <div class="card prestation">
-        <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="lien-afficher-cours">
-        <div class="card__icon">
-            @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(cours.Matiere))
-        </div>
+            <a href="/ContenuPedagogique/afficher?coursId=@cours.Id" class="lien-afficher-cours">
+                <div class="card__icon">
+                    @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(cours.Matiere))
+                </div>
 
-        <h2 class="card__title">@cours.Titre</h2>
+                <h2 class="card__title">@cours.Titre</h2>
 
-        <div>                    
-            <p>Matière: @TypeMatiereExtensions.NomMatiere(cours.Matiere)</p>
-            <p>Niveau: @TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</p>
-        </div>
-        </a>
+                <div>                    
+                    <p>Matière: @TypeMatiereExtensions.NomMatiere(cours.Matiere)</p>
+                    <p>Niveau: @TypeNiveauExtensions.NomDuNiveau(cours.Niveau)</p>
+                </div>
+            </a>
         </div>
 
     }
