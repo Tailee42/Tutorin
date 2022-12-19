@@ -1,4 +1,4 @@
-﻿@model Tutorin.Models.Gestionnaire
+﻿@model Tutorin.ViewModels.GestionnaireViewModel
 @using Tutorin.Models
 @{
     Layout = "_LayoutDuSite";
@@ -30,74 +30,78 @@
             <legend>Gestionnaire</legend>
 
             <div class="hidden">
-                @Html.LabelFor(m => Model.Id)<br />
-                @Html.TextBoxFor(m => Model.Id)<br />
-                @Html.ValidationMessageFor(m => Model.Id)
+                @Html.LabelFor(m => Model.Gestionnaire.Id)<br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.Id)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.Id)
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
+                @Html.LabelFor(m => Model.Gestionnaire.Utilisateur.Nom)<br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.Utilisateur.Nom)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.Utilisateur.Nom)
             </div>
 
             <div class ="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
+                @Html.LabelFor(m => Model.Gestionnaire.Utilisateur.Prenom)<br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.Utilisateur.Prenom)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.Utilisateur.Prenom)
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
+                @Html.LabelFor(m => Model.Gestionnaire.Utilisateur.Identifiant) <br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.Utilisateur.Identifiant)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.Utilisateur.Identifiant)
             </div>
 
             <div class="boite-form">
-                <!-- bouton qui active le menu deroulant pour modifier le mdp, il a le type=button pour ne pas être submit par défaut -->
-                <label class="mdp-modifier">Modifier le mot de passe&ensp;</label>
-                <button type="button" id="btn-modifier"><i class="fa-solid fa-arrow-down"></i></button>
-                <!-- contenu du menu deroulant pour modifier le mot de passe -->
-                <div id="form-modifier" style="display: none">
-                    <div>
-                        <label for="ancien-mdp"> Mot de passe actuel </label>
-                        <input type="password" name="ancienMdp" id="ancien-mdp" />
-                    </div>
-                    <div>
-                        <label for="new-mdp"> Nouveau mot de passe </label>
-                        <input type="password" name="newMdp" id="new-mdp" />
-                    </div>
-                    <div>
-                        <label for="confirm-mdp"> Confirmer mot de passe </label>
-                        <input type="password" name="confirmMdp" id="confirm-mdp" />
-                    </div>
-                    <input formaction="/Gestionnaire/ModifierMotDePasse" class="boutonStyle" type="submit" value="Valider" />
-                </div>
-            </div>
-
-            <div class="boite-form">
-                @Html.LabelFor(m => Model.PosteOccupe) <br />
-                @Html.TextBoxFor(m => Model.PosteOccupe)<br />
-                @Html.ValidationMessageFor(m => Model.PosteOccupe)
+                @Html.LabelFor(m => Model.Gestionnaire.PosteOccupe) <br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.PosteOccupe)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.PosteOccupe)
             </div>
 
            <div class="hidden">
-                @Html.LabelFor(m => Model.Utilisateur.Id) <br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Id)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Id)
+                @Html.LabelFor(m => Model.Gestionnaire.Utilisateur.Id) <br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.Utilisateur.Id)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.Utilisateur.Id)
             </div>
 
             <div class="hidden">
-                @Html.LabelFor(m => Model.UtilisateurId) <br />
-                @Html.TextBoxFor(m => Model.UtilisateurId)<br />
-                @Html.ValidationMessageFor(m => Model.UtilisateurId)
+                @Html.LabelFor(m => Model.Gestionnaire.UtilisateurId) <br />
+                @Html.TextBoxFor(m => Model.Gestionnaire.UtilisateurId)<br />
+                @Html.ValidationMessageFor(m => Model.Gestionnaire.UtilisateurId)
             </div>
 
             <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
-
 </div>
+
+<form action="/Gestionnaire/ModifierMotDePasse" method="post">
+<div class="boite-form">
+    <!-- bouton qui active le menu deroulant pour modifier le mdp, il a le type=button pour ne pas être submit par défaut -->
+    <label class="mdp-modifier">Modifier le mot de passe&ensp;</label>
+    <button type="button" id="btn-modifier"><i class="fa-solid fa-arrow-down"></i></button>
+    <!-- contenu du menu deroulant pour modifier le mot de passe -->
+    <div id="form-modifier" style="display: none">
+        <div>
+            @Html.LabelFor(m => Model.NewPassword.OldPassword) <br />
+            @Html.PasswordFor(m => Model.NewPassword.OldPassword)<br />
+            @Html.ValidationMessageFor(m => Model.NewPassword.OldPassword)
+        </div>
+        <div>
+            @Html.LabelFor(m => Model.NewPassword.NouveauPassword) <br />
+            @Html.PasswordFor(m => Model.NewPassword.NouveauPassword)<br />
+            @Html.ValidationMessageFor(m => Model.NewPassword.NouveauPassword)
+        </div>
+        <div>
+            @Html.LabelFor(m => Model.NewPassword.ConfirmPassword) <br />
+            @Html.PasswordFor(m => Model.NewPassword.ConfirmPassword)<br />
+            @Html.ValidationMessageFor(m => Model.NewPassword.ConfirmPassword)
+        </div>
+        <input class="boutonStyle" type="submit" value="Valider" />
+    </div>
+</div>
+</form>
 
 @section Script {
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>

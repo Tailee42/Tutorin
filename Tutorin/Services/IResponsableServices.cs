@@ -13,8 +13,5 @@ namespace Tutorin.Services
         void SupprimerResponsable(int id);
         List<ResponsableEleve> ObtenirTousLesResponsables();
         int CompterResponsableEleve();
-        public void ModifierMotdePasse(ResponsableEleve responsable, string ancienMdp, string newMdp, string confirmMdp);
-
-
     }
 }

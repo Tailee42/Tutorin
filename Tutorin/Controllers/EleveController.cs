@@ -56,9 +56,11 @@ namespace Tutorin.Controllers
             if (eleveId != 0)
             {
                 Eleve eleve = null;
+                EleveViewModel evm = new EleveViewModel();
                 using (EleveServices es = new EleveServices())
                 {
                     eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
+                    evm.Eleve = eleve;
                 }
 
                 if (eleve == null)
@@ -66,7 +68,7 @@ namespace Tutorin.Controllers
                     return View("Error");
                 }
 
-                return View("Modifier", eleve);
+                return View("Modifier", evm);
 
             }
             return View("Error");
@@ -74,7 +76,7 @@ namespace Tutorin.Controllers
 
         [Authorize(Roles = "ResponsableEleve, Gestionnaire, Eleve")]
         [HttpPost]
-        public IActionResult Modifier(Eleve eleve)
+        public IActionResult Modifier(EleveViewModel evm)
         {
             //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
             //if (!ModelState.IsValid)
@@ -85,29 +87,32 @@ namespace Tutorin.Controllers
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (EleveServices es = new EleveServices())
             {
-                es.ModifierEleve(eleve.Id, eleve.Utilisateur.Nom, eleve.Utilisateur.Prenom, eleve.Utilisateur.Identifiant, eleve.DateNaissance, eleve.Niveau) ; 
+                es.ModifierEleve(evm.Eleve.Id, evm.Eleve.Utilisateur.Nom, evm.Eleve.Utilisateur.Prenom, evm.Eleve.Utilisateur.Identifiant, evm.Eleve.DateNaissance, evm.Eleve.Niveau); 
             }
 
             return RedirectToAction("TableauDeBord", role);
         }
 
-        [Authorize(Roles = "ResponsableEleve, Gestionnaire, Eleve")]
+        [Authorize(Roles = "ResponsableEleve, Eleve")]
         [HttpPost]
-        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        public IActionResult ModifierMotdePasse(NewPassword newPassword)
         {
             string eleveId = User.FindFirstValue("RoleId");
             Eleve eleve = null;
             int id;
+            EleveViewModel evm = new EleveViewModel();
 
             using (EleveServices es = new EleveServices())
             {
                 if (int.TryParse(eleveId, out id))
                 {
                     eleve = es.TrouverUnEleve(id);
-                    es.ModifierMotdePasse(eleve, ancienMdp, newMdp, confirmMdp);
+                    evm.Eleve = eleve;
+                    es.ModifierMotdePasse(eleve, newPassword.OldPassword, newPassword.NouveauPassword, newPassword.ConfirmPassword);
                 }
             }
-            return View("Modifier", eleve);
+
+            return RedirectToAction("TableauDeBord", "eleve");
         }
 
 

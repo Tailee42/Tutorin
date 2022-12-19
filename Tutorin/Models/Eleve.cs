@@ -8,6 +8,7 @@ namespace Tutorin.Models
     {
         public int Id { get; set; }
 
+        [DataType(DataType.Date)]
         [Required]
         public DateTime DateNaissance { get; set; }
 

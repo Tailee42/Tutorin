@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace Tutorin.Controllers
 {
@@ -54,9 +55,11 @@ namespace Tutorin.Controllers
             if (responsableId != 0)
             {
                 ResponsableEleve responsable = null;
+                ResponsableEleveViewModel revm = new ResponsableEleveViewModel();
                 using (ResponsableServices rs = new ResponsableServices())
                 {
                     responsable = rs.ObtenirTousLesResponsables().Where(r => r.Id == responsableId).FirstOrDefault();
+                    revm.ResponsableEleve = responsable;
                 }
 
                 if (responsable == null)
@@ -64,48 +67,51 @@ namespace Tutorin.Controllers
                     return View("Error");
                 }
 
-                return View("Modifier", responsable);
+                return View("Modifier", revm);
             }
             return View("Error");
         }
 
         [Authorize(Roles = "Gestionnaire, ResponsableEleve")]
         [HttpPost]
-        public IActionResult Modifier(ResponsableEleve responsable)
+        public IActionResult Modifier(ResponsableEleveViewModel revm)
         {
             //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
             //if (!ModelState.IsValid)
             //{
-            //    return View("Modifier", responsable);
+            //    return View("Modifier", "responsable");
             //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (ResponsableServices rs = new ResponsableServices())
             {
-                rs.ModifierResponsable(responsable.Id, responsable.Utilisateur.Nom, responsable.Utilisateur.Prenom, responsable.Utilisateur.Identifiant, responsable.Mail, responsable.Abonnements);
+                rs.ModifierResponsable(revm.ResponsableEleve.Id, revm.ResponsableEleve.Utilisateur.Nom, revm.ResponsableEleve.Utilisateur.Prenom, revm.ResponsableEleve.Utilisateur.Identifiant, revm.ResponsableEleve.Mail, revm.ResponsableEleve.Abonnements);
             }
 
             return RedirectToAction("TableauDeBord", role);
 
         }
 
-        [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
+        [Authorize(Roles = "ResponsableEleve")]
         [HttpPost]
-        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        public IActionResult ModifierMotdePasse(NewPassword newPassword)
         {
             string responsableId = User.FindFirstValue("RoleId");
             ResponsableEleve responsable = null;
             int id;
+            ResponsableEleveViewModel revm = new ResponsableEleveViewModel();
 
             using (ResponsableServices rs = new ResponsableServices())
             {
                 if (int.TryParse(responsableId, out id))
                 {
                     responsable = rs.TrouverUnResponsable(id);
-                    rs.ModifierMotdePasse(responsable, ancienMdp, newMdp, confirmMdp);
+                    revm.ResponsableEleve = responsable;
+                    rs.ModifierMotdePasse(responsable, newPassword.OldPassword, newPassword.NouveauPassword, newPassword.ConfirmPassword);
                 }
+
+                return RedirectToAction("TableauDeBord", "responsableEleve");
             }
-            return View("Modifier", responsable);
         }
 
         [Authorize(Roles = "ResponsableEleve")]

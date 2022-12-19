@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -55,23 +56,25 @@ namespace Tutorin.Controllers
             if (gestionnaireId != 0)
             {
                 Gestionnaire gestionnaire = null;
+                GestionnaireViewModel gvm = new GestionnaireViewModel();
                 using (GestionnaireServices ges = new GestionnaireServices())
                 {
                    gestionnaire = ges.ObtientTousLesGestionnaires().Where(r => r.Id == gestionnaireId).FirstOrDefault();
+                   gvm.Gestionnaire = gestionnaire;
                 }
                 if (gestionnaire == null)
                 {
                     return View("Error");
                 }
 
-                return View("Modifier", gestionnaire);
+                return View("Modifier", gvm);
             }
             return View("Error");
         }
 
         
         [HttpPost]
-        public IActionResult Modifier(Gestionnaire gestionnaire)
+        public IActionResult Modifier(GestionnaireViewModel gvm)
         {
             //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
             //if (!ModelState.IsValid)
@@ -83,7 +86,7 @@ namespace Tutorin.Controllers
 
             using (GestionnaireServices ges = new GestionnaireServices())
             {
-                ges.ModifierGestionnaire(gestionnaire.Id, gestionnaire.Utilisateur.Nom, gestionnaire.Utilisateur.Prenom, gestionnaire.Utilisateur.Identifiant, gestionnaire.PosteOccupe);
+                ges.ModifierGestionnaire(gvm.Gestionnaire.Id, gvm.Gestionnaire.Utilisateur.Nom, gvm.Gestionnaire.Utilisateur.Prenom, gvm.Gestionnaire.Utilisateur.Identifiant, gvm.Gestionnaire.PosteOccupe);
             }
 
             return RedirectToAction("TableauDeBord", role);
@@ -92,21 +95,23 @@ namespace Tutorin.Controllers
 
         [Authorize(Roles = "Gestionnaire")]
         [HttpPost]
-        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        public IActionResult ModifierMotdePasse(NewPassword newPassword)
         {
             string gestionnaireId = User.FindFirstValue("RoleId");
             Gestionnaire gestionnaire = null;
             int id;
+            GestionnaireViewModel gvm = new GestionnaireViewModel();
 
             using (GestionnaireServices es = new GestionnaireServices())
             {
                 if (int.TryParse(gestionnaireId, out id))
                 {
                     gestionnaire = es.TrouverUnGestionnaire(id);
-                    es.ModifierMotdePasse(gestionnaire, ancienMdp, newMdp, confirmMdp);
+                    gvm.Gestionnaire = gestionnaire;
+                    es.ModifierMotdePasse(gestionnaire, newPassword.OldPassword, newPassword.NouveauPassword, newPassword.ConfirmPassword);
                 }
             }
-            return View("Modifier", gestionnaire);
+            return RedirectToAction("TableauDeBord", "gestionnaire");
         }
 
 

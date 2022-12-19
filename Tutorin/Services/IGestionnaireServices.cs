@@ -11,6 +11,5 @@ namespace Tutorin.Services
         void SupprimerGestionnaire(int id);
         List<Gestionnaire> ObtientTousLesGestionnaires();
         int CompterGestionnaire();
-        void ModifierMotdePasse(Gestionnaire gestionnaire, string ancienMdp, string newMdp, string confirmMdp);
     }
 }

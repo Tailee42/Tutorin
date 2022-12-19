@@ -6,7 +6,8 @@ namespace Tutorin.ViewModels
 {
     public class EleveViewModel
     {
+        public Eleve Eleve { get; set; }
         public List<Eleve> ListeEleves { get; set; }
-        
+        public NewPassword NewPassword { get; set; }
     }
 }

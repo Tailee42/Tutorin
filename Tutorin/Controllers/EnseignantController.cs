@@ -67,23 +67,25 @@ namespace Tutorin.Controllers
             if (enseignantId != 0)
             {
                 Enseignant enseignant = null;
+                EnseignantViewModel envm = new EnseignantViewModel();
                 using (EnseignantServices ens = new EnseignantServices())
                 {
                     enseignant = ens.ObtientTousLesEnseignants().Where(r => r.Id == enseignantId).FirstOrDefault();
+                    envm.Enseignant = enseignant;
                 }
 
                 if (enseignant == null)
                 {
                     return View("Error");
                 }
-                return View("Modifier", enseignant);
+                return View("Modifier", envm);
             }
             return View("Error");
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]
         [HttpPost]
-        public IActionResult Modifier(Enseignant enseignant)
+        public IActionResult Modifier(EnseignantViewModel envm)
         {
             //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
             //if (!ModelState.IsValid)
@@ -95,29 +97,32 @@ namespace Tutorin.Controllers
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                ens.ModifierEnseignant(enseignant.Id, enseignant.Utilisateur.Nom, enseignant.Utilisateur.Prenom, enseignant.Utilisateur.Identifiant, enseignant.Matiere, enseignant.Niveaux);
+                ens.ModifierEnseignant(envm.Enseignant.Id, envm.Enseignant.Utilisateur.Nom, envm.Enseignant.Utilisateur.Prenom, envm.Enseignant.Utilisateur.Identifiant, envm.Enseignant.Matiere, envm.Enseignant.Niveaux);
             }
 
             return RedirectToAction("TableauDeBord", role);
         }
 
-        [Authorize(Roles = "Gestionnaire, Enseignant")]
+        [Authorize(Roles = "Enseignant")]
         [HttpPost]
-        public IActionResult ModifierMotdePasse(string ancienMdp, string newMdp, string confirmMdp)
+        public IActionResult ModifierMotdePasse(NewPassword newPassword)
         {
             string enseignantId = User.FindFirstValue("RoleId");
             Enseignant enseignant = null;
             int id;
+            EnseignantViewModel envm = new EnseignantViewModel();
 
             using (EnseignantServices ens = new EnseignantServices())
             {
                 if (int.TryParse(enseignantId, out id))
                 {
                     enseignant = ens.TrouverUnEnseignant(id);
-                    ens.ModifierMotdePasse(enseignant, ancienMdp, newMdp, confirmMdp);
+                    envm.Enseignant = enseignant;
+                    ens.ModifierMotdePasse(enseignant, newPassword.OldPassword, newPassword.NouveauPassword, newPassword.ConfirmPassword);
                 }
             }
-            return View("Modifier", enseignant);
+
+            return RedirectToAction("TableauDeBord", "enseignant");
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]

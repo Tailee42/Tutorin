@@ -11,6 +11,5 @@ namespace Tutorin.Services
         void SupprimerEleve(int id);
         List<Eleve> ObtientTousLesEleves();
         int CompterEleve();
-        void ModifierMotdePasse(Eleve eleve, string ancienMdp, string newMdp, string confirmMdp);
     }
 }

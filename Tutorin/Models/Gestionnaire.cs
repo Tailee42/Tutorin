@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tutorin.Models
 {
@@ -9,6 +10,7 @@ namespace Tutorin.Models
         public int UtilisateurId { get; set; }
         public Utilisateur Utilisateur { get; set; }
 
+        [Display (Name="Poste occupé")]
         public string PosteOccupe { get; set; }
 
     }
