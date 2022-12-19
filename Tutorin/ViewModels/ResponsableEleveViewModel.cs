@@ -5,7 +5,8 @@ namespace Tutorin.ViewModels
 {
     public class ResponsableEleveViewModel
     {
+       public ResponsableEleve ResponsableEleve { get; set; }
        public List<ResponsableEleve> ListeResponsablesEleves { get; set; }
-
+       public NewPassword NewPassword { get; set; }
     }
 }

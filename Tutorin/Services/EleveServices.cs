@@ -38,7 +38,7 @@ namespace Tutorin.Services
             _bddContext.Dispose();
         }
 
-        public void ModifierEleve(int id, string nom, string prenom, string identifiant, string motDePasse, DateTime dateNaissance, TypeNiveau niveau)
+        public void ModifierEleve(int id, string nom, string prenom, string identifiant, DateTime dateNaissance, TypeNiveau niveau)
         {
             Eleve eleve = _bddContext.Eleves.Find(id);
             eleve.Utilisateur = _bddContext.Utilisateurs.Find(eleve.UtilisateurId);
@@ -47,7 +47,6 @@ namespace Tutorin.Services
                 eleve.Utilisateur.Nom = nom;
                 eleve.Utilisateur.Prenom = prenom;
                 eleve.Utilisateur.Identifiant = identifiant;
-                eleve.Utilisateur.MotDePasse = EncodeMD5(motDePasse); ;
                 eleve.DateNaissance = dateNaissance;
                 eleve.Niveau = niveau;
                 _bddContext.SaveChanges();
@@ -59,6 +58,22 @@ namespace Tutorin.Services
             eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(eleve.Utilisateur.MotDePasse);
             _bddContext.Eleves.Update(eleve);
             _bddContext.SaveChanges();
+        }
+
+        public void ModifierMotdePasse(Eleve eleve, string ancienMdp, string newMdp, string confirmMdp)
+        {
+            ancienMdp = UtilisateurServices.EncodeMD5(ancienMdp);
+            newMdp = UtilisateurServices.EncodeMD5(newMdp);
+            confirmMdp = UtilisateurServices.EncodeMD5(confirmMdp);
+            if (ancienMdp == eleve.Utilisateur.MotDePasse)
+            {
+                if (newMdp == confirmMdp)
+                {
+                    eleve.Utilisateur.MotDePasse = newMdp;
+                    _bddContext.Utilisateurs.Update(eleve.Utilisateur);
+                    _bddContext.SaveChanges();
+                }
+            }
         }
 
         public List<Eleve> ObtientTousLesEleves()
@@ -92,7 +107,6 @@ namespace Tutorin.Services
 
             return eleve;
         }
-
 
         public static string EncodeMD5(string motDePasse)
         {

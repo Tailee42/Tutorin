@@ -1,4 +1,4 @@
-﻿@model Tutorin.Models.ResponsableEleve
+﻿@model Tutorin.ViewModels.ResponsableEleveViewModel
 @using System.Security.Claims;
 @{
     Layout = "_LayoutDuSite";
@@ -27,70 +27,95 @@
 <h1>Modifier</h1>
 <div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Modifier", "ResponsableEleve", FormMethod.Post))
     {
         <fieldset>
-            <legend>Responsable élève: </legend>
+            <legend>Responsable élève</legend>
 
 
             <div class="hidden">
-                @Html.LabelFor(m => Model.Id)<br />
-                @Html.TextBoxFor(m => Model.Id)<br />
-                @Html.ValidationMessageFor(m => Model.Id)
+                @Html.LabelFor(m => Model.ResponsableEleve.Id)<br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.Id)<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.Id)
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.Nom)<br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Nom)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Nom)
+                @Html.LabelFor(m => Model.ResponsableEleve.Utilisateur.Nom)<br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.Utilisateur.Nom)<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.Utilisateur.Nom)
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.Prenom)<br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Prenom)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Prenom)
+                @Html.LabelFor(m => Model.ResponsableEleve.Utilisateur.Prenom)<br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.Utilisateur.Prenom)<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.Utilisateur.Prenom)
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.Identifiant) <br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Identifiant)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Identifiant)
+                @Html.LabelFor(m => Model.ResponsableEleve.Utilisateur.Identifiant) <br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.Utilisateur.Identifiant)<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.Utilisateur.Identifiant)
             </div>
 
             <div class="boite-form">
-                @Html.LabelFor(m => Model.Utilisateur.MotDePasse)<br />
-                @Html.TextBoxFor(m => Model.Utilisateur.MotDePasse, new {@type = "password" } )<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.MotDePasse)
-            </div>
-
-            <div class="boite-form">
-                @Html.LabelFor(m => Model.Mail)<br />
-                @Html.TextBoxFor(m => Model.Mail, new {@type = "email"} )<br />
-                @Html.ValidationMessageFor(m => Model.Mail)
+                @Html.LabelFor(m => Model.ResponsableEleve.Mail)<br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.Mail, new {@type = "email"} )<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.Mail)
             </div>
 
             <div class="hidden">
-                @Html.LabelFor(m => Model.UtilisateurId) <br />
-                @Html.TextBoxFor(m => Model.UtilisateurId)<br />
-                @Html.ValidationMessageFor(m => Model.UtilisateurId)
+                @Html.LabelFor(m => Model.ResponsableEleve.UtilisateurId) <br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.UtilisateurId)<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.UtilisateurId)
             </div>
 
             <div class="hidden">
-                @Html.LabelFor(m => Model.Utilisateur.Id) <br />
-                @Html.TextBoxFor(m => Model.Utilisateur.Id)<br />
-                @Html.ValidationMessageFor(m => Model.Utilisateur.Id)
+                @Html.LabelFor(m => Model.ResponsableEleve.Utilisateur.Id) <br />
+                @Html.TextBoxFor(m => Model.ResponsableEleve.Utilisateur.Id)<br />
+                @Html.ValidationMessageFor(m => Model.ResponsableEleve.Utilisateur.Id)
             </div>
 
             <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
-    <a class="lien-suppression" href="/ResponsableEleve/supprimerProfil?responsableId=@responsableId">Supprimer le profil</a>
 </div>
+
+@if (role == "ResponsableEleve")
+{
+    <form action="/ResponsableEleve/ModifierMotDePasse" method="post">
+    <div class="boite-form-mdp">
+        <!-- bouton qui active le menu deroulant pour modifier le mdp, il a le type=button pour ne pas être submit par défaut -->
+        <label class="mdp-modifier">Modifier le mot de passe&ensp;</label>
+        <button type="button" id="btn-modifier"><i class="fa-solid fa-arrow-down"></i></button>
+        <!-- contenu du menu deroulant pour modifier le mot de passe -->
+        <div id="form-modifier" style="display: none">
+            <div>
+                @Html.LabelFor(m => Model.NewPassword.OldPassword) <br />
+                @Html.PasswordFor(m => Model.NewPassword.OldPassword)<br />
+                @Html.ValidationMessageFor(m => Model.NewPassword.OldPassword)
+            </div>
+            <div>
+                @Html.LabelFor(m => Model.NewPassword.NouveauPassword) <br />
+                @Html.PasswordFor(m => Model.NewPassword.NouveauPassword)<br />
+                @Html.ValidationMessageFor(m => Model.NewPassword.NouveauPassword)
+            </div>
+            <div>
+                @Html.LabelFor(m => Model.NewPassword.ConfirmPassword) <br />
+                @Html.PasswordFor(m => Model.NewPassword.ConfirmPassword)<br />
+                @Html.ValidationMessageFor(m => Model.NewPassword.ConfirmPassword)
+            </div>
+            <input class="boutonStyle" type="submit" value="Valider" />
+        </div>
+    </div>
+    </form>
+    <a class="lien-suppression" href="/ResponsableEleve/supprimerProfil?responsableId=@responsableId">Supprimer le profil</a>
+}
 
 @section Script {
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/Scripts/MenuModifierMdp.js"></script>
 }
 
 @section Menu {

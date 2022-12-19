@@ -28,19 +28,19 @@ namespace Tutorin.Services
             _bddContext.SaveChanges();
         }
 
-        public void ModifierResponsable(int id, string nom, string prenom, string identifiant, string motDePasse, string mail, List<Abonnement> abonnements)
+        public void ModifierResponsable(int id, string nom, string prenom, string identifiant, string mail, List<Abonnement> abonnements)
         {
             ResponsableEleve responsable = _bddContext.ResponsablesEleves.Find(id);
-            responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.Utilisateur.Id);
+            responsable.Utilisateur = _bddContext.Utilisateurs.Find(responsable.UtilisateurId);
 
             if (responsable != null)
             {
                 responsable.Utilisateur.Nom = nom;
                 responsable.Utilisateur.Prenom = prenom;
                 responsable.Utilisateur.Identifiant = identifiant;
-                responsable.Utilisateur.MotDePasse = motDePasse;
                 responsable.Mail = mail;
                 responsable.Abonnements = abonnements;
+                _bddContext.SaveChanges();
             }
         }
 
@@ -49,6 +49,22 @@ namespace Tutorin.Services
             responsable.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(responsable.Utilisateur.MotDePasse);
             _bddContext.ResponsablesEleves.Update(responsable);
             _bddContext.SaveChanges();
+        }
+
+        public void ModifierMotdePasse(ResponsableEleve responsable, string ancienMdp, string newMdp, string confirmMdp)
+        {
+            ancienMdp = UtilisateurServices.EncodeMD5(ancienMdp);
+            newMdp = UtilisateurServices.EncodeMD5(newMdp);
+            confirmMdp = UtilisateurServices.EncodeMD5(confirmMdp);
+            if (ancienMdp == responsable.Utilisateur.MotDePasse)
+            {
+                if (newMdp == confirmMdp)
+                {
+                    responsable.Utilisateur.MotDePasse = newMdp;
+                    _bddContext.Utilisateurs.Update(responsable.Utilisateur);
+                    _bddContext.SaveChanges();
+                }
+            }
         }
 
         public void SupprimerResponsable(int id)

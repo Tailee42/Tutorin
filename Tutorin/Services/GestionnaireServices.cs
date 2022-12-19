@@ -32,7 +32,7 @@ namespace Tutorin.Services
             return gestionnaire.Id;
         }
 
-        public void ModifierGestionnaire(int id, string nom, string prenom, string identifiant, string motDePasse, string posteOccupe)
+        public void ModifierGestionnaire(int id, string nom, string prenom, string identifiant, string posteOccupe)
         {
             Gestionnaire gestionnaire = _bddContext.Gestionnaires.Find(id);
             gestionnaire.Utilisateur = _bddContext.Utilisateurs.Find(gestionnaire.UtilisateurId);
@@ -41,7 +41,6 @@ namespace Tutorin.Services
                 gestionnaire.Utilisateur.Nom = nom;
                 gestionnaire.Utilisateur.Prenom = prenom;
                 gestionnaire.Utilisateur.Identifiant = identifiant;
-                gestionnaire.Utilisateur.MotDePasse = motDePasse;
                 gestionnaire.PosteOccupe = posteOccupe;
                 _bddContext.SaveChanges();
             }
@@ -52,6 +51,22 @@ namespace Tutorin.Services
             gestionnaire.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(gestionnaire.Utilisateur.MotDePasse);
             _bddContext.Gestionnaires.Update(gestionnaire);
             _bddContext.SaveChanges();
+        }
+
+        public void ModifierMotdePasse(Gestionnaire gestionnaire, string ancienMdp, string newMdp, string confirmMdp)
+        {
+            ancienMdp = UtilisateurServices.EncodeMD5(ancienMdp);
+            newMdp = UtilisateurServices.EncodeMD5(newMdp);
+            confirmMdp = UtilisateurServices.EncodeMD5(confirmMdp);
+            if (ancienMdp == gestionnaire.Utilisateur.MotDePasse)
+            {
+                if (newMdp == confirmMdp)
+                {
+                    gestionnaire.Utilisateur.MotDePasse = newMdp;
+                    _bddContext.Utilisateurs.Update(gestionnaire.Utilisateur);
+                    _bddContext.SaveChanges();
+                }
+            }
         }
 
         public List<Gestionnaire> ObtientTousLesGestionnaires()

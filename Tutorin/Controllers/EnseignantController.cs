@@ -94,37 +94,57 @@ namespace Tutorin.Controllers
             if (enseignantId != 0)
             {
                 Enseignant enseignant = null;
+                EnseignantViewModel envm = new EnseignantViewModel();
                 using (EnseignantServices ens = new EnseignantServices())
                 {
                     enseignant = ens.ObtientTousLesEnseignants().Where(r => r.Id == enseignantId).FirstOrDefault();
+                    envm.Enseignant = enseignant;
                 }
 
                 if (enseignant == null)
                 {
                     return View("Error");
                 }
-                return View("Modifier", enseignant);
+                return View("Modifier", envm);
             }
             return View("Error");
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]
         [HttpPost]
-        public IActionResult Modifier(Enseignant enseignant)
+        public IActionResult Modifier(EnseignantViewModel envm)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Modifier", enseignant);
-            }
-            
+
             string role = User.FindFirstValue(ClaimTypes.Role);
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                ens.ModifierEnseignant(enseignant);
+                ens.ModifierEnseignant(envm.Enseignant.Id, envm.Enseignant.Utilisateur.Nom, envm.Enseignant.Utilisateur.Prenom, envm.Enseignant.Utilisateur.Identifiant, envm.Enseignant.Matiere, envm.Enseignant.Niveaux);
             }
 
             return RedirectToAction("TableauDeBord", role);
+        }
+
+        [Authorize(Roles = "Enseignant")]
+        [HttpPost]
+        public IActionResult ModifierMotdePasse(NewPassword newPassword)
+        {
+            string enseignantId = User.FindFirstValue("RoleId");
+            Enseignant enseignant = null;
+            int id;
+            EnseignantViewModel envm = new EnseignantViewModel();
+
+            using (EnseignantServices ens = new EnseignantServices())
+            {
+                if (int.TryParse(enseignantId, out id))
+                {
+                    enseignant = ens.TrouverUnEnseignant(id);
+                    envm.Enseignant = enseignant;
+                    ens.ModifierMotdePasse(enseignant, newPassword.OldPassword, newPassword.NouveauPassword, newPassword.ConfirmPassword);
+                }
+            }
+
+            return RedirectToAction("TableauDeBord", "enseignant");
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]

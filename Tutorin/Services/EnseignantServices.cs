@@ -30,7 +30,7 @@ namespace Tutorin.Services
             return enseignant.Id;
         }
 
-        public void ModifierEnseignant(int id, string nom, string prenom, string identifiant, string motDePasse, TypeMatiere matiere, TypeNiveau niveau, int utilisateurID)
+        public void ModifierEnseignant(int id, string nom, string prenom, string identifiant, TypeMatiere matiere, TypeNiveau niveau)
         {
             Enseignant enseignant = _bddContext.Enseignants.Find(id);
             enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
@@ -40,7 +40,6 @@ namespace Tutorin.Services
                 enseignant.Utilisateur.Nom = nom;
                 enseignant.Utilisateur.Prenom = prenom;
                 enseignant.Utilisateur.Identifiant = identifiant;
-                enseignant.Utilisateur.MotDePasse = motDePasse;
                 enseignant.Matiere = matiere;
                 enseignant.Niveaux= niveau;
                
@@ -53,6 +52,22 @@ namespace Tutorin.Services
             enseignant.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(enseignant.Utilisateur.MotDePasse);
             _bddContext.Enseignants.Update(enseignant);
             _bddContext.SaveChanges();
+        }
+
+        public void ModifierMotdePasse(Enseignant enseignant, string ancienMdp, string newMdp, string confirmMdp)
+        {
+            ancienMdp = UtilisateurServices.EncodeMD5(ancienMdp);
+            newMdp = UtilisateurServices.EncodeMD5(newMdp);
+            confirmMdp = UtilisateurServices.EncodeMD5(confirmMdp);
+            if (ancienMdp == enseignant.Utilisateur.MotDePasse)
+            {
+                if (newMdp == confirmMdp)
+                {
+                    enseignant.Utilisateur.MotDePasse = newMdp;
+                    _bddContext.Utilisateurs.Update(enseignant.Utilisateur);
+                    _bddContext.SaveChanges();
+                }
+            }
         }
 
         public void SupprimerEnseignant(int id)

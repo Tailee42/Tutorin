@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Tutorin.Models;
 
 namespace Tutorin.ViewModels
@@ -9,5 +10,6 @@ namespace Tutorin.ViewModels
         public List<Enseignant> ListeEnseignants { get; set; }
         public List<Prestation> Prestations { get; set; }
         public List<ContenuPedagogique> ContenuPedagogiques { get; set; }
+        public NewPassword NewPassword { get; set; }
     }
 }
