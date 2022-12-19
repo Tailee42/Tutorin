@@ -16,6 +16,21 @@
 
 <h1>Inscrire un élève à une prestation : </h1>
 
+ @using (Html.BeginForm("Rechercher", "Prestation", FormMethod.Post))
+{  
+    <table>       
+        <tr>
+            <td>@Html.Label("Type de prestation recherché : ")</td>
+            <td>@Html.DropDownListFor(m => Model.Prestation.TypePrestation, new SelectList(Enum.GetValues(typeof(TypePrestation))))</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Niveau recherché : ")</td>
+    <td>@Html.DropDownListFor(m => Model.Prestation.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
+        </tr>
+    </table>
+    <input type="submit" value="Rechercher" />
+}
+
 
 <div class="cards">
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)

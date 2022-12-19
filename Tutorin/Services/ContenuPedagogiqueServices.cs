@@ -93,6 +93,8 @@ namespace Tutorin.Services
 
             return listeCours;
         }
+
+
         //Méthode pour récupérer l'ensemble des cours d'un enseignant)
         public List<ContenuPedagogique> TrouverLesCours(int enseignantId)
         {
