@@ -11,6 +11,7 @@ namespace Tutorin.ViewModels
         public int PrestationId { get; set; }
         public Prestation Prestation { get; set; }
         public List<int> ElevesId { get; set; }
+        public List<Eleve> ListeEleves { get; set; }
         public Payement Payement { get; set; }
     }
 }

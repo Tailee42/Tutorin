@@ -4,7 +4,7 @@
     padding: 0px;
 }
 
-.section {
+section {
     min-height: 40rem;
     text-align: center;
     display: flex;
@@ -40,11 +40,11 @@
         border-bottom: 5px solid #53afe6;
     }
 
-.section .card__icon {
+section .card__icon {
     font-size: 4rem;
 }
 
-.section:nth-child(even) {
+section:nth-child(even) {
     background-color: #a6d6f2;
 }
 

@@ -10,9 +10,7 @@
 }
 
 @section css {
-    <link href="/css/cards.css" rel="stylesheet" />
-    <link href="/css/Eleve.css" rel="stylesheet" />
-   
+    <link href="/css/InscrireEleve.css" rel="stylesheet" />
 }
 
 @section Menu {
@@ -25,29 +23,29 @@
 
 <div class="nomUtilisateur">
     <h2>@Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom</h2>
+    <h3><i class="fa-solid fa-user"></i>&ensp;Responsable</h3>
 </div>
+<br />
 
 <h1>Choisir l'éleve à inscrire :</h1>
-<div class="cards">
 
-
-    @using (Html.BeginForm("AjoutEleveAPrestation", "Prestation", FormMethod.Post))
+@using (Html.BeginForm("AjoutEleveAPrestation", "Prestation", FormMethod.Post))
+{
+    <input name="prestationId" type="hidden" value="@Model.Prestation.Id" />
+    @foreach (Tutorin.Models.Eleve eleve in Model.ListeEleves)
     {
-        <input name="prestationId" type="hidden" value="@Model.Prestation.Id" />
-    @foreach (Tutorin.Models.Abonnement abonnement in Model.ResponsableEleve.Abonnements)
-    {
-        @if (abonnement.EleveId != null && abonnement.DateFin == DateTime.MinValue)
-        {
-          <input name="eleveIds" type="checkbox" value="@abonnement.Eleve.Id" />
-                <div>
-                    @abonnement.Eleve.Utilisateur.Prenom @abonnement.Eleve.Utilisateur.Nom 
-                </div>
-        }
-    }
-      <input type="submit" value="Inscrire" />
-    }
+        <lable class="form-control">
+            <input name="eleveIds" type="checkbox" value="@eleve.Id" />
+            <texte>
+                @eleve.Utilisateur.Prenom @eleve.Utilisateur.Nom
+            </texte>
+        </lable>
 
-</div>
+    }
+    <input type="submit" value="Inscrire" class="boutonStyle" />
+}
+
+
 
 
 @section Script {
