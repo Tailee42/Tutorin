@@ -45,8 +45,8 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne0025") },
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
                 new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") },
-                new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") }
-
+                new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") },
+                new Utilisateur { Id = 10, Nom = "OUAFO", Prenom = "Joachim", Identifiant = "Jouafo", MotDePasse = UtilisateurServices.EncodeMD5("Joachim25") }
                 );
 
             this.Gestionnaires.AddRange(
@@ -147,7 +147,8 @@ namespace Tutorin.Models
                 new Enseignant{ Id = 1, Matiere = TypeMatiere.Mathematiques, Niveaux = TypeNiveau.CM1, UtilisateurId = 5 },
                 new Enseignant { Id = 2, Matiere = TypeMatiere.Physique, Niveaux = TypeNiveau.CM1, UtilisateurId = 6 },
                 new Enseignant { Id = 3, Matiere = TypeMatiere.Geographie, Niveaux = TypeNiveau.Troisieme, UtilisateurId = 8 },
-                new Enseignant { Id = 4, Matiere = TypeMatiere.Français, Niveaux = TypeNiveau.CP, UtilisateurId = 3}
+                new Enseignant { Id = 4, Matiere = TypeMatiere.Français, Niveaux = TypeNiveau.CP, UtilisateurId = 3},
+                new Enseignant { Id = 5, Matiere = TypeMatiere.Mathematiques, Niveaux = TypeNiveau.Terminale, UtilisateurId = 10, ImagePath = "/images/OUAFO.png", }
                 );
 
             this.ContenusPedagogiques.AddRange(

@@ -18,9 +18,12 @@
     <a href="/login/Deconnexion">Déconnexion</a>
 }
 
+
 <div class="nomUtilisateur">
+    <img src="/Images/@Model.Enseignant.ImagePath" width="50" height="50" /> <br>
     @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom<br>
     Enseignant<br>
+
 </div>
 
 
@@ -33,6 +36,7 @@
             <div class="card__icon">
                 <i class="fa-solid fa-file-contract"></i>
             </div>
+            
             <h2 class="card__title">@contenuPedagogique.Titre</h2>
             <div>
                 Etat : @EtatContenuPedagogiqueExtensions.NomEtat(contenuPedagogique.Etat)<br>

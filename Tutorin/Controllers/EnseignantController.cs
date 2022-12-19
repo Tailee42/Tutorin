@@ -1,15 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
 using Tutorin.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Tutorin.Controllers
 {
     public class EnseignantController : Controller
     {
+        private IWebHostEnvironment _webEnv;
+
+        public EnseignantController(IWebHostEnvironment environment)
+        {
+            _webEnv = environment;
+        }
         public IActionResult Index()
         {
             EnseignantViewModel envm = new EnseignantViewModel();
@@ -42,7 +50,24 @@ namespace Tutorin.Controllers
 
         [HttpPost]
         public IActionResult Ajouter(Enseignant enseignant)
+            
         {
+
+            if (enseignant.Image != null )
+            {
+                if (enseignant.Image.Length != 0) {
+                string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                string filePath = Path.Combine(uploads, enseignant.Image.FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+
+                {
+                    enseignant.Image.CopyTo(fileStream);
+                }
+                }
+
+                enseignant.ImagePath = enseignant.Image.FileName; 
+            }
+                   
             if (!ModelState.IsValid)
             {
                 return View("Ajouter", enseignant);
@@ -80,6 +105,7 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", enseignant);
             }
+           
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (EnseignantServices ens = new EnseignantServices())
             {

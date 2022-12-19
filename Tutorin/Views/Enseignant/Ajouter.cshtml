@@ -12,7 +12,7 @@
 <h1>Créer un profil</h1>
 <div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Ajouter", "Enseignant", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <fieldset>
             <legend>Enseignant</legend>
@@ -52,6 +52,8 @@
                 @Html.DropDownListFor(m => Model.Niveaux, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
                 @Html.ValidationMessageFor(m => Model.Niveaux)
             </div>
+
+            @Html.TextBoxFor(model => model.Image, new { placeholder = "Description", @type = "file" })
 
 
             <input class="boutonStyle" type="submit" value="Créer" />

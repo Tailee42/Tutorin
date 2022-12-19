@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tutorin.Models
 {
@@ -12,6 +14,9 @@ namespace Tutorin.Models
         public Utilisateur Utilisateur { get; set; }
         public List<Prestation> Prestations { get; set; }
         public List<ContenuPedagogique> ContenuPedagogiques { get; set; }
+        public string ImagePath { get; set; }
+        [NotMapped]
+        public IFormFile Image { get; set; }
 
     }
 }
