@@ -19,11 +19,10 @@
 }
 
 <div class="nomUtilisateur">
-
+    <img src="/Images/@Model.Enseignant.ImagePath" width="80" height="80" /> <br>
     <h2>@Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</h2>
     <h3><i class="fa-solid fa-chalkboard-user"></i>&ensp;Enseignant</h3>
 </div>
-
 
 <h1>Liste de mes contenus pédagogiques :</h1>
 
@@ -34,6 +33,7 @@
             <div class="card__icon">
                 @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(contenuPedagogique.Matiere))
             </div>
+            
             <h2 class="card__title">@contenuPedagogique.Titre</h2>
             <div>
                 Etat : @EtatContenuPedagogiqueExtensions.NomEtat(contenuPedagogique.Etat)<br>
