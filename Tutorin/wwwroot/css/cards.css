@@ -24,6 +24,10 @@
     transform: scale(1.01);
 }
 
+.card__icon {
+    font-size: 1.5rem;
+}
+
 a {
     cursor: pointer;
     text-decoration: none;
