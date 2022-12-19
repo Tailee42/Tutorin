@@ -17,7 +17,7 @@ namespace Tutorin.Models
         public TypePrestation TypePrestation { get; set; } 
         public string Ville { get; set; }
         public float Prix { get; set; }
-        [Required]
+
         public TypeMatiere Matiere { get; set; }
         [Required]
         public Boolean Presentiel { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Tutorin.Controllers
 {
     public class PrestationController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             PrestationViewModel pvm = new PrestationViewModel();
@@ -19,7 +21,7 @@ namespace Tutorin.Controllers
             using (PrestationServices ps = new PrestationServices())
             {
                 pvm.ListePrestations = ps.ObtientTousLesPrestations();
-            };
+            }
 
             return View("ListePrestations", pvm);
         }
@@ -31,49 +33,59 @@ namespace Tutorin.Controllers
             using (PrestationServices ps = new PrestationServices())
             {
                 pvm.ListePrestations = ps.ObtientToutesLesPrestationsValidees();
-            };
+            }
 
             return View("ListeVisiteur", pvm);
         }
 
+        [Authorize (Roles = "ResponsableEleve")]
         public IActionResult VoirPrestationsValidees(int responsableId)
         {
-            PrestationViewModel pvm;
+            PrestationViewModel pvm = new PrestationViewModel();
 
             using (PrestationServices ps = new PrestationServices())
             {
-                pvm = new PrestationViewModel()
-                {
-                    ListePrestations = ps.ObtientToutesLesPrestationsValidees(),
-
-                };
-            };
+                pvm.ListePrestations = ps.ObtientToutesLesPrestationsValidees();
+            }
 
             return View("ListePrestationsResponsable", pvm);
         }
 
-        public IActionResult VoirPrestationsCrees(int enseignantId)
+        [Authorize]
+        [HttpPost]
+        public IActionResult Rechercher(Prestation prestation)
         {
-            PrestationViewModel pvm;
+            PrestationViewModel pvm = new PrestationViewModel();
 
             using (PrestationServices ps = new PrestationServices())
             {
-                pvm = new PrestationViewModel()
-                {
-                    ListePrestations = ps.ObtientToutesLesPrestationsCreees(),
+                pvm.ListePrestations = ps.RechercherPrestationsValidees(prestation.TypePrestation, prestation.Niveau);
+            }
 
-                };
-            };
+            return View("ListePrestationsResponsable", pvm);
+        }
+
+        [Authorize (Roles = "Enseignant")]
+        public IActionResult VoirPrestationsCrees(int enseignantId)
+        {
+            PrestationViewModel pvm = new PrestationViewModel();
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm.ListePrestations = ps.ObtientToutesLesPrestationsCreees();
+            }
 
             return View("ListePrestationsEnseignant", pvm);
         }
 
+        [Authorize(Roles = "Enseignant, Gestionnaire")]
         [HttpGet]
         public IActionResult Ajouter()
         {
             return View("Ajouter");
         }
 
+        [Authorize(Roles = "Enseignant, Gestionnaire")]
         [HttpPost]
         public IActionResult Ajouter(Prestation prestation)
         {
@@ -85,29 +97,34 @@ namespace Tutorin.Controllers
             using (PrestationServices ps = new PrestationServices())
             {
                 ps.CreerPrestation(prestation);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Enseignant, Gestionnaire")]
         [HttpGet]
         public IActionResult Modifier(int prestationId)
         {
             if (prestationId != 0)
             {
+                Prestation prestation = null;
                 using (PrestationServices ps = new PrestationServices())
                 {
-                    Prestation prestation = ps.ObtientTousLesPrestations().Where(r => r.Id == prestationId).FirstOrDefault();
-                    if (prestation == null)
-                    {
-                        return View("Error");
-                    }
-
-                    return View("Modifier", prestation);
+                    prestation = ps.ObtientTousLesPrestations().Where(r => r.Id == prestationId).FirstOrDefault();
                 }
+
+                if (prestation == null)
+                {
+                    return View("Error");
+                }
+
+                return View("Modifier", prestation);
             }
             return View("Error");
         }
 
+        [Authorize(Roles = "Enseignant, Gestionnaire")]
         [HttpPost]
         public IActionResult Modifier(Prestation prestation)
         {
@@ -119,37 +136,39 @@ namespace Tutorin.Controllers
             using (PrestationServices ps = new PrestationServices())
             {
                 ps.ModifierPrestation(prestation);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
 
         }
 
+        [Authorize(Roles = "Enseignant, Gestionnaire")]
         public IActionResult Supprimer(int prestationId)
         {
             using (PrestationServices ps = new PrestationServices())
             {
                 ps.SupprimerPrestation(prestationId);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize (Roles = "ResponsableEleve")]
         public IActionResult InscrireEleve(int prestationId)
         {
             string responsableId = User.FindFirstValue("RoleId");
             int id;
             ResponsableEleve responsable = new ResponsableEleve();
             Prestation prestation = new Prestation();
+            List<Eleve> listeEleves = new List<Eleve>();
 
             using (ResponsableServices rs = new ResponsableServices())
             {
                 if (int.TryParse(responsableId, out id))
                 {
                     responsable = rs.TrouverUnResponsable(id);
+                    listeEleves = rs.TouverLesElevesDUnResponsable(id);
                 }
-            }
-            using (AbonnementServices aas = new AbonnementServices())
-            {
-                responsable.Abonnements = aas.TrouverAbonnements(id);
             }
 
             using (PrestationServices ps = new PrestationServices())
@@ -160,12 +179,14 @@ namespace Tutorin.Controllers
             PrestationViewModel pvm = new PrestationViewModel()
             {
                 ResponsableEleve = responsable,
-                Prestation = prestation
+                Prestation = prestation,
+                ListeEleves = listeEleves
             };
 
             return View("InscrireEleve", pvm);
         }
 
+        [Authorize(Roles = "ResponsableEleve")]
         [HttpPost]
         public IActionResult AjoutEleveAPrestation(int prestationId, List<int> eleveIds)
         {
@@ -193,7 +214,7 @@ namespace Tutorin.Controllers
         }
 
 
-
+        [Authorize(Roles = "Gestionnaire, Enseignant")]
         public IActionResult VoirPrestationAAffecter()
         {
             List<Prestation> Prestations = new List<Prestation>();
@@ -209,6 +230,7 @@ namespace Tutorin.Controllers
             return View("ListePrestationsEnseignant", pvm);
         }
 
+        [Authorize(Roles = "Gestionnaire, Enseignant")]
         public IActionResult InscrireEnseignant(int prestationId)
         {
             string enseignantId = User.FindFirstValue("RoleId");

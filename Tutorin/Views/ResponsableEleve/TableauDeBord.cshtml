@@ -20,8 +20,8 @@
 }
 
 <div class="nomUtilisateur">
-    @Model.ResponsableEleve.Utilisateur.Nom @Model.ResponsableEleve.Utilisateur.Prenom<br>
-    Responsable<br>
+    <h2>@Model.ResponsableEleve.Utilisateur.Nom.ToUpper() @Model.ResponsableEleve.Utilisateur.Prenom</h2>
+    <h3><i class="fa-solid fa-user"></i>&ensp;Responsable</h3>
 </div>
 
 <h1>Mes Abonnements :</h1>
@@ -107,7 +107,7 @@
 
 <h1>Les Prestations Réservées :</h1>
 
-@foreach (Eleve eleve in Model.Eleves)
+@foreach (Eleve eleve in Model.ElevesActifs)
 {
 
     <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
@@ -123,24 +123,32 @@
 
                     <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
-                <div>
-                    Date de début : @prestation.DateDebut<br>
-                    Date de fin : @prestation.DateFin<br>
-                    Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
-                    Niveau : @prestation.Niveau<br>
-                    Matière : @prestation.Matiere <br>
-                    <hr />
+                    <div>
+                        Date de début : @prestation.DateDebut<br>
+                        Date de fin : @prestation.DateFin<br>
+                        Enseignant : @prestation.Enseignant.Utilisateur.Nom.ToUpper() @prestation.Enseignant.Utilisateur.Prenom<br>
+                        Niveau : @prestation.Niveau<br>
+
+                        @if(prestation.Matiere != 0)
+                        {
+                                <text>
+                            Matière: @prestation.Matiere <br>
+                            </text>
+                        }
+
+                        <hr />
+
                         @if (prestation.Presentiel)
                         {
                             <text>
-                                En Presentiel : <br>
+                                En Presentiel  <br>
                                 Ville : @prestation.Ville
                             </text>
                         }
                         else
                         {
                             <text>
-                                En distantiel : <br>
+                                En distantiel  <br>
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }
@@ -157,14 +165,14 @@
 <h1>Historique des prestations :</h1>
 
 
-@foreach (Eleve eleve in Model.Eleves)
+@foreach (Eleve eleve in Model.ElevesActifs)
 {
 
     <h2>@eleve.Utilisateur.Nom @eleve.Utilisateur.Prenom @eleve.Niveau</h2>
     <div class="cards">
         @foreach (Prestation prestation in eleve.Prestations)
         {
-            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
+            @if (DateTime.Compare(prestation.DateFin, DateTime.Now) <= 0 && (DateTime.Now - prestation.DateFin).Days <= 21)
             {
                 <div class="card historique">
                     <div class="card__icon">
@@ -178,22 +186,30 @@
                         Date de fin : @prestation.DateFin<br>
                         Enseignant : @prestation.Enseignant.Utilisateur.Nom<br>
                         Niveau : @prestation.Niveau<br>
-                        Matière : @prestation.Matiere <br>
+                        @if(prestation.Matiere != 0)
+                        {
+                             <text>
+                            Matière: @prestation.Matiere <br>
+                            </text>
+                        }
+
                         <hr />
+
                         @if (prestation.Presentiel)
                         {
                             <text>
-                                En Presentiel : <br>
+                                En Presentiel  <br>
                                 Ville : @prestation.Ville
                             </text>
                         }
                         else
                         {
                             <text>
-                                En distantiel : <br>
+                                En distantiel  <br>
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }
+
                     </div>
 
                 </div>

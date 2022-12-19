@@ -12,7 +12,7 @@ body>div {
     min-height: 75vh;
 }
 
-.centre {
+h1, h2 {
     text-align: center;
 }
 
@@ -96,6 +96,9 @@ header {
     margin: 5px;
 }
 
+i {
+    color: #e71f93;
+}
 
 a {
     cursor: pointer;
@@ -119,6 +122,11 @@ a:hover {
     text-align: right;
     margin-left: 30px;
 }
+
+.nomUtilisateur h2 {
+    text-align: right;
+}
+
 
 
 /* footer */
@@ -160,3 +168,4 @@ footer {
     text-align: center;
     margin-top: 50px;
 }
+

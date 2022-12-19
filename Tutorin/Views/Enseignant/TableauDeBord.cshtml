@@ -18,14 +18,11 @@
     <a href="/login/Deconnexion">Déconnexion</a>
 }
 
-
 <div class="nomUtilisateur">
-    <img src="/Images/@Model.Enseignant.ImagePath" width="50" height="50" /> <br>
-    @Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom<br>
-    Enseignant<br>
-
+    <img src="/Images/@Model.Enseignant.ImagePath" width="80" height="80" /> <br>
+    <h2>@Model.Enseignant.Utilisateur.Nom.ToUpper() @Model.Enseignant.Utilisateur.Prenom</h2>
+    <h3><i class="fa-solid fa-chalkboard-user"></i>&ensp;Enseignant</h3>
 </div>
-
 
 <h1>Liste de mes contenus pédagogiques :</h1>
 
@@ -34,7 +31,7 @@
     {
         <div class="card abonnement">
             <div class="card__icon">
-                <i class="fa-solid fa-file-contract"></i>
+                @Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(contenuPedagogique.Matiere))
             </div>
             
             <h2 class="card__title">@contenuPedagogique.Titre</h2>
@@ -82,7 +79,12 @@
                         </div>
             <h2 class="card__title">@prestation.TypePrestation</h2>
             <div>
-                Matière : @prestation.Matiere<br>
+                @if(prestation.Matiere != 0)
+                {
+                    <text>
+                    Matière: @prestation.Matiere <br>
+                    </text>
+                }
                 Niveau: @prestation.Niveau<br>
                 Date: @prestation.DateDebut<br>
             </div>
@@ -106,7 +108,12 @@
                 </div>
             <h2 class="card__title">@prestation.TypePrestation</h2>
             <div>
-                Matière : @prestation.Matiere<br>
+                @if(prestation.Matiere != 0)
+                {
+                    <text>
+                    Matière: @prestation.Matiere <br>
+                    </text>
+                }
                 Niveau: @prestation.Niveau<br>
                 Date: @prestation.DateDebut<br>
             </div>
@@ -114,7 +121,7 @@
                     <a class="card__link" href="/Prestation/InscrireEnseignant?prestationId=@prestation.Id">
                         
                     <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                    s'inscrire à la prestation
+                    S'inscrire à la prestation
                 </a>
                 </p>
                 

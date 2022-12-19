@@ -84,7 +84,15 @@ namespace Tutorin.Services
 
         public List<ContenuPedagogique> RechercherCours(TypeNiveau niveau, TypeMatiere matiere)
         {
-            List<ContenuPedagogique> listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Niveau == niveau && c.Matiere == matiere).ToList();
+            List<ContenuPedagogique> listeCours = null;
+            if (matiere == TypeMatiere.Choix_Matiere)
+            {
+                listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Niveau == niveau).ToList();
+            } else
+            {
+                listeCours = _bddContext.ContenusPedagogiques.Where(c => c.Niveau == niveau && c.Matiere == matiere).ToList();
+            }
+            
             foreach (ContenuPedagogique cours in listeCours)
             {
                 cours.Enseignant = _bddContext.Enseignants.Find(cours.EnseignantId);
@@ -93,6 +101,8 @@ namespace Tutorin.Services
 
             return listeCours;
         }
+
+
         //Méthode pour récupérer l'ensemble des cours d'un enseignant)
         public List<ContenuPedagogique> TrouverLesCours(int enseignantId)
         {

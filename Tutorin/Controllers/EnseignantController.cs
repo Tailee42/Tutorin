@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,12 +13,15 @@ namespace Tutorin.Controllers
 {
     public class EnseignantController : Controller
     {
+
         private IWebHostEnvironment _webEnv;
 
         public EnseignantController(IWebHostEnvironment environment)
         {
             _webEnv = environment;
         }
+
+        [Authorize (Roles = "Gestionnaire")]
         public IActionResult Index()
         {
             EnseignantViewModel envm = new EnseignantViewModel();
@@ -42,12 +46,14 @@ namespace Tutorin.Controllers
             return View("ListeVisiteur", evm);
         }
 
+        
         [HttpGet]
         public IActionResult Ajouter()
         {
             return View("Ajouter");
         }
 
+        
         [HttpPost]
         public IActionResult Ajouter(Enseignant enseignant)
             
@@ -76,28 +82,33 @@ namespace Tutorin.Controllers
             using (EnseignantServices en = new EnseignantServices())
             {
                 en.CreerEnseignant(enseignant);
-                return RedirectToAction("Index", "Login");
             }
+
+            return RedirectToAction("Index", "Login");
         }
 
+        [Authorize(Roles = "Gestionnaire, Enseignant")]
         [HttpGet]
         public IActionResult Modifier(int enseignantId)
         {
             if (enseignantId != 0)
             {
+                Enseignant enseignant = null;
                 using (EnseignantServices ens = new EnseignantServices())
                 {
-                    Enseignant enseignant = ens.ObtientTousLesEnseignants().Where(r => r.Id == enseignantId).FirstOrDefault();
-                    if (enseignant == null)
-                    {
-                        return View("Error");
-                    }
-                    return View("Modifier", enseignant);
+                    enseignant = ens.ObtientTousLesEnseignants().Where(r => r.Id == enseignantId).FirstOrDefault();
                 }
+
+                if (enseignant == null)
+                {
+                    return View("Error");
+                }
+                return View("Modifier", enseignant);
             }
             return View("Error");
         }
 
+        [Authorize(Roles = "Gestionnaire, Enseignant")]
         [HttpPost]
         public IActionResult Modifier(Enseignant enseignant)
         {
@@ -105,34 +116,34 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", enseignant);
             }
-           
+            
             string role = User.FindFirstValue(ClaimTypes.Role);
+
             using (EnseignantServices ens = new EnseignantServices())
             {
                 ens.ModifierEnseignant(enseignant);
-                return RedirectToAction("TableauDeBord", role);
             }
 
+            return RedirectToAction("TableauDeBord", role);
         }
 
+        [Authorize(Roles = "Gestionnaire, Enseignant")]
         public IActionResult Supprimer(int enseignantId)
         {
             using (EnseignantServices ens = new EnseignantServices())
             {
-                
                 ens.SupprimerEnseignant(enseignantId);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Enseignant")]
         public IActionResult TableauDeBord()
         {
             string enseignantId = User.FindFirstValue("RoleId");
             Enseignant enseignant = null;
-            int id;
-            List<Enseignant> enseignants = new List<Enseignant>();
-            List<Prestation> prestations = new List<Prestation>();
-            
+            int id; 
            
             EnseignantViewModel envm = new EnseignantViewModel( );
 
@@ -146,9 +157,8 @@ namespace Tutorin.Controllers
 
             using (PrestationServices prs = new PrestationServices())
             {
-                enseignant.Prestations = prs.TrouverPrestations(id);
-                prestations = prs.ObtientTousLesPrestations();
-                envm.Prestations = prestations;
+                enseignant.Prestations = prs.TrouverPrestations(id); 
+                envm.Prestations = prs.ObtientTousLesPrestations();
 
             }
 
@@ -158,15 +168,11 @@ namespace Tutorin.Controllers
             }
             envm.Enseignant = enseignant;
 
-           
             return View("TableauDeBord", envm);
 
         }
-
-        
-       
+  
         
     }
-
 
 }

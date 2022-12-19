@@ -6,8 +6,8 @@
 }
 
 @section css {
-    <link href="/css/Tableaux.css" rel="stylesheet" />
     <link href="/css/TableauDeBord.css" rel="stylesheet" />
+    <link href="/css/TableauTBGestionnaire.css" rel="stylesheet" />
 }
 
 @section Menu {
@@ -18,8 +18,8 @@
 }
 
 <div class="nomUtilisateur">
-    @Model.Gestionnaire.Utilisateur.Nom.ToUpper() @Model.Gestionnaire.Utilisateur.Prenom<br>
-    Gestionnaire<br>
+    <h2>@Model.Gestionnaire.Utilisateur.Nom.ToUpper() @Model.Gestionnaire.Utilisateur.Prenom</h2>
+    <h3><i class="fa-solid fa-user-gear"></i>&ensp;Gestionnaire</h3>
 </div>
 
 <h1 class="titre">Les cours</h1>
@@ -50,7 +50,7 @@
             </tr>
         </tfoot>
     </table>
-    <a href="/ContenuPedagogique/Index2"><i class="fa-solid fa-magnifying-glass fa-lg"></i>Voir les cours</a>
+    <a href="/ContenuPedagogique/TableauContenuPedagogique"><i class="fa-solid fa-magnifying-glass fa-lg"></i>Voir les cours</a>
 </div>
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -10,30 +11,27 @@ namespace Tutorin.Controllers
 {
     public class GestionnaireController : Controller
     {
+        [Authorize (Roles = "Gestionnaire")]
         public IActionResult Index()
         {
-            List<Gestionnaire> listeGestionnaires = new List<Gestionnaire>();
-            GestionnaireViewModel gevm;
+            GestionnaireViewModel gevm = new GestionnaireViewModel();
 
             using (GestionnaireServices ges = new GestionnaireServices())
             {
-                gevm = new GestionnaireViewModel()
-                {
-                    ListeGestionnaires = ges.ObtientTousLesGestionnaires()
-
-                };
-
+                    gevm.ListeGestionnaires = ges.ObtientTousLesGestionnaires();
             };
 
             return View("ListeGestionnaires", gevm);
         }
 
+        [Authorize(Roles = "Gestionnaire")]
         [HttpGet]
         public IActionResult Ajouter()
         {
             return View("Ajouter");
         }
 
+        [Authorize(Roles = "Gestionnaire")]
         [HttpPost]
         public IActionResult Ajouter(Gestionnaire gestionnaire)
         {
@@ -45,28 +43,33 @@ namespace Tutorin.Controllers
             using (GestionnaireServices ges = new GestionnaireServices())
             {
                 ges.CreerGestionnaire(gestionnaire);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Gestionnaire")]
         [HttpGet]
         public IActionResult Modifier(int gestionnaireId)
         {
             if (gestionnaireId != 0)
             {
+                Gestionnaire gestionnaire = null;
                 using (GestionnaireServices ges = new GestionnaireServices())
                 {
-                    Gestionnaire gestionnaire = ges.ObtientTousLesGestionnaires().Where(r => r.Id == gestionnaireId).FirstOrDefault();
-                    if (gestionnaire == null)
-                    {
-                        return View("Error");
-                    }
-                    return View("Modifier", gestionnaire);
+                   gestionnaire = ges.ObtientTousLesGestionnaires().Where(r => r.Id == gestionnaireId).FirstOrDefault();
                 }
+                if (gestionnaire == null)
+                {
+                    return View("Error");
+                }
+
+                return View("Modifier", gestionnaire);
             }
             return View("Error");
         }
 
+        
         [HttpPost]
         public IActionResult Modifier(Gestionnaire gestionnaire)
         {
@@ -74,38 +77,43 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", gestionnaire);
             }
+
             string role = User.FindFirstValue(ClaimTypes.Role);
+
             using (GestionnaireServices ges = new GestionnaireServices())
             {
                 ges.ModifierGestionnaire(gestionnaire);
-                return RedirectToAction("TableauDeBord", role);
             }
+
+            return RedirectToAction("TableauDeBord", role);
 
         }
 
+        [Authorize(Roles = "Gestionnaire")]
         public IActionResult Supprimer(int gestionnaireId)
         {
             using (GestionnaireServices ges = new GestionnaireServices())
             {
-
                 ges.SupprimerGestionnaire(gestionnaireId);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Gestionnaire")]
         public IActionResult TableauDeBord()
         {
             string GestionnaireId = User.FindFirstValue("RoleId");
             Gestionnaire gestionnaire = null;
-            int id;
 
             using (GestionnaireServices gs = new GestionnaireServices())
             {
-                if (int.TryParse(GestionnaireId, out id))
+                if (int.TryParse(GestionnaireId, out int id))
                 {
                     gestionnaire = gs.TrouverUnGestionnaire(id);
                 }
             }
+
             TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel();
             using (ContenuPedagogiqueServices cps = new ContenuPedagogiqueServices())
             {
@@ -153,18 +161,13 @@ namespace Tutorin.Controllers
                 tbevm.NbUtilisateurTotal = us.CompterUtilisateur();
                 
             };
+
             return View("TableauDeBord", tbevm);
         }
 
+        [Authorize (Roles="Gestionnaire")]
         public IActionResult GererUtilisateurs()
         {
-            //Gestionnaire gestionnaire = 
-
-            //TableauBordGestionnaireViewModel tbevm = new TableauBordGestionnaireViewModel()
-            //{
-            //    Gestionnaire = gestionnaire,
-            //};
-
             return View("GererUtilisateurs");
         }
     }

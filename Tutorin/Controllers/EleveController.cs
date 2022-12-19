@@ -7,32 +7,32 @@ using System.Security.Cryptography.X509Certificates;
 using System.Linq;
 using System;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tutorin.Controllers
 {
     public class EleveController : Controller
     {
+        [Authorize(Roles = "Gestionnaire")]
         public IActionResult Index()
         {
-            List<Eleve> listeEleves = new List<Eleve>();
-            EleveViewModel evm;
+            EleveViewModel evm = new EleveViewModel();
 
             using (EleveServices es = new EleveServices())
             {
-                evm = new EleveViewModel()
-                {
-                    ListeEleves = es.ObtientTousLesEleves()
-                };
+                evm.ListeEleves = es.ObtientTousLesEleves();
             };
             return View("ListeEleves", evm);
         }
 
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
         [HttpGet]
         public IActionResult Ajouter()
         {
             return View("Ajouter");
         }
 
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
         [HttpPost]
         public IActionResult Ajouter(Eleve eleve)
         {
@@ -43,32 +43,36 @@ namespace Tutorin.Controllers
 
             using (EleveServices es = new EleveServices())
             {
-                es.CreerEleve(eleve);
-                return RedirectToAction("Index");
+                es.CreerEleve(eleve);  
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire, Eleve")]
         [HttpGet]
         public IActionResult Modifier(int eleveId)
         {
             if (eleveId != 0)
             {
+                Eleve eleve = null;
                 using (EleveServices es = new EleveServices())
                 {
-                    
-                    Eleve eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
-                    
-                    if (eleve == null)
-                    {
-                        return View("Error");
-                    }
-                    Console.WriteLine(eleve.DateNaissance.ToString());
-                    return View("Modifier", eleve);
+                    eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
                 }
+
+                if (eleve == null)
+                {
+                    return View("Error");
+                }
+
+                return View("Modifier", eleve);
+
             }
             return View("Error");
         }
 
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire, Eleve")]
         [HttpPost]
         public IActionResult Modifier(Eleve eleve)
         {
@@ -76,25 +80,28 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", eleve);
             }
+
             string role = User.FindFirstValue(ClaimTypes.Role);
             using (EleveServices es = new EleveServices())
             {
+                es.ModifierEleve(eleve); 
+            }
 
-                es.ModifierEleve(eleve);
-                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
-             }
-
+            return RedirectToAction("TableauDeBord", role);
         }
 
+        [Authorize(Roles = "ResponsableEleve, Gestionnaire")]
         public IActionResult Supprimer(int eleveId)
         {
             using(EleveServices es = new EleveServices())
             {
                 es.SupprimerEleve(eleveId);
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Eleve")]
         public IActionResult TableauDeBord()
         {
             string eleveId = User.FindFirstValue("RoleId");
@@ -113,7 +120,6 @@ namespace Tutorin.Controllers
             {
                 eleve.Prestations = pp.TouverLesPrestationsDUnEleve(id);
             }
-
 
             Abonnement abonnement = null;
             using (AbonnementServices abs = new AbonnementServices())

@@ -1,22 +1,49 @@
-﻿@model Tutorin.Models.Utilisateur
+﻿@using System.Security.Claims;
+@model Tutorin.Models.Utilisateur
 @{
     ViewBag.Title = "Créer un compte utilisateur";
     Layout = "_LayoutDuSite";
 }
 
 @section css {
-    <link href="/css/Site.css" rel="stylesheet"/>
-    <link href="/css/cards.css" rel="stylesheet"/>
+        <link href="/css/Site.css" rel="stylesheet"/>
+        <link href="/css/cards.css" rel="stylesheet"/>
+}
+
+@{
+    bool authentifie = User.Identity.IsAuthenticated;
+    string role = "";
+    if (authentifie)
+    {
+        role = User.FindFirst(ClaimTypes.Role).Value;
+    }
+
 }
 
 @section Menu {
     <a href="/home/">Accueil</a>
-    <a>Présentation</a>
+
+    @if (authentifie)
+    {
+        <a href="/@role/TableauDeBord/">Tableau de Bord</a>
+        <a href="/login/Deconnexion">Déconnexion</a>
+    }
+    else
+    {
+        <a href="/login/">Connexion</a>
+    }
+
 }
 
 <h1 class="titre-creerprofil">Votre profil ?</h1>
 <div class="cards">
-    <div class="card prestation"><a class="lien-user" href="/Enseignant/Ajouter">Enseignant</a></div>
-    <div class="card prestation"><a class="lien-user" href="/ResponsableEleve/Ajouter">Responsable d'élève</a></div>
+    <div class="card prestation">
+        <div class="cards--iconUser"><i class="fa-sharp fa-solid fa-chalkboard-user fa-2xl"></i></div>
+        <a class="lien-user" href="/Enseignant/Ajouter">Enseignant</a>
+    </div>
+    <div class="card prestation">
+        <div class="cards--iconUser"><i class="fa-solid fa-user fa-2xl"></i></div>
+        <a class="lien-user" href="/ResponsableEleve/Ajouter">Responsable d'élève</a>
+    </div>
     @*<div class="card prestation"><a class="lien-user" href="/Gestionnaire/Ajouter">Gestionnaire</a></div>*@
 </div>

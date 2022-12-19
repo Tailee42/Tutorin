@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html>
 
 
-<html>
+<html lang="fr">
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="/css/Site.css" rel="stylesheet" />
@@ -9,11 +10,12 @@
     <title>@ViewBag.Title</title>
     @RenderSection("css", required: false)
 </head>
+
 <body>
     <header>
 
         <div id="entreprise">
-            <img src="/Images/Visages-removebg-preview.png" alt="Logo" />
+            <img src="/Images/Visages-removebg-preview.png" width="80" height="70" alt="Logo" />
             <h1>Tutor'in</h1>
         </div>
 
@@ -50,5 +52,6 @@
 
     <script type="text/javascript" src="~/Scripts/BurgerMenu.js"></script>
     @RenderSection("Script", required: false)
+
 </body>
 </html>

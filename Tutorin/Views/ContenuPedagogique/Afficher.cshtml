@@ -32,14 +32,15 @@
     <i id="size" class="fa-solid fa-text-height"></i>
 </div>
 
-<div class="cours">
+<div id="cours">
+    
     <h1 class="titre-cours">@Html.Raw(TypeMatiereExtensions.IconHTMLPrestation(Model.Matiere)) @Model.Titre</h1>
     
 
     <div class="info-cours">
-        <h4>@Model.Niveau</h4>
-        
+        <h4>@Model.Niveau</h4>  
     </div>
+
     <hr />
 
     <p class="contenu-cours">@Html.Raw(Model.ContenuDuCours)</p>
@@ -51,12 +52,11 @@
         <h4><span>Dernière mise à jour :</span> @Model.DateMiseAJour.ToString("d")</h4>
     </div>
 
-    <div class="telecharger"> @* Imprimer ?*@
-        <button id="btn-telechargerCours">Télécharger</button>
+    <div class="imprimer"> 
+        <button class="boutonStyle" onclick="window.print()">Imprimer</button>
     </div>
     
 </div>
-
 
 @section Script {
     <script src="/Scripts/lirecouleur.js"></script>

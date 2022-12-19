@@ -12,50 +12,86 @@
 
 @section css {
     <link href="/css/cards.css" rel="stylesheet" />
+    <link href="/css/FormCours.css" rel="stylesheet" />
 }
 
 <h1>Inscrire un élève à une prestation : </h1>
+
+ @using (Html.BeginForm("Rechercher", "Prestation", FormMethod.Post))
+{  
+    <table>       
+        <tr>
+            <td>@Html.Label("Type de prestation recherché : ")</td>
+            <td>@Html.DropDownListFor(m => Model.Prestation.TypePrestation, new SelectList(Enum.GetValues(typeof(TypePrestation))))</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Niveau recherché : ")</td>
+    <td>@Html.DropDownListFor(m => Model.Prestation.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="Rechercher" class="boutonStyle" />
+        <button class="boutonStyle" formaction="/Prestation/VoirPrestationsValidees?responsableId=@responsableId">Retour</button>
+    </div>
+}
 
 
 <div class="cards">
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
     {
+        if (((prestation.TypePrestation == TypePrestation.Tutorat || prestation.TypePrestation == TypePrestation.Cours_particulier) && prestation.PrestationsEleves.Count() == 0) 
+        || prestation.TypePrestation == TypePrestation.Aide_aux_devoirs|| prestation.TypePrestation == TypePrestation.Stage_de_revision )
+        {
+            <div class="card prestation">
+                <div class="card__icon">
+                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                </div>
+                <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
 
-        <div class="card prestation">
+                <div>
+                    Date : du @prestation.DateDebut au @prestation.DateFin <br />
+                    Prix : @prestation.Prix € <br />
+                    Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau) <br />
+                    @if (prestation.Matiere != 0){
+                        <text>
+                            Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)<br />
+                        </text>
+                    } 
 
-            <h2 class="card__title">@TypePrestationExtensions.NomPrestation(prestation.TypePrestation)</h2>
+                    @if (prestation.Presentiel)
+                    {
+                        <text>
+                            En présentiel : <br />
+                            Lieu: @prestation.Ville <br />
+                        </text>
+                    } else
+                    {
+                        <text>
+                            En distanciel : <br />
+                            Lien de la visio: @prestation.LienVisio<br />
+                        </text>
+                    }
+                    
+                </div>
 
-            <div>
-                Date : du @prestation.DateDebut au @prestation.DateFin <br />
-                Prix : @prestation.Prix € <br />
-                Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau) <br />
-                Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere) <br />
-                Lieu : @prestation.Ville <br />
-            </div>
-
-            <p class="card__button">
-                <a class="card__link" href="/Prestation/InscrireEleve?prestationId=@prestation.Id">
-                    <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                    Inscrire un élève
-                </a>
-            </p>
+                <p class="card__button">
+                    <a class="card__link" href="/Prestation/InscrireEleve?prestationId=@prestation.Id">
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                        Inscrire un élève
+                    </a>
+                </p>
             
+            </div>
+        }
         
-        </div>
     }
 </div>
 
 
-@section Script {
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-}
-
 
 @section Menu {
     <a href="/home/">Accueil</a>
-    <a href="/Prestation/">Prestations</a>
+    <a href="/ResponsableEleve/TableauDeBord">Tableau de Bord</a>
     <a href="/ResponsableEleve/modifier?responsableId=@responsableId">Mon Compte</a>
     <a href="/login/Deconnexion">Déconnexion</a>
 }

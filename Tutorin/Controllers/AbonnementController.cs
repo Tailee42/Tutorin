@@ -5,6 +5,7 @@ using System;
 using System.Security.Claims;
 using Tutorin.Models;
 using Tutorin.Services;
+using System.Data;
 
 namespace Tutorin.Controllers
 {
@@ -15,14 +16,14 @@ namespace Tutorin.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize (Roles = "ResponsableEleve")]
         public IActionResult AjouterEleve(int abonnementId)
         {
 
             return View("AjouterEleve");
         }
 
-        [Authorize]
+        [Authorize(Roles = "ResponsableEleve")]
         [HttpPost]
         public IActionResult AjouterEleve(Eleve eleve, int abonnementId)
         {
@@ -44,7 +45,7 @@ namespace Tutorin.Controllers
             return View("AjouterEleve");
         }
 
-        [Authorize]
+        [Authorize (Roles = "ResponsableEleve, Gestionnaire")]
         public IActionResult FinAbonnement(int abonnementId)
         {
             using (AbonnementServices abs= new AbonnementServices())
@@ -55,7 +56,7 @@ namespace Tutorin.Controllers
             return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
         }
 
-        [Authorize]
+        [Authorize (Roles = "ResponsableEleve, Gestionnaire")]
         public IActionResult SupprimerEleve(int abonnementId)
         {
 
@@ -67,26 +68,28 @@ namespace Tutorin.Controllers
             return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
         }
 
+        [Authorize (Roles = "ResponsableEleve, Gestionnaire, Eleve")]
         public IActionResult Modifier(int eleveId)
         {
             if (eleveId != 0)
             {
+                Eleve eleve = null;
                 using (EleveServices es = new EleveServices())
                 {
-
-                    Eleve eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
-
-                    if (eleve == null)
-                    {
-                        return View("Error");
-                    }
-                    Console.WriteLine(eleve.DateNaissance.ToString());
-                    return View("Modifier", eleve);
+                    eleve = es.ObtientTousLesEleves().Where(r => r.Id == eleveId).FirstOrDefault();
                 }
+
+                if (eleve == null)
+                {
+                    return View("Error");
+                }
+
+                return View("Modifier", eleve);
             }
             return View("Error");
         }
 
+        [Authorize (Roles = "ResponsableEleve, Gestionnaire, Eleve")]
         [HttpPost]
         public IActionResult Modifier(Eleve eleve)
         {
@@ -97,15 +100,15 @@ namespace Tutorin.Controllers
 
             using (EleveServices es = new EleveServices())
             {
-
-                es.ModifierEleve(eleve);
-                return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
+                es.ModifierEleve(eleve);  
             }
+
+            return RedirectToAction("TableauDeBord", User.FindFirstValue(ClaimTypes.Role));
 
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "ResponsableEleve")]
         [HttpGet]
         public IActionResult AjouterAbonnement()
         {

@@ -36,7 +36,6 @@ namespace Tutorin.Models
             this.Database.EnsureCreated();
 
             this.Utilisateurs.AddRange(
-
                 new Utilisateur { Id = 1, Nom = "Albrand", Prenom = "Pierre", Identifiant = "apierre", MotDePasse = UtilisateurServices.EncodeMD5("Pierre7") },
                 new Utilisateur { Id = 2, Nom = "Roux", Prenom = "Louis", Identifiant = "rlouis", MotDePasse = UtilisateurServices.EncodeMD5("Louis12") },
                 new Utilisateur { Id = 3, Nom = "Queyras", Prenom = "Antoine", Identifiant = "qantoine", MotDePasse = UtilisateurServices.EncodeMD5("Antoine9") },
@@ -45,8 +44,7 @@ namespace Tutorin.Models
                 new Utilisateur { Id = 6, Nom = "Louise", Prenom = "Anne", Identifiant = "lanne", MotDePasse = UtilisateurServices.EncodeMD5("Anne0025") },
                 new Utilisateur { Id = 7, Nom = "Legrand", Prenom = "Susie", Identifiant = "lsusie", MotDePasse = UtilisateurServices.EncodeMD5("Susie33")},
                 new Utilisateur { Id = 8, Nom = "Pachere", Prenom = "Fraise", Identifiant = "pfraise", MotDePasse = UtilisateurServices.EncodeMD5("Fraise0") },
-                new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") },
-                new Utilisateur { Id = 10, Nom = "OUAFO", Prenom = "Joachim", Identifiant = "Jouafo", MotDePasse = UtilisateurServices.EncodeMD5("Joachim25") }
+                new Utilisateur { Id = 9, Nom = "Legrand", Prenom = "Marc", Identifiant = "lmarc", MotDePasse = UtilisateurServices.EncodeMD5("Marco25") }
                 );
 
             this.Gestionnaires.AddRange(
@@ -68,8 +66,7 @@ namespace Tutorin.Models
                     DateFin = new System.DateTime(2022, 12, 23, 14, 0, 0),
                     TypePrestation = TypePrestation.Tutorat,
                     Ville = "Paris",
-                    Prix = 25F,
-                    Matiere = TypeMatiere.Physique,
+                    Prix = 0,
                     Presentiel = true,
                     EnseignantId = 2,
                     EtatPrestation = EtatPrestation.Enseignants_inscrits
@@ -81,7 +78,7 @@ namespace Tutorin.Models
                     DateDebut = new System.DateTime(2022, 12, 30, 16, 0, 0),
                     DateFin = new System.DateTime(2022, 12, 30, 16, 0, 0),
                     TypePrestation = TypePrestation.Aide_aux_devoirs,
-                    Prix = 25F,
+                    Prix = 0,
                     Matiere = TypeMatiere.Histoire,
                     Presentiel = false,
                     EnseignantId = 3,
@@ -108,8 +105,7 @@ namespace Tutorin.Models
                     DateFin = new System.DateTime(2022, 12, 23, 15, 0, 0),
                     TypePrestation = TypePrestation.Tutorat,
                     Ville = "Paris",
-                    Prix = 25F,
-                    Matiere = TypeMatiere.Mathematiques,
+                    Prix = 0,
                     Presentiel = true,
                     EnseignantId = 2,
                     EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
@@ -127,6 +123,114 @@ namespace Tutorin.Models
                     LienVisio = "zoom.us",
                     EnseignantId = 1,
                     EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
+                },
+                new Prestation
+                {
+                    Id = 6,
+                    Niveau = TypeNiveau.CM1,
+                    DateDebut = new System.DateTime(2023, 01, 12, 17, 0, 0),
+                    DateFin = new System.DateTime(2023, 01, 12, 18, 30, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Histoire,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 3,
+                    EtatPrestation = EtatPrestation.Payee_par_responsable_eleve
+                },
+                new Prestation
+                {
+                    Id = 7,
+                    Niveau = TypeNiveau.CM1,
+                    DateDebut = new System.DateTime(2023, 01, 30, 17, 30, 0),
+                    DateFin = new System.DateTime(2023, 01, 30, 19, 00, 0),
+                    TypePrestation = TypePrestation.Cours_particulier,
+                    Prix = 20F,
+                    Matiere = TypeMatiere.Mathematiques,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 1,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 8,
+                    Niveau = TypeNiveau.Sixieme,
+                    DateDebut = new System.DateTime(2023, 01, 05, 18, 00, 0),
+                    DateFin = new System.DateTime(2023, 01, 05, 20, 00, 0),
+                    TypePrestation = TypePrestation.Cours_particulier,
+                    Prix = 20F,
+                    Matiere = TypeMatiere.Français,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 4,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 9,
+                    Niveau = TypeNiveau.Premiere,
+                    DateDebut = new System.DateTime(2023, 01, 26, 18, 0, 0),
+                    DateFin = new System.DateTime(2023, 01, 26, 19, 0, 0),
+                    TypePrestation = TypePrestation.Tutorat,
+                    Prix = 0,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 4,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 10,
+                    Niveau = TypeNiveau.Terminale,
+                    DateDebut = new System.DateTime(2023, 02, 02, 17, 0, 0),
+                    DateFin = new System.DateTime(2023, 02, 02, 19, 0, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Chimie,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EtatPrestation = EtatPrestation.A_affecter
+                },
+                new Prestation
+                {
+                    Id = 11,
+                    Niveau = TypeNiveau.CM2,
+                    DateDebut = new System.DateTime(2023, 01, 23, 18, 0, 0),
+                    DateFin = new System.DateTime(2023, 01, 23, 19, 0, 0),
+                    TypePrestation = TypePrestation.Cours_particulier,
+                    Prix = 20F,
+                    Matiere = TypeMatiere.Français,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 4,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 12,
+                    Niveau = TypeNiveau.CE1,
+                    DateDebut = new System.DateTime(2023, 02, 08, 17, 30, 0),
+                    DateFin = new System.DateTime(2023, 02, 08, 19, 30, 0),
+                    TypePrestation = TypePrestation.Aide_aux_devoirs,
+                    Prix = 0,
+                    Matiere = TypeMatiere.Mathematiques,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EnseignantId = 1,
+                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                },
+                new Prestation
+                {
+                    Id = 13,
+                    Niveau = TypeNiveau.Quatrieme,
+                    DateDebut = new System.DateTime(2023, 02, 27, 17, 0, 0),
+                    DateFin = new System.DateTime(2023, 02, 27, 19, 0, 0),
+                    TypePrestation = TypePrestation.Tutorat,
+                    Prix = 0,
+                    Presentiel = false,
+                    LienVisio = "zoom.us",
+                    EtatPrestation = EtatPrestation.A_affecter
                 }
                 );
 
@@ -159,7 +263,11 @@ namespace Tutorin.Models
                 new ContenuPedagogique { Id = 5, Matiere = TypeMatiere.Français, Niveau = TypeNiveau.CP, Titre = "Les verbes", DatePublication = new System.DateTime(2021, 08, 29), DateMiseAJour = new System.DateTime(2022, 04, 17), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "On distingue : <br/> <strong>Les verbes d'action :</strong> Un verbe d'action exprime une action faite ou subie par le sujet.<br> Ex. : Marion prend un gâteau. Le bébé dort, il rêve. Le sapin est décoré.<br> <strong>Les verbes d'état :</strong> Un verbe d'état (demeurer, devenir, paraître, rester, sembler) exprime un état du sujet. <br> Ex. : Les invités semblaient heureux.", EnseignantId = 3 },
                 new ContenuPedagogique { Id = 6, Matiere = TypeMatiere.Geographie, Niveau = TypeNiveau.Sixieme, Titre = "L'Union Européenne", DatePublication = new System.DateTime(2022, 01, 12), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis sapien et est vehicula euismod vitae ac mauris. Vivamus et justo mauris. Nullam augue sem, consectetur vitae euismod varius, placerat aliquet sem. Fusce eget euismod nulla. Quisque dapibus orci vitae nisl semper eleifend non in purus. Mauris tempor erat a leo dictum, ac pretium lacus molestie. Morbi sed nibh est. Cras nulla metus, iaculis quis rhoncus ut, ultricies sit amet metus. Nunc varius sagittis ipsum, sed tincidunt eros ultricies sit amet. Maecenas sed magna at ex commodo pretium. Aenean venenatis faucibus dolor, vulputate consectetur ante pharetra gravida. Pellentesque sed turpis mauris.", EnseignantId = 3 },
                 new ContenuPedagogique { Id = 7, Matiere = TypeMatiere.Physique, Niveau = TypeNiveau.Seconde, Titre = "PH et titrage", DatePublication = new System.DateTime(2021, 11, 24), DateMiseAJour = new System.DateTime(2022, 12, 02), Etat = EtatContenuPedagogique.A_Valider, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", EnseignantId = 2 },
-                new ContenuPedagogique { Id = 8, Matiere = TypeMatiere.Français, Niveau = TypeNiveau.CE2, Titre = "L'imparfait et le passé composé", DatePublication = new System.DateTime(2021, 08, 29), DateMiseAJour = new System.DateTime(2022, 04, 17), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis tristique tellus, egestas feugiat nibh. Vivamus in vehicula turpis, sit amet blandit ligula. In viverra lacinia vestibulum. Aenean nec felis semper, imperdiet odio nec, molestie mauris. Aliquam magna nisl, blandit ac tincidunt at, finibus vel sapien. Suspendisse pretium tincidunt est, suscipit rutrum felis finibus vitae. In et lorem tristique risus blandit auctor id in magna.", EnseignantId = 3 }
+                new ContenuPedagogique { Id = 8, Matiere = TypeMatiere.Français, Niveau = TypeNiveau.CE2, Titre = "L'imparfait et le passé composé", DatePublication = new System.DateTime(2021, 08, 29), DateMiseAJour = new System.DateTime(2022, 04, 17), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis tristique tellus, egestas feugiat nibh. Vivamus in vehicula turpis, sit amet blandit ligula. In viverra lacinia vestibulum. Aenean nec felis semper, imperdiet odio nec, molestie mauris. Aliquam magna nisl, blandit ac tincidunt at, finibus vel sapien. Suspendisse pretium tincidunt est, suscipit rutrum felis finibus vitae. In et lorem tristique risus blandit auctor id in magna.", EnseignantId = 3 },
+                new ContenuPedagogique { Id = 9, Matiere = TypeMatiere.Chimie, Niveau = TypeNiveau.Quatrieme, Titre = "Les transformations chimiques", DatePublication = new System.DateTime(2022, 12, 16), DateMiseAJour = new System.DateTime(2022, 12, 17), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "", EnseignantId = 2 },
+                new ContenuPedagogique { Id = 10, Matiere = TypeMatiere.Histoire, Niveau = TypeNiveau.Premiere, Titre = "La guerre 1914-1918", DatePublication = new System.DateTime(2022, 11, 10), Etat = EtatContenuPedagogique.A_Modifier, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis sapien et est vehicula euismod vitae ac mauris. Vivamus et justo mauris. Nullam augue sem, consectetur vitae euismod varius, placerat aliquet sem. Fusce eget euismod nulla. Quisque dapibus orci vitae nisl semper eleifend non in purus. Mauris tempor erat a leo dictum, ac pretium lacus molestie. Morbi sed nibh est. Cras nulla metus, iaculis quis rhoncus ut, ultricies sit amet metus. Nunc varius sagittis ipsum, sed tincidunt eros ultricies sit amet. Maecenas sed magna at ex commodo pretium. Aenean venenatis faucibus dolor, vulputate consectetur ante pharetra gravida. Pellentesque sed turpis mauris.", EnseignantId = 4 },
+                new ContenuPedagogique { Id = 11, Matiere = TypeMatiere.Anglais, Niveau = TypeNiveau.CM2, Titre = "Le vocabulaire du petit-déjeuner", DatePublication = new System.DateTime(2021, 09, 10), DateMiseAJour = new System.DateTime(2022, 12, 16), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "", EnseignantId = 4 },
+                new ContenuPedagogique { Id = 12, Matiere = TypeMatiere.Anglais, Niveau = TypeNiveau.Cinquieme, Titre = "Le prétérit simple", DatePublication = new System.DateTime(2022, 12, 09), DateMiseAJour = new System.DateTime(2022, 12, 15), Etat = EtatContenuPedagogique.En_Ligne, ContenuDuCours = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis tristique tellus, egestas feugiat nibh. Vivamus in vehicula turpis, sit amet blandit ligula. In viverra lacinia vestibulum. Aenean nec felis semper, imperdiet odio nec, molestie mauris. Aliquam magna nisl, blandit ac tincidunt at, finibus vel sapien. Suspendisse pretium tincidunt est, suscipit rutrum felis finibus vitae. In et lorem tristique risus blandit auctor id in magna.", EnseignantId = 4 }
                 );
 
             this.Payements.AddRange(
@@ -171,7 +279,9 @@ namespace Tutorin.Models
 
             this.PrestationsEleves.AddRange(
                 new PrestationEleve { Id = 1, EleveId = 1, PrestationId = 4},
-                new PrestationEleve { Id = 2, EleveId = 2, PrestationId = 5}
+                new PrestationEleve { Id = 2, EleveId = 2, PrestationId = 5},
+                new PrestationEleve { Id = 3, EleveId = 1, PrestationId = 6},
+                new PrestationEleve { Id = 4, EleveId = 1, PrestationId = 7}
                 );
 
             this.PrestationsPayements.AddRange(

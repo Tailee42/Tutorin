@@ -42,40 +42,42 @@
 <div class="cards">
     @foreach (Tutorin.Models.Prestation prestation in Model.ListePrestations)
     {
-        if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
+        if (((prestation.TypePrestation == TypePrestation.Tutorat || prestation.TypePrestation == TypePrestation.Cours_particulier) && prestation.PrestationsEleves.Count() == 0)
+        || prestation.TypePrestation == TypePrestation.Aide_aux_devoirs || prestation.TypePrestation == TypePrestation.Stage_de_revision)
         {
-            <div class="card prestation">
-                <div class="card__icon">
-                    @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+            if (DateTime.Compare(prestation.DateFin, DateTime.Now) >= 0)
+            {
+                <div class="card prestation">
+                    <div class="card__icon">
+                        @Html.Raw(TypePrestationExtensions.IconHTMLPrestation(prestation.TypePrestation))
+                    </div>
+
+                    <h2 class="card__title">@TypePrestationExtensions.NomPrestation( prestation.TypePrestation)</h2>
+
+                    <div>
+                        Date : du @prestation.DateDebut au @prestation.DateFin <br>
+                        Prix mensuel : @prestation.Prix € <br>
+                        Niveau : @prestation.Niveau <br>
+                        Matière : @prestation.Matiere
+                        <hr />
+                        @if (prestation.Presentiel)
+                        {
+                            <text>
+                                En Presentiel : <br>
+                                Ville : @prestation.Ville
+                            </text>
+                        }
+                        else
+                        {
+                            <text>
+                                En distantiel : <br>
+                                Lien de la visio : @prestation.LienVisio
+                            </text>
+                        }
+                    </div>
+
                 </div>
-
-                <h2 class="card__title">@TypePrestationExtensions.NomPrestation( prestation.TypePrestation)</h2>
-
-                <div>
-                    Date : du @prestation.DateDebut au @prestation.DateFin <br>
-                    Prix mensuel : @prestation.Prix € <br>
-                    Niveau : @prestation.Niveau <br>
-                    Matière : @prestation.Matiere
-                    <hr />
-                    @if (prestation.Presentiel)
-                    {
-                        <text>
-                            En Presentiel : <br>
-                            Ville : @prestation.Ville
-                        </text>
-                    }
-                    else
-                    {
-                        <text>
-                            En distantiel : <br>
-                            Lien de la visio : @prestation.LienVisio
-                        </text>
-                    }
-                </div>
-
-                
-
-            </div>
+            }
         }
     }
 </div>
