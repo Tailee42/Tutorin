@@ -216,5 +216,19 @@ namespace Tutorin.Services
             }
             return prestations;
         }
+
+        public List<Prestation> RechercherPrestationsValidees(TypePrestation typePrestation, TypeNiveau niveau)
+        {
+            List<Prestation> listePrestations = _bddContext.Prestations.Where(p => p.TypePrestation == typePrestation && p.Niveau == niveau && p.EtatPrestation == EtatPrestation.Enseignants_inscrits).ToList();
+            
+            foreach (Prestation prestation in listePrestations)
+            {
+                prestation.Enseignant = _bddContext.Enseignants.Find(prestation.EnseignantId);
+                prestation.Enseignant.Utilisateur = _bddContext.Utilisateurs.Find(prestation.Enseignant.UtilisateurId);
+                prestation.PrestationsEleves = _bddContext.PrestationsEleves.Where(p => p.PrestationId == prestation.Id).ToList();
+            }
+
+            return listePrestations;
+        }
     }
 }

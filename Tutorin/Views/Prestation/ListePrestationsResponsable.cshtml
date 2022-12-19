@@ -12,9 +12,28 @@
 
 @section css {
     <link href="/css/cards.css" rel="stylesheet" />
+    <link href="/css/FormCours.css" rel="stylesheet" />
 }
 
 <h1>Inscrire un élève à une prestation : </h1>
+
+ @using (Html.BeginForm("Rechercher", "Prestation", FormMethod.Post))
+{  
+    <table>       
+        <tr>
+            <td>@Html.Label("Type de prestation recherché : ")</td>
+            <td>@Html.DropDownListFor(m => Model.Prestation.TypePrestation, new SelectList(Enum.GetValues(typeof(TypePrestation))))</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Niveau recherché : ")</td>
+    <td>@Html.DropDownListFor(m => Model.Prestation.Niveau, new SelectList(Enum.GetValues(typeof(TypeNiveau))))</td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="Rechercher" class="boutonStyle" />
+        <button class="boutonStyle" formaction="/Prestation/VoirPrestationsValidees?responsableId=@responsableId">Retour</button>
+    </div>
+}
 
 
 <div class="cards">

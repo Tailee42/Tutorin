@@ -51,6 +51,20 @@ namespace Tutorin.Controllers
             return View("ListePrestationsResponsable", pvm);
         }
 
+        [Authorize]
+        [HttpPost]
+        public IActionResult Rechercher(Prestation prestation)
+        {
+            PrestationViewModel pvm = new PrestationViewModel();
+
+            using (PrestationServices ps = new PrestationServices())
+            {
+                pvm.ListePrestations = ps.RechercherPrestationsValidees(prestation.TypePrestation, prestation.Niveau);
+            }
+
+            return View("ListePrestationsResponsable", pvm);
+        }
+
         [Authorize (Roles = "Enseignant")]
         public IActionResult VoirPrestationsCrees(int enseignantId)
         {
@@ -156,7 +170,6 @@ namespace Tutorin.Controllers
                     listeEleves = rs.TouverLesElevesDUnResponsable(id);
                 }
             }
-
 
             using (PrestationServices ps = new PrestationServices())
             {
