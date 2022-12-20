@@ -76,11 +76,6 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(GestionnaireViewModel gvm)
         {
-            //le model state devient false depuis l'ajout de la méthode modifier un mot de passe
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("Modifier", gestionnaire);
-            //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
 
