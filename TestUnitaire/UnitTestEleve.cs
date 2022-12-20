@@ -55,7 +55,7 @@ namespace TestUnitaire
                 {
                     utilisateurid = us.CreerUtilisateur("Badaroux", "Antoine", "bantoine", "123456");
                     int eleveId = es.CreerEleve(new DateTime(2010, 7, 14), TypeNiveau.Quatrieme, utilisateurid);
-                    es.ModifierEleve(eleveId, "Badaroux", "Antoine", "bantoine", "123456", new DateTime(2012, 7, 14), TypeNiveau.Sixieme);
+                    //es.ModifierEleve(eleveId, "Badaroux", "Antoine", "bantoine", "123456", new DateTime(2012, 7, 14), TypeNiveau.Sixieme);
                 }
             }
 
