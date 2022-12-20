@@ -94,38 +94,40 @@ namespace Tutorin.Controllers
             if (enseignantId != 0)
             {
                 Enseignant enseignant = null;
+                EnseignantViewModel envm = new EnseignantViewModel();
                 using (EnseignantServices ens = new EnseignantServices())
                 {
                     enseignant = ens.ObtientTousLesEnseignants().Where(r => r.Id == enseignantId).FirstOrDefault();
+                    envm.Enseignant = enseignant;
                 }
 
                 if (enseignant == null)
                 {
                     return View("Error");
                 }
-                return View("Modifier", enseignant);
+                return View("Modifier", envm);
             }
             return View("Error");
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]
         [HttpPost]
-        public IActionResult Modifier(Enseignant enseignant)
+        public IActionResult Modifier(EnseignantViewModel envm)
         {
-            if (enseignant.Image != null)
+            if (envm.Enseignant.Image != null)
             {
-                if (enseignant.Image.Length != 0)
+                if (envm.Enseignant.Image.Length != 0)
                 {
                     string uploads = Path.Combine(_webEnv.WebRootPath, "images");
                     string filePath = Path.Combine(uploads, enseignant.Image.FileName);
                     using (Stream fileStream = new FileStream(filePath, FileMode.Create))
 
                     {
-                        enseignant.Image.CopyTo(fileStream);
+                        envm.Enseignant.Image.CopyTo(fileStream);
                     }
                 }
 
-                enseignant.ImagePath = "/Images/" + enseignant.Image.FileName;
+                envm.Enseignant.ImagePath = "/Images/" + envm.Enseignant.Image.FileName;
             }
 
             if (!ModelState.IsValid)
@@ -137,10 +139,32 @@ namespace Tutorin.Controllers
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                ens.ModifierEnseignant(enseignant);
+                ens.ModifierEnseignant(envm.Enseignant.Id, envm.Enseignant.Utilisateur.Nom, envm.Enseignant.Utilisateur.Prenom, envm.Enseignant.Utilisateur.Identifiant, envm.Enseignant.Matiere, envm.Enseignant.Niveaux);
             }
 
             return RedirectToAction("TableauDeBord", role);
+        }
+
+        [Authorize(Roles = "Enseignant")]
+        [HttpPost]
+        public IActionResult ModifierMotdePasse(NewPassword newPassword)
+        {
+            string enseignantId = User.FindFirstValue("RoleId");
+            Enseignant enseignant = null;
+            int id;
+            EnseignantViewModel envm = new EnseignantViewModel();
+
+            using (EnseignantServices ens = new EnseignantServices())
+            {
+                if (int.TryParse(enseignantId, out id))
+                {
+                    enseignant = ens.TrouverUnEnseignant(id);
+                    envm.Enseignant = enseignant;
+                    ens.ModifierMotdePasse(enseignant, newPassword.OldPassword, newPassword.NouveauPassword, newPassword.ConfirmPassword);
+                }
+            }
+
+            return RedirectToAction("TableauDeBord", "enseignant");
         }
 
         [Authorize(Roles = "Gestionnaire, Enseignant")]
