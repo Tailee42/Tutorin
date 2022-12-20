@@ -130,16 +130,13 @@ namespace Tutorin.Controllers
                 envm.Enseignant.ImagePath = "/Images/" + envm.Enseignant.Image.FileName;
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View("Modifier", envm.Enseignant);
-            }
-
             string role = User.FindFirstValue(ClaimTypes.Role);
 
             using (EnseignantServices ens = new EnseignantServices())
             {
-                ens.ModifierEnseignant(envm.Enseignant.Id, envm.Enseignant.Utilisateur.Nom, envm.Enseignant.Utilisateur.Prenom, envm.Enseignant.Utilisateur.Identifiant, envm.Enseignant.Matiere, envm.Enseignant.Niveaux);
+                ens.ModifierEnseignant(envm.Enseignant.Id, envm.Enseignant.Utilisateur.Nom, envm.Enseignant.Utilisateur.Prenom, 
+                    envm.Enseignant.Utilisateur.Identifiant, envm.Enseignant.Matiere, envm.Enseignant.Niveaux, envm.Enseignant.ImagePath, 
+                    envm.Enseignant.Image);
             }
 
             return RedirectToAction("TableauDeBord", role);
