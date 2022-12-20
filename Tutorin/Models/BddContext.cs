@@ -248,10 +248,10 @@ namespace Tutorin.Models
 
 
             this.Enseignants.AddRange(
-                new Enseignant{ Id = 1, Matiere = TypeMatiere.Mathematiques, Niveaux = TypeNiveau.CM1, UtilisateurId = 5 },
-                new Enseignant { Id = 2, Matiere = TypeMatiere.Physique, Niveaux = TypeNiveau.CM1, UtilisateurId = 6 },
-                new Enseignant { Id = 3, Matiere = TypeMatiere.Geographie, Niveaux = TypeNiveau.Troisieme, UtilisateurId = 8 },
-                new Enseignant { Id = 4, Matiere = TypeMatiere.Français, Niveaux = TypeNiveau.CP, UtilisateurId = 3}
+                new Enseignant{ Id = 1, Matiere = TypeMatiere.Mathematiques, Niveaux = TypeNiveau.CM1, UtilisateurId = 5 , ImagePath = "/images/enseignant.jpg" },
+                new Enseignant { Id = 2, Matiere = TypeMatiere.Physique, Niveaux = TypeNiveau.CM1, UtilisateurId = 6, ImagePath = "/images/enseignant.jpg" },
+                new Enseignant { Id = 3, Matiere = TypeMatiere.Geographie, Niveaux = TypeNiveau.Troisieme, UtilisateurId = 8, ImagePath = "/images/enseignant.jpg" },
+                new Enseignant { Id = 4, Matiere = TypeMatiere.Français, Niveaux = TypeNiveau.CP, UtilisateurId = 3, ImagePath = "/images/enseignant.jpg" }
                 );
 
             this.ContenusPedagogiques.AddRange(
