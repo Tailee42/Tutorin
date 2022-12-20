@@ -83,11 +83,11 @@
                 @Html.ValidationMessageFor(m => Model.Enseignant.Niveaux)
             </div>
 
-            @Html.HiddenFor(model=>model.ImagePath)
+            @Html.HiddenFor(model=>model.Enseignant.ImagePath)
 
-            <div class="custom-file-upload">
-                @Html.LabelFor(model => model.Image) <br />
-                @Html.TextBoxFor(model => model.Image, new { placeholder = "Description", @type = "file" })
+            <div class="boite-form">
+                @Html.LabelFor(model => model.Enseignant.Image) <br />
+                @Html.TextBoxFor(model => model.Enseignant.Image, new { placeholder = "Description", @type = "file" })
             </div>
             <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>

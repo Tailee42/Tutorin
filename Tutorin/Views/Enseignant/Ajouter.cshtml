@@ -53,12 +53,12 @@
                 @Html.DropDownListFor(m => Model.Niveaux, new SelectList(Enum.GetValues(typeof(TypeNiveau))))
                 @Html.ValidationMessageFor(m => Model.Niveaux)
             </div>
-            
-                <div class="custom-file-upload">
-                        @Html.HiddenFor(model=>model.ImagePath)
-                        @Html.LabelFor(model => model.Image) <br />
-                        @Html.TextBoxFor(model => model.Image, new { placeholder = "Description", @type = "file" })
-                 </div>
+
+            <div class="boite-form">
+                @Html.HiddenFor(model=>model.ImagePath)
+                @Html.LabelFor(model => model.Image) <br />
+                @Html.TextBoxFor(model => model.Image, new { placeholder = "Description", @type = "file" })
+            </div>
                
             @*<div class="custom-file-upload">
                 @Html.LabelFor(m => Model.Image) <br />

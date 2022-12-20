@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tutorin.Models;
 using System.Linq;
-
+using Microsoft.AspNetCore.Http;
 
 namespace Tutorin.Services
 {
@@ -30,7 +30,7 @@ namespace Tutorin.Services
             return enseignant.Id;
         }
 
-        public void ModifierEnseignant(int id, string nom, string prenom, string identifiant, TypeMatiere matiere, TypeNiveau niveau)
+        public void ModifierEnseignant(int id, string nom, string prenom, string identifiant, TypeMatiere matiere, TypeNiveau niveau, string imagePath, IFormFile image )
         {
             Enseignant enseignant = _bddContext.Enseignants.Find(id);
             enseignant.Utilisateur = _bddContext.Utilisateurs.Find(enseignant.UtilisateurId);
@@ -42,6 +42,8 @@ namespace Tutorin.Services
                 enseignant.Utilisateur.Identifiant = identifiant;
                 enseignant.Matiere = matiere;
                 enseignant.Niveaux= niveau;
+                enseignant.ImagePath = imagePath;
+                enseignant.Image = image;
                
                 _bddContext.SaveChanges();
             }
