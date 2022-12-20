@@ -220,9 +220,7 @@ namespace Tutorin.Controllers
                     {
                         elevesFins.Add(eleve);
                     }
-
-                }
-                
+                }    
             }
 
             TableauBordResponsableViewModel tbrvm = new TableauBordResponsableViewModel() { 
