@@ -46,19 +46,6 @@
             }
             return 0;
         }
-
-        public static float PrixTTCAbonnement(int abonnement)
-        {
-            switch (abonnement)
-            {
-                case 0:
-                    return 5.99F * (1 + Abonnement.TVA);
-                case 1:
-                    return 14.99F * (1 + Abonnement.TVA);
-
-            }
-            return 0;
-        }
     }
     
 }
