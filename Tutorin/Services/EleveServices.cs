@@ -27,6 +27,7 @@ namespace Tutorin.Services
 
         public int CreerEleve(Eleve eleve)
         {
+            eleve.Utilisateur.MotDePasse = UtilisateurServices.EncodeMD5(eleve.Utilisateur.MotDePasse);
             _bddContext.Eleves.Add(eleve);
             _bddContext.SaveChanges();
 
