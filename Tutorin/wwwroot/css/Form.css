@@ -76,6 +76,16 @@ label {
 .boutonStyle:hover, boutonStyle:active, boutonStyle:focus {
     background: #F68712;
 }
+/*
+input[type="file"] {
+    display: none;
+}*/
+
+/*custom-file-upload {
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+}*/
 
 /*Message erreur*/
 .field-validation-error {
@@ -103,6 +113,7 @@ textarea {
 
 /* vue modifier responsable élève */
 .lien-suppression {
+
     margin-top: 20px;
 }
 
@@ -126,3 +137,4 @@ textarea {
 .mdp-modifier {
     font-size: 16px;
 }
+

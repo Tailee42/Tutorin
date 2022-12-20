@@ -71,7 +71,7 @@ namespace Tutorin.Controllers
                 }
                 }
 
-                enseignant.ImagePath = enseignant.Image.FileName; 
+                enseignant.ImagePath = "/Images/"+ enseignant.Image.FileName; 
             }
                    
             if (!ModelState.IsValid)
@@ -114,6 +114,26 @@ namespace Tutorin.Controllers
         [HttpPost]
         public IActionResult Modifier(EnseignantViewModel envm)
         {
+            if (envm.Enseignant.Image != null)
+            {
+                if (envm.Enseignant.Image.Length != 0)
+                {
+                    string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                    string filePath = Path.Combine(uploads, enseignant.Image.FileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+
+                    {
+                        envm.Enseignant.Image.CopyTo(fileStream);
+                    }
+                }
+
+                envm.Enseignant.ImagePath = "/Images/" + envm.Enseignant.Image.FileName;
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("Modifier", enseignant);
+            }
 
             string role = User.FindFirstValue(ClaimTypes.Role);
 

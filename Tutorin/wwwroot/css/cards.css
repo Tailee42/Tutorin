@@ -47,6 +47,13 @@
     background: linear-gradient(180deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
 }
 
+.my-3 {
+
+    text-align: center;
+    background-image:none;
+
+}
+
 .prestation {
     background: linear-gradient(180deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
 }

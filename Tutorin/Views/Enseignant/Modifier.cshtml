@@ -27,7 +27,9 @@
 <h1>Modifier</h1>
 <div>
 
-    @using (Html.BeginForm("Modifier", "Enseignant", FormMethod.Post))
+
+    @using (Html.BeginForm("Modifier", "Enseignant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
     {
         <fieldset>
             <legend>Enseignant</legend>
@@ -81,6 +83,12 @@
                 @Html.ValidationMessageFor(m => Model.Enseignant.Niveaux)
             </div>
 
+            @Html.HiddenFor(model=>model.ImagePath)
+
+            <div class="custom-file-upload">
+                @Html.LabelFor(model => model.Image) <br />
+                @Html.TextBoxFor(model => model.Image, new { placeholder = "Description", @type = "file" })
+            </div>
             <input class="boutonStyle" type="submit" value="Modifier" />
         </fieldset>
     }
