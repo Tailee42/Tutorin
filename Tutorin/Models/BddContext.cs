@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using Tutorin.Services;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Tutorin.Models
 {
@@ -21,7 +23,19 @@ namespace Tutorin.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=tutorin");
+            
+			if (System.Diagnostics.Debugger.IsAttached)
+            {
+               optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=tutorin");  // connexion string. Attention au password. avec comme nom de BDD : ChoixSejourTest
+            }
+            else
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+            }
         }
 
         public void DeleteCreateDatabase()
