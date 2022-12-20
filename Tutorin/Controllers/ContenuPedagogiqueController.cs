@@ -145,7 +145,7 @@ namespace Tutorin.Controllers
             return RedirectToAction("TableauContenuPedagogique");
         }
 
-        [Authorize (Roles = "Enseignant, Eleve")]
+        [Authorize (Roles = "Gestionnaire, Enseignant, Eleve")]
         public IActionResult Afficher(int coursId)
         {
             if (coursId != 0)
