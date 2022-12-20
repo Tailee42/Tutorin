@@ -112,12 +112,12 @@ namespace Tutorin.Controllers
             {
                 return View("Modifier", cours);
             }
-            string enseignantId = User.FindFirstValue("RoleId");
+            //string enseignantId = User.FindFirstValue("RoleId");
 
-            if (int.TryParse(enseignantId, out int id))
-            {
-                cours.EnseignantId = id;
-            }
+            //if (int.TryParse(enseignantId, out int id))
+            //{
+            //    cours.EnseignantId = id;
+            //}
 
             string role = User.FindFirstValue(ClaimTypes.Role);
 

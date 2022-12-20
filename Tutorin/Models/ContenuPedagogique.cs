@@ -13,13 +13,18 @@ namespace Tutorin.Models
         public TypeNiveau Niveau { get; set; }
         public string Titre { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        [Required]
+        [Display(Name = "Date de publication")]
         public DateTime DatePublication { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name = "Date de mise à jour")]
+        [DataType(DataType.Date)]
         public DateTime DateMiseAJour { get; set; }
 
         public EtatContenuPedagogique Etat { get; set; }
+
+        [Display(Name = "Contenu du cours")]
         public string ContenuDuCours { get; set; }
 
         public int EnseignantId { get; set; }
