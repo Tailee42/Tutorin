@@ -119,7 +119,7 @@ namespace Tutorin.Controllers
                 if (envm.Enseignant.Image.Length != 0)
                 {
                     string uploads = Path.Combine(_webEnv.WebRootPath, "images");
-                    string filePath = Path.Combine(uploads, enseignant.Image.FileName);
+                    string filePath = Path.Combine(uploads, envm.Enseignant.Image.FileName);
                     using (Stream fileStream = new FileStream(filePath, FileMode.Create))
 
                     {
@@ -132,7 +132,7 @@ namespace Tutorin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("Modifier", enseignant);
+                return View("Modifier", envm.Enseignant);
             }
 
             string role = User.FindFirstValue(ClaimTypes.Role);
