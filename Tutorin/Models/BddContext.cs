@@ -255,9 +255,9 @@ namespace Tutorin.Models
                 );
 
             this.Abonnements.AddRange(
-                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), ResponsableEleveId = 2, PayementId = 2 },
+                new Abonnement(TypeAbonnement.CoursEnLigne) { Id = 1, DateDebut = new System.DateTime(2022, 02, 23), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, PayementId = 2 },
                 new Abonnement(TypeAbonnement.Tutorat) { Id = 2, DateDebut = new System.DateTime(2022, 04, 10), ResponsableEleveId = 2, EleveId = 1, PayementId = 3 },
-                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), DateFin = new System.DateTime(2022, 01, 10), ResponsableEleveId = 2, EleveId = 2, PayementId = 1 }
+                new Abonnement(TypeAbonnement.Tutorat) { Id = 3, DateDebut = new System.DateTime(2021, 02, 08), ResponsableEleveId = 2, EleveId = 2, PayementId = 1 }
                 );
 
 
