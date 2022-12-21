@@ -37,7 +37,7 @@
     <link href="/css/cards.css" rel="stylesheet" />
 }
 
-<h1>Liste des prestations disponibles : </h1>
+<h1>Liste des prestations disponibles </h1>
 
 
 <div class="cards">
@@ -58,20 +58,20 @@
                     <div>
                         Date : du @prestation.DateDebut au @prestation.DateFin <br>
                         Prix mensuel : @prestation.Prix € <br>
-                        Niveau : @prestation.Niveau <br>
-                        Matière : @prestation.Matiere
+                        Niveau : @TypeNiveauExtensions.NomDuNiveau(prestation.Niveau) <br>
+                        Matière : @TypeMatiereExtensions.NomMatiere(prestation.Matiere)
                         <hr />
                         @if (prestation.Presentiel)
                         {
                             <text>
-                                En Presentiel : <br>
+                                En Présentiel : <br>
                                 Ville : @prestation.Ville
                             </text>
                         }
                         else
                         {
                             <text>
-                                En distantiel : <br>
+                                En distanciel : <br>
                                 Lien de la visio : @prestation.LienVisio
                             </text>
                         }
