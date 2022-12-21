@@ -76,14 +76,14 @@ namespace Tutorin.Models
                 {
                     Id = 1,
                     Niveau = TypeNiveau.CM2,
-                    DateDebut = new System.DateTime(2022, 12, 23, 14, 0, 0),
-                    DateFin = new System.DateTime(2022, 12, 23, 14, 0, 0),
+                    DateDebut = new System.DateTime(2022, 12, 18, 14, 0, 0),
+                    DateFin = new System.DateTime(2022, 12, 18, 14, 0, 0),
                     TypePrestation = TypePrestation.Tutorat,
                     Ville = "Paris",
                     Prix = 0,
                     Presentiel = true,
                     EnseignantId = 2,
-                    EtatPrestation = EtatPrestation.Enseignants_inscrits
+                    EtatPrestation = EtatPrestation.Realisée
                 },
                 new Prestation
                 {

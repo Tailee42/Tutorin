@@ -42,6 +42,9 @@
     border-bottom: none;
 }
 
+.card>a {
+    border-bottom: none;
+}
 
 .abonnement {
     background: linear-gradient(180deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
